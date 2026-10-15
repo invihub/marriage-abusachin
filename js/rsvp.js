@@ -1,18 +1,16 @@
 /**
- * Personalized South Indian Wedding RSVP Engine
- * Handles:
- * - Multi-event selection (Haldi, Sangeet, Wedding 1, Wedding 2, Reception)
- * - Guest & Family name recording (e.g. 'Sai and his family')
- * - Headcount & Feast preferences
- * - Personalized greeting confirmation card with exact requested phrase:
+ * Personalized South Indian Wedding RSVP Engine (Updated Clean Schema)
+ * - Guest / Family Name recording (e.g. 'Sai and his family')
+ * - Event attendance multi-select
+ * - Number of people (approx)
+ * - Personalized greeting confirmation card with exact phrase:
  *   "We look forward to celebrating with you."
- * - Persistent storage in localStorage
- * - Organizer View Drawer / Table with CSV Export
+ * - Organizer View with CSV Export
  */
 
 class RsvpSystem {
   constructor() {
-    this.storageKey = 'abu_sachin_wedding_rsvps_v1';
+    this.storageKey = 'abu_sachin_wedding_rsvps_v2';
     this.form = document.getElementById('wedding-rsvp-form');
     this.confirmationModal = document.getElementById('rsvp-confirmation-modal');
     this.organizerModal = document.getElementById('organizer-modal');
@@ -24,7 +22,6 @@ class RsvpSystem {
       this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
 
-    // Preload sample RSVPs if empty so the organizer view has immediate demonstration data
     if (!localStorage.getItem(this.storageKey)) {
       this.seedInitialData();
     }
@@ -37,37 +34,25 @@ class RsvpSystem {
       {
         id: 'rsvp_sample_1',
         guestName: 'Sai and his family',
-        phone: '+91 98401 23456',
-        email: 'sai.family@example.com',
         events: ['haldi', 'sangeet', 'wedding_thoothukudi', 'wedding_chennai', 'reception_chennai'],
-        adults: 4,
-        children: 1,
-        diet: 'traditional_veg',
+        peopleCount: 4,
         message: 'Heartiest congratulations Abu & Sachin! 11 years of love, can\'t wait for the grand celebration!',
         timestamp: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
       },
       {
         id: 'rsvp_sample_2',
-        guestName: 'Karthik & Ananya (Toronto Gang)',
-        phone: '+1 416 555 0192',
-        email: 'karthik.toronto@example.com',
+        guestName: 'Karthik & Ananya (Toronto)',
         events: ['wedding_chennai', 'reception_chennai'],
-        adults: 2,
-        children: 0,
-        diet: 'traditional_nonveg',
-        message: 'Flying down from Canada! The snowy Toronto chapter was legendary, now time for Chennai vibes!',
+        peopleCount: 2,
+        message: 'Flying down from Canada! The snowy chapter was magical, now time for Chennai vibes!',
         timestamp: new Date(Date.now() - 3600000 * 12).toISOString()
       },
       {
         id: 'rsvp_sample_3',
         guestName: 'Dr. Meenakshi & Family (Tuticorin)',
-        phone: '+91 94431 87654',
-        email: 'meenakshi.doc@example.com',
         events: ['haldi', 'sangeet', 'wedding_thoothukudi'],
-        adults: 3,
-        children: 0,
-        diet: 'traditional_veg',
-        message: 'So proud of Abu! Looking forward to welcoming the Chennai groom Sachin to our Pearl City!',
+        peopleCount: 3,
+        message: 'Looking forward to welcoming the groom to our Pearl City!',
         timestamp: new Date(Date.now() - 3600000 * 5).toISOString()
       }
     ];
@@ -100,32 +85,23 @@ class RsvpSystem {
       return;
     }
 
-    // Checked events
     const checkedEvents = [];
     const eventCheckboxes = document.querySelectorAll('input[name="rsvp_events"]:checked');
     eventCheckboxes.forEach(cb => checkedEvents.push(cb.value));
 
     if (checkedEvents.length === 0) {
-      alert('Please select at least one ceremony you will be gracing with your presence.');
+      alert('Please select at least one ceremony you will be attending.');
       return;
     }
 
-    const adults = parseInt(document.getElementById('rsvp-adults')?.value || '1', 10);
-    const children = parseInt(document.getElementById('rsvp-children')?.value || '0', 10);
-    const diet = document.getElementById('rsvp-diet')?.value || 'traditional_veg';
+    const peopleCount = parseInt(document.getElementById('rsvp-people')?.value || '2', 10);
     const message = document.getElementById('rsvp-wishes')?.value || '';
-    const phone = document.getElementById('rsvp-phone')?.value || '';
-    const email = document.getElementById('rsvp-email')?.value || '';
 
     const newRsvp = {
       id: 'rsvp_' + Date.now(),
       guestName,
-      phone,
-      email,
       events: checkedEvents,
-      adults,
-      children,
-      diet,
+      peopleCount,
       message,
       timestamp: new Date().toISOString()
     };
@@ -134,28 +110,21 @@ class RsvpSystem {
     currentList.unshift(newRsvp);
     this.saveRsvps(currentList);
 
-    // Trigger marigold petal shower celebrating the RSVP
-    if (window.petalShower) {
-      window.petalShower.triggerBurst(80, 5000);
-    }
     if (window.weddingAudio) {
       window.weddingAudio.playTempleBell();
     }
 
-    // Show personalized confirmation modal
     this.showConfirmation(newRsvp);
-
-    // Reset form
     this.form.reset();
   }
 
   getEventNamesMap() {
     return {
-      'haldi': 'Haldi Ceremony (Dec 5 · Thoothukudi)',
-      'sangeet': 'Sangeet & Musical Night (Dec 5 · Thoothukudi)',
-      'wedding_thoothukudi': 'Wedding Tradition 1 (Dec 6 · Thoothukudi)',
-      'wedding_chennai': 'Wedding Tradition 2 (Dec 10 · Chennai)',
-      'reception_chennai': 'Grand Reception at The Leela Palace (Dec 11 · Chennai)'
+      'haldi': 'Dec 5 · Haldi Ceremony (Thoothukudi)',
+      'sangeet': 'Dec 5 · Sangeet & Musical Night (Thoothukudi)',
+      'wedding_thoothukudi': 'Dec 6 · Wedding Tradition 1 (Thoothukudi)',
+      'wedding_chennai': 'Dec 10 · Wedding Tradition 2 (Chennai)',
+      'reception_chennai': 'Dec 11 · Grand Reception at The Leela Palace (Chennai)'
     };
   }
 
@@ -170,7 +139,7 @@ class RsvpSystem {
 
     if (nameEl) nameEl.textContent = rsvp.guestName;
 
-    // Exact requested wording: "We look forward to celebrating with you."
+    // Exact requested wording
     if (phraseEl) {
       phraseEl.innerHTML = `<strong>"We look forward to celebrating with you."</strong>`;
     }
@@ -179,15 +148,14 @@ class RsvpSystem {
       const map = this.getEventNamesMap();
       eventsListEl.innerHTML = rsvp.events.map(evKey => `
         <li class="confirm-event-badge">
-          <span class="badge-icon">🪔</span>
+          <span>✨</span>
           <span>${map[evKey] || evKey}</span>
         </li>
       `).join('');
     }
 
     if (headcountEl) {
-      const totalGuests = rsvp.adults + rsvp.children;
-      headcountEl.textContent = `${totalGuests} Guest${totalGuests > 1 ? 's' : ''} (${rsvp.adults} Adults${rsvp.children > 0 ? `, ${rsvp.children} Children` : ''})`;
+      headcountEl.textContent = `${rsvp.peopleCount} ${rsvp.peopleCount > 1 ? 'Guests' : 'Guest'} (Approx)`;
     }
 
     modal.classList.add('active');
@@ -234,7 +202,6 @@ class RsvpSystem {
       });
     }
 
-    // Close confirmation modal
     const closeConfirmBtn = document.getElementById('close-confirm-modal-btn');
     if (closeConfirmBtn) {
       closeConfirmBtn.addEventListener('click', () => {
@@ -256,33 +223,19 @@ class RsvpSystem {
     const tableBody = document.getElementById('organizer-table-body');
     const countTotalEl = document.getElementById('org-count-total');
     const countGuestsEl = document.getElementById('org-count-guests');
-    const countTuticorinEl = document.getElementById('org-count-tuticorin');
-    const countChennaiEl = document.getElementById('org-count-chennai');
 
     let totalGuests = 0;
-    let tuticorinAttendees = 0;
-    let chennaiAttendees = 0;
-
     list.forEach(r => {
-      const gCount = (r.adults || 1) + (r.children || 0);
-      totalGuests += gCount;
-      if (r.events.includes('haldi') || r.events.includes('sangeet') || r.events.includes('wedding_thoothukudi')) {
-        tuticorinAttendees += gCount;
-      }
-      if (r.events.includes('wedding_chennai') || r.events.includes('reception_chennai')) {
-        chennaiAttendees += gCount;
-      }
+      totalGuests += (r.peopleCount || 1);
     });
 
     if (countTotalEl) countTotalEl.textContent = list.length;
     if (countGuestsEl) countGuestsEl.textContent = totalGuests;
-    if (countTuticorinEl) countTuticorinEl.textContent = tuticorinAttendees;
-    if (countChennaiEl) countChennaiEl.textContent = chennaiAttendees;
 
     if (!tableBody) return;
 
     if (list.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="7" class="empty-table-msg">No RSVPs recorded yet. Guest submissions will appear here automatically.</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="6" class="empty-table-msg">No RSVPs recorded yet.</td></tr>`;
       return;
     }
 
@@ -303,10 +256,9 @@ class RsvpSystem {
       return `
         <tr>
           <td>${index + 1}</td>
-          <td><strong>${this.escapeHtml(r.guestName)}</strong><br><small class="text-muted">${this.escapeHtml(r.phone || r.email || '')}</small></td>
+          <td><strong>${this.escapeHtml(r.guestName)}</strong></td>
           <td>${eventsStr}</td>
-          <td>${r.adults} Adults${r.children > 0 ? `, ${r.children} Kids` : ''}</td>
-          <td><span class="diet-pill">${r.diet === 'traditional_veg' ? 'Traditional Veg' : 'Coastal Virundhu'}</span></td>
+          <td>${r.peopleCount} People</td>
           <td><span class="guest-wishes-cell" title="${this.escapeHtml(r.message)}">${this.escapeHtml(r.message || '—')}</span></td>
           <td><small>${dateStr}</small></td>
         </tr>
@@ -319,20 +271,16 @@ class RsvpSystem {
       'Gokul & Deepa',
       'Arun, Priya and Family (KCG Alumni)',
       'Uncle Sundaram & Family (Chennai)',
-      'Ravi Kumar (Tuticorin Cashew Trade Friends)',
-      'Sneha & Vikram (Toronto Maple Clan)'
+      'Ravi Kumar (Tuticorin Friends)',
+      'Sneha & Vikram (Toronto Clan)'
     ];
     const pickedName = sampleNames[Math.floor(Math.random() * sampleNames.length)] + ' #' + Math.floor(Math.random() * 90 + 10);
     const newSample = {
       id: 'rsvp_' + Date.now(),
       guestName: pickedName,
-      phone: '+91 99' + Math.floor(10000000 + Math.random() * 90000000),
-      email: 'guest@example.com',
       events: ['haldi', 'wedding_thoothukudi', 'reception_chennai'],
-      adults: 2,
-      children: 1,
-      diet: 'traditional_veg',
-      message: 'So excited to be a part of Abu & Sachin’s big day!',
+      peopleCount: Math.floor(Math.random() * 4) + 2,
+      message: 'So excited to be part of Abu & Sachin’s big day!',
       timestamp: new Date().toISOString()
     };
     const current = this.getAllRsvps();
@@ -347,16 +295,12 @@ class RsvpSystem {
       return;
     }
 
-    const headers = ['S.No', 'Guest / Family Name', 'Contact', 'Attending Events', 'Adults', 'Children', 'Total Guests', 'Feast Preference', 'Wishes / Message', 'RSVP Timestamp'];
+    const headers = ['S.No', 'Guest / Family Name', 'Attending Events', 'People Count (Approx)', 'Wishes / Message', 'RSVP Timestamp'];
     const rows = list.map((r, i) => [
       i + 1,
       `"${(r.guestName || '').replace(/"/g, '""')}"`,
-      `"${((r.phone || '') + ' ' + (r.email || '')).trim().replace(/"/g, '""')}"`,
       `"${r.events.join('; ')}"`,
-      r.adults || 1,
-      r.children || 0,
-      (r.adults || 1) + (r.children || 0),
-      `"${r.diet}"`,
+      r.peopleCount || 1,
       `"${(r.message || '').replace(/"/g, '""')}"`,
       `"${r.timestamp}"`
     ]);

@@ -3,179 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abu & Sachin Wedding Invitation | 11-Year Journey · Thoothukudi & Chennai</title>
+  <title>Abu & Sachin Wedding Invitation | Thoothukudi & Chennai</title>
   
-  <meta name="description" content="A festive, auspicious South Indian wedding invitation celebrating the 11-year journey of Abu (Thoothukudi) and Sachin (Chennai). Join us for ceremonies in Thoothukudi and Chennai.">
-  <meta name="keywords" content="Abu Sachin Wedding, South Indian Wedding, Thoothukudi Chennai Wedding, Pearl City Express, OK Kanmani Theme, Leela Palace Chennai">
-  <meta property="og:title" content="Abu & Sachin | South Indian Wedding Invitation">
-  <meta property="og:description" content="11 Years of Love · Thoothukudi (Pearl City) to Chennai (Madras Heritage) · Canada Chapter">
-  <meta property="og:image" content="images/tuticorin_chennai_panoramic_1792065432987.jpg">
+  <meta name="description" content="Wedding celebration of Abu (Thoothukudi) and Sachin (Chennai) · 11-Year Journey · Winter & Heritage Celebration">
+  <meta property="og:title" content="Abu & Sachin | Wedding Invitation">
+  <meta property="og:description" content="11-Year Journey · Thoothukudi & Chennai · Canada Chapter">
+  <meta property="og:image" content="images/couple-wedding.jpg">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪔</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Festive Marigold & Jasmine Petal Shower Canvas -->
-  <canvas id="petal-canvas"></canvas>
+  <!-- Gentle Romantic Snowfall Canvas -->
+  <canvas id="snow-canvas"></canvas>
 
   <!-- ==========================================================================
-       1. Festive Temple Entrance & Auspicious Split Doors
+       1. Tamil Architecture Gopuram Split Doors Opening
        ========================================================================== -->
   <div id="temple-door-curtain" class="temple-entrance-curtain">
-    <div class="temple-arch-backdrop"></div>
-    <div class="temple-vignette"></div>
+    
+    <div class="gopuram-split-doors-wrapper">
+      
+      <!-- Left Half of Gopuram -->
+      <div class="gopuram-door-half gopuram-door-left"></div>
 
-    <!-- Glowing Brass Kuthuvilakku Flanks -->
-    <div class="kuthuvilakku-flank kuthuvilakku-left">
-      <div class="kuthuvilakku-body">
-        <div class="lamp-flame"></div>
-      </div>
-    </div>
-    <div class="kuthuvilakku-flank kuthuvilakku-right">
-      <div class="kuthuvilakku-body">
-        <div class="lamp-flame"></div>
-      </div>
-    </div>
+      <!-- Right Half of Gopuram -->
+      <div class="gopuram-door-half gopuram-door-right"></div>
 
-    <!-- Split Double Wooden Temple Doors -->
-    <div class="temple-double-doors">
-      <div class="temple-door door-left">
-        <div class="door-panel-carving">
-          <span class="door-carved-emblem">🕉️</span>
-          <div class="door-brass-knocker">🪔</div>
-          <span class="door-carved-emblem">🌸</span>
+      <!-- Center Call to Action Overlay -->
+      <div class="gopuram-cta-overlay">
+        <p class="gopuram-badge-label">திருமணம் · Tamil Heritage</p>
+        <h1 class="gopuram-couple-names">Abu & Sachin</h1>
+        
+        <div class="gopuram-cities-tag">
+          <span>Thoothukudi ⇄ Chennai · 11-Year Journey</span>
         </div>
+
+        <button id="open-doors-btn" class="btn-open-gopuram" aria-label="Open Temple Gates and Enter Wedding Celebration">
+          <span>🔔</span>
+          <span>Open Temple Gates & Enter Celebration</span>
+        </button>
       </div>
 
-      <div class="temple-door door-right">
-        <div class="door-panel-carving">
-          <span class="door-carved-emblem">卐</span>
-          <div class="door-brass-knocker">🪔</div>
-          <span class="door-carved-emblem">🌺</span>
-        </div>
-      </div>
-
-      <!-- Inner Radiance Revealed When Doors Part -->
-      <div class="door-inner-radiance">
-        <div class="door-sanctum-glow">
-          <span>✨ Subham Astu ✨</span>
-          <p style="font-size: 1.1rem; margin-top: 10px; color: #FFF8DC;">Two Families · Two Coastal Heritages · One Eternal Bond</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Door Call to Action Overlay -->
-    <div class="door-action-overlay">
-      <div class="temple-sacred-om">ॐ</div>
-      <p class="temple-entrance-subtitle">Auspicious Wedding Celebration</p>
-      <h1 class="temple-entrance-names">Abu & Sachin</h1>
-      <div class="temple-journey-pill">
-        <span>🌊 Thoothukudi</span>
-        <span>⇄</span>
-        <span>🚂 Chennai</span>
-        <span>🍁 Canada</span>
-        <span>· 11-Year Journey</span>
-      </div>
-
-      <button id="open-doors-btn" class="btn-open-temple" aria-label="Open Temple Doors and Enter Celebration">
-        <span>🔔</span>
-        <span>Open Doors & Enter Celebration</span>
-      </button>
-
-      <p class="temple-door-hint">Click to sound auspicious temple bells & shower marigold petals</p>
-    </div>
   </div>
 
   <!-- ==========================================================================
-       2. Site Header & Auspicious Navigation
+       2. Redesigned Floating Frosted Navigation Bar
        ========================================================================== -->
   <header class="site-header">
-    <div class="header-container">
-      <a href="#hero" class="header-logo-group">
-        <span class="header-logo-icon">🪔</span>
-        <div class="header-logo-text">
-          <span class="logo-title">Abu & Sachin</span>
-          <span class="logo-subtitle">Thoothukudi ⇄ Chennai</span>
-        </div>
+    <div class="nav-floating-pill">
+      
+      <a href="#hero" class="nav-brand-link">
+        <div class="nav-crest">A&S</div>
+        <span class="nav-names">Abu & Sachin</span>
       </a>
 
       <nav>
         <ul class="site-nav-menu">
           <li><a href="#hero">Invitation</a></li>
-          <li><a href="#timeline-journey">11-Year Journey</a></li>
-          <li><a href="#ceremonies">Celebration Schedule</a></li>
-          <li><a href="#rsvp-section">Personalized RSVP</a></li>
-          <li><a href="#gallery">Couples Gallery</a></li>
+          <li><a href="#timeline-journey">Pearl Express (11 Yrs)</a></li>
+          <li><a href="#celebration-wheel-section">Celebration Wheel</a></li>
+          <li><a href="#rsvp-section">RSVP</a></li>
+          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#travel-transit">Travel & Stays</a></li>
           <li><a href="#iconic-places">Iconic Places</a></li>
         </ul>
       </nav>
 
-      <div class="header-actions">
-        <a href="#rsvp-section" id="nav-rsvp-btn" class="btn-rsvp-nav">
-          <span>💌</span>
-          <span>RSVP</span>
-        </a>
-        <button id="revisit-doors-btn" class="btn-secondary-glass" style="padding: 6px 14px; font-size: 0.8rem;" title="Close doors and view temple gate">
-          ⛩️ Temple Gate
-        </button>
-        <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu">
-          ☰
-        </button>
+      <div class="nav-actions">
+        <a href="#rsvp-section" id="nav-rsvp-btn" class="btn-nav-rsvp">RSVP</a>
+        <button id="revisit-doors-btn" class="btn-nav-temple" title="View Temple Opening">Temple Gate</button>
+        <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu">☰</button>
       </div>
+
     </div>
   </header>
 
   <!-- ==========================================================================
-       3. Main Hero Invitation Section
+       3. Snow-Themed Hero Invitation Section
        ========================================================================== -->
   <main>
     <section id="hero" class="hero-wedding-section">
-      <div class="hero-wedding-overlay"></div>
-      
       <div class="hero-content">
-        <div class="festive-shubh-badge" title="Click for extra marigold petal burst">
-          <span>🪔</span>
-          <span>Om Sri Ganeshayanamaha · Shubh Vivah</span>
-          <span>🌸</span>
+        
+        <div class="festive-sub-badge">
+          <span>❄️</span>
+          <span>11-Year Journey · Winter Wedding Celebration</span>
+          <span>❄️</span>
         </div>
 
         <h1 class="hero-main-title">
-          Celebrating 11 Years & Forever<br>
-          <span class="couple-names-highlight">Abu & Sachin</span>
+          Abu & Sachin
         </h1>
 
         <!-- Dual Cities Badges -->
         <div class="hero-cities-dual">
-          <div class="city-badge city-tuticorin">
-            <span>🌊</span>
-            <span>Bride: Abu · Thoothukudi (The Pearl City)</span>
-          </div>
-          <div class="city-divider-train">🚂 12693 Pearl City Express 🚂</div>
-          <div class="city-badge city-chennai">
-            <span>🏛️</span>
-            <span>Groom: Sachin · Chennai (Madras Heritage)</span>
-          </div>
+          <div class="city-badge city-tuticorin">Bride: Abu · Thoothukudi</div>
+          <div class="city-divider-train">🚂 Pearl City Express · Canada Chapter 🍁</div>
+          <div class="city-badge city-chennai">Groom: Sachin · Chennai</div>
         </div>
 
-        <!-- Couple's Heartfelt Quote Box -->
+        <!-- Couple's Concise Quote -->
         <div class="hero-quote-box">
           <p class="hero-quote-text">
-            "From the bustling corridors of KCG College to rainy Chennai movie dates watching OK Kanmani, across freezing Canadian snowstorms and oceans apart... 11 years, two coastal souls, and one eternal love story."
+            "From KCG College corridors to rainy Chennai movie dates watching OK Kanmani, and across snowy Toronto winters... 11 years, two coastal souls, and one eternal love story."
           </p>
           <p class="hero-quote-caption">
-            — With the auspicious blessings of our beloved parents & families
+            — Together with our families, we invite you to celebrate with us
           </p>
         </div>
 
-        <!-- Muhurtham Live Countdown Timer -->
+        <!-- Muhurtham Live Countdown -->
         <div class="countdown-container">
-          <p class="countdown-title">Auspicious Wedding Muhurtham Countdown</p>
+          <p class="countdown-title">Wedding Muhurtham Countdown</p>
           <div class="countdown-boxes">
             <div class="timer-box">
               <div id="timer-days" class="timer-num">00</div>
@@ -196,198 +143,198 @@
           </div>
         </div>
 
-        <!-- Hero Actions -->
+        <!-- Action Buttons -->
         <div class="hero-cta-group">
-          <a href="#rsvp-section" class="btn-primary-gold">
-            <span>💌</span>
-            <span>Confirm Attendance (RSVP)</span>
-          </a>
-          <a href="#ceremonies" class="btn-secondary-glass">
-            <span>📅</span>
-            <span>View Celebration Schedule</span>
-          </a>
-          <a href="#timeline-journey" class="btn-secondary-glass">
-            <span>🚂</span>
-            <span>Board the 11-Year Express</span>
-          </a>
+          <a href="#rsvp-section" class="btn-primary-festive">Confirm RSVP</a>
+          <a href="#celebration-wheel-section" class="btn-secondary-snow">Celebration Wheel</a>
+          <a href="#timeline-journey" class="btn-secondary-snow">Pearl City Express</a>
         </div>
+
       </div>
     </section>
 
     <!-- ==========================================================================
-         4. Interactive Horizontal Scroll Timeline: Pearl City Express (11 Years)
+         4. Pearl City Superfast Express · Lengthed Train Coaches (11-Year Journey)
          ========================================================================== -->
     <section id="timeline-journey" class="timeline-scroll-section">
       <div class="timeline-sticky-wrapper">
         
-        <!-- Timeline Header -->
+        <!-- Train Header -->
         <div class="timeline-header-bar">
           <div class="train-title-cluster">
-            <span class="train-logo-icon">🚂</span>
+            <span style="font-size: 2rem;">🚂</span>
             <div>
               <h2 class="train-service-name">Pearl City Superfast Express</h2>
-              <span class="train-service-number">Train #12693 / 12694 · The 11-Year Journey (2015 – 2026)</span>
+              <span class="train-service-number">Train #12693 / 12694 · 11-Year Journey (2015 – 2026)</span>
             </div>
           </div>
 
           <div class="train-station-indicator">
             <span class="station-pulse-dot"></span>
-            <span style="font-size: 0.8rem; color: var(--ok-amber); text-transform: uppercase;">Current Station:</span>
-            <span id="current-train-station" class="station-name-text">Chennai Egmore</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Station:</span>
+            <span id="current-train-station" style="font-weight: 700; color: var(--train-blue);">Chennai Egmore</span>
           </div>
         </div>
 
-        <!-- Horizontal Track with Train Coaches -->
+        <!-- Horizontal Track with Authentic Lengthed Train Coaches -->
         <div class="train-coaches-viewport">
           <div class="train-coaches-track">
             
             <!-- Locomotive Engine -->
             <div class="train-locomotive">
-              <span class="locomotive-badge">WAP-7 LOCOMOTIVE</span>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.75rem; background: #E11D48; padding: 2px 8px; border-radius: 4px; font-weight: 700;">WAP-7</span>
+                <span style="font-size: 0.75rem; color: #93C5FD;">SOUTHERN RAILWAY</span>
+              </div>
               <div class="locomotive-headlight"></div>
               <div>
-                <h3 class="locomotive-title">Pearl City Express</h3>
-                <p class="locomotive-desc">Chennai Egmore ⇄ Tuticorin<br>Connecting Abu & Sachin's worlds since 2015.</p>
+                <h3 class="locomotive-title">Pearl City Superfast</h3>
+                <p style="font-size: 0.82rem; color: #BAE6FD;">Connecting Chennai & Thoothukudi since 2015</p>
               </div>
               <div class="locomotive-route">
-                <span>MS (20:00)</span>
+                <span>MS · 20:00</span>
                 <span>➔ 656 KM ➔</span>
-                <span>TN (07:15)</span>
+                <span>TN · 07:15</span>
               </div>
             </div>
 
-            <!-- Coach 1: 2015 - KCG College of Technology -->
+            <!-- Coach 1: 2015 · KCG College (Chennai) -->
             <article class="train-coach-item coach-focused" id="coach-1">
-              <div class="coach-roof-bar">
-                <span class="coach-number-tag">COACH C-01 · 2015</span>
-                <span class="coach-destination-tag">KCG College, Chennai</span>
+              <div class="coach-curved-roof">
+                <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
+                <span class="coach-sr-tag">COACH C-01 · KCG</span>
               </div>
-              <div class="coach-image-window">
-                <img src="images/ok-kanmani-movie-date.jpg" alt="KCG College of Technology Sketches & Memories" loading="lazy">
-                <span class="coach-year-stamp">2015</span>
+              <div class="coach-livery-stripes">
+                PEARL CITY EXPRESS · CHENNAI ⇄ TUTICORIN
               </div>
-              <div class="coach-body-content">
-                <div>
-                  <h3 class="coach-milestone-title">KCG College of Technology (Chennai)</h3>
-                  <p class="coach-milestone-desc">
-                    Where college sparks first ignited. Between classroom lectures, canteen breaks, shared notes, and lively Chennai bus rides, a quiet companionship blossomed into something unforgettable.
-                  </p>
+              <div class="coach-windows-strip">
+                <div class="coach-panoramic-window">
+                  <img src="images/ok-kanmani-movie-date.jpg" alt="KCG College Chennai Sketches" loading="lazy">
                 </div>
-                <div class="coach-tags-cluster">
-                  <span class="coach-tag">🎓 Campus Days</span>
-                  <span class="coach-tag">🌿 Gulmohar Trees</span>
-                  <span class="coach-tag">🤝 First Conversation</span>
+                <div class="coach-milestone-brief">
+                  <div class="coach-year-badge">2015</div>
+                  <h3 class="coach-title-clean">KCG College of Technology</h3>
+                  <p class="coach-sub-clean">Where college sparks first ignited across campus corridors.</p>
                 </div>
+              </div>
+              <div class="coach-undercarriage">
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
               </div>
             </article>
 
-            <!-- Coach 2: 2015 - First Movie Date (OK Kanmani) -->
+            <!-- Coach 2: 2015 · First Movie Date (OK Kanmani) -->
             <article class="train-coach-item" id="coach-2">
-              <div class="coach-roof-bar">
-                <span class="coach-number-tag">COACH C-02 · 2015</span>
-                <span class="coach-destination-tag">Satyam Cinemas, Chennai</span>
+              <div class="coach-curved-roof">
+                <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
+                <span class="coach-sr-tag">COACH C-02 · SATYAM</span>
               </div>
-              <div class="coach-image-window">
-                <img src="images/ok-kanmani-cassette.jfif" alt="OK Kanmani Cassette and Chennai Rain" loading="lazy">
-                <span class="coach-year-stamp">2015</span>
+              <div class="coach-livery-stripes">
+                PEARL CITY EXPRESS · CHENNAI ⇄ TUTICORIN
               </div>
-              <div class="coach-body-content">
-                <div>
-                  <h3 class="coach-milestone-title">First Movie Date (OK Kanmani)</h3>
-                  <p class="coach-milestone-desc">
-                    April 2015 at Satyam Cinemas. Watching Mani Ratnam's <em>O Kadhal Kanmani</em> with AR Rahman's magical score. The songs <em>Mental Manadhil</em> and <em>Aye Sinamika</em> became the timeless soundtrack of their young love.
-                  </p>
+              <div class="coach-windows-strip">
+                <div class="coach-panoramic-window">
+                  <img src="images/ok-kanmani-cassette.jfif" alt="OK Kanmani Date Cassette and Chennai Rain" loading="lazy">
                 </div>
-                <div class="coach-tags-cluster">
-                  <span class="coach-tag">🍿 Satyam Cinemas</span>
-                  <span class="coach-tag">🎶 Mental Manadhil</span>
-                  <span class="coach-tag">🌧️ Chennai Rain</span>
+                <div class="coach-milestone-brief">
+                  <div class="coach-year-badge">2015</div>
+                  <h3 class="coach-title-clean">First Movie Date (OK Kanmani)</h3>
+                  <p class="coach-sub-clean">Satyam Cinemas, Mental Manadhil & rainy Chennai streets.</p>
                 </div>
+              </div>
+              <div class="coach-undercarriage">
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
               </div>
             </article>
 
-            <!-- Coach 3: 2017-2020 - Chennai Romance & Growing Foundations -->
+            <!-- Coach 3: 2017-2020 · Chennai Romance -->
             <article class="train-coach-item" id="coach-3">
-              <div class="coach-roof-bar">
-                <span class="coach-number-tag">COACH C-03 · 2017–2020</span>
-                <span class="coach-destination-tag">Chennai & Tuticorin Shore</span>
+              <div class="coach-curved-roof">
+                <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
+                <span class="coach-sr-tag">COACH C-03 · MYLAPORE</span>
               </div>
-              <div class="coach-image-window">
-                <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar and Chennai Filter Coffee" loading="lazy">
-                <span class="coach-year-stamp">2017–2020</span>
+              <div class="coach-livery-stripes">
+                PEARL CITY EXPRESS · CHENNAI ⇄ TUTICORIN
               </div>
-              <div class="coach-body-content">
-                <div>
-                  <h3 class="coach-milestone-title">Chennai Romance & Long Distance Foundations</h3>
-                  <p class="coach-milestone-desc">
-                    Steaming Mylapore filter coffees, evening sea breezes across Marina Beach and Napier Bridge, dream-building across the IT corridor, and countless overnight Pearl City train journeys between Chennai and Tuticorin.
-                  </p>
+              <div class="coach-windows-strip">
+                <div class="coach-panoramic-window">
+                  <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar and Filter Coffee" loading="lazy">
                 </div>
-                <div class="coach-tags-cluster">
-                  <span class="coach-tag">☕ Filter Coffee</span>
-                  <span class="coach-tag">🌊 Marina Beach</span>
-                  <span class="coach-tag">🌉 Napier Bridge</span>
+                <div class="coach-milestone-brief">
+                  <div class="coach-year-badge">2017–2020</div>
+                  <h3 class="coach-title-clean">Chennai Romance & Foundations</h3>
+                  <p class="coach-sub-clean">Mylapore filter coffee, Marina Beach walks & overnight trains.</p>
                 </div>
+              </div>
+              <div class="coach-undercarriage">
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
               </div>
             </article>
 
-            <!-- Coach 4: 2021-2025 - The Canada Chapter -->
+            <!-- Coach 4: 2021-2025 · The Canada Chapter -->
             <article class="train-coach-item" id="coach-4">
-              <div class="coach-roof-bar">
-                <span class="coach-number-tag">COACH C-04 · 2021–2025</span>
-                <span class="coach-destination-tag">Toronto, Canada</span>
+              <div class="coach-curved-roof">
+                <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
+                <span class="coach-sr-tag">COACH C-04 · TORONTO</span>
               </div>
-              <div class="coach-image-window">
-                <img src="images/canada-chapter.jpg" alt="Canada Chapter in Snowy Toronto with Red Maple Leaves" loading="lazy">
-                <span class="coach-year-stamp">2021–2025</span>
+              <div class="coach-livery-stripes">
+                PEARL CITY EXPRESS · TORONTO ⇄ MADRAS
               </div>
-              <div class="coach-body-content">
-                <div>
-                  <h3 class="coach-milestone-title">The Canada Chapter: Crossing Oceans</h3>
-                  <p class="coach-milestone-desc">
-                    Crossing continents to Canada. Braving sub-zero snowy Toronto winters together with warm hugs and hot tea, watching red autumn maple leaves fall, building careers, and proving distance only deepened their commitment.
-                  </p>
+              <div class="coach-windows-strip">
+                <div class="coach-panoramic-window">
+                  <img src="images/canada-chapter.jpg" alt="Canada Chapter in Snowy Toronto" loading="lazy">
                 </div>
-                <div class="coach-tags-cluster">
-                  <span class="coach-tag">🍁 Maple Dreams</span>
-                  <span class="coach-tag">❄️ Toronto Snow</span>
-                  <span class="coach-tag">✈️ Timezone Triumphs</span>
+                <div class="coach-milestone-brief">
+                  <div class="coach-year-badge">2021–2025</div>
+                  <h3 class="coach-title-clean">The Canada Chapter</h3>
+                  <p class="coach-sub-clean">Crossing oceans, Toronto winters, maple leaves & shared dreams.</p>
                 </div>
+              </div>
+              <div class="coach-undercarriage">
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
               </div>
             </article>
 
-            <!-- Coach 5: 2026 - Marriage: 11 Years & Forever -->
+            <!-- Coach 5: 2026 · Marriage — 11 Years & Forever -->
             <article class="train-coach-item" id="coach-5">
-              <div class="coach-roof-bar">
-                <span class="coach-number-tag">COACH C-05 · 2026</span>
-                <span class="coach-destination-tag">Thoothukudi ⇄ Chennai</span>
+              <div class="coach-curved-roof">
+                <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
+                <span class="coach-sr-tag">COACH C-05 · WEDDING</span>
               </div>
-              <div class="coach-image-window">
-                <img src="images/couple-wedding.jpg" alt="Abu and Sachin South Indian Wedding Portrait" loading="lazy">
-                <span class="coach-year-stamp">2026</span>
+              <div class="coach-livery-stripes">
+                PEARL CITY EXPRESS · THOOTHUKUDI ⇄ CHENNAI
               </div>
-              <div class="coach-body-content">
-                <div>
-                  <h3 class="coach-milestone-title">11 Years & Forever: Two Sacred Traditions</h3>
-                  <p class="coach-milestone-desc">
-                    The journey culminates in sacred matrimony. Two coastal families unite across Thoothukudi and Chennai. 11 years of devotion, endless train rides, and a lifetime of shared dreams ahead.
-                  </p>
+              <div class="coach-windows-strip">
+                <div class="coach-panoramic-window">
+                  <img src="images/couple-wedding.jpg" alt="Abu and Sachin Wedding Traditional Attire" loading="lazy">
                 </div>
-                <div class="coach-tags-cluster">
-                  <span class="coach-tag">🪔 Sacred Muhurtham</span>
-                  <span class="coach-tag">🌺 Jasmine & Silk</span>
-                  <span class="coach-tag">💍 Eternal Vows</span>
+                <div class="coach-milestone-brief">
+                  <div class="coach-year-badge">2026</div>
+                  <h3 class="coach-title-clean">Marriage — 11 Years & Forever</h3>
+                  <p class="coach-sub-clean">Two coastal souls united in sacred matrimony.</p>
                 </div>
+              </div>
+              <div class="coach-undercarriage">
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
+                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
               </div>
             </article>
 
           </div>
         </div>
 
-        <!-- Railway Track Visual Element -->
+        <!-- Railway Tracks -->
         <div class="railway-track-footer"></div>
 
-        <!-- Timeline Bottom Controls -->
+        <!-- Controls -->
         <div class="timeline-bottom-controls">
           <div class="timeline-progress-track">
             <div class="timeline-progress-fill"></div>
@@ -411,772 +358,452 @@
     </section>
 
     <!-- ==========================================================================
-         5. Celebration Schedule & Ceremonies
+         5. Celebration Schedule Spin Wheel (5 Rotating Sections)
          ========================================================================== -->
-    <section id="ceremonies" class="section-wrapper">
+    <section id="celebration-wheel-section" class="section-wrapper">
       <div class="section-title-cluster">
-        <span class="section-pretitle">Auspicious Wedding Itinerary</span>
-        <h2 class="section-title">Celebration Schedule & Ceremonies</h2>
+        <span class="section-pretitle">Ceremonies & Venues</span>
+        <h2 class="section-title">Celebration Schedule</h2>
         <p class="section-desc">
-          Honoring two rich traditions across Thoothukudi and Chennai. We invite you to join us for every sacred ritual, musical evening, and joyful feast.
+          Interactive rotating wheel. Click any section to open the Google Maps venue location.
         </p>
       </div>
 
-      <div class="ceremonies-grid">
-        
-        <!-- Ceremony 1: Haldi Ceremony (Dec 5 - Thoothukudi) -->
-        <article class="ceremony-card" id="card-haldi">
-          <div class="ceremony-card-header">
-            <span class="ceremony-city-tag tag-tuticorin">🌊 Thoothukudi</span>
-            <div class="ceremony-date-badge">
-              <span class="ceremony-day">05</span>
-              <span class="ceremony-month">Dec 2026</span>
-            </div>
-          </div>
-          <div class="ceremony-card-body">
-            <h3 class="ceremony-title">Haldi Ceremony</h3>
-            <div class="ceremony-muhurtham-banner">
-              <span>⏰ 09:30 AM Onwards</span>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">📍</span>
-              <div>
-                <strong>Pearl Beach Greens</strong>
-                <p>Harbour Road, Thoothukudi, Tamil Nadu</p>
-              </div>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">💛</span>
-              <p>Auspicious turmeric blessing, fragrant sandalwood paste, marigold showers, and joyful morning festivities by the sea breeze.</p>
-            </div>
-            <div class="ceremony-dresscode">
-              <span class="dresscode-label">Dress Code & Style:</span>
-              <span class="dresscode-val">Festive Yellows, Mustard, Floral Kurtas & Light Cotton Sarees</span>
-            </div>
-          </div>
-          <div class="ceremony-card-actions">
-            <button class="btn-ceremony-action btn-add-gcal" data-event-key="haldi">
-              <span>📅</span> Add to Google Calendar
-            </button>
-            <button class="btn-ceremony-action btn-download-ics" data-event-key="haldi">
-              <span>📥</span> Download .ICS
-            </button>
-            <a href="https://maps.google.com/?q=Pearl+Beach+Thoothukudi" target="_blank" rel="noopener noreferrer" class="btn-ceremony-action btn-venue-maps">
-              <span>🗺️</span> View Venue on Maps
-            </a>
-          </div>
-        </article>
+      <!-- The Grand 5-Section Rotating Spin Wheel -->
+      <div class="wheel-container-wrapper">
+        <div id="celebration-wheel" class="celebration-wheel-outer">
+          
+          <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
+            <!-- 5 Segments (72 degrees each) -->
+            <!-- Segment 1: Dec 5 09:30 AM · Haldi (Thoothukudi) -->
+            <g class="wheel-segment" 
+               data-title="Dec 5 · Haldi Ceremony (09:30 AM)" 
+               data-venue="Pearl Beach Greens, Thoothukudi" 
+               data-map="https://maps.google.com/?q=Pearl+Beach+Thoothukudi">
+              <path d="M 250 250 L 250 10 A 240 240 0 0 1 478.25 175.91 Z" fill="#0284C7" />
+              <text x="345" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(36, 345, 125)">
+                DEC 5 · 09:30 AM
+              </text>
+              <text x="345" y="142" fill="#E0F2FE" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(36, 345, 142)">
+                Haldi · Thoothukudi
+              </text>
+            </g>
 
-        <!-- Ceremony 2: Sangeet & Musical Night (Dec 5 - Thoothukudi) -->
-        <article class="ceremony-card" id="card-sangeet">
-          <div class="ceremony-card-header">
-            <span class="ceremony-city-tag tag-tuticorin">🌊 Thoothukudi</span>
-            <div class="ceremony-date-badge">
-              <span class="ceremony-day">05</span>
-              <span class="ceremony-month">Dec 2026</span>
-            </div>
-          </div>
-          <div class="ceremony-card-body">
-            <h3 class="ceremony-title">Sangeet / Musical Night</h3>
-            <div class="ceremony-muhurtham-banner">
-              <span>⏰ 06:30 PM Onwards</span>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">📍</span>
-              <div>
-                <strong>Grand Ballroom, Regency Tuticorin</strong>
-                <p>GRT Hotels, Palayamkottai Road, Thoothukudi</p>
-              </div>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">🎵</span>
-              <p>OK Kanmani retro hits, AR Rahman dance medleys, high-energy dhol, cocktails, and family choreography celebrating Abu & Sachin.</p>
-            </div>
-            <div class="ceremony-dresscode">
-              <span class="dresscode-label">Dress Code & Style:</span>
-              <span class="dresscode-val">Indo-Western Glamour, Shimmering Lehengas, Bandhgalas & Tuxedos</span>
-            </div>
-          </div>
-          <div class="ceremony-card-actions">
-            <button class="btn-ceremony-action btn-add-gcal" data-event-key="sangeet">
-              <span>📅</span> Add to Google Calendar
-            </button>
-            <button class="btn-ceremony-action btn-download-ics" data-event-key="sangeet">
-              <span>📥</span> Download .ICS
-            </button>
-            <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="btn-ceremony-action btn-venue-maps">
-              <span>🗺️</span> View Venue on Maps
-            </a>
-          </div>
-        </article>
+            <!-- Segment 2: Dec 5 06:30 PM · Sangeet (Regency Tuticorin) -->
+            <g class="wheel-segment" 
+               data-title="Dec 5 · Sangeet & Musical Night (06:30 PM)" 
+               data-venue="Regency Tuticorin by GRT Hotels" 
+               data-map="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels">
+              <path d="M 250 250 L 478.25 175.91 A 240 240 0 0 1 391.07 444.09 Z" fill="#8B1E28" />
+              <text x="390" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(108, 390, 310)">
+                DEC 5 · 06:30 PM
+              </text>
+              <text x="390" y="327" fill="#FECACA" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(108, 390, 327)">
+                Sangeet · GRT Regency
+              </text>
+            </g>
 
-        <!-- Ceremony 3: Wedding Ceremony - Tradition 1 (Dec 6 - Thoothukudi) -->
-        <article class="ceremony-card featured-reception" id="card-wedding-thoothukudi">
-          <div class="ceremony-card-header">
-            <span class="ceremony-city-tag tag-tuticorin">🌊 Thoothukudi</span>
-            <div class="ceremony-date-badge">
-              <span class="ceremony-day">06</span>
-              <span class="ceremony-month">Dec 2026</span>
-            </div>
-          </div>
-          <div class="ceremony-card-body">
-            <h3 class="ceremony-title">Wedding Ceremony – Tradition 1</h3>
-            <div class="ceremony-muhurtham-banner">
-              <span>🪔 Auspicious Muhurtham: 09:45 AM (09:00 AM – 01:00 PM)</span>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">📍</span>
-              <div>
-                <strong>Sea-Breeze Thirumana Mandapam</strong>
-                <p>Beach Road, Near Harbour, Thoothukudi, Tamil Nadu</p>
-              </div>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">💍</span>
-              <p>Sacred traditional vows, exchange of floral garlands, coastal family rituals, followed by an elaborate South Indian wedding feast (Elai Sappadu).</p>
-            </div>
-            <div class="ceremony-dresscode">
-              <span class="dresscode-label">Dress Code & Style:</span>
-              <span class="dresscode-val">Pure Kanchipuram Silk Sarees & Traditional Silk Veshti (Mundu) with Angavastram</span>
-            </div>
-          </div>
-          <div class="ceremony-card-actions">
-            <button class="btn-ceremony-action btn-add-gcal" data-event-key="wedding_thoothukudi">
-              <span>📅</span> Add to Google Calendar
-            </button>
-            <button class="btn-ceremony-action btn-download-ics" data-event-key="wedding_thoothukudi">
-              <span>📥</span> Download .ICS
-            </button>
-            <a href="https://maps.google.com/?q=Thoothukudi+Beach+Road" target="_blank" rel="noopener noreferrer" class="btn-ceremony-action btn-venue-maps">
-              <span>🗺️</span> View Venue on Maps
-            </a>
-          </div>
-        </article>
+            <!-- Segment 3: Dec 6 09:45 AM · Wedding Tradition 1 (Thoothukudi) -->
+            <g class="wheel-segment" 
+               data-title="Dec 6 · Wedding Tradition 1 (09:45 AM Muhurtham)" 
+               data-venue="Sea-Breeze Mandapam, Thoothukudi" 
+               data-map="https://maps.google.com/?q=Thoothukudi+Beach+Road">
+              <path d="M 250 250 L 391.07 444.09 A 240 240 0 0 1 108.93 444.09 Z" fill="#C59B27" />
+              <text x="250" y="415" fill="#1E293B" font-size="12" font-weight="800" text-anchor="middle" transform="rotate(180, 250, 415)">
+                DEC 6 · 09:45 AM MUHURTHAM
+              </text>
+              <text x="250" y="432" fill="#334155" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(180, 250, 432)">
+                Wedding 1 · Thoothukudi
+              </text>
+            </g>
 
-        <!-- Ceremony 4: Wedding Ceremony - Tradition 2 (Dec 10 - Chennai) -->
-        <article class="ceremony-card" id="card-wedding-chennai">
-          <div class="ceremony-card-header">
-            <span class="ceremony-city-tag tag-chennai">🏛️ Chennai</span>
-            <div class="ceremony-date-badge">
-              <span class="ceremony-day">10</span>
-              <span class="ceremony-month">Dec 2026</span>
-            </div>
-          </div>
-          <div class="ceremony-card-body">
-            <h3 class="ceremony-title">Wedding Ceremony – Tradition 2</h3>
-            <div class="ceremony-muhurtham-banner">
-              <span>🪔 Auspicious Muhurtham: 08:15 AM (07:30 AM – 12:00 PM)</span>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">📍</span>
-              <div>
-                <strong>Sri Kapaleeshwarar Heritage Hall</strong>
-                <p>Mylapore Tank Road, Chennai, Tamil Nadu</p>
-              </div>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">🕉️</span>
-              <p>Madras Vedic matrimonial rites, Nadaswaram & Thavil live Mangala Vaathiyam, Saptapadi, and authentic Mylapore filter coffee breakfast feast.</p>
-            </div>
-            <div class="ceremony-dresscode">
-              <span class="dresscode-label">Dress Code & Style:</span>
-              <span class="dresscode-val">Auspicious Red, Crimson, Maroon & Gold Silk Attire</span>
-            </div>
-          </div>
-          <div class="ceremony-card-actions">
-            <button class="btn-ceremony-action btn-add-gcal" data-event-key="wedding_chennai">
-              <span>📅</span> Add to Google Calendar
-            </button>
-            <button class="btn-ceremony-action btn-download-ics" data-event-key="wedding_chennai">
-              <span>📥</span> Download .ICS
-            </button>
-            <a href="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai" target="_blank" rel="noopener noreferrer" class="btn-ceremony-action btn-venue-maps">
-              <span>🗺️</span> View Venue on Maps
-            </a>
-          </div>
-        </article>
+            <!-- Segment 4: Dec 10 08:15 AM · Wedding Tradition 2 (Mylapore Chennai) -->
+            <g class="wheel-segment" 
+               data-title="Dec 10 · Wedding Tradition 2 (08:15 AM Muhurtham)" 
+               data-venue="Sri Kapaleeshwarar Heritage Hall, Mylapore" 
+               data-map="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai">
+              <path d="M 250 250 L 108.93 444.09 A 240 240 0 0 1 21.75 175.91 Z" fill="#0D4E5B" />
+              <text x="110" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-108, 110, 310)">
+                DEC 10 · 08:15 AM MUHURTHAM
+              </text>
+              <text x="110" y="327" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(-108, 110, 327)">
+                Wedding 2 · Mylapore Chennai
+              </text>
+            </g>
 
-        <!-- Ceremony 5: Grand Wedding Reception (Dec 11 - Chennai) -->
-        <article class="ceremony-card featured-reception" id="card-reception-chennai">
-          <div class="ceremony-card-header">
-            <span class="ceremony-city-tag tag-chennai">🏛️ Chennai</span>
-            <div class="ceremony-date-badge">
-              <span class="ceremony-day">11</span>
-              <span class="ceremony-month">Dec 2026</span>
-            </div>
+            <!-- Segment 5: Dec 11 06:30 PM · Grand Reception (The Leela Palace Chennai) -->
+            <g class="wheel-segment" 
+               data-title="Dec 11 · Grand Reception (06:30 PM)" 
+               data-venue="The Leela Palace Chennai, MRC Nagar" 
+               data-map="https://maps.google.com/?q=The+Leela+Palace+Chennai">
+              <path d="M 250 250 L 21.75 175.91 A 240 240 0 0 1 250 10 Z" fill="#9B1B30" />
+              <text x="155" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-36, 155, 125)">
+                DEC 11 · 06:30 PM
+              </text>
+              <text x="155" y="142" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(-36, 155, 142)">
+                Grand Reception · The Leela
+              </text>
+            </g>
+          </svg>
+
+          <!-- Center Frosted Hub -->
+          <div class="wheel-center-hub">
+            <span class="hub-brand-names" id="wheel-hub-active-title">Abu & Sachin</span>
+            <span class="hub-status-text" id="wheel-hub-active-venue">Tap segment for Google Maps</span>
           </div>
-          <div class="ceremony-card-body">
-            <h3 class="ceremony-title">Grand Wedding Reception</h3>
-            <div class="ceremony-muhurtham-banner">
-              <span>✨ 06:30 PM Onwards · Evening Celebration</span>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">📍</span>
-              <div>
-                <strong>The Leela Palace Chennai</strong>
-                <p>Adyar Seaface, MRC Nagar, Raja Annamalai Puram, Chennai</p>
-              </div>
-            </div>
-            <div class="ceremony-detail-item">
-              <span class="ceremony-detail-icon">🥂</span>
-              <p>Grand banquet celebration overlooking the Bay of Bengal. Live orchestral melodies, dinner feast, and photo sessions with Abu & Sachin.</p>
-            </div>
-            <div class="ceremony-dresscode">
-              <span class="dresscode-label">Dress Code & Style:</span>
-              <span class="dresscode-val">Black Tie, Royal Silk, Evening Gowns & Formal Bandhgalas</span>
-            </div>
-          </div>
-          <div class="ceremony-card-actions">
-            <button class="btn-ceremony-action btn-add-gcal" data-event-key="reception_chennai">
-              <span>📅</span> Add to Google Calendar
-            </button>
-            <button class="btn-ceremony-action btn-download-ics" data-event-key="reception_chennai">
-              <span>📥</span> Download .ICS
-            </button>
-            <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="btn-ceremony-action btn-venue-maps">
-              <span>🗺️</span> View Venue on Maps
-            </a>
-          </div>
-        </article>
+
+        </div>
+
+        <!-- Quick Access Venue Pills below wheel -->
+        <div class="wheel-quick-pills">
+          <a href="https://maps.google.com/?q=Pearl+Beach+Thoothukudi" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+            <span>🗺️</span> <strong>Dec 5:</strong> Haldi (Thoothukudi)
+          </a>
+          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+            <span>🗺️</span> <strong>Dec 5:</strong> Sangeet (GRT Regency)
+          </a>
+          <a href="https://maps.google.com/?q=Thoothukudi+Beach+Road" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+            <span>🗺️</span> <strong>Dec 6:</strong> Wedding Tradition 1 (Thoothukudi)
+          </a>
+          <a href="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+            <span>🗺️</span> <strong>Dec 10:</strong> Wedding Tradition 2 (Mylapore)
+          </a>
+          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+            <span>🗺️</span> <strong>Dec 11:</strong> Reception (The Leela Palace)
+          </a>
+        </div>
 
       </div>
     </section>
 
     <!-- ==========================================================================
-         6. Personalized RSVP System
+         6. Clean Personalized RSVP System
          ========================================================================== -->
     <section id="rsvp-section" class="section-wrapper">
       <div class="rsvp-section-box">
+        
         <div class="rsvp-header-proclamation">
-          <div class="rsvp-om-symbol">🪔</div>
           <span class="section-pretitle">Your Presence Is Our Blessing</span>
           <h2 class="section-title">Personalized RSVP</h2>
-          <p class="section-desc" style="max-width: 600px; margin: 0 auto;">
-            Please let us know which ceremonies you will be gracing with your attendance. We will prepare your personalized warm welcome!
+          <p class="section-desc">
+            Please let us know which ceremonies you will be attending.
           </p>
         </div>
 
         <form id="wedding-rsvp-form">
           <div class="rsvp-form-grid">
             
-            <!-- Guest & Family Name -->
-            <div class="form-group form-full-width">
-              <label for="rsvp-guest-name" class="form-label">
-                Guest / Family Name(s) * <span style="font-size: 0.8rem; font-weight: 400; color: var(--ok-amber);">(e.g., "Sai and his family" or "Anand & Priya")</span>
-              </label>
+            <!-- Guest / Family Name -->
+            <div class="form-group">
+              <label for="rsvp-guest-name" class="form-label">Guest / Family Name * (e.g., "Sai and his family")</label>
               <input type="text" id="rsvp-guest-name" class="form-input" placeholder="e.g. Sai and his family" required>
             </div>
 
-            <!-- Contact Information -->
+            <!-- Events Multi-Select Checkboxes -->
             <div class="form-group">
-              <label for="rsvp-phone" class="form-label">WhatsApp / Phone Number</label>
-              <input type="tel" id="rsvp-phone" class="form-input" placeholder="+91 98400 12345">
-            </div>
-
-            <div class="form-group">
-              <label for="rsvp-email" class="form-label">Email Address (For Calendar Updates)</label>
-              <input type="email" id="rsvp-email" class="form-input" placeholder="sai.family@example.com">
-            </div>
-
-            <!-- Multi-Select Event Attendance Checkboxes -->
-            <div class="form-group form-full-width">
-              <label class="form-label">Select Events You Will Attend (Multi-Select) *</label>
+              <label class="form-label">Ceremonies You Will Attend *</label>
               <div class="events-checkbox-container">
-                
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="haldi" checked>
-                  <div class="event-check-info">
-                    <span class="event-check-name">Dec 5 · Haldi Ceremony (Thoothukudi)</span>
-                    <span class="event-check-sub">09:30 AM · Pearl Beach Greens</span>
-                  </div>
+                  <span class="event-check-name">Dec 5 · Haldi Ceremony (Thoothukudi)</span>
                 </label>
-
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="sangeet" checked>
-                  <div class="event-check-info">
-                    <span class="event-check-name">Dec 5 · Sangeet & Musical Night (Thoothukudi)</span>
-                    <span class="event-check-sub">06:30 PM · Regency Tuticorin</span>
-                  </div>
+                  <span class="event-check-name">Dec 5 · Sangeet & Musical Night (Thoothukudi)</span>
                 </label>
-
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="wedding_thoothukudi" checked>
-                  <div class="event-check-info">
-                    <span class="event-check-name">Dec 6 · Wedding Ceremony – Tradition 1 (Thoothukudi)</span>
-                    <span class="event-check-sub">09:00 AM · Muhurtham: 09:45 AM</span>
-                  </div>
+                  <span class="event-check-name">Dec 6 · Wedding Tradition 1 (Thoothukudi)</span>
                 </label>
-
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="wedding_chennai" checked>
-                  <div class="event-check-info">
-                    <span class="event-check-name">Dec 10 · Wedding Ceremony – Tradition 2 (Chennai)</span>
-                    <span class="event-check-sub">07:30 AM · Muhurtham: 08:15 AM · Mylapore</span>
-                  </div>
+                  <span class="event-check-name">Dec 10 · Wedding Tradition 2 (Chennai)</span>
                 </label>
-
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="reception_chennai" checked>
-                  <div class="event-check-info">
-                    <span class="event-check-name">Dec 11 · Grand Wedding Reception (Chennai)</span>
-                    <span class="event-check-sub">06:30 PM · The Leela Palace Chennai</span>
-                  </div>
+                  <span class="event-check-name">Dec 11 · Grand Reception (The Leela Palace Chennai)</span>
                 </label>
-
               </div>
             </div>
 
-            <!-- Headcount -->
+            <!-- Number of People (approx) -->
             <div class="form-group">
-              <label for="rsvp-adults" class="form-label">Number of Adults Attending</label>
-              <select id="rsvp-adults" class="form-select">
-                <option value="1">1 Adult</option>
-                <option value="2" selected>2 Adults</option>
-                <option value="3">3 Adults</option>
-                <option value="4">4 Adults</option>
-                <option value="5">5+ Adults (Family)</option>
+              <label for="rsvp-people" class="form-label">Number of People (approx)</label>
+              <select id="rsvp-people" class="form-select">
+                <option value="1">1 Person</option>
+                <option value="2" selected>2 People</option>
+                <option value="3">3 People</option>
+                <option value="4">4 People</option>
+                <option value="5">5 People</option>
+                <option value="6">6+ People (Family)</option>
               </select>
             </div>
 
+            <!-- Message / Wishes -->
             <div class="form-group">
-              <label for="rsvp-children" class="form-label">Number of Children</label>
-              <select id="rsvp-children" class="form-select">
-                <option value="0" selected>0 Children</option>
-                <option value="1">1 Child</option>
-                <option value="2">2 Children</option>
-                <option value="3">3+ Children</option>
-              </select>
-            </div>
-
-            <!-- Feast Preference -->
-            <div class="form-group form-full-width">
-              <label for="rsvp-diet" class="form-label">Feast & Meal Preference</label>
-              <select id="rsvp-diet" class="form-select">
-                <option value="traditional_veg" selected>Traditional South Indian Pure Vegetarian Feast (Elai Sappadu)</option>
-                <option value="traditional_nonveg">Coastal Tamil Nadu Traditional Virundhu</option>
-                <option value="jain_veg">Jain Vegetarian Feast</option>
-              </select>
-            </div>
-
-            <!-- Warm Wishes / Message -->
-            <div class="form-group form-full-width">
-              <label for="rsvp-wishes" class="form-label">Your Blessings & Warm Wishes for Abu & Sachin</label>
-              <textarea id="rsvp-wishes" class="form-textarea" rows="3" placeholder="Write a sweet quote or wish for Abu & Sachin's 11-year milestone..."></textarea>
+              <label for="rsvp-wishes" class="form-label">Wishes for Abu & Sachin (Optional)</label>
+              <textarea id="rsvp-wishes" class="form-textarea" rows="2" placeholder="Write a wish for the couple..."></textarea>
             </div>
 
             <!-- Submit Button -->
-            <div class="form-full-width">
-              <button type="submit" id="submit-rsvp-btn" class="btn-submit-rsvp">
-                <span>🪔</span>
-                <span>Confirm Wedding RSVP & Bless Couple</span>
-              </button>
-            </div>
+            <button type="submit" id="submit-rsvp-btn" class="btn-submit-rsvp">
+              Confirm Wedding RSVP
+            </button>
 
           </div>
         </form>
 
         <div class="rsvp-organizer-link-wrap">
           <button id="open-organizer-view-btn" class="btn-organizer-view">
-            🔒 Organizer View & Export Guest List (.CSV)
+            Organizer View & Export Guest List (.CSV)
           </button>
         </div>
+
       </div>
     </section>
 
     <!-- ==========================================================================
-         7. Photo Gallery for Couples (Polaroids & Empty Upload Slots)
+         7. Couples Photo Gallery (Polaroids & Clean Slots)
          ========================================================================== -->
     <section id="gallery" class="section-wrapper">
       <div class="section-title-cluster">
-        <span class="section-pretitle">Moments Captured in Time</span>
-        <h2 class="section-title">Couples Photo Gallery</h2>
-        <p class="section-desc">
-          Snapshots from an 11-year romance. Tap on any photo to expand, or use the empty frames to upload your favorite memory with Abu & Sachin!
-        </p>
+        <span class="section-pretitle">Memories</span>
+        <h2 class="section-title">Couples Gallery</h2>
+        <p class="section-desc">Tap on any memory or upload your photo in the empty slots.</p>
       </div>
 
       <div class="gallery-grid">
         
-        <!-- Photo 1: South Indian Wedding Traditional Portrait -->
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/couple-wedding.jpg" alt="Abu and Sachin Traditional South Indian Wedding" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
+            <img src="images/couple-wedding.jpg" alt="Abu and Sachin Wedding Traditional Attire" loading="lazy">
           </div>
           <div class="gallery-card-caption">
-            <strong>Abu & Sachin · Forever Begins</strong>
-            <span>Kanchipuram Silk & Sacred Vows</span>
+            <strong>Abu & Sachin</strong>
+            <span>Traditional Wedding Portrait</span>
           </div>
         </div>
 
-        <!-- Photo 2: First Movie Date (OK Kanmani Satyam Cinemas) -->
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/ok-kanmani-movie-date.jpg" alt="OK Kanmani 2015 Satyam Cinemas Date and KCG Sketches" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
+            <img src="images/ok-kanmani-movie-date.jpg" alt="2015 OK Kanmani Movie Date Satyam Cinemas" loading="lazy">
           </div>
           <div class="gallery-card-caption">
-            <strong>April 2015 · The OK Kanmani Date</strong>
-            <span>Satyam Cinemas, Chennai Corridors</span>
+            <strong>First Movie Date · 2015</strong>
+            <span>OK Kanmani at Satyam Cinemas</span>
           </div>
         </div>
 
-        <!-- Photo 3: The Canada Chapter (Snow & Maple Leaves) -->
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/canada-chapter.jpg" alt="The Canada Chapter - Toronto Winter with Falling Red Maple Leaves" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
+            <img src="images/canada-chapter.jpg" alt="Canada Chapter Toronto Winter" loading="lazy">
           </div>
           <div class="gallery-card-caption">
-            <strong>2021–2025 · The Canada Chapter</strong>
-            <span>Toronto Winters & Crimson Maple Leaves</span>
+            <strong>The Canada Chapter</strong>
+            <span>Toronto Winters & Maple Leaves</span>
           </div>
         </div>
 
-        <!-- Photo 4: Thoothukudi Cashew Macaroons & Pearl Coast -->
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/tuticorin-macaroons.jpg" alt="Famous Tuticorin Cashew Macaroons with Jasmine and Coffee" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
+            <img src="images/tuticorin-macaroons.jpg" alt="Tuticorin Cashew Macaroons" loading="lazy">
           </div>
           <div class="gallery-card-caption">
-            <strong>Thoothukudi · Cashew Macaroons</strong>
-            <span>Sweet Pearl City Traditions</span>
+            <strong>Thoothukudi Heritage</strong>
+            <span>Famous Cashew Macaroons</span>
           </div>
         </div>
 
-        <!-- Photo 5: Mylapore Kapaleeshwarar & Filter Coffee -->
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/chennai-mylapore.jpg" alt="Kapaleeshwarar Mylapore Chennai and Filter Coffee" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
+            <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar Temple" loading="lazy">
           </div>
           <div class="gallery-card-caption">
-            <strong>Madras Memories · Mylapore</strong>
-            <span>Kapaleeshwarar Temple & Filter Coffee</span>
+            <strong>Chennai Heritage</strong>
+            <span>Kapaleeshwarar & Filter Coffee</span>
           </div>
         </div>
 
-        <!-- Photo 6: Panoramic Dual Heritage Procession -->
-        <div class="gallery-card">
-          <div class="gallery-img-wrap">
-            <img src="images/tuticorin_chennai_panoramic_1792065432987.jpg" alt="Thoothukudi to Chennai Wedding Procession" loading="lazy">
-            <div class="gallery-overlay"><span class="gallery-zoom-icon">🔍</span></div>
-          </div>
-          <div class="gallery-card-caption">
-            <strong>Two Coastal Legacies Unite</strong>
-            <span>Our Lady of Snows & Kapaleeshwarar</span>
-          </div>
-        </div>
-
-        <!-- Empty Slot 1: Haldi Celebration Memory Slot -->
+        <!-- Empty Slot 1 -->
         <div class="gallery-card gallery-empty-slot" data-slot-id="slot_haldi">
-          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo for Haldi Memory Slot">
-          <span class="slot-upload-icon">📸</span>
-          <h4 class="slot-title">Haldi Memory Slot</h4>
-          <p class="slot-hint">Click or drop a photo here to add your Haldi moment with Abu & Sachin</p>
+          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo">
+          <span style="font-size: 2rem; margin-bottom: 8px;">📸</span>
+          <strong style="font-size: 0.95rem; color: var(--text-primary);">Haldi Memory Slot</strong>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Click to upload a memory</span>
         </div>
 
-        <!-- Empty Slot 2: Sangeet & Reception Groove Slot -->
+        <!-- Empty Slot 2 -->
         <div class="gallery-card gallery-empty-slot" data-slot-id="slot_reception">
-          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo for Sangeet Memory Slot">
-          <span class="slot-upload-icon">✨</span>
-          <h4 class="slot-title">Sangeet / Reception Slot</h4>
-          <p class="slot-hint">Click or drop a photo here to capture the Leela Palace dance celebration</p>
+          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo">
+          <span style="font-size: 2rem; margin-bottom: 8px;">✨</span>
+          <strong style="font-size: 0.95rem; color: var(--text-primary);">Reception Slot</strong>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Click to upload a memory</span>
         </div>
 
       </div>
     </section>
 
     <!-- ==========================================================================
-         8. Travel Plans, Transit & Handpicked Hotel Stays
+         8. Travel Plans & Hotel Stays
          ========================================================================== -->
     <section id="travel-transit" class="section-wrapper">
       <div class="section-title-cluster">
-        <span class="section-pretitle">Smooth Journeys for Honored Guests</span>
-        <h2 class="section-title">Travel Plans & Hotel Stays</h2>
-        <p class="section-desc">
-          Everything you need to travel seamlessly between Chennai and Thoothukudi, along with curated accommodations near all venues.
-        </p>
+        <span class="section-pretitle">Guest Logistics</span>
+        <h2 class="section-title">Travel Plans & Hotels</h2>
       </div>
 
-      <!-- Transit Modes Grid -->
       <div class="travel-grid">
-        
-        <!-- Transit 1: Pearl City Superfast Express -->
         <div class="transit-card">
-          <div class="transit-header">
-            <div class="transit-icon-box">🚂</div>
-            <div>
-              <h3 class="transit-title">Pearl City Superfast Express</h3>
-              <span class="transit-sub">Train No: 12693 (MS ➔ TN) / 12694 (TN ➔ MS)</span>
-            </div>
-          </div>
+          <h3 class="transit-title">🚂 Pearl City Superfast Express</h3>
           <ul class="transit-details-list">
-            <li><strong>From Chennai Egmore (MS):</strong> Departs 20:00, Arrives Tuticorin (TN) 07:15 (+1 day).</li>
-            <li><strong>From Tuticorin (TN):</strong> Departs 20:20, Arrives Chennai Egmore 07:35 (+1 day).</li>
-            <li><strong>Coaches:</strong> 1st AC (1A), 2nd AC (2A), 3rd AC (3A), Sleeper (SL).</li>
-            <li><strong>Booking Tip:</strong> Connects Chennai and Thoothukudi overnight in absolute comfort. Book on <a href="https://www.irctc.co.in" target="_blank" rel="noopener noreferrer" style="color: var(--ok-amber); text-decoration: underline;">IRCTC.co.in</a>.</li>
+            <li><strong>Train 12693:</strong> Chennai Egmore (20:00) ➔ Tuticorin (07:15).</li>
+            <li><strong>Train 12694:</strong> Tuticorin (20:20) ➔ Chennai Egmore (07:35).</li>
+            <li>Overnight AC travel connecting Chennai & Thoothukudi.</li>
           </ul>
         </div>
 
-        <!-- Transit 2: Direct Flights -->
         <div class="transit-card">
-          <div class="transit-header">
-            <div class="transit-icon-box">✈️</div>
-            <div>
-              <h3 class="transit-title">Direct Flights (MAA ⇄ TCR)</h3>
-              <span class="transit-sub">Chennai International ⇄ Tuticorin Airport</span>
-            </div>
-          </div>
+          <h3 class="transit-title">✈️ Direct Flights (MAA ⇄ TCR)</h3>
           <ul class="transit-details-list">
-            <li><strong>Flight Time:</strong> Approx. 1 hour 25 mins nonstop daily via IndiGo.</li>
-            <li><strong>Tuticorin Airport (TCR):</strong> Located at Vagaikulam, ~15 km from Tuticorin town & wedding venues.</li>
-            <li><strong>Chennai Airport (MAA):</strong> ~14 km from The Leela Palace, MRC Nagar.</li>
-            <li><strong>Cabs:</strong> Pre-paid taxis and Uber/Ola available at both airports.</li>
+            <li>Daily IndiGo nonstop flight (~1 hr 25 mins).</li>
+            <li>Tuticorin Airport (TCR) is ~15 km from town venues.</li>
+            <li>Chennai Airport (MAA) is ~14 km from The Leela Palace.</li>
           </ul>
         </div>
 
-        <!-- Transit 3: Luxury Sleeper Buses -->
         <div class="transit-card">
-          <div class="transit-header">
-            <div class="transit-icon-box">🚌</div>
-            <div>
-              <h3 class="transit-title">Luxury AC Sleeper Buses</h3>
-              <span class="transit-sub">Overnight Multi-Axle Volvo / Scania</span>
-            </div>
-          </div>
+          <h3 class="transit-title">🚌 AC Sleeper Buses</h3>
           <ul class="transit-details-list">
-            <li><strong>Key Operators:</strong> IntrCity SmartBus, KPN, SRM Travels, Parveen Travels.</li>
-            <li><strong>Boarding in Chennai:</strong> Koyambedu CMBT, Guindy, Perungalathur, OMR.</li>
-            <li><strong>Drop in Tuticorin:</strong> New Bus Stand, Tuticorin Bypass, GRT Junction.</li>
-            <li><strong>Duration:</strong> ~9 to 10 hours via smooth NH45 / NH38 highway.</li>
+            <li>Overnight Volvo / Scania sleepers (IntrCity, KPN, SRM).</li>
+            <li>Boarding: Koyambedu CMBT / Guindy / Perungalathur.</li>
+            <li>Drop: Tuticorin New Bus Stand (~9 hrs).</li>
           </ul>
         </div>
-
       </div>
-
-      <!-- Handpicked Hotel Stays -->
-      <h3 style="font-family: var(--font-serif-hero); font-size: 1.8rem; color: var(--gold-light); margin-bottom: 24px; text-align: center;">
-        Handpicked Hotel Stays
-      </h3>
 
       <div class="hotels-grid">
-        
-        <!-- Hotel 1: Regency Tuticorin by GRT Hotels -->
         <div class="hotel-card">
           <div>
-            <span class="ceremony-city-tag tag-tuticorin" style="margin-bottom: 8px; display: inline-block;">Thoothukudi</span>
             <h4 class="hotel-name">Regency Tuticorin by GRT Hotels</h4>
-            <p class="hotel-location">Palayamkottai Road · 5★ Hospitality (Venue of Sangeet)</p>
+            <p class="hotel-location">Thoothukudi · Sangeet Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
+          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
         </div>
 
-        <!-- Hotel 2: Hotel DSF Grand Plaza -->
         <div class="hotel-card">
           <div>
-            <span class="ceremony-city-tag tag-tuticorin" style="margin-bottom: 8px; display: inline-block;">Thoothukudi</span>
             <h4 class="hotel-name">Hotel DSF Grand Plaza</h4>
-            <p class="hotel-location">V.V.D. Road · Premium business luxury stay</p>
+            <p class="hotel-location">Thoothukudi · Town Center</p>
           </div>
-          <a href="https://maps.google.com/?q=Hotel+DSF+Grand+Plaza+Tuticorin" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
+          <a href="https://maps.google.com/?q=Hotel+DSF+Grand+Plaza+Tuticorin" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
         </div>
 
-        <!-- Hotel 3: SRM Hotel Tuticorin -->
         <div class="hotel-card">
           <div>
-            <span class="ceremony-city-tag tag-tuticorin" style="margin-bottom: 8px; display: inline-block;">Thoothukudi</span>
-            <h4 class="hotel-name">SRM Hotel Tuticorin</h4>
-            <p class="hotel-location">Near New Bus Stand · Spacious family rooms</p>
-          </div>
-          <a href="https://maps.google.com/?q=SRM+Hotel+Tuticorin" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
-        </div>
-
-        <!-- Hotel 4: The Leela Palace Chennai -->
-        <div class="hotel-card">
-          <div>
-            <span class="ceremony-city-tag tag-chennai" style="margin-bottom: 8px; display: inline-block;">Chennai</span>
             <h4 class="hotel-name">The Leela Palace Chennai</h4>
-            <p class="hotel-location">MRC Nagar · Sea-facing luxury (Reception Venue)</p>
+            <p class="hotel-location">MRC Nagar · Reception Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
+          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
         </div>
 
-        <!-- Hotel 5: Somerset Greenways Chennai -->
         <div class="hotel-card">
           <div>
-            <span class="ceremony-city-tag tag-chennai" style="margin-bottom: 8px; display: inline-block;">Chennai</span>
             <h4 class="hotel-name">Somerset Greenways Chennai</h4>
-            <p class="hotel-location">MRC Nagar · 3 mins drive from Reception</p>
+            <p class="hotel-location">MRC Nagar · Near Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=Somerset+Greenways+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
+          <a href="https://maps.google.com/?q=Somerset+Greenways+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
         </div>
-
-        <!-- Hotel 6: Taj Club House Chennai -->
-        <div class="hotel-card">
-          <div>
-            <span class="ceremony-city-tag tag-chennai" style="margin-bottom: 8px; display: inline-block;">Chennai</span>
-            <h4 class="hotel-name">Taj Club House Chennai</h4>
-            <p class="hotel-location">Club House Road, Anna Salai · Heritage 5★ elegance</p>
-          </div>
-          <a href="https://maps.google.com/?q=Taj+Club+House+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">
-            <span>🗺️</span> View Google Maps
-          </a>
-        </div>
-
       </div>
     </section>
 
     <!-- ==========================================================================
-         9. Concise Places Only (Iconic Spots Cards)
+         9. Concise Iconic Spots Cards
          ========================================================================== -->
-    <section id="iconic-places" class="section-wrapper city-spots-section">
+    <section id="iconic-places" class="section-wrapper">
       <div class="section-title-cluster">
-        <span class="section-pretitle">Explore Both Heritage Cities</span>
+        <span class="section-pretitle">Must-Visit Landmarks</span>
         <h2 class="section-title">Iconic Spots: Thoothukudi & Chennai</h2>
-        <p class="section-desc">
-          Handpicked must-visit landmarks that capture the heart and soul of Abu's and Sachin's hometowns.
-        </p>
       </div>
 
       <div class="city-spots-grid">
-        
-        <!-- Spot 1: Tiruchendur Murugan Temple -->
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/tiruchendur-temple.jpg" alt="Tiruchendur Murugan Temple on the Bay of Bengal sea shore" loading="lazy">
-            <span class="spot-city-badge tag-tuticorin">Thoothukudi</span>
+            <img src="images/tiruchendur-temple.jpg" alt="Tiruchendur Murugan Temple" loading="lazy">
+            <span class="spot-city-badge city-tuticorin">Thoothukudi</span>
           </div>
           <div class="spot-content">
             <h3 class="spot-title">Tiruchendur Murugan Temple</h3>
-            <p class="spot-brief">
-              Ancient 2,000-year-old coastal sanctuary where the soaring stone Gopuram overlooks crashing Bay of Bengal waves. One of the sacred Arupadaiveedu shrines.
-            </p>
+            <p class="spot-brief">Ancient sea-shore temple by the crashing Bay of Bengal waves.</p>
           </div>
         </article>
 
-        <!-- Spot 2: Pearl City Beach & Harbour -->
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/temple_wedding_heritage_1792067417009.jpg" alt="Pearl City Beach and Harbour Thoothukudi" loading="lazy">
-            <span class="spot-city-badge tag-tuticorin">Thoothukudi</span>
+            <img src="images/tuticorin-macaroons.jpg" alt="Tuticorin Cashew Macaroons" loading="lazy">
+            <span class="spot-city-badge city-tuticorin">Thoothukudi</span>
           </div>
           <div class="spot-content">
-            <h3 class="spot-title">Pearl City Beach & Harbour</h3>
-            <p class="spot-brief">
-              Breezy shoreline known for India's historic natural pearl diving legacy, shimmering salt pans, and sunset pier walks with cool ocean winds.
-            </p>
+            <h3 class="spot-title">Famous Ganesh Bakery Macaroons</h3>
+            <p class="spot-brief">Tuticorin's iconic crispy cashew meringues that melt in your mouth.</p>
           </div>
         </article>
 
-        <!-- Spot 3: Famous Ganesh Bakery Cashew Macaroons -->
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/tuticorin-macaroons.jpg" alt="Famous Tuticorin Cashew Macaroons from Ganesh Bakery" loading="lazy">
-            <span class="spot-city-badge tag-tuticorin">Thoothukudi</span>
+            <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar Temple" loading="lazy">
+            <span class="spot-city-badge city-chennai">Chennai</span>
           </div>
           <div class="spot-content">
-            <h3 class="spot-title">Ganesh Bakery Cashew Macaroons</h3>
-            <p class="spot-brief">
-              Tuticorin's iconic confection! Golden conical meringues crafted with egg whites and roasted cashews that melt on your tongue. Don't leave without a box!
-            </p>
+            <h3 class="spot-title">Kapaleeshwarar & Filter Coffee</h3>
+            <p class="spot-brief">7th-century Dravidian temple followed by hot degree filter coffee.</p>
           </div>
         </article>
 
-        <!-- Spot 4: Kapaleeshwarar Temple & Filter Coffee (Mylapore) -->
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/chennai-mylapore.jpg" alt="Kapaleeshwarar Temple and Mylapore Filter Coffee" loading="lazy">
-            <span class="spot-city-badge tag-chennai">Chennai</span>
-          </div>
-          <div class="spot-content">
-            <h3 class="spot-title">Kapaleeshwarar Temple & Filter Coffee</h3>
-            <p class="spot-brief">
-              7th-century Dravidian architectural marvel in Mylapore. Follow morning darshan with a steaming brass davara tumbler of authentic degree filter coffee.
-            </p>
-          </div>
-        </article>
-
-        <!-- Spot 5: Marina Beach & Napier Bridge -->
-        <article class="spot-card">
-          <div class="spot-img-wrap">
-            <img src="images/tuticorin_chennai_panoramic_1792065432987.jpg" alt="Marina Beach and Napier Bridge Chennai" loading="lazy">
-            <span class="spot-city-badge tag-chennai">Chennai</span>
+            <img src="images/tuticorin_chennai_panoramic_1792065432987.jpg" alt="Marina Beach Chennai" loading="lazy">
+            <span class="spot-city-badge city-chennai">Chennai</span>
           </div>
           <div class="spot-content">
             <h3 class="spot-title">Marina Beach & Napier Bridge</h3>
-            <p class="spot-brief">
-              The world's second-longest natural urban beach, paired with the iconic illuminated Napier Bridge over the Cooum estuary, famous for evening sundal and sea breeze.
-            </p>
+            <p class="spot-brief">World's second-longest urban beach & Chennai's illuminated bridge.</p>
           </div>
         </article>
-
-        <!-- Spot 6: Mahabalipuram (Mamallapuram) -->
-        <article class="spot-card">
-          <div class="spot-img-wrap">
-            <img src="images/temple_wedding_heritage_1792067417009.jpg" alt="Mahabalipuram Shore Temple" loading="lazy">
-            <span class="spot-city-badge tag-chennai">Chennai</span>
-          </div>
-          <div class="spot-content">
-            <h3 class="spot-title">Mahabalipuram Shore Temples</h3>
-            <p class="spot-brief">
-              UNESCO World Heritage site along the East Coast Road (ECR). 7th-century rock-cut monolithic rathas, Arjuna's Penance, and shore temples bathed in golden sunlight.
-            </p>
-          </div>
-        </article>
-
       </div>
     </section>
 
   </main>
 
   <!-- ==========================================================================
-       10. Floating Cassette Player & Monsoon Rain Atmosphere Widget
+       10. Floating Cassette Player & Monsoon Rain Atmosphere
        ========================================================================== -->
   <aside class="floating-cassette-widget widget-minimized">
-    
     <div class="cassette-deck-card">
-      
-      <!-- Retro Cassette Tape Display -->
       <div class="cassette-tape-body">
         <div class="cassette-tape-label">
           <span>O KADHAL KANMANI</span>
-          <span>A.R. RAHMAN · STEREO</span>
+          <span>A.R. RAHMAN</span>
         </div>
         <div class="cassette-window">
           <div class="cassette-reel"></div>
-          <div style="font-size: 0.7rem; color: #FFF; font-family: monospace;">TAPE: 11-YRS</div>
+          <div style="font-size: 0.65rem; color: #FFF; font-family: monospace;">11-YRS</div>
           <div class="cassette-reel"></div>
         </div>
       </div>
 
-      <!-- Current Track Info -->
       <div class="cassette-track-info">
-        <h4 id="cassette-track-title" class="cassette-title">Mental Manadhil (Acoustic Synth)</h4>
-        <span id="cassette-track-film" class="cassette-film">O Kadhal Kanmani · Melodic Synth</span>
+        <h4 id="cassette-track-title" class="cassette-title">Mental Manadhil</h4>
+        <span id="cassette-track-film" class="cassette-film">O Kadhal Kanmani</span>
       </div>
 
-      <!-- Playback Controls -->
       <div class="cassette-controls">
-        <button id="cassette-prev" class="deck-btn" title="Previous Track" aria-label="Previous Track">⏮</button>
-        <button id="cassette-play-toggle" class="deck-btn deck-btn-play" title="Play / Pause" aria-label="Play or Pause">
+        <button id="cassette-prev" class="deck-btn" aria-label="Previous Track">⏮</button>
+        <button id="cassette-play-toggle" class="deck-btn deck-btn-play" aria-label="Play or Pause">
           <span id="cassette-play-icon">▶</span>
         </button>
-        <button id="cassette-next" class="deck-btn" title="Next Track" aria-label="Next Track">⏭</button>
+        <button id="cassette-next" class="deck-btn" aria-label="Next Track">⏭</button>
       </div>
 
-      <!-- Real-Time Equalizer Bars -->
       <div class="audio-equalizer-bars">
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
@@ -1185,39 +812,35 @@
         <div class="eq-bar"></div>
       </div>
 
-      <!-- Volume & Chennai Rain Atmosphere Control -->
       <div class="rain-atmosphere-control">
         <button id="rain-atmosphere-toggle" class="btn-toggle-rain">
-          <span>🌧️ <span id="rain-toggle-status">Chennai Monsoon Rain (Toggle)</span></span>
-          <span>🎧</span>
+          🌧️ <span id="rain-toggle-status">Chennai Monsoon Rain (Toggle)</span>
         </button>
         <div class="volume-row">
-          <span>Rain Vol:</span>
+          <span>Rain:</span>
           <input type="range" id="rain-volume-slider" min="0" max="1" step="0.05" value="0.45" aria-label="Rain volume">
         </div>
         <div class="volume-row">
-          <span>Music Vol:</span>
+          <span>Music:</span>
           <input type="range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.65" aria-label="Music volume">
         </div>
       </div>
-
     </div>
 
-    <!-- Toggle Widget Pill -->
-    <button id="cassette-toggle-widget" class="cassette-toggle-pill" aria-label="Open or collapse OK Kanmani Cassette Player">
+    <button id="cassette-toggle-widget" class="cassette-toggle-pill" aria-label="Toggle Cassette Player">
       <span>📼</span>
       <span>OK Kanmani Jukebox</span>
     </button>
   </aside>
 
   <!-- ==========================================================================
-       11. Personalized RSVP Confirmation Modal
+       11. RSVP Confirmation Modal
        ========================================================================== -->
-  <div id="rsvp-confirmation-modal" class="custom-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div id="rsvp-confirmation-modal" class="custom-modal-backdrop" role="dialog" aria-modal="true">
     <div class="rsvp-confirm-card">
-      <div class="confirm-shubh-icon">🪔</div>
-      <h3 id="confirm-title" class="confirm-title">RSVP Warmly Confirmed</h3>
-      <p class="confirm-guest-greeting">Dear <strong id="confirm-guest-name" style="color: var(--gold-light);">Guest</strong>,</p>
+      <div style="font-size: 2.5rem; margin-bottom: 8px;">💌</div>
+      <h3 class="confirm-title">RSVP Confirmed</h3>
+      <p class="confirm-guest-greeting">Dear <strong id="confirm-guest-name">Guest</strong>,</p>
 
       <!-- Exact requested wording -->
       <div class="confirm-exact-quote-box" id="confirm-exact-phrase">
@@ -1225,22 +848,15 @@
       </div>
 
       <div class="confirm-events-box">
-        <p style="font-size: 0.82rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px;">Selected Ceremonies:</p>
-        <ul id="confirm-events-list" class="confirm-events-list">
-          <!-- Dynamically populated -->
-        </ul>
-        <p style="margin-top: 10px; font-size: 0.88rem; color: #BBB;">
-          Headcount: <span id="confirm-headcount" style="color: #FFF; font-weight: 600;">2 Guests</span>
+        <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Selected Ceremonies:</p>
+        <ul id="confirm-events-list" class="confirm-events-list"></ul>
+        <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
+          Guests: <span id="confirm-headcount" style="font-weight: 700; color: var(--text-primary);">2 Guests (Approx)</span>
         </p>
       </div>
 
-      <p style="font-size: 0.92rem; color: #D6CEC2; line-height: 1.5; margin-bottom: 24px;">
-        Your presence brings boundless happiness to Abu, Sachin, and both our families as we celebrate 11 years of love.
-      </p>
-
-      <button id="close-confirm-modal-btn" class="btn-primary-gold" style="width: 100%;">
-        <span>🌸</span>
-        <span>Subham Astu · Return to Celebration</span>
+      <button id="close-confirm-modal-btn" class="btn-primary-festive" style="width: 100%; border: none; cursor: pointer; margin-top: 10px;">
+        Return to Celebration
       </button>
     </div>
   </div>
@@ -1248,33 +864,24 @@
   <!-- ==========================================================================
        12. Organizer View Modal & CSV Export
        ========================================================================== -->
-  <div id="organizer-modal" class="custom-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="org-title">
+  <div id="organizer-modal" class="custom-modal-backdrop" role="dialog" aria-modal="true">
     <div class="organizer-modal-content">
-      
       <div class="organizer-modal-header">
         <div>
-          <h3 id="org-title" style="font-family: var(--font-serif-hero); font-size: 1.4rem; color: var(--gold-light);">Wedding RSVPs & Guest List</h3>
-          <span style="font-size: 0.8rem; color: #AAA;">Abu & Sachin Wedding Organizing Dashboard</span>
+          <h3 style="font-family: var(--font-hero); font-size: 1.3rem; color: var(--royal-maroon);">RSVP Guest List</h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Abu & Sachin Wedding Dashboard</span>
         </div>
-        <button id="close-organizer-modal-btn" style="background: transparent; border: none; font-size: 1.8rem; color: #FFF; cursor: pointer;">✕</button>
+        <button id="close-organizer-modal-btn" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer;">✕</button>
       </div>
 
       <div class="organizer-stats-bar">
         <div class="stat-pill">
           <div id="org-count-total" class="stat-num">0</div>
-          <div class="stat-title">Total Submissions</div>
+          <div class="stat-title">Submissions</div>
         </div>
         <div class="stat-pill">
           <div id="org-count-guests" class="stat-num">0</div>
           <div class="stat-title">Estimated Guests</div>
-        </div>
-        <div class="stat-pill">
-          <div id="org-count-tuticorin" class="stat-num">0</div>
-          <div class="stat-title">Thoothukudi Attendees</div>
-        </div>
-        <div class="stat-pill">
-          <div id="org-count-chennai" class="stat-num">0</div>
-          <div class="stat-title">Chennai Attendees</div>
         </div>
       </div>
 
@@ -1284,40 +891,30 @@
             <tr>
               <th>#</th>
               <th>Guest / Family</th>
-              <th>Attending Events</th>
-              <th>Headcount</th>
-              <th>Feast</th>
+              <th>Ceremonies</th>
+              <th>People (Approx)</th>
               <th>Wishes</th>
-              <th>Recorded At</th>
+              <th>Date</th>
             </tr>
           </thead>
-          <tbody id="organizer-table-body">
-            <!-- Dynamically populated -->
-          </tbody>
+          <tbody id="organizer-table-body"></tbody>
         </table>
       </div>
 
       <div class="organizer-modal-footer">
-        <div style="display: flex; gap: 10px;">
-          <button id="add-sample-rsvp-btn" class="btn-secondary-glass" style="font-size: 0.82rem; padding: 8px 16px;">
-            ➕ Add Sample RSVP
-          </button>
-          <button id="clear-all-rsvps-btn" class="btn-secondary-glass" style="font-size: 0.82rem; padding: 8px 16px; color: #FF8A80;">
-            🗑️ Clear List
-          </button>
+        <div style="display: flex; gap: 8px;">
+          <button id="add-sample-rsvp-btn" class="btn-secondary-snow" style="font-size: 0.8rem; padding: 6px 14px;">+ Sample RSVP</button>
+          <button id="clear-all-rsvps-btn" class="btn-secondary-snow" style="font-size: 0.8rem; padding: 6px 14px; color: #DC2626;">Clear List</button>
         </div>
-
-        <button id="export-csv-btn" class="btn-primary-gold" style="font-size: 0.9rem; padding: 10px 24px;">
-          <span>📥</span>
-          <span>Export to CSV (.csv)</span>
+        <button id="export-csv-btn" class="btn-primary-festive" style="font-size: 0.85rem; padding: 8px 20px; border: none; cursor: pointer;">
+          Export to CSV (.csv)
         </button>
       </div>
-
     </div>
   </div>
 
   <!-- ==========================================================================
-       13. Fullscreen Lightbox for Couples Gallery
+       13. Lightbox
        ========================================================================== -->
   <div id="gallery-lightbox" class="gallery-lightbox-modal" role="dialog" aria-modal="true">
     <button id="lightbox-close-btn" class="lightbox-close" aria-label="Close Lightbox">✕</button>
@@ -1328,38 +925,23 @@
   </div>
 
   <!-- ==========================================================================
-       14. Auspicious Footer
+       14. Footer
        ========================================================================== -->
   <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-om">ॐ</div>
-      <p class="footer-family-invitation">
-        "Two souls, two ancient coastal cities, eleven glorious years, and a lifetime of love ahead."
-      </p>
-
-      <div class="footer-journey-label">
-        <span>🌊 Thoothukudi</span>
-        <span>⇄</span>
-        <span>🚂 Pearl City Superfast</span>
-        <span>⇄</span>
-        <span>🏛️ Chennai</span>
-        <span>🍁 Canada</span>
-      </div>
-
-      <p style="font-size: 0.95rem; color: #CFC5B6; margin-bottom: 20px;">
-        Cordially invited with love by the families of<br>
-        <strong style="color: var(--gold-light); font-size: 1.15rem; font-family: var(--font-serif-hero);">Abu & Sachin</strong>
-      </p>
-
-      <div class="footer-credit">
-        Celebration Invitation &middot; December 2026 &middot; OK Kanmani Musical Atmosphere &middot; Subham Astu
-      </div>
+    <p class="footer-family-invitation">
+      "Two souls, two coastal cities, eleven glorious years, and a lifetime of love ahead."
+    </p>
+    <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 8px;">
+      Cordially invited by the families of <strong>Abu & Sachin</strong>
+    </p>
+    <div class="footer-credit">
+      Thoothukudi ⇄ Chennai · Canada Chapter · OK Kanmani Musical Theme · December 2026
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="js/audio.js"></script>
-  <script src="js/petals.js"></script>
+  <script src="js/snow.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/rsvp.js"></script>
   <script src="js/gallery.js"></script>

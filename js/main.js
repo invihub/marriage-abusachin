@@ -1,23 +1,24 @@
 /**
  * Main Application Script for Abu & Sachin's Wedding Invitation
+ * Snow-Themed Romantic Marriage Experience
  * Handles:
- * - Temple Door split-open ceremonial entrance with bell chime & petal shower
+ * - Tamil Architecture Gopuram Split Doors opening
  * - Wedding Muhurtham Countdown Timer
+ * - Spinning Celebration Schedule Wheel interaction
  * - OK Kanmani Floating Cassette Player & Rain Controls
- * - Add to Google Calendar & Downloadable .ICS Calendar generator
- * - Smooth scroll, navigation indicators, and UI micro-interactions
+ * - Clean mobile navigation & smooth interactions
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initTempleDoors();
   initCountdownTimer();
   initCassettePlayer();
-  initCalendarActions();
+  initSpinWheel();
   initMobileNav();
 });
 
 /**
- * 1. Festive Temple Entrance & Auspicious Split Doors
+ * 1. Tamil Architecture Gopuram Split Doors Opening
  */
 function initTempleDoors() {
   const openDoorsBtn = document.getElementById('open-doors-btn');
@@ -26,25 +27,20 @@ function initTempleDoors() {
 
   if (openDoorsBtn && doorOverlay) {
     openDoorsBtn.addEventListener('click', () => {
-      // 1. Play Auspicious South Indian Temple Bell Chime
+      // 1. Play Auspicious Temple Bell Chime
       if (window.weddingAudio) {
         window.weddingAudio.playTempleBell();
       }
 
-      // 2. Shower golden marigold petals and white jasmine
-      if (window.petalShower) {
-        window.petalShower.triggerBurst(150, 9000);
-      }
-
-      // 3. Split open the grand carved wooden doors
+      // 2. Split open the two halves of the Tamil Gopuram
       doorOverlay.classList.add('doors-opened');
 
-      // 4. Start gentle ambient rain or OK Kanmani melody after doors part
+      // 3. Start gentle romantic melody after doors open
       setTimeout(() => {
         if (window.weddingAudio && !window.weddingAudio.isPlaying) {
           window.weddingAudio.play();
         }
-      }, 1600);
+      }, 1400);
     });
   }
 
@@ -63,7 +59,6 @@ function initTempleDoors() {
  * Auspicious Muhurtham: Dec 6, 2026, 09:45 AM (Thoothukudi Tradition 1)
  */
 function initCountdownTimer() {
-  // Target date: Dec 6, 2026 09:45:00 IST
   const targetDate = new Date('2026-12-06T09:45:00+05:30').getTime();
 
   const daysEl = document.getElementById('timer-days');
@@ -99,7 +94,43 @@ function initCountdownTimer() {
 }
 
 /**
- * 3. OK Kanmani Jukebox & Rain Atmosphere Player
+ * 3. Celebration Schedule 5-Section Rotating Spin Wheel
+ */
+function initSpinWheel() {
+  const wheel = document.getElementById('celebration-wheel');
+  const hubInfo = document.getElementById('wheel-hub-active-title');
+  const hubVenue = document.getElementById('wheel-hub-active-venue');
+
+  if (!wheel) return;
+
+  const segments = document.querySelectorAll('.wheel-segment');
+
+  segments.forEach(seg => {
+    seg.addEventListener('mouseenter', () => {
+      const title = seg.dataset.title;
+      const venue = seg.dataset.venue;
+      if (hubInfo && title) hubInfo.textContent = title;
+      if (hubVenue && venue) hubVenue.textContent = venue;
+      wheel.classList.add('wheel-paused');
+    });
+
+    seg.addEventListener('mouseleave', () => {
+      if (hubInfo) hubInfo.textContent = 'Abu & Sachin';
+      if (hubVenue) hubVenue.textContent = 'Click segment for Google Maps';
+      wheel.classList.remove('wheel-paused');
+    });
+
+    seg.addEventListener('click', () => {
+      const mapUrl = seg.dataset.map;
+      if (mapUrl) {
+        window.open(mapUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+}
+
+/**
+ * 4. OK Kanmani Jukebox & Rain Atmosphere Player
  */
 function initCassettePlayer() {
   const playBtn = document.getElementById('cassette-play-toggle');
@@ -153,7 +184,6 @@ function initCassettePlayer() {
     });
   }
 
-  // Chennai Rain Atmosphere Toggle
   if (rainToggleBtn) {
     rainToggleBtn.addEventListener('click', () => {
       const isRainOn = window.weddingAudio.toggleRain();
@@ -177,14 +207,12 @@ function initCassettePlayer() {
     });
   }
 
-  // Toggle cassette player drawer
   if (cassetteToggleBtn && cassetteDeck) {
     cassetteToggleBtn.addEventListener('click', () => {
       cassetteDeck.classList.toggle('widget-minimized');
     });
   }
 
-  // Real-time equalizer visualizer animation loop
   function animateEqualizer() {
     if (window.weddingAudio && window.weddingAudio.isPlaying && eqBars.length > 0) {
       const data = window.weddingAudio.getEqualizerData();
@@ -200,111 +228,11 @@ function initCassettePlayer() {
   }
   animateEqualizer();
 
-  // Initial display
   updateTrackDisplay(window.weddingAudio.getCurrentTrack());
 }
 
 /**
- * 4. Calendar Integration: Direct Google Calendar Links & Dynamic .ICS Download
- */
-function initCalendarActions() {
-  const eventsData = {
-    'haldi': {
-      title: 'Abu & Sachin Wedding: Haldi Ceremony',
-      start: '20261205T093000',
-      end: '20261205T123000',
-      location: 'Pearl Beach Greens, Harbour Road, Thoothukudi, Tamil Nadu',
-      description: 'Festive turmeric ceremony, traditional music, and joyful blessings for Abu & Sachin.'
-    },
-    'sangeet': {
-      title: 'Abu & Sachin Wedding: Sangeet & Musical Night',
-      start: '20261205T183000',
-      end: '20261205T223000',
-      location: 'Grand Ballroom, Regency Tuticorin by GRT Hotels, Thoothukudi',
-      description: 'OK Kanmani retro hits, dhol, dance, dinner, and celebration under the stars.'
-    },
-    'wedding_thoothukudi': {
-      title: 'Abu & Sachin Wedding: Tradition 1 (Thoothukudi)',
-      start: '20261206T090000',
-      end: '20261206T130000',
-      location: 'Sea-Breeze Thirumana Mandapam, Beach Road, Thoothukudi, Tamil Nadu',
-      description: 'Auspicious Muhurtham: 09:45 AM. Two coastal families uniting in sacred tradition.'
-    },
-    'wedding_chennai': {
-      title: 'Abu & Sachin Wedding: Tradition 2 (Chennai)',
-      start: '20261210T073000',
-      end: '20261210T120000',
-      location: 'Sri Kapaleeshwarar Heritage Hall, Mylapore, Chennai, Tamil Nadu',
-      description: 'Auspicious Muhurtham: 08:15 AM. Vedic rites, nadaswaram, and traditional breakfast feast.'
-    },
-    'reception_chennai': {
-      title: 'Abu & Sachin Grand Wedding Reception',
-      start: '20261211T183000',
-      end: '20261211T230000',
-      location: 'The Leela Palace Chennai, Adyar Seaface, MRC Nagar, Chennai',
-      description: 'Grand Wedding Reception celebrating Abu & Sachin 11-Year Journey. Dinner and live orchestra.'
-    }
-  };
-
-  // Google Calendar Buttons
-  document.querySelectorAll('.btn-add-gcal').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const eventKey = btn.dataset.eventKey;
-      const ev = eventsData[eventKey];
-      if (!ev) return;
-
-      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.start}/${ev.end}&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}`;
-      window.open(gcalUrl, '_blank', 'noopener,noreferrer');
-    });
-  });
-
-  // Download .ICS Buttons
-  document.querySelectorAll('.btn-download-ics').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const eventKey = btn.dataset.eventKey;
-      const ev = eventsData[eventKey];
-      if (!ev) return;
-
-      downloadIcsFile(ev);
-    });
-  });
-}
-
-function downloadIcsFile(ev) {
-  const icsLines = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Abu and Sachin Wedding//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    `UID:${Date.now()}@abu-sachin-wedding.com`,
-    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
-    `DTSTART;TZID=Asia/Kolkata:${ev.start}`,
-    `DTEND;TZID=Asia/Kolkata:${ev.end}`,
-    `SUMMARY:${ev.title}`,
-    `DESCRIPTION:${ev.description}`,
-    `LOCATION:${ev.location}`,
-    'STATUS:CONFIRMED',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ];
-
-  const blob = new Blob([icsLines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${ev.title.replace(/[^a-zA-Z0-9]/g, '_')}.ics`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-/**
- * 5. Mobile Navigation & Smooth Scroll
+ * 5. Mobile Navigation
  */
 function initMobileNav() {
   const menuToggle = document.getElementById('mobile-nav-toggle');
@@ -315,20 +243,10 @@ function initMobileNav() {
       navMenu.classList.toggle('nav-open');
     });
 
-    // Close when clicking nav links
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('nav-open');
       });
-    });
-  }
-
-  // Petal shower burst on clicking gold badge
-  const festiveBadge = document.querySelector('.festive-shubh-badge');
-  if (festiveBadge && window.petalShower) {
-    festiveBadge.addEventListener('click', () => {
-      window.petalShower.triggerBurst(60, 4000);
-      if (window.weddingAudio) window.weddingAudio.playTempleBell(659.25);
     });
   }
 }
