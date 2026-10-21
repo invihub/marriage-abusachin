@@ -234,7 +234,7 @@
           <div class="train-station-indicator">
             <span class="station-pulse-dot"></span>
             <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Station:</span>
-            <span id="current-train-station" style="font-weight: 700; color: var(--train-blue);">Chennai Egmore</span>
+            <span id="current-train-station" style="font-weight: 700; color: var(--train-blue);">KCG College</span>
           </div>
         </div>
 
@@ -261,7 +261,11 @@
               </div>
             </div>
 
-            <!-- Coach 1: 2015 · KCG College (Chennai) -->
+            <!-- Coach photos: each <img> has two knobs in its style attribute
+                 --photo-pos  : which part of the photo stays in the square ("50% 0%" = top, "50% 100%" = bottom)
+                 --photo-zoom : 1 = fit the square, 1.2 = 20% closer (zooms into --photo-pos) -->
+
+            <!-- Coach 1: 2014 · KCG College of Technology (Chennai) -->
             <article class="train-coach-item coach-focused" id="coach-1">
               <div class="coach-curved-roof">
                 <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
@@ -272,12 +276,13 @@
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/ok-kanmani-movie-date.jpg" alt="KCG College Chennai Sketches" loading="lazy">
+                  <img src="images/KCG-meet.jpg" alt="Abu and Sachin first see each other at KCG College of Technology"
+                    loading="lazy" style="--photo-pos: 50% 100%; --photo-zoom: 1.1;">
                 </div>
                 <div class="coach-milestone-brief">
-                  <div class="coach-year-badge">2015</div>
+                  <div class="coach-year-badge">2014</div>
                   <h3 class="coach-title-clean">KCG College of Technology</h3>
-                  <p class="coach-sub-clean">Where college sparks first ignited across campus corridors.</p>
+                  <p class="coach-sub-clean">It all started with a glance across the campus corridors.</p>
                 </div>
               </div>
               <div class="coach-undercarriage">
@@ -304,7 +309,8 @@
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/ok-kanmani-cassette.jpg" alt="OK Kanmani date cassette" loading="lazy">
+                  <img src="images/Date.jpg" alt="Abu and Sachin on a scooter ride along the beach road" loading="lazy"
+                    style="--photo-pos: 15% 90%; --photo-zoom: 1.1;">
                 </div>
                 <div class="coach-milestone-brief">
                   <div class="coach-year-badge">2015</div>
@@ -325,23 +331,25 @@
               </div>
             </article>
 
-            <!-- Coach 3: 2017-2020 · Chennai Romance -->
+            <!-- Coach 3: 2018-2019 · Tuticorin to Toronto (long distance) -->
             <article class="train-coach-item" id="coach-3">
               <div class="coach-curved-roof">
                 <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
-                <span class="coach-sr-tag">COACH C-03 · MYLAPORE</span>
+                <span class="coach-sr-tag">COACH C-03 · LONG DISTANCE</span>
               </div>
               <div class="coach-livery-stripes">
-                PEARL CITY EXPRESS · CHENNAI ⇄ TUTICORIN
+                PEARL CITY EXPRESS · TUTICORIN ⇄ TORONTO
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar and Filter Coffee" loading="lazy">
+                  <img src="images/tuticorin-toranto.jpg"
+                    alt="Waiting with a cup of coffee as a plane flies towards Toronto" loading="lazy"
+                    style="--photo-pos: 50% 25%; --photo-zoom: 1;">
                 </div>
                 <div class="coach-milestone-brief">
-                  <div class="coach-year-badge">2017–2020</div>
-                  <h3 class="coach-title-clean">Chennai Romance & Foundations</h3>
-                  <p class="coach-sub-clean">Mylapore filter coffee, Marina Beach walks & overnight trains.</p>
+                  <div class="coach-year-badge">2018–2019</div>
+                  <h3 class="coach-title-clean">Tuticorin to Toronto</h3>
+                  <p class="coach-sub-clean">Long-distance video calls across oceans and time zones.</p>
                 </div>
               </div>
               <div class="coach-undercarriage">
@@ -357,23 +365,25 @@
               </div>
             </article>
 
-            <!-- Coach 4: 2021-2025 · The Canada Chapter -->
+            <!-- Coach 4: 2019-2026 · The Canada Chapter -->
             <article class="train-coach-item" id="coach-4">
               <div class="coach-curved-roof">
                 <span class="coach-sr-tag">SOUTHERN RAILWAY</span>
-                <span class="coach-sr-tag">COACH C-04 · TORONTO</span>
+                <span class="coach-sr-tag">COACH C-04 · CANADA</span>
               </div>
               <div class="coach-livery-stripes">
-                PEARL CITY EXPRESS · TORONTO ⇄ MADRAS
+                PEARL CITY EXPRESS · WELCOME TO CANADA
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/canada-chapter.jpg" alt="Canada Chapter in Snowy Toronto" loading="lazy">
+                  <img src="images/Welcome-canada2.jpg"
+                    alt="Abu and Sachin arrive together under a Welcome to Canada sign" loading="lazy"
+                    style="--photo-pos: 20% 65%; --photo-zoom: 1.14;">
                 </div>
                 <div class="coach-milestone-brief">
-                  <div class="coach-year-badge">2021–2025</div>
+                  <div class="coach-year-badge">2019–2026</div>
                   <h3 class="coach-title-clean">The Canada Chapter</h3>
-                  <p class="coach-sub-clean">Crossing oceans, Toronto winters, maple leaves & shared dreams.</p>
+                  <p class="coach-sub-clean">Together in Canada: Toronto winters, maple leaves & shared dreams.</p>
                 </div>
               </div>
               <div class="coach-undercarriage">
@@ -400,7 +410,8 @@
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/couple-wedding.jpg" alt="Abu and Sachin Wedding Traditional Attire" loading="lazy">
+                  <img src="images/marriage.jpg" alt="Abu and Sachin in traditional wedding attire" loading="lazy"
+                    style="--photo-pos: 50% 75%; --photo-zoom: 1.22;">
                 </div>
                 <div class="coach-milestone-brief">
                   <div class="coach-year-badge">2026</div>
@@ -434,10 +445,10 @@
           </div>
 
           <div class="coach-nav-pills">
-            <button class="coach-nav-btn active" data-coach="0">2015 · KCG</button>
+            <button class="coach-nav-btn active" data-coach="0">2014 · KCG</button>
             <button class="coach-nav-btn" data-coach="1">2015 · OKK</button>
-            <button class="coach-nav-btn" data-coach="2">2017-20 · Chennai</button>
-            <button class="coach-nav-btn" data-coach="3">2021-25 · Canada</button>
+            <button class="coach-nav-btn" data-coach="2">2018-19 · Video Calls</button>
+            <button class="coach-nav-btn" data-coach="3">2019-26 · Canada</button>
             <button class="coach-nav-btn" data-coach="4">2026 · Marriage</button>
           </div>
 
@@ -468,104 +479,104 @@
 
           <!-- Segments + labels turn together; the hub stays still -->
           <div class="wheel-rotor">
-          <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
-            <!-- 5 Segments (72 degrees each) -->
-            <!-- Segment 1: Dec 5 09:30 AM · Haldi (Thoothukudi) -->
-            <g class="wheel-segment" data-title="Dec 5 · Haldi Ceremony (09:30 AM)"
-              data-venue="Pearl Beach Greens, Thoothukudi"
-              data-map="https://maps.google.com/?q=Pearl+Beach+Thoothukudi">
-              <path d="M 250 250 L 250 10 A 240 240 0 0 1 478.25 175.91 Z" fill="#0284C7" />
-              <text x="345" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                transform="rotate(36, 345, 125)">
-                DEC 5 · 09:30 AM
-              </text>
-              <text x="345" y="142" fill="#E0F2FE" font-size="11" font-weight="600" text-anchor="middle"
-                transform="rotate(36, 345, 142)">
-                Haldi · Thoothukudi
-              </text>
-            </g>
+            <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
+              <!-- 5 Segments (72 degrees each) -->
+              <!-- Segment 1: Dec 5 09:30 AM · Haldi (Thoothukudi) -->
+              <g class="wheel-segment" data-title="Dec 5 · Haldi Ceremony (09:30 AM)"
+                data-venue="Pearl Beach Greens, Thoothukudi"
+                data-map="https://maps.google.com/?q=Pearl+Beach+Thoothukudi">
+                <path d="M 250 250 L 250 10 A 240 240 0 0 1 478.25 175.91 Z" fill="#0284C7" />
+                <text x="345" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(36, 345, 125)">
+                  DEC 5 · 09:30 AM
+                </text>
+                <text x="345" y="142" fill="#E0F2FE" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(36, 345, 142)">
+                  Haldi · Thoothukudi
+                </text>
+              </g>
 
-            <!-- Segment 2: Dec 5 06:30 PM · Sangeet (Regency Tuticorin) -->
-            <g class="wheel-segment" data-title="Dec 5 · Sangeet & Musical Night (06:30 PM)"
-              data-venue="Regency Tuticorin by GRT Hotels"
-              data-map="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels">
-              <path d="M 250 250 L 478.25 175.91 A 240 240 0 0 1 391.07 444.09 Z" fill="#8B1E28" />
-              <text x="390" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                transform="rotate(108, 390, 310)">
-                DEC 5 · 06:30 PM
-              </text>
-              <text x="390" y="327" fill="#FECACA" font-size="11" font-weight="600" text-anchor="middle"
-                transform="rotate(108, 390, 327)">
-                Sangeet · GRT Regency
-              </text>
-            </g>
+              <!-- Segment 2: Dec 5 06:30 PM · Sangeet (Regency Tuticorin) -->
+              <g class="wheel-segment" data-title="Dec 5 · Sangeet & Musical Night (06:30 PM)"
+                data-venue="Regency Tuticorin by GRT Hotels"
+                data-map="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels">
+                <path d="M 250 250 L 478.25 175.91 A 240 240 0 0 1 391.07 444.09 Z" fill="#8B1E28" />
+                <text x="390" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(108, 390, 310)">
+                  DEC 5 · 06:30 PM
+                </text>
+                <text x="390" y="327" fill="#FECACA" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(108, 390, 327)">
+                  Sangeet · GRT Regency
+                </text>
+              </g>
 
-            <!-- Segment 3: Dec 6 09:45 AM · Wedding Tradition 1 (Thoothukudi) -->
-            <g class="wheel-segment" data-title="Dec 6 · Wedding Tradition 1 (09:45 AM Muhurtham)"
-              data-venue="Sea-Breeze Mandapam, Thoothukudi"
-              data-map="https://maps.google.com/?q=Thoothukudi+Beach+Road">
-              <path d="M 250 250 L 391.07 444.09 A 240 240 0 0 1 108.93 444.09 Z" fill="#C59B27" />
-              <text x="250" y="415" fill="#1E293B" font-size="12" font-weight="800" text-anchor="middle"
-                transform="rotate(180, 250, 415)">
-                DEC 6 · 09:45 AM MUHURTHAM
-              </text>
-              <text x="250" y="432" fill="#334155" font-size="11" font-weight="700" text-anchor="middle"
-                transform="rotate(180, 250, 432)">
-                Wedding 1 · Thoothukudi
-              </text>
-            </g>
+              <!-- Segment 3: Dec 6 09:45 AM · Wedding Tradition 1 (Thoothukudi) -->
+              <g class="wheel-segment" data-title="Dec 6 · Wedding Tradition 1 (09:45 AM Muhurtham)"
+                data-venue="Sea-Breeze Mandapam, Thoothukudi"
+                data-map="https://maps.google.com/?q=Thoothukudi+Beach+Road">
+                <path d="M 250 250 L 391.07 444.09 A 240 240 0 0 1 108.93 444.09 Z" fill="#C59B27" />
+                <text x="250" y="415" fill="#1E293B" font-size="12" font-weight="800" text-anchor="middle"
+                  transform="rotate(180, 250, 415)">
+                  DEC 6 · 09:45 AM MUHURTHAM
+                </text>
+                <text x="250" y="432" fill="#334155" font-size="11" font-weight="700" text-anchor="middle"
+                  transform="rotate(180, 250, 432)">
+                  Wedding 1 · Thoothukudi
+                </text>
+              </g>
 
-            <!-- Segment 4: Dec 10 08:15 AM · Wedding Tradition 2 (Mylapore Chennai) -->
-            <g class="wheel-segment" data-title="Dec 10 · Wedding Tradition 2 (08:15 AM Muhurtham)"
-              data-venue="Sri Kapaleeshwarar Heritage Hall, Mylapore"
-              data-map="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai">
-              <path d="M 250 250 L 108.93 444.09 A 240 240 0 0 1 21.75 175.91 Z" fill="#0D4E5B" />
-              <text x="110" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                transform="rotate(-108, 110, 310)">
-                DEC 10 · 08:15 AM MUHURTHAM
-              </text>
-              <text x="110" y="327" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle"
-                transform="rotate(-108, 110, 327)">
-                Wedding 2 · Mylapore Chennai
-              </text>
-            </g>
+              <!-- Segment 4: Dec 10 08:15 AM · Wedding Tradition 2 (Mylapore Chennai) -->
+              <g class="wheel-segment" data-title="Dec 10 · Wedding Tradition 2 (08:15 AM Muhurtham)"
+                data-venue="Sri Kapaleeshwarar Heritage Hall, Mylapore"
+                data-map="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai">
+                <path d="M 250 250 L 108.93 444.09 A 240 240 0 0 1 21.75 175.91 Z" fill="#0D4E5B" />
+                <text x="110" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(-108, 110, 310)">
+                  DEC 10 · 08:15 AM MUHURTHAM
+                </text>
+                <text x="110" y="327" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(-108, 110, 327)">
+                  Wedding 2 · Mylapore Chennai
+                </text>
+              </g>
 
-            <!-- Segment 5: Dec 11 06:30 PM · Grand Reception (The Leela Palace Chennai) -->
-            <g class="wheel-segment" data-title="Dec 11 · Grand Reception (06:30 PM)"
-              data-venue="The Leela Palace Chennai, MRC Nagar"
-              data-map="https://maps.google.com/?q=The+Leela+Palace+Chennai">
-              <path d="M 250 250 L 21.75 175.91 A 240 240 0 0 1 250 10 Z" fill="#9B1B30" />
-              <text x="155" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                transform="rotate(-36, 155, 125)">
-                DEC 11 · 06:30 PM
-              </text>
-              <text x="155" y="142" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle"
-                transform="rotate(-36, 155, 142)">
-                Grand Reception · The Leela
-              </text>
-            </g>
-          </svg>
+              <!-- Segment 5: Dec 11 06:30 PM · Grand Reception (The Leela Palace Chennai) -->
+              <g class="wheel-segment" data-title="Dec 11 · Grand Reception (06:30 PM)"
+                data-venue="The Leela Palace Chennai, MRC Nagar"
+                data-map="https://maps.google.com/?q=The+Leela+Palace+Chennai">
+                <path d="M 250 250 L 21.75 175.91 A 240 240 0 0 1 250 10 Z" fill="#9B1B30" />
+                <text x="155" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(-36, 155, 125)">
+                  DEC 11 · 06:30 PM
+                </text>
+                <text x="155" y="142" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(-36, 155, 142)">
+                  Grand Reception · The Leela
+                </text>
+              </g>
+            </svg>
 
-          <div class="wheel-segment-label label-hal" aria-hidden="true">
-            <strong>Dec 5 · 09:30 AM</strong>
-            <span>Haldi · Thoothukudi</span>
-          </div>
-          <div class="wheel-segment-label label-sangeet" aria-hidden="true">
-            <strong>Dec 5 · 06:30 PM</strong>
-            <span>Sangeet · GRT Regency</span>
-          </div>
-          <div class="wheel-segment-label label-wedding-one" aria-hidden="true">
-            <strong>Dec 6 · 09:45 AM</strong>
-            <span>Wedding · Thoothukudi</span>
-          </div>
-          <div class="wheel-segment-label label-wedding-two" aria-hidden="true">
-            <strong>Dec 10 · 08:15 AM</strong>
-            <span>Wedding · Mylapore</span>
-          </div>
-          <div class="wheel-segment-label label-reception" aria-hidden="true">
-            <strong>Dec 11 · 06:30 PM</strong>
-            <span>Reception · The Leela</span>
-          </div>
+            <div class="wheel-segment-label label-hal" aria-hidden="true">
+              <strong>Dec 5 · 09:30 AM</strong>
+              <span>Haldi · Thoothukudi</span>
+            </div>
+            <div class="wheel-segment-label label-sangeet" aria-hidden="true">
+              <strong>Dec 5 · 06:30 PM</strong>
+              <span>Sangeet · GRT Regency</span>
+            </div>
+            <div class="wheel-segment-label label-wedding-one" aria-hidden="true">
+              <strong>Dec 6 · 09:45 AM</strong>
+              <span>Wedding · Thoothukudi</span>
+            </div>
+            <div class="wheel-segment-label label-wedding-two" aria-hidden="true">
+              <strong>Dec 10 · 08:15 AM</strong>
+              <span>Wedding · Mylapore</span>
+            </div>
+            <div class="wheel-segment-label label-reception" aria-hidden="true">
+              <strong>Dec 11 · 06:30 PM</strong>
+              <span>Reception · The Leela</span>
+            </div>
           </div>
 
           <!-- Center Frosted Hub -->
@@ -702,55 +713,63 @@
         <p class="section-desc">Tap on any memory to view it larger.</p>
       </div>
 
+      <!-- Each <img> takes the same knobs as the train coaches:
+           --photo-pos (which part stays in the square) and --photo-zoom (1 = normal).
+           Tapping a card opens the full, uncropped photo. -->
       <div class="gallery-grid">
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/couple-wedding.jpg" alt="Abu and Sachin Wedding Traditional Attire" loading="lazy">
+            <img src="images/sachin-abu.jpg" alt="Sachin by the sea and Abu by the harbour, joined by a heart" loading="lazy"
+              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
-            <strong>Abu & Sachin</strong>
-            <span>Traditional Wedding Portrait</span>
+            <strong>Sachin & Abu</strong>
+            <span>Two shores, one story</span>
           </div>
         </div>
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/ok-kanmani-movie-date.jpg" alt="2015 OK Kanmani Movie Date Satyam Cinemas" loading="lazy">
+            <img src="images/KCG.jpg" alt="KCG College of Technology campus in Chennai" loading="lazy"
+              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
-            <strong>First Movie Date · 2015</strong>
-            <span>OK Kanmani at Satyam Cinemas</span>
+            <strong>Where It Began</strong>
+            <span>KCG College of Technology · 2014</span>
           </div>
         </div>
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/canada-chapter.jpg" alt="Canada Chapter Toronto Winter" loading="lazy">
+            <img src="images/video-call.jpg" alt="A video call across the miles with the Toronto skyline outside" loading="lazy"
+              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
-            <strong>The Canada Chapter</strong>
-            <span>Toronto Winters & Maple Leaves</span>
+            <strong>Miles Apart, Never Distant</strong>
+            <span>Video calls · Tuticorin ⇄ Toronto</span>
           </div>
         </div>
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/tuticorin-macaroons.jpg" alt="Tuticorin Cashew Macaroons" loading="lazy">
+            <img src="images/Welcome-canada.jpg" alt="Abu and Sachin arrive together under a Welcome to Canada sign" loading="lazy"
+              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
-            <strong>Thoothukudi Heritage</strong>
-            <span>Famous Cashew Macaroons</span>
+            <strong>Canada Chapter</strong>
+            <span>Welcome to Canada · 2019</span>
           </div>
         </div>
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar Temple" loading="lazy">
+            <img src="images/save-date.jpg" alt="Save the Date, 6 December 2026, written in the sand by the sea" loading="lazy"
+              style="--photo-pos: 50% 100%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
-            <strong>Chennai Heritage</strong>
-            <span>Kapaleeshwarar & Filter Coffee</span>
+            <strong>Save the Date</strong>
+            <span>6 December 2026</span>
           </div>
         </div>
 

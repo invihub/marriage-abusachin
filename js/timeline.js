@@ -2,10 +2,10 @@
  * Pearl City Superfast Express - 11-Year Journey Horizontal Scroll Engine
  * Translates vertical page scrolling into horizontal train coach movement
  * Milestone Coaches:
- * 1. 2015 - KCG College of Technology (Chennai)
+ * 1. 2014 - KCG College of Technology (Chennai)
  * 2. 2015 - First Movie Date (OK Kanmani)
- * 3. 2017-2020 - Chennai Romance & Growing Dreams
- * 4. 2021-2025 - The Canada Chapter
+ * 3. 2018-2019 - Tuticorin to Toronto (long-distance video calls)
+ * 4. 2019-2026 - The Canada Chapter
  * 5. 2026 - Marriage: 11 Years & Forever
  *
  * Layout is measured once (and again on resize), so scrolling only reads
@@ -24,7 +24,7 @@ class TrainTimelineEngine {
     this.prevBtn = document.getElementById('train-prev-btn');
     this.nextBtn = document.getElementById('train-next-btn');
     this.stationLabel = document.getElementById('current-train-station');
-    this.stations = ['Chennai Egmore', 'Satyam Cinemas', 'OMR Corridor', 'Toronto Union', 'Thoothukudi Terminus'];
+    this.stations = ['KCG College', 'Satyam Cinemas', 'Tuticorin ⇄ Toronto', 'Toronto Union', 'Thoothukudi Terminus'];
     this.activeCoachIndex = -1;
     this.lastX = -1;
     this.frameQueued = false;
