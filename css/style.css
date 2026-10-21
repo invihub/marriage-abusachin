@@ -3927,51 +3927,250 @@ main>section[id] {
     margin-bottom: 0.3px;
   }
 }
+
 /* ==========================================================================
-   Ice glass finish
-   One recipe, four layers (top to bottom): fine frost grain, a diagonal
-   light sheen, the cool ice tint, and bright inner edges. No backdrop blur:
-   the snow is drawn above the page, so a blur would only cost scrolling
-   smoothness on phones without showing anything.
-   Edit the look of every ice card here:
+   Glass finish: clear liquid glass (like a sheet of clear ice)
+   Almost no white in the glass itself; what makes it read as glass is
+   light on its edges: a sharp highlight on the top-left rim, a softer one
+   bottom-right, an inner glow along the top (the thickness of the ice) and
+   a faint blue tint pooling at the bottom. A light blur softens what's
+   behind without turning it milky. All glass on the page reads these values:
    ========================================================================== */
 :root {
-  /* the ice colour: top-left (lightest) -> bottom-right (deepest blue) */
-  --ice-tint: linear-gradient(160deg,
-      rgba(246, 252, 255, .66) 0%,
-      rgba(210, 237, 248, .46) 55%,
-      rgba(178, 220, 237, .42) 100%);
-  /* light catching the ice; raise .34 for a brighter streak, 0 to remove */
-  --ice-sheen: linear-gradient(118deg,
-      transparent 32%,
-      rgba(255, 255, 255, .34) 47%,
-      transparent 62%);
-  /* frost grain; set to "none" for perfectly smooth glass */
-  --ice-frost: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 -.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-  --ice-border: rgba(255, 255, 255, .82);
-  --ice-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .95),
-    inset 0 -1px 0 rgba(120, 186, 212, .38),
-    inset 0 0 22px rgba(255, 255, 255, .22),
-    0 10px 26px rgba(37, 83, 105, .13);
-  /* lighter ice for form fields, so typing stays easy to read */
-  --ice-field: linear-gradient(160deg, rgba(255, 255, 255, .78), rgba(225, 243, 250, .62));
+  /* see-through amount: the first number is the top-left, the last the
+     bottom-right. Lower = clearer, higher = more frosted (old look ~.32) */
+  --glass-fill: linear-gradient(145deg,
+      rgba(255, 255, 255, .2) 0%,
+      rgba(255, 255, 255, .06) 40%,
+      rgba(255, 255, 255, .04) 65%,
+      rgba(214, 238, 250, .14) 100%);
+  /* light sliding across the surface; set to "none" to remove */
+  --glass-glare:
+    linear-gradient(125deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, 0) 24%),
+    radial-gradient(60% 40% at 100% 100%, rgba(255, 255, 255, .14) 0%, transparent 70%);
+  /* how much the background behind is softened: 0px = perfectly clear */
+  --glass-blur: blur(7px) saturate(135%) brightness(1.06);
+  /* rim colours: top, right, bottom, left (light comes from the top-left) */
+  --glass-rim: rgba(255, 255, 255, .75) rgba(255, 255, 255, .38) rgba(255, 255, 255, .3) rgba(255, 255, 255, .58);
+  /* edge light + thickness, then the drop shadow */
+  --glass-shadow:
+    inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .95),
+    inset -1px -1px .5px -.5px rgba(255, 255, 255, .55),
+    inset 0 14px 22px -18px rgba(255, 255, 255, .9),
+    inset 0 -16px 26px -20px rgba(80, 145, 182, .45),
+    0 2px 6px rgba(16, 42, 67, .08),
+    0 14px 34px -14px rgba(16, 42, 67, .32);
+  --glass-pill-shadow:
+    inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .95),
+    inset -1px -1px .5px -.5px rgba(255, 255, 255, .5),
+    inset 0 -8px 14px -10px rgba(80, 145, 182, .4),
+    0 6px 16px -6px rgba(16, 42, 67, .3);
+  /* fields inside a glass card (inputs, checkbox rows, photo mats) */
+  --glass-field: rgba(255, 255, 255, .34);
 }
 
-/* ---- Requested: timer, the 5 venue buttons under the wheel, gallery ---- */
+/* phones: lighter blur keeps scrolling smooth */
+@media (max-width: 600px) {
+  :root {
+    --glass-blur: blur(6px) saturate(135%) brightness(1.06);
+  }
+}
+
+/* Section backgrounds become see-through: glass only frosts one layer deep,
+   so the cards (not big panels behind them) carry the glass. */
+.section-wrapper,
+.timeline-sticky-wrapper {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* ---- Cards ---- */
+.hero-quote-box,
 .timer-box,
-.wheel-pill-link,
-.gallery-card {
-  background: var(--ice-frost), var(--ice-sheen), var(--ice-tint);
-  border: 1px solid var(--ice-border);
-  box-shadow: var(--ice-shadow);
+.rsvp-section-box,
+.gallery-card,
+.transit-card,
+.hotel-card,
+.spot-card {
+  background: var(--glass-glare), var(--glass-fill);
+  border: 1px solid;
+  border-color: var(--glass-rim);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+/* ---- Buttons and chips ---- */
+.nav-floating-pill,
+.festive-sub-badge,
+.btn-secondary-snow,
+.train-station-indicator,
+.coach-nav-btn,
+.train-arrow-btn,
+.wheel-pill-link {
+  background: var(--glass-glare), var(--glass-fill);
+  border: 1px solid;
+  border-color: var(--glass-rim);
+  box-shadow: var(--glass-pill-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.btn-secondary-snow:hover,
+.wheel-pill-link:hover {
+  background: var(--glass-glare), rgba(255, 255, 255, .32);
+}
+
+/* bride / groom chips: tinted glass, same colours as before */
+.city-tuticorin,
+.city-chennai {
+  border: 1px solid;
+  border-color: var(--glass-rim);
+  box-shadow: var(--glass-pill-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.city-tuticorin {
+  background: var(--glass-glare), rgba(186, 230, 253, .3);
+}
+
+.city-chennai {
+  background: var(--glass-glare), rgba(254, 202, 202, .32);
+}
+
+/* landmark city tags float on the photo as small glass chips */
+.spot-city-badge {
+  background: rgba(255, 255, 255, .34);
+  border: 1px solid rgba(255, 255, 255, .7);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .9), 0 4px 12px rgba(0, 0, 0, .18);
+  backdrop-filter: blur(5px) saturate(170%) brightness(1.1);
+  -webkit-backdrop-filter: blur(5px) saturate(170%) brightness(1.1);
+}
+
+/* wheel hub: a clear glass lens over the turning wheel, gold ring kept.
+   A little more white than the cards so the hub text stays readable. */
+.wheel-center-hub {
+  background: var(--glass-glare), rgba(255, 255, 255, .46);
+  box-shadow:
+    inset 2px 2px 1px -1px rgba(255, 255, 255, .95),
+    inset 0 -14px 24px -16px rgba(80, 145, 182, .5),
+    0 10px 30px rgba(15, 23, 42, .25);
+  backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
+  -webkit-backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
+}
+
+/* ---- Inside glass cards: milkier fields, no second blur (it can't see
+   through the card anyway) ---- */
+.form-input,
+.form-select,
+.form-textarea,
+.events-checkbox-container,
+.event-check-card,
+.btn-hotel-map {
+  background: var(--glass-field);
+  border: 1px solid rgba(255, 255, 255, .7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+}
+
+.events-checkbox-container {
+  background: rgba(255, 255, 255, .1);
+}
+
+.event-check-card:hover {
+  background: rgba(255, 236, 238, .5);
+  border-color: var(--royal-maroon);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  background: rgba(255, 255, 255, .8);
 }
 
 .gallery-img-wrap {
-  background: rgba(214, 238, 247, .5);
-  border: 1px solid rgba(255, 255, 255, .7);
+  background: var(--glass-field);
 }
 
+/* ---- Water droplets: a few beads of melt-water on some of the glass.
+   Each card below lists its droplets as position + size; delete a card's
+   rule to dry it, or copy one to add droplets elsewhere. ---- */
+:root {
+  --drop: url('../images/glass-droplet.svg');
+}
+
+.hero-quote-box,
+.timer-box:nth-child(3),
+.rsvp-section-box,
+.gallery-card:nth-child(3),
+.transit-card:nth-child(1),
+.spot-card:nth-child(2) {
+  position: relative;
+}
+
+.hero-quote-box::after,
+.timer-box:nth-child(3)::after,
+.rsvp-section-box::after,
+.gallery-card:nth-child(3)::after,
+.transit-card:nth-child(1)::after,
+.spot-card:nth-child(2)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background-repeat: no-repeat;
+}
+
+.hero-quote-box::after {
+  background-image: var(--drop), var(--drop), var(--drop);
+  background-position: calc(100% - 8px) 10px, calc(100% - 12px) 44px, 9px calc(100% - 10px);
+  background-size: 24px 27px, 12px 13px, 16px 18px;
+}
+
+/* phones: the quote text runs close to the edge, so its drops sit in the corners */
+@media (max-width: 600px) {
+  .hero-quote-box::after {
+    background-position: calc(100% - 3px) 3px, calc(100% - 4px) 30px, 4px calc(100% - 4px);
+    background-size: 18px 20px, 9px 10px, 13px 14px;
+  }
+}
+
+.timer-box:nth-child(3)::after {
+  background-image: var(--drop);
+  background-position: calc(100% - 6px) 6px;
+  background-size: 13px 14px;
+}
+
+.rsvp-section-box::after {
+  background-image: var(--drop), var(--drop), var(--drop);
+  background-position: calc(100% - 18px) 16px, calc(100% - 14px) 50px, 16px calc(100% - 14px);
+  background-size: 28px 31px, 13px 14px, 20px 22px;
+}
+
+.gallery-card:nth-child(3)::after {
+  background-image: var(--drop), var(--drop);
+  background-position: calc(100% - 8px) calc(100% - 8px), calc(100% - 10px) calc(100% - 38px);
+  background-size: 19px 21px, 10px 11px;
+}
+
+.transit-card:nth-child(1)::after {
+  background-image: var(--drop);
+  background-position: calc(100% - 12px) calc(100% - 12px);
+  background-size: 22px 24px;
+}
+
+.spot-card:nth-child(2)::after {
+  background-image: var(--drop), var(--drop);
+  background-position: calc(100% - 10px) calc(100% - 10px), calc(100% - 36px) calc(100% - 14px);
+  background-size: 18px 20px, 9px 10px;
+}
+
+/* ==========================================================================
+   Gallery layout + photo framing
+   ========================================================================== */
 /* gallery photos use the same --photo-pos / --photo-zoom knobs as the coaches */
 .gallery-img-wrap img {
   object-position: var(--photo-pos, 50% 50%);
@@ -3996,48 +4195,4 @@ main>section[id] {
   .gallery-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
-}
-
-/* ---- On trial: RSVP, Travel & Hotels, Must-Visit Landmarks ----
-   To go back to the previous white look, delete this block. */
-.rsvp-section-box,
-.events-checkbox-container,
-.event-check-card,
-.transit-card,
-.hotel-card,
-.spot-card {
-  background: var(--ice-frost), var(--ice-sheen), var(--ice-tint);
-  border: 1px solid var(--ice-border);
-  box-shadow: var(--ice-shadow);
-}
-
-/* checkbox rows sit inside an ice panel: lighter, no sheen, so they don't stripe */
-.event-check-card {
-  background: var(--ice-field);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 2px 6px rgba(37, 83, 105, .06);
-}
-
-.event-check-card:hover {
-  background: linear-gradient(160deg, rgba(255, 244, 244, .85), rgba(253, 226, 228, .6));
-  border-color: var(--royal-maroon);
-}
-
-.form-input,
-.form-select,
-.form-textarea {
-  background: var(--ice-field);
-  border: 1px solid rgba(255, 255, 255, .85);
-  box-shadow: inset 0 1px 3px rgba(37, 83, 105, .12), 0 1px 0 rgba(255, 255, 255, .6);
-}
-
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
-  background: rgba(255, 255, 255, .92);
-}
-
-.btn-hotel-map {
-  background: linear-gradient(160deg, rgba(255, 255, 255, .7), rgba(207, 235, 247, .6));
-  border-color: rgba(255, 255, 255, .85);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 2px 6px rgba(37, 83, 105, .1);
 }

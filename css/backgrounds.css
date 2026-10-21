@@ -1,0 +1,287 @@
+/* ==========================================================================
+   Background themes (trial)
+   Pick one by adding data-bg to the <html> tag in index.html:
+     <html lang="en" class="gate-closed" data-bg="original">     dark grey gradient (default)
+     <html lang="en" class="gate-closed" data-bg="ice">          Frozen-style ice crystals
+     <html lang="en" class="gate-closed" data-bg="traditional">  paisley damask photo, pearl tint
+   To preview without editing, use the "Background" button (bottom-left) or
+   add ?bg=original / ?bg=ice / ?bg=traditional to the URL.
+   Once you decide, delete the other blocks (and their files in images/bg/).
+
+   The pattern sits on fixed layers behind the page, so the glass cards
+   scroll over it (that movement is what makes glass read).
+   ========================================================================== */
+
+html[data-bg] body {
+  background: transparent;
+}
+
+html[data-bg] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   1. Ice: Frozen-style glowing crystals
+   ========================================================================== */
+html[data-bg="ice"] {
+  /* ---- BACKGROUND COLOURS: try your own here ----
+     centre = behind the content (keep it light so text stays readable),
+     middle = the ring around it, edge = corners and screen edges.
+     Presets to try (centre / middle / edge):
+       Glacier blue (default) #e4edf2  #b9cdd9  #6f93aa
+       Silver frost           #eef2f5  #cfd9e0  #8ea2b1
+       Arctic night           #d3e0e8  #8eaabd  #3f6580
+       Teal ice               #d9f3f7  #7fcadb  #0f5f78           */
+
+
+  /* --ice-bg-centre: #e4edf2;
+  --ice-bg-middle: #b9cdd9;
+  --ice-bg-edge: #6f93aa; */
+  /* soft light falling from the top of the screen; transparent = none */
+  /* --ice-bg-shine: rgba(255, 255, 255, .55); */
+
+  /* active: Pearl City Express coach colours
+     centre = coach body mid-blue, middle = coach body top, edge = coach body
+     bottom, shine = the coaches' sky-blue outline glow */
+  /* --ice-bg-centre: #0E427F;
+  --ice-bg-middle: #0A2F5C;
+  --ice-bg-edge: #082447; */
+  /* soft light falling from the top of the screen; transparent = none */
+  /* --ice-bg-shine: rgba(56, 189, 248, .28); */
+
+
+  --ice-bg-centre: #b1cfd0;
+  --ice-bg-middle: #77d7dc;
+  --ice-bg-edge: #0a82b9bd;
+  /* soft light falling from the top of the screen; transparent = none */
+  --ice-bg-shine: rgba(255, 255, 255, 0.593);
+
+
+  /* ---- CRYSTALS ----
+     How many, how big, where and which colour: all set in
+     scripts/ice-crystals.py (see the top of that file).
+     sway-time: one slow drift of the large crystals (higher = slower).
+     Small crystals don't move. */
+  --ice-sway-time: 36s;
+
+  background-color: var(--ice-bg-middle);
+}
+
+/* layer 1: the colours (still) */
+html[data-bg="ice"] body::before {
+  z-index: -3;
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 0%, var(--ice-bg-shine) 0%, transparent 70%),
+    radial-gradient(ellipse 110% 95% at 50% 45%, var(--ice-bg-centre) 0%, var(--ice-bg-middle) 55%, var(--ice-bg-edge) 100%);
+}
+
+/* layer 2: large and medium crystals, slowly swaying */
+html[data-bg="ice"] body::after {
+  content: '';
+  position: fixed;
+  top: -60px;
+  left: -60px;
+  width: calc(100% + 120px);
+  height: calc(100lvh + 120px);
+  z-index: -2;
+  pointer-events: none;
+  /* one screen-sized image, not repeated: positions are % of the screen */
+  background: url('../images/bg/ice-crystals-large.svg?v=1792613245') 0 0 / 100% 100% no-repeat;
+  animation: iceSway var(--ice-sway-time) ease-in-out infinite;
+  will-change: transform;
+}
+
+/* layer 3: small crystals and sparkle dust, still. Same box as layer 2 so
+   the mask (a soft hole at each large crystal) lines up with it. */
+html[data-bg="ice"]::after {
+  content: '';
+  position: fixed;
+  top: -60px;
+  left: -60px;
+  width: calc(100% + 120px);
+  height: calc(100lvh + 120px);
+  z-index: -1;
+  pointer-events: none;
+  /* repeating tile; its size comes from SMALL_TILE in the script */
+  background: url('../images/bg/ice-crystals-small.svg?v=1792613245') 0 0 repeat;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cstyle%3E%40media%20%28max-width%3A%20720px%29%20%7B%20.c%20%7B%20transform%3A%20scale%280.65%29%3B%20%7D%20%7D%3C%2Fstyle%3E%3Cdefs%3E%3CradialGradient%20id%3D%27hole%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23000%27%2F%3E%3Cstop%20offset%3D%27.72%27%20stop-color%3D%27%23000%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23fff%27%2F%3E%3C%2FradialGradient%3E%3Cmask%20id%3D%27m%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23fff%27%2F%3E%3Csvg%20x%3D%2724%25%27%20y%3D%2732%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%27115.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2714%25%27%20y%3D%2786%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2785.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%276%25%27%20y%3D%2718%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2790.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2777%25%27%20y%3D%2756%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%27125.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2794%25%27%20y%3D%2776%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2780.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3C%2Fmask%3E%3C%2Fdefs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23000%27%20mask%3D%27url%28%23m%29%27%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cstyle%3E%40media%20%28max-width%3A%20720px%29%20%7B%20.c%20%7B%20transform%3A%20scale%280.65%29%3B%20%7D%20%7D%3C%2Fstyle%3E%3Cdefs%3E%3CradialGradient%20id%3D%27hole%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23000%27%2F%3E%3Cstop%20offset%3D%27.72%27%20stop-color%3D%27%23000%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23fff%27%2F%3E%3C%2FradialGradient%3E%3Cmask%20id%3D%27m%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23fff%27%2F%3E%3Csvg%20x%3D%2724%25%27%20y%3D%2732%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%27115.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2714%25%27%20y%3D%2786%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2785.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%276%25%27%20y%3D%2718%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2790.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2777%25%27%20y%3D%2756%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%27125.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3Csvg%20x%3D%2794%25%27%20y%3D%2776%25%27%20width%3D%271%27%20height%3D%271%27%20overflow%3D%27visible%27%3E%3Ccircle%20class%3D%27c%27%20r%3D%2780.0%27%20fill%3D%27url%28%23hole%29%27%2F%3E%3C%2Fsvg%3E%3C%2Fmask%3E%3C%2Fdefs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23000%27%20mask%3D%27url%28%23m%29%27%2F%3E%3C%2Fsvg%3E") 0 0 / 100% 100% no-repeat;
+}
+
+@keyframes iceSway {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate3d(-28px, 22px, 0) rotate(.8deg);
+  }
+
+  66% {
+    transform: translate3d(22px, -14px, 0) rotate(-.6deg);
+  }
+}
+
+/* nothing moves behind the closed temple gate */
+html.gate-closed[data-bg="ice"] body::after {
+  animation-play-state: paused;
+}
+
+/* footer: a glass band over the same background instead of a solid block */
+html[data-bg] .site-footer {
+  background: var(--glass-glare), var(--glass-fill);
+  border-top: 1px solid rgba(255, 255, 255, .6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 -10px 30px -18px rgba(16, 42, 67, .3);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+/* text sitting straight on the crystals gets a soft white halo to stay crisp */
+html[data-bg="ice"] :is(.section-pretitle, .section-title, .section-desc, .hero-main-title,
+  .city-divider-train, .countdown-title, .train-service-name, .train-service-number) {
+  text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 14px #fff, 0 0 24px rgba(255, 255, 255, .9);
+}
+
+/* ==========================================================================
+   2. Original: dark grey gradient (clear glass reads best on neutral grey)
+   ========================================================================== */
+html[data-bg="original"] {
+  /* ---- BACKGROUND COLOURS: try your own here ----
+     Presets to try (centre / middle / edge):
+       Graphite (default)  #b3b9bf  #8c949c  #4f5861
+       Soft grey           #c6cbd0  #a3aab1  #6b737b
+       Charcoal            #9aa1a8  #6f7780  #343b42
+       Blue slate          #b0bac4  #86939f  #45525e           */
+  --orig-bg-centre: rgb(253, 228, 163);
+  --orig-bg-middle: rgba(249, 197, 151, 0.975);
+  --orig-bg-edge: rgb(228, 141, 109);
+  --orig-bg-shine: #f6e6d8;
+
+
+  /* --orig-bg-centre: #ccdbe9ef;
+  --orig-bg-middle: #99bec9;
+  --orig-bg-edge: #2389a5b5;
+  --orig-bg-shine: rgb(202, 240, 249); */
+
+  background-color: var(--orig-bg-middle);
+}
+
+html[data-bg="original"] body::before {
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 0%, var(--orig-bg-shine) 0%, transparent 70%),
+    radial-gradient(ellipse 110% 95% at 50% 45%, var(--orig-bg-centre) 0%, var(--orig-bg-middle) 55%, var(--orig-bg-edge) 100%);
+}
+
+/* ==========================================================================
+   3. Traditional: paisley damask photo, tinted with the pearl colours
+   images/bg/traditional-paisley.jpg is your photo plus its mirror images
+   (2 x 2), so it repeats with no visible seams.
+   ========================================================================== */
+html[data-bg="traditional"] {
+  /* how wide one repeat of the photo is drawn: smaller = smaller paisleys
+     (2048px = full detail; 1024px shows each paisley at about half the
+     size of the original photo) */
+  --trad-image-size: 1024px;
+
+  /* ---- PEARL TINT over the photo ----
+     Five soft colour pools. The last number in each rgba() is its strength
+     (1 = full, 0 = off). --trad-tint-strength fades all of them at once:
+     0 = the photo's own ivory and silver, 1 = full pearl colours. */
+  --trad-tint-strength: .55;
+  --trad-pink: rgb(204, 219, 220);
+  --trad-sky: rgba(192, 219, 239, 0.9);
+  --trad-lilac: rgba(216, 210, 229, 0.88);
+  --trad-mint: rgb(177, 239, 249);
+  --trad-peach: #eed0b6d1;
+
+  background-color: #e9e5dc;
+}
+
+@media (max-width: 600px) {
+  html[data-bg="traditional"] {
+    --trad-image-size: 720px;
+  }
+}
+
+/* layer 1: the paisley photo */
+html[data-bg="traditional"] body::before {
+  background: url('../images/bg/traditional-paisley.jpg') 0 0 / var(--trad-image-size) auto repeat, #e9e5dc;
+}
+
+/* layer 2: the pearl tint, multiplied over the photo (colours the ivory,
+   keeps the silver pattern visible) */
+html[data-bg="traditional"]::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--trad-tint-strength);
+  mix-blend-mode: multiply;
+  background:
+    radial-gradient(circle at 12% 18%, var(--trad-pink) 0%, transparent 42%),
+    radial-gradient(circle at 88% 12%, var(--trad-sky) 0%, transparent 44%),
+    radial-gradient(circle at 80% 72%, var(--trad-lilac) 0%, transparent 46%),
+    radial-gradient(circle at 16% 84%, var(--trad-mint) 0%, transparent 44%),
+    radial-gradient(circle at 50% 45%, var(--trad-peach) 0%, transparent 48%);
+}
+
+/* ==========================================================================
+   Glass on the Original and Traditional themes: more see-through than the
+   site default (style.css). Raise the numbers for more frost.
+   ========================================================================== */
+html[data-bg="original"],
+html[data-bg="traditional"] {
+  --glass-fill: linear-gradient(145deg,
+      rgba(255, 255, 255, .13) 0%,
+      rgba(255, 255, 255, .03) 40%,
+      rgba(255, 255, 255, .02) 65%,
+      rgba(255, 255, 255, .08) 100%);
+  --glass-field: rgba(255, 255, 255, .28);
+}
+
+/* text sitting straight on these backgrounds gets a soft light halo */
+html:is([data-bg="original"], [data-bg="traditional"]) :is(.section-pretitle, .section-title, .section-desc,
+  .hero-main-title, .city-divider-train, .countdown-title, .train-service-name, .train-service-number) {
+  text-shadow: 0 0 2px rgba(255, 255, 255, .9), 0 0 8px rgba(255, 255, 255, .7), 0 0 18px rgba(255, 255, 255, .5);
+}
+
+/* ---- Trial switch button (bottom-left). Delete with the trial. ---- */
+.bg-trial-switch {
+  position: fixed;
+  left: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 900;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .75);
+  background: rgba(24, 82, 98, .85);
+  color: #fff;
+  font: 600 .8rem/1 var(--font-sans);
+  box-shadow: 0 6px 18px rgba(16, 42, 67, .3);
+  cursor: pointer;
+}
+
+/* phones: sit above the train's bottom controls */
+@media (max-width: 600px) {
+  .bg-trial-switch {
+    bottom: max(70px, calc(env(safe-area-inset-bottom) + 58px));
+  }
+}
+
+/* hidden while the temple gate is closed */
+html.gate-closed .bg-trial-switch {
+  display: none;
+}

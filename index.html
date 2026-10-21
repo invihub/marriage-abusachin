@@ -30,6 +30,19 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Background theme trial (see css/backgrounds.css). Choose with the
+       "Background" button at the bottom-left, or ?bg=original | ice | traditional -->
+  <link rel="stylesheet" href="css/backgrounds.css">
+  <script>
+    (function () {
+      var m = (location.search + location.hash).toLowerCase().match(/bg=(\w+)/);
+      var bg = m ? m[1] : null;
+      try { bg = bg || localStorage.getItem('bg-trial'); } catch (e) { }
+      if (['original', 'ice', 'traditional'].indexOf(bg) < 0) bg = 'original'; // default, or a removed theme
+      document.documentElement.setAttribute('data-bg', bg);
+    })();
+  </script>
 </head>
 
 <body>
@@ -174,7 +187,7 @@
         <!-- Couple's Concise Quote -->
         <div class="hero-quote-box">
           <p class="hero-quote-text">
-            "From KCG College corridors to Chennai movie dates watching OK Kanmani, and across snowy Toronto winters...
+            "Begin at KCG college, our love shines from Tuticorin breeze to Toronto snowfalls,
             11 years, two coastal souls, and one eternal love story."
           </p>
           <p class="hero-quote-caption">
@@ -720,8 +733,8 @@
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/sachin-abu.jpg" alt="Sachin by the sea and Abu by the harbour, joined by a heart" loading="lazy"
-              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
+            <img src="images/sachin-abu.jpg" alt="Sachin by the sea and Abu by the harbour, joined by a heart"
+              loading="lazy" style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
             <strong>Sachin & Abu</strong>
@@ -742,8 +755,8 @@
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/video-call.jpg" alt="A video call across the miles with the Toronto skyline outside" loading="lazy"
-              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
+            <img src="images/video-call.jpg" alt="A video call across the miles with the Toronto skyline outside"
+              loading="lazy" style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
             <strong>Miles Apart, Never Distant</strong>
@@ -753,8 +766,8 @@
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/Welcome-canada.jpg" alt="Abu and Sachin arrive together under a Welcome to Canada sign" loading="lazy"
-              style="--photo-pos: 50% 50%; --photo-zoom: 1;">
+            <img src="images/Welcome-canada.jpg" alt="Abu and Sachin arrive together under a Welcome to Canada sign"
+              loading="lazy" style="--photo-pos: 50% 50%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
             <strong>Canada Chapter</strong>
@@ -764,8 +777,8 @@
 
         <div class="gallery-card">
           <div class="gallery-img-wrap">
-            <img src="images/save-date.jpg" alt="Save the Date, 6 December 2026, written in the sand by the sea" loading="lazy"
-              style="--photo-pos: 50% 100%; --photo-zoom: 1;">
+            <img src="images/save-date.jpg" alt="Save the Date, 6 December 2026, written in the sand by the sea"
+              loading="lazy" style="--photo-pos: 50% 100%; --photo-zoom: 1;">
           </div>
           <div class="gallery-card-caption">
             <strong>Save the Date</strong>
@@ -1050,6 +1063,27 @@
       Thoothukudi ⇄ Chennai · Canada Chapter · OK Kanmani Musical Theme · December 2026
     </div>
   </footer>
+
+  <!-- Background theme trial: tap to cycle Original -> Ice -> Traditional.
+       Remove this button + script (and the trial lines in <head>) once a theme is chosen. -->
+  <button type="button" id="bg-trial-switch" class="bg-trial-switch" aria-live="polite">Background: Original</button>
+  <script>
+    (function () {
+      var btn = document.getElementById('bg-trial-switch');
+      var themes = ['original', 'ice', 'traditional'];
+      var names = { original: 'Original', ice: 'Ice', traditional: 'Traditional' };
+      var html = document.documentElement;
+      var current = function () { return html.getAttribute('data-bg') || 'original'; };
+      var show = function () { btn.textContent = 'Background: ' + (names[current()] || current()); };
+      btn.addEventListener('click', function () {
+        var next = themes[(themes.indexOf(current()) + 1) % themes.length];
+        html.setAttribute('data-bg', next);
+        try { localStorage.setItem('bg-trial', next); } catch (e) { }
+        show();
+      });
+      show();
+    })();
+  </script>
 
   <!-- Scripts -->
   <!-- Generated from environment variables: node scripts/build-config.mjs -->
