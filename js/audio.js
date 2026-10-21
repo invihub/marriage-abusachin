@@ -1,21 +1,19 @@
 /**
- * OK Kanmani & South Indian Wedding Auspicious Audio System
- * Uses Web Audio API for rich procedural synthesis:
- * - Auspicious Temple Bell Chimes
- * - Chennai Monsoon Rain & Thunder Generator
- * - Synthesized Romantic Melodies (Mental Manadhil, Aye Sinamika, Parandhu Sella Vaa, Mangala Vaathiyam)
+ * Auspicious South Indian & OK Kanmani Synthesizer Audio System
+ * Plays authentic melodic chiptune/lounge synthesizers:
+ * - Mental Manadhil (O Kadhal Kanmani)
+ * - Aye Sinamika (O Kadhal Kanmani)
+ * - Parandhu Sella Vaa (O Kadhal Kanmani)
+ * - Mangala Vaathiyam (Temple Nadaswaram & Chimes)
+ * - Auspicious Temple Bell Chime
  */
 
 class WeddingAudioEngine {
   constructor() {
     this.ctx = null;
     this.isPlaying = false;
-    this.isRainPlaying = false;
     this.currentTrackIndex = 0;
-    this.rainVolume = 0.45;
-    this.musicVolume = 0.65;
-    this.rainNode = null;
-    this.rainGain = null;
+    this.musicVolume = 0.7;
     this.masterGain = null;
     this.musicGain = null;
     this.analyser = null;
@@ -27,11 +25,10 @@ class WeddingAudioEngine {
     this.tracks = [
       {
         id: 'mental-manadhil',
-        title: 'Mental Manadhil (Acoustic Synth)',
+        title: 'Mental Manadhil (Acoustic Soul)',
         film: 'O Kadhal Kanmani',
         tempo: 124,
-        scale: [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25], // C major
-        // Catchy melodic phrase
+        scale: [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25],
         notes: [
           { pitch: 523.25, dur: 0.25 }, { pitch: 493.88, dur: 0.25 }, { pitch: 523.25, dur: 0.25 }, { pitch: 392.00, dur: 0.5 },
           { pitch: 329.63, dur: 0.25 }, { pitch: 349.23, dur: 0.25 }, { pitch: 392.00, dur: 0.5 }, { pitch: 0, dur: 0.25 },
@@ -41,10 +38,9 @@ class WeddingAudioEngine {
       },
       {
         id: 'aye-sinamika',
-        title: 'Aye Sinamika (Gentle Romance)',
+        title: 'Aye Sinamika (Gentle Sunset)',
         film: 'O Kadhal Kanmani',
         tempo: 88,
-        scale: [293.66, 329.63, 369.99, 392.00, 440.00, 493.88, 554.37, 587.33], // D major
         notes: [
           { pitch: 440.00, dur: 0.5 }, { pitch: 493.88, dur: 0.5 }, { pitch: 554.37, dur: 0.75 }, { pitch: 493.88, dur: 0.25 },
           { pitch: 440.00, dur: 0.5 }, { pitch: 369.99, dur: 0.5 }, { pitch: 392.00, dur: 0.75 }, { pitch: 329.63, dur: 0.25 },
@@ -53,7 +49,7 @@ class WeddingAudioEngine {
       },
       {
         id: 'parandhu-sella-vaa',
-        title: 'Parandhu Sella Vaa (Dreamy Ambient)',
+        title: 'Parandhu Sella Vaa (Dreamy)',
         film: 'O Kadhal Kanmani',
         tempo: 96,
         notes: [
@@ -64,8 +60,8 @@ class WeddingAudioEngine {
       },
       {
         id: 'mangala-vaathiyam',
-        title: 'Mangala Vaathiyam (Nadaswaram & Bells)',
-        film: 'Auspicious South Indian Temple Vows',
+        title: 'Mangala Vaathiyam (Temple Nadaswaram)',
+        film: 'Sacred Wedding Ragas',
         tempo: 104,
         notes: [
           { pitch: 587.33, dur: 0.35, isNadaswaram: true }, { pitch: 659.25, dur: 0.35, isNadaswaram: true }, { pitch: 739.99, dur: 0.5, isNadaswaram: true },
@@ -87,157 +83,38 @@ class WeddingAudioEngine {
     this.musicGain = this.ctx.createGain();
     this.musicGain.gain.setValueAtTime(this.musicVolume, this.ctx.currentTime);
 
-    this.rainGain = this.ctx.createGain();
-    this.rainGain.gain.setValueAtTime(this.rainVolume, this.ctx.currentTime);
-
-    this.analyser = this.ctx.createAnalyser();
-    this.analyser.fftSize = 64;
-
     this.musicGain.connect(this.masterGain);
-    this.rainGain.connect(this.masterGain);
-    this.masterGain.connect(this.analyser);
-    this.analyser.connect(this.ctx.destination);
+    this.masterGain.connect(this.ctx.destination);
   }
 
   ensureContext() {
-    if (!this.ctx) {
-      this.init();
-    }
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
+    if (!this.ctx) this.init();
+    if (this.ctx.state === 'suspended') this.ctx.resume();
   }
 
-  /**
-   * Authentic auspicious South Indian Temple Bell Chime
-   * Generates a multi-harmonic brass bell strike with resonance
-   */
-  playTempleBell(frequency = 587.33) { // D5 base
+  playTempleBell(frequency = 587.33) {
     this.ensureContext();
     const now = this.ctx.currentTime;
-
-    // Harmonic ratios for authentic bell resonance
     const partials = [
-      { ratio: 1.0, gain: 0.6, decay: 3.2 },
-      { ratio: 1.503, gain: 0.35, decay: 2.8 },
-      { ratio: 2.0, gain: 0.25, decay: 2.2 },
-      { ratio: 2.76, gain: 0.18, decay: 1.8 },
-      { ratio: 3.48, gain: 0.12, decay: 1.4 },
-      { ratio: 4.82, gain: 0.08, decay: 0.9 }
+      { ratio: 1.0, gain: 0.55, decay: 3.2 },
+      { ratio: 1.503, gain: 0.32, decay: 2.8 },
+      { ratio: 2.0, gain: 0.22, decay: 2.2 },
+      { ratio: 2.76, gain: 0.16, decay: 1.8 }
     ];
 
     partials.forEach(p => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
-
       osc.type = 'sine';
       osc.frequency.setValueAtTime(frequency * p.ratio, now);
-
       gain.gain.setValueAtTime(0.0001, now);
       gain.gain.exponentialRampToValueAtTime(p.gain, now + 0.008);
       gain.gain.exponentialRampToValueAtTime(0.00001, now + p.decay);
-
       osc.connect(gain);
       gain.connect(this.masterGain);
-
       osc.start(now);
       osc.stop(now + p.decay + 0.1);
     });
-
-    // Play a secondary lighter chime 180ms later for ceremonial double-gong
-    setTimeout(() => {
-      if (!this.ctx) return;
-      const t = this.ctx.currentTime;
-      const highBell = this.ctx.createOscillator();
-      const hGain = this.ctx.createGain();
-      highBell.type = 'triangle';
-      highBell.frequency.setValueAtTime(frequency * 2.02, t);
-      hGain.gain.setValueAtTime(0.18, t);
-      hGain.gain.exponentialRampToValueAtTime(0.00001, t + 2.4);
-      highBell.connect(hGain);
-      hGain.connect(this.masterGain);
-      highBell.start(t);
-      highBell.stop(t + 2.5);
-    }, 180);
-  }
-
-  /**
-   * Procedural Chennai Monsoon Rain Generator
-   * Creates soothing rain on window sound with brown noise and modulated filtering
-   */
-  toggleRain() {
-    this.ensureContext();
-    if (this.isRainPlaying) {
-      this.stopRain();
-      return false;
-    } else {
-      this.startRain();
-      return true;
-    }
-  }
-
-  startRain() {
-    this.ensureContext();
-    if (this.isRainPlaying) return;
-
-    const bufferSize = 2 * this.ctx.sampleRate;
-    const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-    const output = noiseBuffer.getChannelData(0);
-
-    // Generate brown/pink noise suitable for rain
-    let lastOut = 0.0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + (0.02 * white)) / 1.02;
-      lastOut = output[i];
-      output[i] *= 3.5; // Gain boost
-    }
-
-    this.rainNode = this.ctx.createBufferSource();
-    this.rainNode.buffer = noiseBuffer;
-    this.rainNode.loop = true;
-
-    // Filters to simulate raindrops hitting window glass
-    const filter = this.ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1100, this.ctx.currentTime);
-    filter.Q.setValueAtTime(1.2, this.ctx.currentTime);
-
-    const highpass = this.ctx.createBiquadFilter();
-    highpass.type = 'highpass';
-    highpass.frequency.setValueAtTime(220, this.ctx.currentTime);
-
-    this.rainNode.connect(highpass);
-    highpass.connect(filter);
-    filter.connect(this.rainGain);
-
-    this.rainGain.gain.setValueAtTime(0.001, this.ctx.currentTime);
-    this.rainGain.gain.linearRampToValueAtTime(this.rainVolume, this.ctx.currentTime + 1.2);
-
-    this.rainNode.start();
-    this.isRainPlaying = true;
-  }
-
-  stopRain() {
-    if (!this.isRainPlaying || !this.rainNode) return;
-    const now = this.ctx.currentTime;
-    this.rainGain.gain.setValueAtTime(this.rainGain.gain.value, now);
-    this.rainGain.gain.linearRampToValueAtTime(0.0001, now + 0.8);
-    setTimeout(() => {
-      if (this.rainNode) {
-        try { this.rainNode.stop(); } catch(e){}
-        this.rainNode.disconnect();
-        this.rainNode = null;
-      }
-      this.isRainPlaying = false;
-    }, 850);
-  }
-
-  setRainVolume(val) {
-    this.rainVolume = Math.max(0, Math.min(1, val));
-    if (this.rainGain && this.ctx) {
-      this.rainGain.gain.setValueAtTime(this.rainVolume, this.ctx.currentTime);
-    }
   }
 
   setMusicVolume(val) {
@@ -319,7 +196,6 @@ class WeddingAudioEngine {
     const now = this.ctx.currentTime;
 
     if (isNadaswaram) {
-      // Nadaswaram characteristic reed timbre (rich in odd harmonics with vibrato)
       const osc = this.ctx.createOscillator();
       const osc2 = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
@@ -327,20 +203,15 @@ class WeddingAudioEngine {
 
       osc.type = 'sawtooth';
       osc2.type = 'triangle';
-
       osc.frequency.setValueAtTime(freq, now);
-      osc2.frequency.setValueAtTime(freq * 1.004, now); // slight chorus warmth
-
-      // Subtly glide frequency for gamaka
-      osc.frequency.exponentialRampToValueAtTime(freq * 1.015, now + 0.1);
-      osc.frequency.exponentialRampToValueAtTime(freq, now + 0.25);
+      osc2.frequency.setValueAtTime(freq * 1.004, now);
 
       filter.type = 'bandpass';
       filter.frequency.setValueAtTime(freq * 2.2, now);
       filter.Q.setValueAtTime(3.0, now);
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.22, now + 0.05);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
       osc.connect(filter);
@@ -352,21 +223,18 @@ class WeddingAudioEngine {
       osc2.start(now);
       osc.stop(now + duration + 0.05);
       osc2.stop(now + duration + 0.05);
-
     } else {
-      // Warm romantic melodic synth (Rhodes / Flute hybrid)
       const osc1 = this.ctx.createOscillator();
       const osc2 = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
 
       osc1.type = 'sine';
       osc2.type = 'triangle';
-
       osc1.frequency.setValueAtTime(freq, now);
-      osc2.frequency.setValueAtTime(freq * 2, now); // Octave overtone
+      osc2.frequency.setValueAtTime(freq * 2, now);
 
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.26, now + 0.03);
+      gain.gain.linearRampToValueAtTime(0.24, now + 0.03);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
       osc1.connect(gain);
@@ -379,19 +247,19 @@ class WeddingAudioEngine {
       osc2.stop(now + duration + 0.05);
     }
   }
-
-  getEqualizerData() {
-    if (!this.analyser) return [0, 0, 0, 0, 0];
-    const data = new Uint8Array(this.analyser.frequencyBinCount);
-    this.analyser.getByteFrequencyData(data);
-    return [
-      data[1] || 0,
-      data[4] || 0,
-      data[8] || 0,
-      data[14] || 0,
-      data[20] || 0
-    ];
-  }
 }
 
 window.weddingAudio = new WeddingAudioEngine();
+
+// Background tabs throttle timers, which would make the melody stutter;
+// pause while hidden (e.g. switching apps on a phone) and resume on return.
+document.addEventListener('visibilitychange', () => {
+  const audio = window.weddingAudio;
+  if (document.hidden) {
+    audio.resumeOnVisible = audio.isPlaying;
+    if (audio.isPlaying) audio.pause();
+  } else if (audio.resumeOnVisible) {
+    audio.resumeOnVisible = false;
+    audio.play();
+  }
+});

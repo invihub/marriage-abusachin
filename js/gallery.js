@@ -1,8 +1,7 @@
 /**
  * Photo Gallery & Lightbox for Abu & Sachin
  * Features:
- * - Curated couple photos in vintage polaroid & gold-embossed frames
- * - Empty slots with interactive photo upload (persists via localStorage)
+ * - Curated couple photos in polaroid frames
  * - Fullscreen romantic lightbox viewer with captions
  */
 
@@ -18,7 +17,7 @@ class WeddingGallery {
 
   init() {
     // Bind click events on gallery cards
-    document.querySelectorAll('.gallery-card:not(.gallery-empty-slot)').forEach(card => {
+    document.querySelectorAll('.gallery-card').forEach(card => {
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
         const caption = card.querySelector('.gallery-card-caption');
@@ -26,11 +25,6 @@ class WeddingGallery {
           this.openLightbox(img.src, caption ? caption.textContent : 'Abu & Sachin');
         }
       });
-    });
-
-    // Handle empty slot upload
-    document.querySelectorAll('.gallery-upload-input').forEach(input => {
-      input.addEventListener('change', (e) => this.handleSlotUpload(e));
     });
 
     // Close lightbox
@@ -49,9 +43,6 @@ class WeddingGallery {
         this.closeLightbox();
       }
     });
-
-    // Restore any uploaded user photos from localStorage
-    this.restoreUploadedPhotos();
   }
 
   openLightbox(src, caption) {
@@ -68,66 +59,6 @@ class WeddingGallery {
     if (!this.lightbox) return;
     this.lightbox.classList.remove('active');
     document.body.style.overflow = '';
-  }
-
-  handleSlotUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const slotCard = e.target.closest('.gallery-empty-slot');
-    const slotId = slotCard ? slotCard.dataset.slotId : 'slot_' + Date.now();
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target.result;
-      this.populateSlot(slotCard, dataUrl, file.name);
-
-      // Save to localStorage
-      try {
-        localStorage.setItem('abu_sachin_gallery_' + slotId, dataUrl);
-      } catch (err) {
-        console.warn('Image might exceed localStorage limit, shown in session:', err);
-      }
-
-      if (window.petalShower) {
-        window.petalShower.triggerBurst(40, 3000);
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-
-  populateSlot(slotCard, src, title) {
-    if (!slotCard) return;
-    slotCard.classList.remove('gallery-empty-slot');
-    slotCard.classList.add('gallery-filled');
-    slotCard.innerHTML = `
-      <div class="gallery-img-wrap">
-        <img src="${src}" alt="Abu & Sachin Celebration Memory" loading="lazy">
-        <div class="gallery-overlay">
-          <span class="gallery-zoom-icon">🔍</span>
-        </div>
-      </div>
-      <div class="gallery-card-caption">
-        <strong>${title.replace(/\.[^/.]+$/, "")}</strong>
-        <span>Added with love by family & friends</span>
-      </div>
-    `;
-
-    slotCard.addEventListener('click', () => {
-      this.openLightbox(src, title);
-    });
-  }
-
-  restoreUploadedPhotos() {
-    document.querySelectorAll('.gallery-empty-slot').forEach(slot => {
-      const slotId = slot.dataset.slotId;
-      if (slotId) {
-        const saved = localStorage.getItem('abu_sachin_gallery_' + slotId);
-        if (saved) {
-          this.populateSlot(slot, saved, 'Celebration Memory');
-        }
-      }
-    });
   }
 }
 

@@ -1,12 +1,6 @@
 /**
  * Main Application Script for Abu & Sachin's Wedding Invitation
- * Snow-Themed Romantic Marriage Experience
- * Handles:
- * - Tamil Architecture Gopuram Split Doors opening
- * - Wedding Muhurtham Countdown Timer
- * - Spinning Celebration Schedule Wheel interaction
- * - OK Kanmani Floating Cassette Player & Rain Controls
- * - Clean mobile navigation & smooth interactions
+ * Mobile-First Snow & Heritage Experience
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,45 +12,53 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 1. Tamil Architecture Gopuram Split Doors Opening
+ * 1. Straight-Facing Gopuram Split Doors Opening
  */
 function initTempleDoors() {
   const openDoorsBtn = document.getElementById('open-doors-btn');
   const doorOverlay = document.getElementById('temple-door-curtain');
   const reOpenDoorsBtn = document.getElementById('revisit-doors-btn');
 
-  if (openDoorsBtn && doorOverlay) {
+  // The page behind the gate stays scroll-locked (html.gate-closed) and the
+  // snow stays paused until the doors open, so nothing animates unseen.
+  const setGateClosed = (closed) => {
+    document.documentElement.classList.toggle('gate-closed', closed);
+    if (window.snowfallEngine) {
+      closed ? window.snowfallEngine.stop() : window.snowfallEngine.start();
+    }
+  };
+
+  if (!doorOverlay) {
+    setGateClosed(false);
+    return;
+  }
+
+  if (openDoorsBtn) {
     openDoorsBtn.addEventListener('click', () => {
       // 1. Play Auspicious Temple Bell Chime
       if (window.weddingAudio) {
         window.weddingAudio.playTempleBell();
       }
 
-      // 2. Split open the two halves of the Tamil Gopuram
+      // 2. Split open both halves
       doorOverlay.classList.add('doors-opened');
-
-      // 3. Start gentle romantic melody after doors open
-      setTimeout(() => {
-        if (window.weddingAudio && !window.weddingAudio.isPlaying) {
-          window.weddingAudio.play();
-        }
-      }, 1400);
+      setGateClosed(false);
     });
   }
 
   // Re-enter / close doors button
-  if (reOpenDoorsBtn && doorOverlay) {
+  if (reOpenDoorsBtn) {
     reOpenDoorsBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'instant' });
       doorOverlay.classList.remove('doors-opened');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setGateClosed(true);
     });
   }
 }
 
 /**
  * 2. Wedding Countdown Timer
- * Auspicious Muhurtham: Dec 6, 2026, 09:45 AM (Thoothukudi Tradition 1)
  */
 function initCountdownTimer() {
   const targetDate = new Date('2026-12-06T09:45:00+05:30').getTime();
@@ -98,7 +100,7 @@ function initCountdownTimer() {
  */
 function initSpinWheel() {
   const wheel = document.getElementById('celebration-wheel');
-  const hubInfo = document.getElementById('wheel-hub-active-title');
+  const hubTitle = document.getElementById('wheel-hub-active-title');
   const hubVenue = document.getElementById('wheel-hub-active-venue');
 
   if (!wheel) return;
@@ -109,14 +111,14 @@ function initSpinWheel() {
     seg.addEventListener('mouseenter', () => {
       const title = seg.dataset.title;
       const venue = seg.dataset.venue;
-      if (hubInfo && title) hubInfo.textContent = title;
+      if (hubTitle && title) hubTitle.textContent = title;
       if (hubVenue && venue) hubVenue.textContent = venue;
       wheel.classList.add('wheel-paused');
     });
 
     seg.addEventListener('mouseleave', () => {
-      if (hubInfo) hubInfo.textContent = 'Abu & Sachin';
-      if (hubVenue) hubVenue.textContent = 'Click segment for Google Maps';
+      if (hubTitle) hubTitle.textContent = 'Abu & Sachin';
+      if (hubVenue) hubVenue.textContent = 'Tap segment for Google Maps';
       wheel.classList.remove('wheel-paused');
     });
 
@@ -130,27 +132,26 @@ function initSpinWheel() {
 }
 
 /**
- * 4. OK Kanmani Jukebox & Rain Atmosphere Player
+ * 4. Redesigned Tape Recorder Player (with 2 Rotating Reel Circles)
  */
 function initCassettePlayer() {
   const playBtn = document.getElementById('cassette-play-toggle');
   const playIcon = document.getElementById('cassette-play-icon');
-  const prevBtn = document.getElementById('cassette-prev');
   const nextBtn = document.getElementById('cassette-next');
   const trackTitleEl = document.getElementById('cassette-track-title');
-  const trackFilmEl = document.getElementById('cassette-track-film');
+  const statusEl = document.getElementById('cassette-status-badge');
   const cassetteDeck = document.querySelector('.floating-cassette-widget');
   const cassetteToggleBtn = document.getElementById('cassette-toggle-widget');
-  const rainToggleBtn = document.getElementById('rain-atmosphere-toggle');
-  const rainSlider = document.getElementById('rain-volume-slider');
+  const quickSoundtrackBtn = document.getElementById('quick-soundtrack-toggle');
+  const quickSoundtrackIcon = document.getElementById('quick-soundtrack-icon');
+  const quickSoundtrackLabel = document.getElementById('quick-soundtrack-label');
+  const minimizeBtn = document.getElementById('cassette-minimize-btn');
   const musicSlider = document.getElementById('music-volume-slider');
-  const eqBars = document.querySelectorAll('.eq-bar');
 
   if (!window.weddingAudio) return;
 
   function updateTrackDisplay(track) {
     if (trackTitleEl) trackTitleEl.textContent = track.title;
-    if (trackFilmEl) trackFilmEl.textContent = track.film;
   }
 
   window.weddingAudio.onTrackChange = (track) => {
@@ -159,22 +160,37 @@ function initCassettePlayer() {
 
   window.weddingAudio.onPlayStateChange = (isPlaying) => {
     if (playIcon) {
-      playIcon.textContent = isPlaying ? '⏸' : '▶';
+      // Icon only: the play button is a small circle
+      playIcon.textContent = isPlaying ? '❚❚' : '▶';
+    }
+    if (statusEl) {
+      statusEl.textContent = isPlaying ? 'PLAYING' : 'PAUSED';
     }
     if (cassetteDeck) {
       cassetteDeck.classList.toggle('is-playing', isPlaying);
     }
+    if (quickSoundtrackIcon) {
+      quickSoundtrackIcon.textContent = isPlaying ? '❚❚' : '▶';
+    }
+    if (quickSoundtrackLabel) {
+      quickSoundtrackLabel.textContent = isPlaying ? 'Pause' : 'Play';
+    }
+    if (quickSoundtrackBtn) {
+      quickSoundtrackBtn.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
+    }
   };
+
+  const toggleMusic = () => window.weddingAudio.toggleMusic();
 
   if (playBtn) {
     playBtn.addEventListener('click', () => {
-      window.weddingAudio.toggleMusic();
+      toggleMusic();
     });
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      window.weddingAudio.prevTrack();
+  if (quickSoundtrackBtn) {
+    quickSoundtrackBtn.addEventListener('click', () => {
+      toggleMusic();
     });
   }
 
@@ -184,20 +200,10 @@ function initCassettePlayer() {
     });
   }
 
-  if (rainToggleBtn) {
-    rainToggleBtn.addEventListener('click', () => {
-      const isRainOn = window.weddingAudio.toggleRain();
-      rainToggleBtn.classList.toggle('rain-active', isRainOn);
-      const rainStatusText = document.getElementById('rain-toggle-status');
-      if (rainStatusText) {
-        rainStatusText.textContent = isRainOn ? 'Rain ON (Chennai Monsoon)' : 'Rain OFF';
-      }
-    });
-  }
-
-  if (rainSlider) {
-    rainSlider.addEventListener('input', (e) => {
-      window.weddingAudio.setRainVolume(parseFloat(e.target.value));
+  const prevBtn = document.getElementById('cassette-prev');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      window.weddingAudio.prevTrack();
     });
   }
 
@@ -209,24 +215,16 @@ function initCassettePlayer() {
 
   if (cassetteToggleBtn && cassetteDeck) {
     cassetteToggleBtn.addEventListener('click', () => {
-      cassetteDeck.classList.toggle('widget-minimized');
+      const minimized = cassetteDeck.classList.toggle('widget-minimized');
+      cassetteToggleBtn.setAttribute('aria-expanded', String(!minimized));
     });
   }
 
-  function animateEqualizer() {
-    if (window.weddingAudio && window.weddingAudio.isPlaying && eqBars.length > 0) {
-      const data = window.weddingAudio.getEqualizerData();
-      eqBars.forEach((bar, idx) => {
-        const val = data[idx] || 0;
-        const heightPct = Math.max(15, Math.min(100, (val / 255) * 100));
-        bar.style.height = `${heightPct}%`;
-      });
-    } else {
-      eqBars.forEach(bar => bar.style.height = '15%');
-    }
-    requestAnimationFrame(animateEqualizer);
+  if (minimizeBtn && cassetteDeck) {
+    minimizeBtn.addEventListener('click', () => {
+      cassetteDeck.classList.add('widget-minimized');
+    });
   }
-  animateEqualizer();
 
   updateTrackDisplay(window.weddingAudio.getCurrentTrack());
 }
@@ -239,14 +237,27 @@ function initMobileNav() {
   const navMenu = document.querySelector('.site-nav-menu');
 
   if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('nav-open');
+    const setOpen = (open) => {
+      navMenu.classList.toggle('nav-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.textContent = open ? '✕' : '☰';
+    };
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!navMenu.classList.contains('nav-open'));
     });
 
     navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('nav-open');
-      });
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    // Close when tapping anywhere outside the menu, or on Escape
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('nav-open') && !navMenu.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
     });
   }
 }

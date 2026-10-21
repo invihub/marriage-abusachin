@@ -7,37 +7,53 @@
  * 3. 2017-2020 - Chennai Romance & Growing Dreams
  * 4. 2021-2025 - The Canada Chapter
  * 5. 2026 - Marriage: 11 Years & Forever
+ *
+ * Layout is measured once (and again on resize), so scrolling only reads
+ * window.scrollY and writes a transform, at most once per animation frame.
  */
 
 class TrainTimelineEngine {
   constructor() {
     this.section = document.getElementById('timeline-journey');
     this.stickyContainer = document.querySelector('.timeline-sticky-wrapper');
+    this.viewport = document.querySelector('.train-coaches-viewport');
     this.track = document.querySelector('.train-coaches-track');
     this.progressBar = document.querySelector('.timeline-progress-fill');
+    this.coaches = document.querySelectorAll('.train-coach-item');
     this.coachPills = document.querySelectorAll('.coach-nav-btn');
     this.prevBtn = document.getElementById('train-prev-btn');
     this.nextBtn = document.getElementById('train-next-btn');
-    this.activeCoachIndex = 0;
+    this.stationLabel = document.getElementById('current-train-station');
+    this.stations = ['Chennai Egmore', 'Satyam Cinemas', 'OMR Corridor', 'Toronto Union', 'Thoothukudi Terminus'];
+    this.activeCoachIndex = -1;
+    this.lastX = -1;
+    this.frameQueued = false;
+    this.layout = null;
 
     this.init();
   }
 
   init() {
-    if (!this.section || !this.track) return;
+    if (!this.section || !this.track || !this.stickyContainer) return;
 
-    window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
-    window.addEventListener('resize', () => this.handleScroll(), { passive: true });
+    window.addEventListener('scroll', () => this.queueUpdate(), { passive: true });
+    window.addEventListener('resize', () => this.queueUpdate(true), { passive: true });
+    window.addEventListener('load', () => this.queueUpdate(true));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => this.queueUpdate(true));
+    }
+    // Content above the timeline can change height (fonts, images, uploads)
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => this.queueUpdate(true)).observe(document.body);
+    }
 
     // Coach navigation clicks
-    if (this.coachPills) {
-      this.coachPills.forEach((btn, index) => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.scrollToCoach(index);
-        });
+    this.coachPills.forEach((btn, index) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.scrollToCoach(index);
       });
-    }
+    });
 
     if (this.prevBtn) {
       this.prevBtn.addEventListener('click', () => {
@@ -47,42 +63,74 @@ class TrainTimelineEngine {
 
     if (this.nextBtn) {
       this.nextBtn.addEventListener('click', () => {
-        this.scrollToCoach(Math.min(4, this.activeCoachIndex + 1));
+        this.scrollToCoach(Math.min(this.coaches.length - 1, this.activeCoachIndex + 1));
       });
     }
 
-    this.handleScroll();
+    this.measure();
+    this.update();
   }
 
-  handleScroll() {
-    if (!this.section || !this.track) return;
+  queueUpdate(remeasure = false) {
+    if (remeasure) this.needsMeasure = true;
+    if (this.frameQueued) return;
+    this.frameQueued = true;
+    requestAnimationFrame(() => {
+      this.frameQueued = false;
+      if (this.needsMeasure) {
+        this.needsMeasure = false;
+        this.measure();
+      }
+      this.update();
+    });
+  }
 
-    const rect = this.section.getBoundingClientRect();
-    const sectionHeight = this.section.offsetHeight;
-    const viewportHeight = window.innerHeight;
+  measure() {
+    const viewportWidth = this.viewport ? this.viewport.clientWidth : window.innerWidth;
+    const maxTranslate = Math.max(0, this.track.scrollWidth - viewportWidth);
+    const sectionTop = this.section.getBoundingClientRect().top + window.scrollY;
+    const totalScrollable = this.section.offsetHeight - this.stickyContainer.offsetHeight;
 
-    // Total scrollable vertical distance inside this section
-    const totalScrollable = sectionHeight - viewportHeight;
-    if (totalScrollable <= 0) return;
+    // Translate needed to centre each coach in the viewport
+    const centers = [];
+    const targets = [];
+    this.coaches.forEach(coach => {
+      const center = coach.offsetLeft + coach.offsetWidth / 2;
+      centers.push(center);
+      targets.push(Math.min(maxTranslate, Math.max(0, center - viewportWidth / 2)));
+    });
 
-    // How far we have scrolled past section top
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+    this.layout = { viewportWidth, maxTranslate, sectionTop, totalScrollable, centers, targets };
+    this.lastX = -1; // force a repaint with the new geometry
+  }
 
-    // Calculate maximum horizontal travel distance
-    const trackWidth = this.track.scrollWidth;
-    const viewportWidth = window.innerWidth;
-    const maxTranslate = Math.max(0, trackWidth - viewportWidth + 80);
+  update() {
+    const l = this.layout;
+    if (!l || l.totalScrollable <= 0) return;
 
-    const currentX = progress * maxTranslate;
-    this.track.style.transform = `translateX(-${currentX}px)`;
+    const scrolled = window.scrollY - l.sectionTop;
+    const progress = Math.max(0, Math.min(1, scrolled / l.totalScrollable));
+    const x = Math.round(progress * l.maxTranslate);
+    if (x === this.lastX) return;
+    this.lastX = x;
 
+    this.track.style.transform = `translate3d(${-x}px, 0, 0)`;
     if (this.progressBar) {
-      this.progressBar.style.width = `${progress * 100}%`;
+      this.progressBar.style.transform = `scaleX(${progress})`;
     }
 
-    // Determine current active coach (5 coaches: 0 to 4)
-    const coachIndex = Math.min(4, Math.floor(progress * 5));
+    // Active coach = the one whose centre is closest to the viewport centre
+    const viewCenter = x + l.viewportWidth / 2;
+    let coachIndex = 0;
+    let best = Infinity;
+    l.centers.forEach((c, i) => {
+      const dist = Math.abs(c - viewCenter);
+      if (dist < best) {
+        best = dist;
+        coachIndex = i;
+      }
+    });
+
     if (coachIndex !== this.activeCoachIndex) {
       this.activeCoachIndex = coachIndex;
       this.updateActiveCoachState(coachIndex);
@@ -91,38 +139,28 @@ class TrainTimelineEngine {
 
   updateActiveCoachState(index) {
     // Update navigation buttons
-    if (this.coachPills) {
-      this.coachPills.forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-      });
-    }
+    this.coachPills.forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
 
     // Update coach cards
-    const coaches = document.querySelectorAll('.train-coach-item');
-    coaches.forEach((coach, i) => {
+    this.coaches.forEach((coach, i) => {
       coach.classList.toggle('coach-focused', i === index);
     });
 
     // Update station signboard indicator
-    const stations = ['Chennai Egmore', 'Satyam Cinemas', 'OMR Corridor', 'Toronto Union', 'Thoothukudi Terminus'];
-    const stationLabel = document.getElementById('current-train-station');
-    if (stationLabel && stations[index]) {
-      stationLabel.textContent = stations[index];
+    if (this.stationLabel && this.stations[index]) {
+      this.stationLabel.textContent = this.stations[index];
     }
   }
 
   scrollToCoach(index) {
-    if (!this.section) return;
-    const sectionTop = this.section.offsetTop;
-    const sectionHeight = this.section.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const totalScrollable = sectionHeight - viewportHeight;
-
-    const targetFraction = index / 4.2; // slight offset so coach is centered
-    const targetScrollY = sectionTop + (targetFraction * totalScrollable);
+    if (!this.layout) this.measure();
+    const l = this.layout;
+    const fraction = l.maxTranslate > 0 ? l.targets[index] / l.maxTranslate : 0;
 
     window.scrollTo({
-      top: targetScrollY,
+      top: l.sectionTop + fraction * l.totalScrollable,
       behavior: 'smooth'
     });
   }

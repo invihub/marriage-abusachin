@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="gate-closed">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#cce8f2">
   <title>Abu & Sachin Wedding Invitation | Thoothukudi & Chennai</title>
-  
-  <meta name="description" content="Wedding celebration of Abu (Thoothukudi) and Sachin (Chennai) · 11-Year Journey · Winter & Heritage Celebration">
+
+  <meta name="description"
+    content="Wedding celebration of Abu (Thoothukudi) and Sachin (Chennai) · 11-Year Journey · Winter & Heritage Celebration">
   <meta property="og:title" content="Abu & Sachin | Wedding Invitation">
   <meta property="og:description" content="11-Year Journey · Thoothukudi & Chennai · Canada Chapter">
   <meta property="og:image" content="images/couple-wedding.jpg">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+
+  <!-- Fonts (loaded in parallel with the stylesheet instead of via a CSS @import chain) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&display=swap">
+
+  <!-- Entrance image is needed immediately -->
+  <link rel="preload" as="image" href="images/temple-gopuram.jpg">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <!-- Gentle Romantic Snowfall Canvas -->
@@ -26,27 +40,40 @@
        1. Tamil Architecture Gopuram Split Doors Opening
        ========================================================================== -->
   <div id="temple-door-curtain" class="temple-entrance-curtain">
-    
-    <div class="gopuram-split-doors-wrapper">
-      
-      <!-- Left Half of Gopuram -->
-      <div class="gopuram-door-half gopuram-door-left"></div>
 
-      <!-- Right Half of Gopuram -->
-      <div class="gopuram-door-half gopuram-door-right"></div>
+    <div class="gopuram-split-doors-wrapper">
+      <div class="gopuram-image-layer" aria-hidden="true"></div>
+
+      <!-- Left Half of Gopuram (Bride side) -->
+      <div class="gopuram-door-half gopuram-door-left">
+        <div class="gopuram-name-panel gopuram-name-bride">
+          <span class="gopuram-name-role">Bride</span>
+          <span class="gopuram-name-text">Abu</span>
+          <span class="gopuram-name-city">Thoothukudi</span>
+        </div>
+      </div>
+
+      <!-- Right Half of Gopuram (Groom side) -->
+      <div class="gopuram-door-half gopuram-door-right">
+        <div class="gopuram-name-panel gopuram-name-groom">
+          <span class="gopuram-name-role">Groom</span>
+          <span class="gopuram-name-text">Sachin</span>
+          <span class="gopuram-name-city">Chennai</span>
+        </div>
+      </div>
 
       <!-- Center Call to Action Overlay -->
       <div class="gopuram-cta-overlay">
-        <p class="gopuram-badge-label">திருமணம் · Tamil Heritage</p>
-        <h1 class="gopuram-couple-names">Abu & Sachin</h1>
-        
+        <p class="gopuram-badge-label">திருமணம் · A wedding invitation</p>
+        <h1 class="gopuram-couple-names">Abu <span>&amp;</span> Sachin</h1>
         <div class="gopuram-cities-tag">
           <span>Thoothukudi ⇄ Chennai · 11-Year Journey</span>
         </div>
-
-        <button id="open-doors-btn" class="btn-open-gopuram" aria-label="Open Temple Gates and Enter Wedding Celebration">
-          <span>🔔</span>
-          <span>Open Temple Gates & Enter Celebration</span>
+        <button id="open-doors-btn" class="btn-open-gopuram"
+          aria-label="Open Temple Gates and Enter Wedding Celebration">
+          <span>Enter</span>
+          <span>the</span>
+          <span>celebration</span>
         </button>
       </div>
 
@@ -59,18 +86,18 @@
        ========================================================================== -->
   <header class="site-header">
     <div class="nav-floating-pill">
-      
+
       <a href="#hero" class="nav-brand-link">
         <div class="nav-crest">A&S</div>
         <span class="nav-names">Abu & Sachin</span>
       </a>
 
       <nav>
-        <ul class="site-nav-menu">
+        <ul class="site-nav-menu" id="site-nav-menu">
           <li><a href="#hero">Invitation</a></li>
           <li><a href="#timeline-journey">Pearl Express (11 Yrs)</a></li>
           <li><a href="#celebration-wheel-section">Celebration Wheel</a></li>
-          <li><a href="#rsvp-section">RSVP</a></li>
+          <li class="nav-item-rsvp"><a href="#rsvp-section">RSVP</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#travel-transit">Travel & Stays</a></li>
           <li><a href="#iconic-places">Iconic Places</a></li>
@@ -79,8 +106,11 @@
 
       <div class="nav-actions">
         <a href="#rsvp-section" id="nav-rsvp-btn" class="btn-nav-rsvp">RSVP</a>
-        <button id="revisit-doors-btn" class="btn-nav-temple" title="View Temple Opening">Temple Gate</button>
-        <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu">☰</button>
+        <button id="revisit-doors-btn" class="btn-nav-temple" title="View Temple Opening" aria-label="View temple gate opening">
+          <span aria-hidden="true">🛕</span><span class="btn-nav-temple-text">Temple Gate</span>
+        </button>
+        <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu"
+          aria-controls="site-nav-menu" aria-expanded="false">☰</button>
       </div>
 
     </div>
@@ -92,7 +122,7 @@
   <main>
     <section id="hero" class="hero-wedding-section">
       <div class="hero-content">
-        
+
         <div class="festive-sub-badge">
           <span>❄️</span>
           <span>11-Year Journey · Winter Wedding Celebration</span>
@@ -113,7 +143,8 @@
         <!-- Couple's Concise Quote -->
         <div class="hero-quote-box">
           <p class="hero-quote-text">
-            "From KCG College corridors to rainy Chennai movie dates watching OK Kanmani, and across snowy Toronto winters... 11 years, two coastal souls, and one eternal love story."
+            "From KCG College corridors to Chennai movie dates watching OK Kanmani, and across snowy Toronto winters...
+            11 years, two coastal souls, and one eternal love story."
           </p>
           <p class="hero-quote-caption">
             — Together with our families, we invite you to celebrate with us
@@ -158,7 +189,7 @@
          ========================================================================== -->
     <section id="timeline-journey" class="timeline-scroll-section">
       <div class="timeline-sticky-wrapper">
-        
+
         <!-- Train Header -->
         <div class="timeline-header-bar">
           <div class="train-title-cluster">
@@ -179,11 +210,12 @@
         <!-- Horizontal Track with Authentic Lengthed Train Coaches -->
         <div class="train-coaches-viewport">
           <div class="train-coaches-track">
-            
+
             <!-- Locomotive Engine -->
             <div class="train-locomotive">
               <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.75rem; background: #E11D48; padding: 2px 8px; border-radius: 4px; font-weight: 700;">WAP-7</span>
+                <span
+                  style="font-size: 0.75rem; background: #E11D48; padding: 2px 8px; border-radius: 4px; font-weight: 700;">WAP-7</span>
                 <span style="font-size: 0.75rem; color: #93C5FD;">SOUTHERN RAILWAY</span>
               </div>
               <div class="locomotive-headlight"></div>
@@ -218,9 +250,15 @@
                 </div>
               </div>
               <div class="coach-undercarriage">
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
                 <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
               </div>
             </article>
 
@@ -235,18 +273,24 @@
               </div>
               <div class="coach-windows-strip">
                 <div class="coach-panoramic-window">
-                  <img src="images/ok-kanmani-cassette.jfif" alt="OK Kanmani Date Cassette and Chennai Rain" loading="lazy">
+                  <img src="images/ok-kanmani-cassette.jpg" alt="OK Kanmani date cassette" loading="lazy">
                 </div>
                 <div class="coach-milestone-brief">
                   <div class="coach-year-badge">2015</div>
                   <h3 class="coach-title-clean">First Movie Date (OK Kanmani)</h3>
-                  <p class="coach-sub-clean">Satyam Cinemas, Mental Manadhil & rainy Chennai streets.</p>
+                  <p class="coach-sub-clean">Satyam Cinemas, Mental Manadhil & Chennai evenings.</p>
                 </div>
               </div>
               <div class="coach-undercarriage">
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
                 <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
               </div>
             </article>
 
@@ -270,9 +314,15 @@
                 </div>
               </div>
               <div class="coach-undercarriage">
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
                 <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
               </div>
             </article>
 
@@ -296,9 +346,15 @@
                 </div>
               </div>
               <div class="coach-undercarriage">
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
                 <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
               </div>
             </article>
 
@@ -322,9 +378,15 @@
                 </div>
               </div>
               <div class="coach-undercarriage">
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
                 <div style="font-size: 0.7rem; color: #64748B;">INDIAN RAILWAYS · 12693</div>
-                <div class="bogie-set"><div class="train-wheel"></div><div class="train-wheel"></div></div>
+                <div class="bogie-set">
+                  <div class="train-wheel"></div>
+                  <div class="train-wheel"></div>
+                </div>
               </div>
             </article>
 
@@ -365,86 +427,112 @@
         <span class="section-pretitle">Ceremonies & Venues</span>
         <h2 class="section-title">Celebration Schedule</h2>
         <p class="section-desc">
-          Interactive rotating wheel. Click any section to open the Google Maps venue location.
+          Tap any section of the wheel, or a venue below, to open it in Google Maps.
         </p>
       </div>
 
       <!-- The Grand 5-Section Rotating Spin Wheel -->
       <div class="wheel-container-wrapper">
         <div id="celebration-wheel" class="celebration-wheel-outer">
-          
+
           <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
             <!-- 5 Segments (72 degrees each) -->
             <!-- Segment 1: Dec 5 09:30 AM · Haldi (Thoothukudi) -->
-            <g class="wheel-segment" 
-               data-title="Dec 5 · Haldi Ceremony (09:30 AM)" 
-               data-venue="Pearl Beach Greens, Thoothukudi" 
-               data-map="https://maps.google.com/?q=Pearl+Beach+Thoothukudi">
+            <g class="wheel-segment" data-title="Dec 5 · Haldi Ceremony (09:30 AM)"
+              data-venue="Pearl Beach Greens, Thoothukudi"
+              data-map="https://maps.google.com/?q=Pearl+Beach+Thoothukudi">
               <path d="M 250 250 L 250 10 A 240 240 0 0 1 478.25 175.91 Z" fill="#0284C7" />
-              <text x="345" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(36, 345, 125)">
+              <text x="345" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                transform="rotate(36, 345, 125)">
                 DEC 5 · 09:30 AM
               </text>
-              <text x="345" y="142" fill="#E0F2FE" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(36, 345, 142)">
+              <text x="345" y="142" fill="#E0F2FE" font-size="11" font-weight="600" text-anchor="middle"
+                transform="rotate(36, 345, 142)">
                 Haldi · Thoothukudi
               </text>
             </g>
 
             <!-- Segment 2: Dec 5 06:30 PM · Sangeet (Regency Tuticorin) -->
-            <g class="wheel-segment" 
-               data-title="Dec 5 · Sangeet & Musical Night (06:30 PM)" 
-               data-venue="Regency Tuticorin by GRT Hotels" 
-               data-map="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels">
+            <g class="wheel-segment" data-title="Dec 5 · Sangeet & Musical Night (06:30 PM)"
+              data-venue="Regency Tuticorin by GRT Hotels"
+              data-map="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels">
               <path d="M 250 250 L 478.25 175.91 A 240 240 0 0 1 391.07 444.09 Z" fill="#8B1E28" />
-              <text x="390" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(108, 390, 310)">
+              <text x="390" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                transform="rotate(108, 390, 310)">
                 DEC 5 · 06:30 PM
               </text>
-              <text x="390" y="327" fill="#FECACA" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(108, 390, 327)">
+              <text x="390" y="327" fill="#FECACA" font-size="11" font-weight="600" text-anchor="middle"
+                transform="rotate(108, 390, 327)">
                 Sangeet · GRT Regency
               </text>
             </g>
 
             <!-- Segment 3: Dec 6 09:45 AM · Wedding Tradition 1 (Thoothukudi) -->
-            <g class="wheel-segment" 
-               data-title="Dec 6 · Wedding Tradition 1 (09:45 AM Muhurtham)" 
-               data-venue="Sea-Breeze Mandapam, Thoothukudi" 
-               data-map="https://maps.google.com/?q=Thoothukudi+Beach+Road">
+            <g class="wheel-segment" data-title="Dec 6 · Wedding Tradition 1 (09:45 AM Muhurtham)"
+              data-venue="Sea-Breeze Mandapam, Thoothukudi"
+              data-map="https://maps.google.com/?q=Thoothukudi+Beach+Road">
               <path d="M 250 250 L 391.07 444.09 A 240 240 0 0 1 108.93 444.09 Z" fill="#C59B27" />
-              <text x="250" y="415" fill="#1E293B" font-size="12" font-weight="800" text-anchor="middle" transform="rotate(180, 250, 415)">
+              <text x="250" y="415" fill="#1E293B" font-size="12" font-weight="800" text-anchor="middle"
+                transform="rotate(180, 250, 415)">
                 DEC 6 · 09:45 AM MUHURTHAM
               </text>
-              <text x="250" y="432" fill="#334155" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(180, 250, 432)">
+              <text x="250" y="432" fill="#334155" font-size="11" font-weight="700" text-anchor="middle"
+                transform="rotate(180, 250, 432)">
                 Wedding 1 · Thoothukudi
               </text>
             </g>
 
             <!-- Segment 4: Dec 10 08:15 AM · Wedding Tradition 2 (Mylapore Chennai) -->
-            <g class="wheel-segment" 
-               data-title="Dec 10 · Wedding Tradition 2 (08:15 AM Muhurtham)" 
-               data-venue="Sri Kapaleeshwarar Heritage Hall, Mylapore" 
-               data-map="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai">
+            <g class="wheel-segment" data-title="Dec 10 · Wedding Tradition 2 (08:15 AM Muhurtham)"
+              data-venue="Sri Kapaleeshwarar Heritage Hall, Mylapore"
+              data-map="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai">
               <path d="M 250 250 L 108.93 444.09 A 240 240 0 0 1 21.75 175.91 Z" fill="#0D4E5B" />
-              <text x="110" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-108, 110, 310)">
+              <text x="110" y="310" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                transform="rotate(-108, 110, 310)">
                 DEC 10 · 08:15 AM MUHURTHAM
               </text>
-              <text x="110" y="327" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(-108, 110, 327)">
+              <text x="110" y="327" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle"
+                transform="rotate(-108, 110, 327)">
                 Wedding 2 · Mylapore Chennai
               </text>
             </g>
 
             <!-- Segment 5: Dec 11 06:30 PM · Grand Reception (The Leela Palace Chennai) -->
-            <g class="wheel-segment" 
-               data-title="Dec 11 · Grand Reception (06:30 PM)" 
-               data-venue="The Leela Palace Chennai, MRC Nagar" 
-               data-map="https://maps.google.com/?q=The+Leela+Palace+Chennai">
+            <g class="wheel-segment" data-title="Dec 11 · Grand Reception (06:30 PM)"
+              data-venue="The Leela Palace Chennai, MRC Nagar"
+              data-map="https://maps.google.com/?q=The+Leela+Palace+Chennai">
               <path d="M 250 250 L 21.75 175.91 A 240 240 0 0 1 250 10 Z" fill="#9B1B30" />
-              <text x="155" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-36, 155, 125)">
+              <text x="155" y="125" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                transform="rotate(-36, 155, 125)">
                 DEC 11 · 06:30 PM
               </text>
-              <text x="155" y="142" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(-36, 155, 142)">
+              <text x="155" y="142" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle"
+                transform="rotate(-36, 155, 142)">
                 Grand Reception · The Leela
               </text>
             </g>
           </svg>
+
+          <div class="wheel-segment-label label-hal" aria-hidden="true">
+            <strong>Dec 5 · 09:30 AM</strong>
+            <span>Haldi · Thoothukudi</span>
+          </div>
+          <div class="wheel-segment-label label-sangeet" aria-hidden="true">
+            <strong>Dec 5 · 06:30 PM</strong>
+            <span>Sangeet · GRT Regency</span>
+          </div>
+          <div class="wheel-segment-label label-wedding-one" aria-hidden="true">
+            <strong>Dec 6 · 09:45 AM</strong>
+            <span>Wedding · Thoothukudi</span>
+          </div>
+          <div class="wheel-segment-label label-wedding-two" aria-hidden="true">
+            <strong>Dec 10 · 08:15 AM</strong>
+            <span>Wedding · Mylapore</span>
+          </div>
+          <div class="wheel-segment-label label-reception" aria-hidden="true">
+            <strong>Dec 11 · 06:30 PM</strong>
+            <span>Reception · The Leela</span>
+          </div>
 
           <!-- Center Frosted Hub -->
           <div class="wheel-center-hub">
@@ -456,19 +544,24 @@
 
         <!-- Quick Access Venue Pills below wheel -->
         <div class="wheel-quick-pills">
-          <a href="https://maps.google.com/?q=Pearl+Beach+Thoothukudi" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+          <a href="https://maps.google.com/?q=Pearl+Beach+Thoothukudi" target="_blank" rel="noopener noreferrer"
+            class="wheel-pill-link">
             <span>🗺️</span> <strong>Dec 5:</strong> Haldi (Thoothukudi)
           </a>
-          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer"
+            class="wheel-pill-link">
             <span>🗺️</span> <strong>Dec 5:</strong> Sangeet (GRT Regency)
           </a>
-          <a href="https://maps.google.com/?q=Thoothukudi+Beach+Road" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+          <a href="https://maps.google.com/?q=Thoothukudi+Beach+Road" target="_blank" rel="noopener noreferrer"
+            class="wheel-pill-link">
             <span>🗺️</span> <strong>Dec 6:</strong> Wedding Tradition 1 (Thoothukudi)
           </a>
-          <a href="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+          <a href="https://maps.google.com/?q=Kapaleeshwarar+Temple+Mylapore+Chennai" target="_blank"
+            rel="noopener noreferrer" class="wheel-pill-link">
             <span>🗺️</span> <strong>Dec 10:</strong> Wedding Tradition 2 (Mylapore)
           </a>
-          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="wheel-pill-link">
+          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer"
+            class="wheel-pill-link">
             <span>🗺️</span> <strong>Dec 11:</strong> Reception (The Leela Palace)
           </a>
         </div>
@@ -481,7 +574,7 @@
          ========================================================================== -->
     <section id="rsvp-section" class="section-wrapper">
       <div class="rsvp-section-box">
-        
+
         <div class="rsvp-header-proclamation">
           <span class="section-pretitle">Your Presence Is Our Blessing</span>
           <h2 class="section-title">Personalized RSVP</h2>
@@ -492,7 +585,7 @@
 
         <form id="wedding-rsvp-form">
           <div class="rsvp-form-grid">
-            
+
             <!-- Guest / Family Name -->
             <div class="form-group">
               <label for="rsvp-guest-name" class="form-label">Guest / Family Name * (e.g., "Sai and his family")</label>
@@ -542,8 +635,17 @@
             <!-- Message / Wishes -->
             <div class="form-group">
               <label for="rsvp-wishes" class="form-label">Wishes for Abu & Sachin (Optional)</label>
-              <textarea id="rsvp-wishes" class="form-textarea" rows="2" placeholder="Write a wish for the couple..."></textarea>
+              <textarea id="rsvp-wishes" class="form-textarea" rows="2"
+                placeholder="Write a wish for the couple..."></textarea>
             </div>
+
+            <!-- Hidden from people; bots that fill it are ignored -->
+            <div class="rsvp-honeypot" aria-hidden="true">
+              <label for="rsvp-website">Website</label>
+              <input type="text" id="rsvp-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <p id="rsvp-form-error" class="rsvp-form-error" role="alert" hidden></p>
 
             <!-- Submit Button -->
             <button type="submit" id="submit-rsvp-btn" class="btn-submit-rsvp">
@@ -552,12 +654,6 @@
 
           </div>
         </form>
-
-        <div class="rsvp-organizer-link-wrap">
-          <button id="open-organizer-view-btn" class="btn-organizer-view">
-            Organizer View & Export Guest List (.CSV)
-          </button>
-        </div>
 
       </div>
     </section>
@@ -569,11 +665,11 @@
       <div class="section-title-cluster">
         <span class="section-pretitle">Memories</span>
         <h2 class="section-title">Couples Gallery</h2>
-        <p class="section-desc">Tap on any memory or upload your photo in the empty slots.</p>
+        <p class="section-desc">Tap on any memory to view it larger.</p>
       </div>
 
       <div class="gallery-grid">
-        
+
         <div class="gallery-card">
           <div class="gallery-img-wrap">
             <img src="images/couple-wedding.jpg" alt="Abu and Sachin Wedding Traditional Attire" loading="lazy">
@@ -624,22 +720,6 @@
           </div>
         </div>
 
-        <!-- Empty Slot 1 -->
-        <div class="gallery-card gallery-empty-slot" data-slot-id="slot_haldi">
-          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo">
-          <span style="font-size: 2rem; margin-bottom: 8px;">📸</span>
-          <strong style="font-size: 0.95rem; color: var(--text-primary);">Haldi Memory Slot</strong>
-          <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Click to upload a memory</span>
-        </div>
-
-        <!-- Empty Slot 2 -->
-        <div class="gallery-card gallery-empty-slot" data-slot-id="slot_reception">
-          <input type="file" accept="image/*" class="gallery-upload-input" title="Upload Photo">
-          <span style="font-size: 2rem; margin-bottom: 8px;">✨</span>
-          <strong style="font-size: 0.95rem; color: var(--text-primary);">Reception Slot</strong>
-          <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Click to upload a memory</span>
-        </div>
-
       </div>
     </section>
 
@@ -687,7 +767,8 @@
             <h4 class="hotel-name">Regency Tuticorin by GRT Hotels</h4>
             <p class="hotel-location">Thoothukudi · Sangeet Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
+          <a href="https://maps.google.com/?q=Regency+Tuticorin+by+GRT+Hotels" target="_blank" rel="noopener noreferrer"
+            class="btn-hotel-map">View on Maps</a>
         </div>
 
         <div class="hotel-card">
@@ -695,7 +776,8 @@
             <h4 class="hotel-name">Hotel DSF Grand Plaza</h4>
             <p class="hotel-location">Thoothukudi · Town Center</p>
           </div>
-          <a href="https://maps.google.com/?q=Hotel+DSF+Grand+Plaza+Tuticorin" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
+          <a href="https://maps.google.com/?q=Hotel+DSF+Grand+Plaza+Tuticorin" target="_blank" rel="noopener noreferrer"
+            class="btn-hotel-map">View on Maps</a>
         </div>
 
         <div class="hotel-card">
@@ -703,7 +785,8 @@
             <h4 class="hotel-name">The Leela Palace Chennai</h4>
             <p class="hotel-location">MRC Nagar · Reception Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
+          <a href="https://maps.google.com/?q=The+Leela+Palace+Chennai" target="_blank" rel="noopener noreferrer"
+            class="btn-hotel-map">View on Maps</a>
         </div>
 
         <div class="hotel-card">
@@ -711,7 +794,8 @@
             <h4 class="hotel-name">Somerset Greenways Chennai</h4>
             <p class="hotel-location">MRC Nagar · Near Venue</p>
           </div>
-          <a href="https://maps.google.com/?q=Somerset+Greenways+Chennai" target="_blank" rel="noopener noreferrer" class="btn-hotel-map">View on Maps</a>
+          <a href="https://maps.google.com/?q=Somerset+Greenways+Chennai" target="_blank" rel="noopener noreferrer"
+            class="btn-hotel-map">View on Maps</a>
         </div>
       </div>
     </section>
@@ -775,27 +859,48 @@
   </main>
 
   <!-- ==========================================================================
-       10. Floating Cassette Player & Monsoon Rain Atmosphere
+       10. Floating Music Player
        ========================================================================== -->
   <aside class="floating-cassette-widget widget-minimized">
     <div class="cassette-deck-card">
+
+      <!-- Tape body with dual rotating reels -->
       <div class="cassette-tape-body">
         <div class="cassette-tape-label">
-          <span>O KADHAL KANMANI</span>
-          <span>A.R. RAHMAN</span>
+          <span>OUR SOUNDTRACK</span>
+          <span>ABU &amp; SACHIN</span>
         </div>
         <div class="cassette-window">
-          <div class="cassette-reel"></div>
-          <div style="font-size: 0.65rem; color: #FFF; font-family: monospace;">11-YRS</div>
-          <div class="cassette-reel"></div>
+          <!-- Left Reel -->
+          <div class="cassette-reel-assembly">
+            <div class="cassette-reel reel-outer">
+              <div class="reel-inner">
+                <div class="reel-hub"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Center label -->
+          <div class="cassette-center-label">
+            <span>A&amp;S</span>
+          </div>
+          <!-- Right Reel -->
+          <div class="cassette-reel-assembly">
+            <div class="cassette-reel reel-outer">
+              <div class="reel-inner">
+                <div class="reel-hub"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Track Info -->
       <div class="cassette-track-info">
         <h4 id="cassette-track-title" class="cassette-title">Mental Manadhil</h4>
-        <span id="cassette-track-film" class="cassette-film">O Kadhal Kanmani</span>
+        <span id="cassette-track-film" class="cassette-film">A little music for our story</span>
       </div>
 
+      <!-- Controls -->
       <div class="cassette-controls">
         <button id="cassette-prev" class="deck-btn" aria-label="Previous Track">⏮</button>
         <button id="cassette-play-toggle" class="deck-btn deck-btn-play" aria-label="Play or Pause">
@@ -804,33 +909,36 @@
         <button id="cassette-next" class="deck-btn" aria-label="Next Track">⏭</button>
       </div>
 
+      <!-- EQ Bars -->
       <div class="audio-equalizer-bars">
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
+        <div class="eq-bar"></div>
       </div>
 
-      <div class="rain-atmosphere-control">
-        <button id="rain-atmosphere-toggle" class="btn-toggle-rain">
-          🌧️ <span id="rain-toggle-status">Chennai Monsoon Rain (Toggle)</span>
-        </button>
-        <div class="volume-row">
-          <span>Rain:</span>
-          <input type="range" id="rain-volume-slider" min="0" max="1" step="0.05" value="0.45" aria-label="Rain volume">
-        </div>
-        <div class="volume-row">
-          <span>Music:</span>
-          <input type="range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.65" aria-label="Music volume">
-        </div>
+      <!-- Music Volume only -->
+      <div class="cassette-volume-row">
+        <span class="vol-label">♪</span>
+        <input type="range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.65" aria-label="Music volume">
       </div>
+
     </div>
 
-    <button id="cassette-toggle-widget" class="cassette-toggle-pill" aria-label="Toggle Cassette Player">
-      <span>📼</span>
-      <span>OK Kanmani Jukebox</span>
-    </button>
+    <div class="cassette-quick-actions">
+      <button id="cassette-toggle-widget" class="cassette-toggle-pill" aria-label="Toggle Cassette Player"
+        aria-expanded="false">
+        <span aria-hidden="true">♫</span>
+        <span class="pill-text">Our soundtrack</span>
+      </button>
+      <button id="quick-soundtrack-toggle" class="quick-soundtrack-toggle" aria-label="Play music">
+        <span id="quick-soundtrack-icon" aria-hidden="true">▶</span>
+        <span id="quick-soundtrack-label" class="pill-text">Play</span>
+      </button>
+    </div>
   </aside>
 
   <!-- ==========================================================================
@@ -848,84 +956,35 @@
       </div>
 
       <div class="confirm-events-box">
-        <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Selected Ceremonies:</p>
+        <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Selected
+          Ceremonies:</p>
         <ul id="confirm-events-list" class="confirm-events-list"></ul>
         <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
-          Guests: <span id="confirm-headcount" style="font-weight: 700; color: var(--text-primary);">2 Guests (Approx)</span>
+          Guests: <span id="confirm-headcount" style="font-weight: 700; color: var(--text-primary);">2 Guests
+            (Approx)</span>
         </p>
       </div>
 
-      <button id="close-confirm-modal-btn" class="btn-primary-festive" style="width: 100%; border: none; cursor: pointer; margin-top: 10px;">
+      <button id="close-confirm-modal-btn" class="btn-primary-festive"
+        style="width: 100%; border: none; cursor: pointer; margin-top: 10px;">
         Return to Celebration
       </button>
     </div>
   </div>
 
   <!-- ==========================================================================
-       12. Organizer View Modal & CSV Export
-       ========================================================================== -->
-  <div id="organizer-modal" class="custom-modal-backdrop" role="dialog" aria-modal="true">
-    <div class="organizer-modal-content">
-      <div class="organizer-modal-header">
-        <div>
-          <h3 style="font-family: var(--font-hero); font-size: 1.3rem; color: var(--royal-maroon);">RSVP Guest List</h3>
-          <span style="font-size: 0.78rem; color: var(--text-muted);">Abu & Sachin Wedding Dashboard</span>
-        </div>
-        <button id="close-organizer-modal-btn" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer;">✕</button>
-      </div>
-
-      <div class="organizer-stats-bar">
-        <div class="stat-pill">
-          <div id="org-count-total" class="stat-num">0</div>
-          <div class="stat-title">Submissions</div>
-        </div>
-        <div class="stat-pill">
-          <div id="org-count-guests" class="stat-num">0</div>
-          <div class="stat-title">Estimated Guests</div>
-        </div>
-      </div>
-
-      <div class="organizer-table-wrap">
-        <table class="organizer-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Guest / Family</th>
-              <th>Ceremonies</th>
-              <th>People (Approx)</th>
-              <th>Wishes</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody id="organizer-table-body"></tbody>
-        </table>
-      </div>
-
-      <div class="organizer-modal-footer">
-        <div style="display: flex; gap: 8px;">
-          <button id="add-sample-rsvp-btn" class="btn-secondary-snow" style="font-size: 0.8rem; padding: 6px 14px;">+ Sample RSVP</button>
-          <button id="clear-all-rsvps-btn" class="btn-secondary-snow" style="font-size: 0.8rem; padding: 6px 14px; color: #DC2626;">Clear List</button>
-        </div>
-        <button id="export-csv-btn" class="btn-primary-festive" style="font-size: 0.85rem; padding: 8px 20px; border: none; cursor: pointer;">
-          Export to CSV (.csv)
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       13. Lightbox
+       12. Lightbox
        ========================================================================== -->
   <div id="gallery-lightbox" class="gallery-lightbox-modal" role="dialog" aria-modal="true">
     <button id="lightbox-close-btn" class="lightbox-close" aria-label="Close Lightbox">✕</button>
     <div class="lightbox-image-wrap">
-      <img id="lightbox-img" src="" alt="Abu and Sachin Wedding Moment">
+      <img id="lightbox-img" alt="Abu and Sachin Wedding Moment">
     </div>
     <div id="lightbox-caption" class="lightbox-caption-text"></div>
   </div>
 
   <!-- ==========================================================================
-       14. Footer
+       13. Footer
        ========================================================================== -->
   <footer class="site-footer">
     <p class="footer-family-invitation">
@@ -940,6 +999,8 @@
   </footer>
 
   <!-- Scripts -->
+  <!-- Generated from environment variables: node scripts/build-config.mjs -->
+  <script src="js/config.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/snow.js"></script>
   <script src="js/timeline.js"></script>
@@ -948,4 +1009,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>
