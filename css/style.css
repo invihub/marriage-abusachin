@@ -257,29 +257,6 @@ body {
   margin-bottom: 24px;
 }
 
-.btn-open-gopuram {
-  background: linear-gradient(135deg, var(--wedding-gold) 0%, #E67E22 100%);
-  color: #111;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  padding: 16px 36px;
-  border: 2px solid #FFF;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(243, 202, 101, 0.5);
-  transition: var(--transition-smooth);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-open-gopuram:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(243, 202, 101, 0.8);
-  background: linear-gradient(135deg, #FFD54F 0%, #D4AF37 100%);
-}
-
 /* ==========================================================================
    2. Sleek Floating Frosted Navigation Bar
    ========================================================================== */
@@ -1178,7 +1155,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 16px;
+  padding: 10px;
   pointer-events: none;
   z-index: 5;
 }
@@ -2191,11 +2168,6 @@ body {
     padding: 20px 16px;
     max-width: 96%;
   }
-
-  .btn-open-gopuram {
-    font-size: 1rem;
-    padding: 12px 24px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -2309,27 +2281,24 @@ body {
 }
 
 .temple-entrance-curtain {
-  background:
-    radial-gradient(circle at 50% 18%, rgba(130, 190, 222, .42), transparent 48%),
-    linear-gradient(135deg, rgba(201, 229, 241, .78), rgba(160, 205, 226, .62));
-  backdrop-filter: blur(10px) saturate(.92);
-  -webkit-backdrop-filter: blur(10px) saturate(.92);
-  transition: opacity .85s cubic-bezier(.77, 0, .175, 1), visibility 0s linear .85s;
+  /* sky -> paving colours of the gopuram photo, behind it while it loads */
+  background: linear-gradient(180deg, #5e9acc 0%, #a9c7dc 60%, #9a908b 100%);
+  /* coming back (Temple Gate button): visible at once, then fade in */
+  transition: opacity .85s cubic-bezier(.77, 0, .175, 1), visibility 0s linear 0s;
 }
 
+/* opening: fade out first, then hide */
 .temple-entrance-curtain.doors-opened {
+  background: transparent;
   transition: opacity .85s cubic-bezier(.77, 0, .175, 1), visibility 0s linear .85s;
 }
 
 .gopuram-split-doors-wrapper {
-  width: min(100%, calc(100vh * .5625));
-  width: min(100%, calc(100dvh * .5625));
-  height: 100vh;
-  height: 100dvh;
-  aspect-ratio: 9 / 16;
+  width: 100%;
+  height: 100%;
   border: 0;
   border-radius: 0;
-  box-shadow: 0 24px 70px rgba(35, 78, 96, .22);
+  box-shadow: none;
   background: transparent;
   isolation: isolate;
 }
@@ -2338,7 +2307,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: linear-gradient(180deg, rgba(21, 68, 82, .04) 20%, rgba(21, 68, 82, .2) 100%), url('../images/temple-gopuram.jpg');
+  background-image: linear-gradient(180deg, rgba(21, 68, 82, .04) 20%, rgba(21, 68, 82, .2) 100%), url('../images/temple-gopuram-landscape.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%, cover;
   background-position: center, center;
@@ -2374,7 +2343,7 @@ body {
   inset: 0;
   z-index: 0;
   width: 200%;
-  background-image: url('../images/temple-gopuram.jpg');
+  background-image: url('../images/temple-gopuram-landscape.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -2450,7 +2419,7 @@ body {
 
 .gopuram-badge-label {
   position: absolute;
-  top: 5%;
+  top: 3%;
   left: 50%;
   width: 92%;
   transform: translateX(-50%);
@@ -2466,7 +2435,7 @@ body {
 
 .gopuram-cities-tag {
   position: absolute;
-  bottom: 95%;
+  bottom: 97%;
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
@@ -2479,43 +2448,6 @@ body {
   font-size: clamp(.68rem, .9vw, .82rem);
   text-align: center;
   text-shadow: 0 1px 4px rgba(0, 0, 0, .35);
-}
-
-.btn-open-gopuram {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(80px, 20%, 130px);
-  height: clamp(100px, 18vh, 184px);
-  padding: 26px 10px 10px;
-  border: 1px solid rgba(7, 65, 80, 0.9);
-  border-radius: 50% 50% 10px 10px / 34% 34% 10px 10px;
-  background: linear-gradient(145deg, #5f8793 0%, #395d69 48%, #254651 100%);
-  color: #eef8fa;
-  box-shadow: 0 10px 24px rgba(20, 54, 66, .38), inset 0 1px rgba(240, 251, 252, .24);
-  font-size: .9rem;
-  font-family: var(--font-serif);
-  font-weight: 700;
-  line-height: 1.05;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  white-space: normal;
-}
-
-.btn-open-gopuram:hover,
-.btn-open-gopuram:focus-visible {
-  transform: translate(-50%, calc(-50% - 2px));
-}
-
-.btn-open-gopuram:active,
-.doors-opened .btn-open-gopuram {
-  background: linear-gradient(145deg, #87afba 0%, #527987 52%, #335b68 100%);
-  box-shadow: 0 0 0 5px rgba(172, 216, 226, .2), 0 0 32px rgba(150, 205, 218, .72), inset 0 1px rgba(255, 255, 255, .34);
 }
 
 .hero-wedding-section {
@@ -2694,22 +2626,12 @@ body {
   }
 
   .gopuram-badge-label {
-    top: 4%;
+    top: 3%;
   }
 
   .gopuram-cities-tag {
-    bottom: max(1.3%, env(safe-area-inset-bottom));
+    bottom: max(1.1%, env(safe-area-inset-bottom));
     font-size: .64rem;
-  }
-
-  .btn-open-gopuram {
-    top: 79%;
-    width: 29%;
-    min-width: 100px;
-    height: 15svh;
-    min-height: 104px;
-    max-height: 132px;
-    padding: 22px 8px 10px;
   }
 
   .hero-wedding-section {
@@ -2985,6 +2907,7 @@ body {
     line-height: 1.35;
   }
 }
+
 /* ============================================================================
    Mobile & performance pass
    - keeps content clear of the floating nav and music buttons
@@ -2999,7 +2922,6 @@ body {
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scrollbar-gutter: stable;
 }
 
 /* Page stays put behind the closed temple gate */
@@ -3068,6 +2990,7 @@ main>section[id] {
 }
 
 @media (max-width: 1180px) {
+
   /* solid: the bar's own blur stops a nested blur from working, so a
      translucent menu let the page text show through the links */
   .site-nav-menu {
@@ -3198,12 +3121,6 @@ main>section[id] {
     --header-space: 70px;
   }
 
-  /* gate image covers the whole screen, so the blur behind it is wasted work */
-  .temple-entrance-curtain {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
   /* nav: crest + names, RSVP, temple icon, menu */
   .site-header {
     top: 8px;
@@ -3256,52 +3173,68 @@ main>section[id] {
     right: 10px;
   }
 
-  /* timeline: tall coaches with a large photo instead of a thumbnail */
-  /* controls share the bottom row with the (compact) music buttons,
-     kept apart by the controls' right padding below */
+  /* timeline: long rectangular coaches like real rakes. Each coach is wider
+     than the screen: the photo window fills the screen first, and scrolling
+     on brings the rest of the coach (the story text) into view. The engine
+     has the same height so the train lines up. */
   .timeline-sticky-wrapper {
     padding-top: var(--header-space);
     padding-bottom: max(14px, env(safe-area-inset-bottom));
   }
 
+  .train-coaches-track {
+    gap: 14px;
+  }
+
+  .train-locomotive,
   .train-coach-item {
-    width: min(82vw, 340px);
-    height: auto;
-    /* leave room for the focused coach's 6px lift */
-    max-height: calc(100% - 16px);
+    /* taller on taller phones, always leaving room for the focused lift */
+    height: min(clamp(220px, 34svh, 300px), calc(100% - 16px));
+    max-height: none;
+  }
+
+  .train-locomotive {
+    width: min(78vw, 320px);
+  }
+
+  .train-coach-item {
+    /* photo window (~screen) + story text (~2/3 screen) */
+    width: calc(min(78vw, 340px) + min(66vw, 300px) + 34px);
   }
 
   .coach-windows-strip {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
-    gap: 10px;
+    gap: 14px;
     padding: 10px;
     min-height: 0;
   }
 
   .coach-panoramic-window {
-    width: 100%;
+    width: min(78vw, 340px);
     height: auto;
-    aspect-ratio: 16 / 10;
-    max-height: 28svh;
-    min-height: 90px;
-    flex-shrink: 1;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+    flex-shrink: 0;
   }
 
   .coach-milestone-brief {
-    flex: none;
+    flex: 1;
+    min-width: 0;
+    padding-right: 6px;
   }
 
   .coach-year-badge {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
   .coach-title-clean {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .coach-sub-clean {
-    font-size: .8rem;
+    font-size: .85rem;
   }
 
   .timeline-bottom-controls {
@@ -3365,10 +3298,6 @@ main>section[id] {
     font-size: 1.5rem !important;
   }
 
-  .coach-panoramic-window {
-    max-height: 21svh;
-  }
-
   .timeline-header-bar {
     gap: 4px;
   }
@@ -3380,8 +3309,9 @@ main>section[id] {
     display: none;
   }
 
-  .coach-panoramic-window {
-    min-height: 56px;
+  .train-locomotive,
+  .train-coach-item {
+    height: calc(100% - 12px);
   }
 }
 
@@ -3401,10 +3331,6 @@ main>section[id] {
   .btn-nav-rsvp:hover,
   .btn-submit-rsvp:hover {
     transform: none;
-  }
-
-  .btn-open-gopuram:hover {
-    transform: translate(-50%, -50%);
   }
 
   .gallery-card:hover .gallery-img-wrap img {
@@ -3431,3 +3357,511 @@ main>section[id] {
     animation: none !important;
   }
 }
+
+/* ---- Entrance gate on wide screens (16:9 photo) ----
+   The photo is shown at most at its real size (1376x768), never enlarged,
+   so it stays sharp. Any screen area around it is filled with a small,
+   pre-blurred copy of the same photo (temple-gopuram-desktop-blur.jpg). */
+@media (min-width: 601px) {
+  :root {
+    /* fit inside the screen, but never larger than the photo's 1376px */
+    --gate-photo-width: min(1376px, 100cqw, calc(100cqh * 1376 / 768));
+  }
+
+  .gopuram-image-layer {
+    background-image:
+      linear-gradient(180deg, rgba(21, 68, 82, .04) 20%, rgba(21, 68, 82, .2) 100%),
+      url('../images/temple-gopuram-desktop.jpg'),
+      url('../images/temple-gopuram-desktop-blur.jpg');
+    background-size: 100% 100%, var(--gate-photo-width) auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* each door half is 200% wide (the full screen), so the same layers line up */
+  .gopuram-door-half::before {
+    background-image:
+      url('../images/temple-gopuram-desktop.jpg'),
+      url('../images/temple-gopuram-desktop-blur.jpg');
+    background-size: var(--gate-photo-width) auto, cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* invitation line first, then the journey pill under it */
+  .gopuram-badge-label {
+    top: 1.5%;
+  }
+
+  .gopuram-cities-tag {
+    bottom: auto;
+    top: calc(2% + 2.4rem);
+  }
+}
+
+/* ============================================================================
+   Entrance: ring the temple bell
+   A brass bell hangs in the gopuram's real doorway. .gate-photo-frame is the
+   exact box the photo occupies on screen (phone: "cover", desktop: native
+   size), so the bell is positioned in photo coordinates and stays on the door
+   at every screen size. Ringing it (main.js) swings the bell, floods the
+   doorway with lamplight, then parts the doors.
+   ============================================================================ */
+.gopuram-split-doors-wrapper {
+  container-type: size;
+}
+
+/* ---- Heading: always at the top ---- */
+.gate-heading {
+  position: absolute;
+  z-index: 2;
+  top: max(calc(env(safe-area-inset-top) + 14px), calc(50% - var(--photo-h) / 2 + 18px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 640px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.gate-heading .gopuram-badge-label,
+.gate-heading .gopuram-cities-tag {
+  position: static;
+  transform: none;
+  inset: auto;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+}
+
+.gate-heading .gopuram-badge-label {
+  color: #e9f7fc;
+  font-size: clamp(.95rem, 2.4vw, 1.35rem);
+  letter-spacing: 1.8px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .55), 0 0 18px rgba(0, 30, 45, .5);
+}
+
+.gate-heading .gopuram-cities-tag {
+  padding: 4px 16px;
+  background: rgba(9, 38, 48, .22);
+  border: 1px solid rgba(234, 247, 250, .58);
+  border-radius: 999px;
+  color: #fdf6e3;
+  font-size: clamp(.72rem, 1.4vw, .85rem);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+}
+
+/* ---- Bride / groom panels: darker glass so names read over the carvings ---- */
+/* .gopuram-name-panel {
+  background: rgba(9, 38, 48, .55);
+  border: 1px solid rgba(243, 202, 101, .6);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.gopuram-name-role {
+  color: var(--gold-glow);
+} */
+
+.gopuram-name-panel {
+  background: rgba(118, 187, 206, 0.15);
+  border: 1px solid rgba(234, 247, 250, .58);
+  box-shadow: 0 12px 26px rgba(9, 36, 47, .22);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+/* bride & groom names */
+.gopuram-name-text {
+  color: #e1b136;
+}
+
+.gopuram-name-role {
+  color: #e9f7fc;
+}
+
+/* ---- Photo frame + doorway (percentages of the photo) ---- */
+.gopuram-cta-overlay {
+  /* phone: landscape photo (1200x896) covering the screen */
+  --photo-w: max(100cqw, calc(100cqh * 1200 / 896));
+  --photo-h: max(100cqh, calc(100cqw * 896 / 1200));
+  --door-left: 47.2%;
+  --door-top: 76.9%;
+  --door-w: 5.7%;
+  --door-h: 15.3%;
+}
+
+.gate-photo-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--photo-w);
+  height: var(--photo-h);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@media (min-width: 601px) {
+  .gopuram-cta-overlay {
+    /* desktop: 16:9 photo (1376x768) at native size, centred */
+    --photo-w: var(--gate-photo-width);
+    --photo-h: calc(var(--gate-photo-width) * 768 / 1376);
+    --door-left: 48.1%;
+    --door-top: 77.6%;
+    --door-w: 4%;
+    --door-h: 13.5%;
+  }
+}
+
+/* The button IS the doorway opening */
+.gate-bell-btn {
+  position: absolute;
+  left: var(--door-left);
+  top: var(--door-top);
+  width: var(--door-w);
+  height: var(--door-h);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gate-bell-btn:focus-visible {
+  outline: 2px solid var(--gold-glow);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* lamplight inside the doorway */
+.gate-door-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 72%, rgba(255, 214, 128, .55), rgba(255, 166, 60, .18) 60%, transparent 85%);
+  animation: gateGlow 2.8s ease-in-out infinite;
+  transition: box-shadow .5s ease, background .5s ease;
+}
+
+@keyframes gateGlow {
+
+  0%,
+  100% {
+    opacity: .65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* brass bell hanging from the lintel */
+.gate-bell {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(30px, 78%, 60px);
+  height: auto;
+  margin-left: calc(clamp(30px, 78%, 60px) / -2);
+  overflow: visible;
+  transform-origin: 50% 0;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .45)) drop-shadow(0 0 10px rgba(255, 200, 90, .45));
+  animation: bellIdle 3.2s ease-in-out infinite;
+}
+
+.gate-bell-clapper {
+  transform-origin: 30px 70px;
+  transform-box: view-box;
+}
+
+@keyframes bellIdle {
+
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.gate-bell-btn:hover .gate-bell {
+  animation-duration: 1.6s;
+}
+
+/* instruction, just above the doorway */
+.gate-hint {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 6px 14px;
+  background: rgba(132, 206, 226, 0.15);
+  border: 1px solid rgba(234, 247, 250, .58);
+  border-radius: 999px;
+  color: #e9c975;
+  font-family: var(--font-serif);
+  font-size: clamp(.78rem, 1.3vw, .9rem);
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-shadow: 0 1px 3px rgba(11, 57, 74, 0.6);
+  box-shadow: 0 8px 22px rgba(24, 79, 107, 0.28), inset 0 1px 0 rgba(255, 255, 255, .55);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  transition: opacity .3s ease;
+}
+
+/* ---- Ringing ---- */
+.bell-rung .gate-bell {
+  animation: bellRing .9s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.bell-rung .gate-bell-clapper {
+  animation: clapperRing .9s ease-in-out both;
+}
+
+.bell-rung .gate-door-glow {
+  animation: none;
+  opacity: 1;
+  background: radial-gradient(ellipse 90% 80% at 50% 60%, rgba(255, 240, 190, .95), rgba(255, 190, 80, .6) 55%, rgba(255, 160, 60, .2) 85%);
+  box-shadow: 0 0 60px 30px rgba(255, 200, 100, .55);
+}
+
+.bell-rung .gate-hint {
+  opacity: 0;
+}
+
+@keyframes bellRing {
+  0% {
+    transform: rotate(0);
+  }
+
+  15% {
+    transform: rotate(24deg);
+  }
+
+  35% {
+    transform: rotate(-20deg);
+  }
+
+  55% {
+    transform: rotate(13deg);
+  }
+
+  75% {
+    transform: rotate(-7deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes clapperRing {
+  0% {
+    transform: rotate(0);
+  }
+
+  20% {
+    transform: rotate(-26deg);
+  }
+
+  40% {
+    transform: rotate(22deg);
+  }
+
+  60% {
+    transform: rotate(-12deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gate-bell,
+  .gate-door-glow {
+    animation: none;
+  }
+}
+
+/* ---- Entrance heading on phones ----
+   The gopuram fills the width here, so: one-line heading pulled up into the
+   sky above the finials, and no journey pill (the name cards already show
+   Thoothukudi / Chennai, and the invitation repeats "11-Year Journey"). */
+@media (max-width: 600px) {
+  .gate-heading {
+    top: calc(env(safe-area-inset-top) + 10px);
+  }
+
+  .gate-heading .gopuram-badge-label {
+    font-size: clamp(.8rem, 4.1vw, 1.05rem);
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+  }
+
+  .gate-heading .gopuram-cities-tag {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   Celebration wheel: slow rotation
+   .wheel-rotor (segments + labels) turns once a minute; the centre hub stays
+   still. Each label is pinned to its segment's centre line and turns the
+   opposite way at the same speed, so it travels with its segment but always
+   stays upright and readable.
+   Label positions: segment centre angles are 36°, 108°, 180°, 252°, 324°
+   (clockwise from the top), at 34% of the wheel's width from the centre,
+   halfway between the hub and the rim:
+     left = 50% + 34% * sin(a),  top = 50% - 34% * cos(a)
+   ============================================================================ */
+.wheel-rotor {
+  position: absolute;
+  inset: 0;
+  animation: wheelTurn 60s linear infinite;
+}
+
+.wheel-rotor .celebration-wheel-svg {
+  display: block;
+}
+
+.wheel-segment-label {
+  width: 30%;
+  font-size: clamp(.55rem, 1.6vw, .8rem);
+  line-height: 1.25;
+  animation: wheelLabelUpright 60s linear infinite;
+}
+
+.wheel-segment-label strong {
+  white-space: nowrap;
+}
+
+.label-hal {
+  left: 70%;
+  top: 22.5%;
+}
+
+.label-sangeet {
+  left: 82.3%;
+  top: 60.5%;
+}
+
+.label-wedding-one {
+  left: 50%;
+  top: 84%;
+  bottom: auto;
+}
+
+.label-wedding-two {
+  left: 17.7%;
+  top: 60.5%;
+}
+
+.label-reception {
+  left: 30%;
+  top: 22.5%;
+}
+
+@keyframes wheelTurn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wheelLabelUpright {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* pause while a guest is pointing at / reading a segment.
+   Mouse only: on touch screens a tap leaves a "stuck" hover, which froze the
+   wheel after coming back from Google Maps. */
+@media (hover: hover) {
+
+  .celebration-wheel-outer:hover .wheel-rotor,
+  .celebration-wheel-outer:hover .wheel-segment-label,
+  .celebration-wheel-outer.wheel-paused .wheel-rotor,
+  .celebration-wheel-outer.wheel-paused .wheel-segment-label {
+    animation-play-state: paused;
+  }
+}
+
+/* Phones: the ring between hub and rim is only ~95px deep, so a smaller
+   hub, smaller text, and the venue line may wrap under the date */
+@media (max-width: 600px) {
+  .celebration-wheel-outer {
+    /* HOW FAR THE LABELS SIT FROM THE CENTRE, as a % of the wheel's width.
+       Bigger = closer to the outer edge, smaller = closer to the hub.
+       Was 34 (halfway); 29 moves every label 5% inwards. Hub edge is ~15.5. */
+    --label-radius: 31;
+  }
+
+  .wheel-center-hub {
+    width: 31%;
+    height: 31%;
+    padding: 8px;
+  }
+
+  .hub-brand-names {
+    font-size: .7rem;
+  }
+
+  .hub-status-text {
+    font-size: .5rem;
+  }
+
+  .wheel-segment-label {
+    width: 22%;
+    gap: 1px;
+    font-size: clamp(.56rem, 2.5vw, .66rem);
+    line-height: 1.2;
+  }
+
+  .wheel-segment-label span {
+    white-space: normal;
+  }
+
+  /* position = centre + radius * (sin, -cos) of each segment's middle angle:
+     Haldi 36deg, Sangeet 108deg, Wedding 1 180deg, Wedding 2 252deg, Reception 324deg */
+  .label-hal {
+    left: calc(50% + var(--label-radius) * 1% * sin(36deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(36deg));
+  }
+
+  .label-sangeet {
+    left: calc(50% + var(--label-radius) * 1% * sin(108deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(108deg));
+  }
+
+  .label-wedding-one {
+    left: 50%;
+    top: calc(50% + var(--label-radius) * 1%);
+  }
+
+  .label-wedding-two {
+    left: calc(50% + var(--label-radius) * 1% * sin(252deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(252deg));
+  }
+
+  .label-reception {
+    left: calc(50% + var(--label-radius) * 1% * sin(324deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(324deg));
+  }
+}
+
+/* No reduced-motion override: one turn a minute is gentle, and Windows'
+   "Animation effects: off" also reports reduced motion. */

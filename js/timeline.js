@@ -91,13 +91,17 @@ class TrainTimelineEngine {
     const sectionTop = this.section.getBoundingClientRect().top + window.scrollY;
     const totalScrollable = this.section.offsetHeight - this.stickyContainer.offsetHeight;
 
-    // Translate needed to centre each coach in the viewport
+    // Translate needed to centre each coach in the viewport; a coach wider
+    // than the screen (phones) is shown from its start, photo first
     const centers = [];
     const targets = [];
     this.coaches.forEach(coach => {
       const center = coach.offsetLeft + coach.offsetWidth / 2;
       centers.push(center);
-      targets.push(Math.min(maxTranslate, Math.max(0, center - viewportWidth / 2)));
+      const target = coach.offsetWidth > viewportWidth
+        ? coach.offsetLeft - (viewportWidth - Math.min(coach.offsetWidth, viewportWidth * 0.86)) / 2
+        : center - viewportWidth / 2;
+      targets.push(Math.min(maxTranslate, Math.max(0, target)));
     });
 
     this.layout = { viewportWidth, maxTranslate, sectionTop, totalScrollable, centers, targets };

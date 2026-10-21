@@ -25,7 +25,8 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&display=swap">
 
   <!-- Entrance image is needed immediately -->
-  <link rel="preload" as="image" href="images/temple-gopuram.jpg">
+  <link rel="preload" as="image" href="images/temple-gopuram-landscape.jpg" media="(max-width: 600px)">
+  <link rel="preload" as="image" href="images/temple-gopuram-desktop.jpg" media="(min-width: 601px)">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -62,19 +63,48 @@
         </div>
       </div>
 
-      <!-- Center Call to Action Overlay -->
+      <!-- Overlay: heading at the top, temple bell hanging in the gopuram doorway -->
       <div class="gopuram-cta-overlay">
-        <p class="gopuram-badge-label">திருமணம் · A wedding invitation</p>
-        <h1 class="gopuram-couple-names">Abu <span>&amp;</span> Sachin</h1>
-        <div class="gopuram-cities-tag">
-          <span>Thoothukudi ⇄ Chennai · 11-Year Journey</span>
+        <div class="gate-heading">
+          <p class="gopuram-badge-label">திருமணம் · A wedding invitation</p>
+          <div class="gopuram-cities-tag">
+            <span>Thoothukudi ⇄ Chennai · 11-Year Journey</span>
+          </div>
         </div>
-        <button id="open-doors-btn" class="btn-open-gopuram"
-          aria-label="Open Temple Gates and Enter Wedding Celebration">
-          <span>Enter</span>
-          <span>the</span>
-          <span>celebration</span>
-        </button>
+        <h1 class="gopuram-couple-names">Abu <span>&amp;</span> Sachin</h1>
+
+        <!-- Same box as the photo on screen, so the bell always sits in the real doorway -->
+        <div class="gate-photo-frame">
+          <button id="open-doors-btn" class="gate-bell-btn" type="button"
+            aria-label="Ring the temple bell to enter the wedding celebration">
+            <span class="gate-door-glow" aria-hidden="true"></span>
+            <svg class="gate-bell" viewBox="0 0 60 92" aria-hidden="true">
+              <defs>
+                <linearGradient id="gate-bell-brass" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#8a5a12" />
+                  <stop offset=".32" stop-color="#f8dc84" />
+                  <stop offset=".55" stop-color="#e3b23c" />
+                  <stop offset="1" stop-color="#7a4b0c" />
+                </linearGradient>
+              </defs>
+              <!-- chain -->
+              <path d="M30 0 V20" stroke="#e9c76b" stroke-width="2.2" stroke-dasharray="3.2 2" />
+              <circle cx="30" cy="24" r="4.2" fill="none" stroke="url(#gate-bell-brass)" stroke-width="2.6" />
+              <!-- bell body -->
+              <path
+                d="M30 28c-10.5 0-15 8.6-15 20.5 0 10.4-2.3 16.6-7.5 20.5h45c-5.2-3.9-7.5-10.1-7.5-20.5C45 36.6 40.5 28 30 28z"
+                fill="url(#gate-bell-brass)" />
+              <path d="M17.4 45h25.2M16.6 52h26.8" stroke="#7a4b0c" stroke-opacity=".45" stroke-width="1.2" />
+              <rect x="5.5" y="68" width="49" height="5.5" rx="2.75" fill="url(#gate-bell-brass)" />
+              <!-- clapper -->
+              <g class="gate-bell-clapper">
+                <path d="M30 70v8" stroke="#8a5a12" stroke-width="2" />
+                <circle cx="30" cy="81" r="4.6" fill="#c7932f" />
+              </g>
+            </svg>
+            <span class="gate-hint">Ring the bell to enter</span>
+          </button>
+        </div>
       </div>
 
     </div>
@@ -106,7 +136,8 @@
 
       <div class="nav-actions">
         <a href="#rsvp-section" id="nav-rsvp-btn" class="btn-nav-rsvp">RSVP</a>
-        <button id="revisit-doors-btn" class="btn-nav-temple" title="View Temple Opening" aria-label="View temple gate opening">
+        <button id="revisit-doors-btn" class="btn-nav-temple" title="View Temple Opening"
+          aria-label="View temple gate opening">
           <span aria-hidden="true">🛕</span><span class="btn-nav-temple-text">Temple Gate</span>
         </button>
         <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu"
@@ -435,6 +466,8 @@
       <div class="wheel-container-wrapper">
         <div id="celebration-wheel" class="celebration-wheel-outer">
 
+          <!-- Segments + labels turn together; the hub stays still -->
+          <div class="wheel-rotor">
           <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
             <!-- 5 Segments (72 degrees each) -->
             <!-- Segment 1: Dec 5 09:30 AM · Haldi (Thoothukudi) -->
@@ -532,6 +565,7 @@
           <div class="wheel-segment-label label-reception" aria-hidden="true">
             <strong>Dec 11 · 06:30 PM</strong>
             <span>Reception · The Leela</span>
+          </div>
           </div>
 
           <!-- Center Frosted Hub -->

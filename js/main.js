@@ -34,15 +34,22 @@ function initTempleDoors() {
   }
 
   if (openDoorsBtn) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     openDoorsBtn.addEventListener('click', () => {
-      // 1. Play Auspicious Temple Bell Chime
+      if (doorOverlay.classList.contains('bell-rung')) return;
+
+      // 1. Ring the temple bell: it swings and lamplight floods the doorway
       if (window.weddingAudio) {
         window.weddingAudio.playTempleBell();
       }
+      doorOverlay.classList.add('bell-rung');
 
-      // 2. Split open both halves
-      doorOverlay.classList.add('doors-opened');
-      setGateClosed(false);
+      // 2. Then split open both halves of the gopuram
+      setTimeout(() => {
+        doorOverlay.classList.add('doors-opened');
+        setGateClosed(false);
+      }, reducedMotion ? 0 : 700);
     });
   }
 
@@ -51,7 +58,7 @@ function initTempleDoors() {
     reOpenDoorsBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'instant' });
-      doorOverlay.classList.remove('doors-opened');
+      doorOverlay.classList.remove('doors-opened', 'bell-rung');
       setGateClosed(true);
     });
   }
@@ -106,21 +113,32 @@ function initSpinWheel() {
   if (!wheel) return;
 
   const segments = document.querySelectorAll('.wheel-segment');
+  const defaultTitle = 'Abu & Sachin';
+  const defaultVenue = 'Tap segment for Google Maps';
+
+  const resetHub = () => {
+    if (hubTitle) hubTitle.textContent = defaultTitle;
+    if (hubVenue) hubVenue.textContent = defaultVenue;
+    wheel.classList.remove('wheel-paused');
+  };
+
+  // Hover details are for mouse users only. On a touch screen a tap fires a
+  // fake "mouseenter" that never gets a "mouseleave", which left the centre
+  // text enlarged and the wheel frozen after returning from Google Maps.
+  const canHover = window.matchMedia('(hover: hover)').matches;
 
   segments.forEach(seg => {
-    seg.addEventListener('mouseenter', () => {
-      const title = seg.dataset.title;
-      const venue = seg.dataset.venue;
-      if (hubTitle && title) hubTitle.textContent = title;
-      if (hubVenue && venue) hubVenue.textContent = venue;
-      wheel.classList.add('wheel-paused');
-    });
+    if (canHover) {
+      seg.addEventListener('mouseenter', () => {
+        const title = seg.dataset.title;
+        const venue = seg.dataset.venue;
+        if (hubTitle && title) hubTitle.textContent = title;
+        if (hubVenue && venue) hubVenue.textContent = venue;
+        wheel.classList.add('wheel-paused');
+      });
 
-    seg.addEventListener('mouseleave', () => {
-      if (hubTitle) hubTitle.textContent = 'Abu & Sachin';
-      if (hubVenue) hubVenue.textContent = 'Tap segment for Google Maps';
-      wheel.classList.remove('wheel-paused');
-    });
+      seg.addEventListener('mouseleave', resetHub);
+    }
 
     seg.addEventListener('click', () => {
       const mapUrl = seg.dataset.map;
@@ -128,6 +146,12 @@ function initSpinWheel() {
         window.open(mapUrl, '_blank', 'noopener,noreferrer');
       }
     });
+  });
+
+  // Coming back from the map (tab switch or browser back-forward cache)
+  window.addEventListener('pageshow', resetHub);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) resetHub();
   });
 }
 
