@@ -32,14 +32,14 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Background theme trial (see css/backgrounds.css). Choose with the
-       "Background" button at the bottom-left, or ?bg=original | ice | traditional -->
+       "Background" button at the bottom-left, or ?bg=original | ice | aurora -->
   <link rel="stylesheet" href="css/backgrounds.css">
   <script>
     (function () {
       var m = (location.search + location.hash).toLowerCase().match(/bg=(\w+)/);
       var bg = m ? m[1] : null;
       try { bg = bg || localStorage.getItem('bg-trial'); } catch (e) { }
-      if (['original', 'ice', 'traditional'].indexOf(bg) < 0) bg = 'original'; // default, or a removed theme
+      if (['original', 'ice', 'aurora'].indexOf(bg) < 0) bg = 'original'; // default, or a removed theme
       document.documentElement.setAttribute('data-bg', bg);
     })();
   </script>
@@ -1064,14 +1064,14 @@
     </div>
   </footer>
 
-  <!-- Background theme trial: tap to cycle Original -> Ice -> Traditional.
+  <!-- Background theme trial: tap to cycle Original -> Ice -> Aurora.
        Remove this button + script (and the trial lines in <head>) once a theme is chosen. -->
   <button type="button" id="bg-trial-switch" class="bg-trial-switch" aria-live="polite">Background: Original</button>
   <script>
     (function () {
       var btn = document.getElementById('bg-trial-switch');
-      var themes = ['original', 'ice', 'traditional'];
-      var names = { original: 'Original', ice: 'Ice', traditional: 'Traditional' };
+      var themes = ['original', 'ice', 'aurora'];
+      var names = { original: 'Original', ice: 'Ice', aurora: 'Aurora' };
       var html = document.documentElement;
       var current = function () { return html.getAttribute('data-bg') || 'original'; };
       var show = function () { btn.textContent = 'Background: ' + (names[current()] || current()); };
