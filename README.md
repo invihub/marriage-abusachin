@@ -125,3 +125,5 @@ Only the **publishable** key is used in the browser. The secret key must never b
 ## Deploying
 
 Pushing to `main` deploys to GitHub Pages (`.github/workflows/deploy-pages.yml`). The workflow builds `js/config.js` from the repository secrets `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`, plus the optional variable `SUPABASE_SCHEMA`, which defaults to `abu_sachin`. In **Settings → Pages**, set the source to **GitHub Actions**.
+
+**Link preview (WhatsApp, Facebook, ...):** the invitation shows `images/og-save-date.jpg`, the Save the Date painting on a 1200×630 card (the shape that gets WhatsApp's large preview), set by the `og:image` tags at the top of `index.html`. WhatsApp remembers a link's preview for a while, so a link shared before the change may still show the old picture; adding something to the end, e.g. `https://invihub.github.io/marriage-abusachin/?v=2`, makes it fetch the new one.
