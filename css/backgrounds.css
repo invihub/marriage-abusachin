@@ -35,34 +35,15 @@ html[data-bg="ice"] {
      centre = behind the content (keep it light so text stays readable),
      middle = the ring around it, edge = corners and screen edges.
      Presets to try (centre / middle / edge):
-       Glacier blue (default) #e4edf2  #b9cdd9  #6f93aa
+       Glacier blue           #e4edf2  #b9cdd9  #6f93aa
        Silver frost           #eef2f5  #cfd9e0  #8ea2b1
        Arctic night           #d3e0e8  #8eaabd  #3f6580
        Teal ice               #d9f3f7  #7fcadb  #0f5f78           */
-
-
-  /* --ice-bg-centre: #e4edf2;
-  --ice-bg-middle: #b9cdd9;
-  --ice-bg-edge: #6f93aa; */
-  /* soft light falling from the top of the screen; transparent = none */
-  /* --ice-bg-shine: rgba(255, 255, 255, .55); */
-
-  /* active: Pearl City Express coach colours
-     centre = coach body mid-blue, middle = coach body top, edge = coach body
-     bottom, shine = the coaches' sky-blue outline glow */
-  /* --ice-bg-centre: #0E427F;
-  --ice-bg-middle: #0A2F5C;
-  --ice-bg-edge: #082447; */
-  /* soft light falling from the top of the screen; transparent = none */
-  /* --ice-bg-shine: rgba(56, 189, 248, .28); */
-
-
   --ice-bg-centre: #c0dadb;
   --ice-bg-middle: #8ad7dc;
   --ice-bg-edge: #0a93b9af;
   /* soft light falling from the top of the screen; transparent = none */
   --ice-bg-shine: rgba(255, 255, 255, 0.593);
-
 
   /* ---- CRYSTALS ----
      How many, how big, where and which colour: all set in
@@ -491,6 +472,57 @@ html[data-bg="aurora"] .event-check-card:hover {
 html[data-bg="aurora"] :is(.form-input, .form-select, .form-textarea):focus {
   background: rgba(255, 255, 255, .14);
   border-color: var(--aurora-gold);
+}
+
+/* ---- Sangeet Mixtape, per background (Original's shades are in mixtape.css) ----
+     score ink / lit note colour, and the track cassettes: body, reels, hub */
+html[data-bg="ice"] #sangeet-mixtape {
+  --score-ink: #1d4f5f;
+  --score-lit: #b07a08;
+  --trk-bg: rgba(183, 216, 224, .58);
+  --trk-rim: rgba(234, 248, 251, .9);
+  --trk-frame: rgba(255, 255, 255, .3);
+  --reel-a: #287386;
+  --reel-b: #9ecbd4;
+  --reel-rim: #eaf8fb;
+  --reel-hub: #e3f2f5;
+  --reel-hub-ring: #2a7387;
+  --reel-ink: #1b5f71;
+}
+
+html[data-bg="aurora"] #sangeet-mixtape {
+  --mt-gold: var(--aurora-gold);
+  --mt-maroon: var(--aurora-rose);
+  --score-ink: #dceaf5;
+  --score-lit: #f6d37e;
+  --score-glow: rgba(246, 211, 126, .9);
+  --trk-bg: rgba(8, 30, 48, .5);
+  --trk-rim: rgba(143, 240, 196, .35);
+  --trk-frame: rgba(143, 240, 196, .07);
+  --reel-a: #1fae84;
+  --reel-b: #0e3a4a;
+  --reel-rim: #bff5dd;
+  --reel-hub: #0b2133;
+  --reel-hub-ring: #8ff0c4;
+  --reel-ink: #eafff5;
+}
+
+/* night glass keys: clearer whites so the aurora shows through */
+html[data-bg="aurora"] .mt-key:not(.mt-key-black):not(.is-down) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .5) 0%, rgba(220, 240, 255, .22) 62%, rgba(255, 255, 255, .42) 100%);
+  border-color: rgba(220, 245, 255, .6);
+}
+
+html[data-bg="aurora"] .mt-tracklist-head h3 {
+  color: var(--aurora-gold);
+}
+
+html[data-bg="aurora"] .mt-track-action.is-backed b {
+  color: #1E293B;
+}
+
+html[data-bg="aurora"] .mt-note.is-warn {
+  color: var(--aurora-rose);
 }
 
 html[data-bg="aurora"] .mobile-nav-toggle {

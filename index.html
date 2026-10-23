@@ -11,7 +11,9 @@
     content="Wedding celebration of Abu (Thoothukudi) and Sachin (Chennai) · 11-Year Journey · Winter & Heritage Celebration">
   <meta property="og:title" content="Abu & Sachin | Wedding Invitation">
   <meta property="og:description" content="11-Year Journey · Thoothukudi & Chennai · Canada Chapter">
-  <meta property="og:image" content="images/couple-wedding.jpg">
+  <!-- link previews (WhatsApp, Facebook) need full addresses -->
+  <meta property="og:url" content="https://invihub.github.io/marriage-abusachin/">
+  <meta property="og:image" content="https://invihub.github.io/marriage-abusachin/images/couple-wedding.jpg">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
@@ -30,6 +32,7 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mixtape.css">
 
   <!-- Background theme trial (see css/backgrounds.css). Choose with the
        "Background" button at the bottom-left, or ?bg=original | ice | aurora -->
@@ -141,6 +144,7 @@
           <li><a href="#timeline-journey">Pearl Express (11 Yrs)</a></li>
           <li><a href="#celebration-wheel-section">Celebration Wheel</a></li>
           <li class="nav-item-rsvp"><a href="#rsvp-section">RSVP</a></li>
+          <li><a href="#sangeet-mixtape">Mixtape</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#travel-transit">Travel & Stays</a></li>
           <li><a href="#iconic-places">Iconic Places</a></li>
@@ -717,6 +721,59 @@
     </section>
 
     <!-- ==========================================================================
+         6b. Sangeet Mixtape: guests record songs for the dance floor or back
+         songs already on the tape (shared list, see js/mixtape.js)
+         ========================================================================== -->
+    <section id="sangeet-mixtape" class="section-wrapper">
+      <div class="section-title-cluster">
+        <span class="section-pretitle">Sangeet Night · Dance Floor Requests</span>
+        <h2 class="section-title">Record Our Mixtape</h2>
+        <p class="section-desc">
+          Name a song you want to dance to, or tap a song already on the tape to back it.
+          Everyone has 3 picks, and the most-backed songs play at the Sangeet.
+        </p>
+      </div>
+
+      <div class="mixtape-layout">
+
+        <!-- Recording deck: piano keys press and notes light up as you type
+             (keys and notes are drawn by js/mixtape.js) -->
+        <div class="mixtape-deck">
+          <div class="mt-piano" aria-hidden="true">
+            <div class="mt-keys" id="mixtape-keys"></div>
+          </div>
+
+          <svg class="mt-score" id="mixtape-score" viewBox="0 0 320 114" aria-hidden="true"></svg>
+
+          <form id="mixtape-form" class="mt-record" autocomplete="off">
+            <label for="mixtape-input" class="form-label">Song name (add the film or singer if you like)</label>
+            <div class="mt-input-row">
+              <input type="text" id="mixtape-input" class="form-input" maxlength="80"
+                placeholder="e.g. Mental Manadhil, OK Kanmani" enterkeyhint="send">
+              <button type="submit" id="mixtape-record" class="mt-record-btn">
+                <span class="mt-rec-dot" aria-hidden="true"></span>Record
+              </button>
+            </div>
+          </form>
+
+          <div class="mt-picks" id="mixtape-picks"></div>
+          <p class="mt-note" id="mixtape-note" role="status">Tuning in…</p>
+        </div>
+
+        <!-- Tracklist: the shared list, styled like a cassette's paper insert -->
+        <div class="mixtape-tracklist">
+          <div class="mt-tracklist-head">
+            <h3>Tracklist</h3>
+            <span id="mixtape-summary"></span>
+          </div>
+          <ol class="mt-tracks" id="mixtape-tracks"></ol>
+          <button type="button" class="mt-more" id="mixtape-more" hidden></button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
          7. Couples Photo Gallery (Polaroids & Clean Slots)
          ========================================================================== -->
     <section id="gallery" class="section-wrapper">
@@ -900,7 +957,7 @@
 
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/chennai-mylapore.jpg" alt="Mylapore Kapaleeshwarar Temple" loading="lazy">
+            <img src="images/filter_coffee_mylapore.jpg" alt="Filter coffee before the Kapaleeshwarar Temple gopuram, Mylapore" loading="lazy">
             <span class="spot-city-badge city-chennai">Chennai</span>
           </div>
           <div class="spot-content">
@@ -911,7 +968,7 @@
 
         <article class="spot-card">
           <div class="spot-img-wrap">
-            <img src="images/tuticorin_chennai_panoramic_1792065432987.jpg" alt="Marina Beach Chennai" loading="lazy">
+            <img src="images/marina.jpg" alt="Marina Beach, Chennai" loading="lazy">
             <span class="spot-city-badge city-chennai">Chennai</span>
           </div>
           <div class="spot-content">
@@ -962,7 +1019,7 @@
 
       <!-- Track Info -->
       <div class="cassette-track-info">
-        <h4 id="cassette-track-title" class="cassette-title">Mental Manadhil</h4>
+        <h4 id="cassette-track-title" class="cassette-title">Theera Ulaa</h4>
         <span id="cassette-track-film" class="cassette-film">A little music for our story</span>
       </div>
 
@@ -1088,10 +1145,13 @@
   <!-- Scripts -->
   <!-- Generated from environment variables: node scripts/build-config.mjs -->
   <script src="js/config.js"></script>
+  <!-- Generated from the files in songs/: node scripts/build-songs.mjs -->
+  <script src="js/songs.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/snow.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/rsvp.js"></script>
+  <script src="js/mixtape.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/main.js"></script>
 

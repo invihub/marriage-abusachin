@@ -1,12 +1,34 @@
 /**
- * Auspicious South Indian & OK Kanmani Synthesizer Audio System
- * Plays authentic melodic chiptune/lounge synthesizers:
- * - Mental Manadhil (O Kadhal Kanmani)
- * - Aye Sinamika (O Kadhal Kanmani)
- * - Parandhu Sella Vaa (O Kadhal Kanmani)
- * - Mangala Vaathiyam (Temple Nadaswaram & Chimes)
- * - Auspicious Temple Bell Chime
+ * Wedding sound: the "Our Soundtrack" cassette player and the temple bell
+ * - Plays every song in songs/, in file-name order (01-..., 02-...). The
+ *   list is written to js/songs.js by scripts/build-songs.mjs.
+ * - The first song starts by itself as the guest walks through the temple
+ *   gate. A song plays for at most SOUNDTRACK.maxPlaySeconds, fades out and
+ *   stops; the next one waits in the player for the guest to press play.
+ * - Songs stream only when played, so the page doesn't download them all.
+ * - The temple bell (gate, RSVP) and the mixtape's chime are synthesised.
  */
+
+// ===== EDIT HERE ============================================================
+const SOUNDTRACK = {
+  // How long a song plays before it fades out and stops, in seconds.
+  // 0 = play the whole song.
+  maxPlaySeconds: 60,
+  // How long that fade-out lasts, in seconds.
+  fadeSeconds: 3
+};
+// ============================================================================
+
+// "03-Mental-Manadhil-(Female).mp3" -> "Mental Manadhil (Female)"
+const songTitle = (file) => file
+  .replace(/\.[^.]+$/, '')
+  .replace(/^\d+[\s._-]*/, '')
+  .replace(/[_-]+/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+// a moment of silence, played on the gate tap to unlock sound on phones
+const SILENCE = 'data:audio/wav;base64,UklGRsQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YaAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA';
 
 class WeddingAudioEngine {
   constructor() {
@@ -16,60 +38,36 @@ class WeddingAudioEngine {
     this.musicVolume = 0.7;
     this.masterGain = null;
     this.musicGain = null;
-    this.analyser = null;
-    this.melodyTimer = null;
-    this.currentMelodyStep = 0;
     this.onTrackChange = null;
     this.onPlayStateChange = null;
+    this.resumeOnVisible = false;
+    this.unlocked = false;
+    this.autoStarted = false;
+    this.userControlled = false;   // set by the player's buttons (js/main.js)
+    this.tracks = (window.SONG_FILES || []).map((file) => ({
+      title: songTitle(file),
+      src: 'songs/' + encodeURIComponent(file)
+    }));
 
-    this.tracks = [
-      {
-        id: 'mental-manadhil',
-        title: 'Mental Manadhil (Acoustic Soul)',
-        film: 'O Kadhal Kanmani',
-        tempo: 124,
-        scale: [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25],
-        notes: [
-          { pitch: 523.25, dur: 0.25 }, { pitch: 493.88, dur: 0.25 }, { pitch: 523.25, dur: 0.25 }, { pitch: 392.00, dur: 0.5 },
-          { pitch: 329.63, dur: 0.25 }, { pitch: 349.23, dur: 0.25 }, { pitch: 392.00, dur: 0.5 }, { pitch: 0, dur: 0.25 },
-          { pitch: 440.00, dur: 0.25 }, { pitch: 493.88, dur: 0.25 }, { pitch: 523.25, dur: 0.5 }, { pitch: 440.00, dur: 0.25 },
-          { pitch: 392.00, dur: 0.5 }, { pitch: 349.23, dur: 0.25 }, { pitch: 329.63, dur: 0.5 }, { pitch: 261.63, dur: 0.5 }
-        ]
-      },
-      {
-        id: 'aye-sinamika',
-        title: 'Aye Sinamika (Gentle Sunset)',
-        film: 'O Kadhal Kanmani',
-        tempo: 88,
-        notes: [
-          { pitch: 440.00, dur: 0.5 }, { pitch: 493.88, dur: 0.5 }, { pitch: 554.37, dur: 0.75 }, { pitch: 493.88, dur: 0.25 },
-          { pitch: 440.00, dur: 0.5 }, { pitch: 369.99, dur: 0.5 }, { pitch: 392.00, dur: 0.75 }, { pitch: 329.63, dur: 0.25 },
-          { pitch: 293.66, dur: 0.75 }, { pitch: 369.99, dur: 0.5 }, { pitch: 440.00, dur: 1.0 }, { pitch: 0, dur: 0.5 }
-        ]
-      },
-      {
-        id: 'parandhu-sella-vaa',
-        title: 'Parandhu Sella Vaa (Dreamy)',
-        film: 'O Kadhal Kanmani',
-        tempo: 96,
-        notes: [
-          { pitch: 523.25, dur: 0.75 }, { pitch: 587.33, dur: 0.5 }, { pitch: 659.25, dur: 0.75 }, { pitch: 523.25, dur: 0.5 },
-          { pitch: 440.00, dur: 0.75 }, { pitch: 493.88, dur: 0.5 }, { pitch: 523.25, dur: 1.0 }, { pitch: 392.00, dur: 0.5 },
-          { pitch: 329.63, dur: 0.75 }, { pitch: 392.00, dur: 0.5 }, { pitch: 440.00, dur: 1.2 }, { pitch: 0, dur: 0.5 }
-        ]
-      },
-      {
-        id: 'mangala-vaathiyam',
-        title: 'Mangala Vaathiyam (Temple Nadaswaram)',
-        film: 'Sacred Wedding Ragas',
-        tempo: 104,
-        notes: [
-          { pitch: 587.33, dur: 0.35, isNadaswaram: true }, { pitch: 659.25, dur: 0.35, isNadaswaram: true }, { pitch: 739.99, dur: 0.5, isNadaswaram: true },
-          { pitch: 880.00, dur: 0.6, isNadaswaram: true }, { pitch: 739.99, dur: 0.3, isNadaswaram: true }, { pitch: 659.25, dur: 0.4, isNadaswaram: true },
-          { pitch: 587.33, dur: 0.8, isNadaswaram: true }, { pitch: 440.00, dur: 0.4, isNadaswaram: true }, { pitch: 587.33, dur: 1.0, isNadaswaram: true }
-        ]
-      }
-    ];
+    // one audio element plays the whole playlist
+    this.player = new Audio();
+    this.player.preload = 'none';
+    this.loadedIndex = -1;
+    this.trackGain = null;     // fade-out stage when routed through Web Audio
+    this.fading = false;
+    this.fadeTimer = null;
+    this.failures = 0;
+
+    this.player.addEventListener('timeupdate', () => this.checkPlayLimit());
+    this.player.addEventListener('ended', () => { if (this.isPlaying) this.finishTrack(); });
+    this.player.addEventListener('playing', () => { this.failures = 0; });
+    this.player.addEventListener('error', () => {
+      // a missing or broken file: skip it, but stop if every song fails
+      if (!this.isPlaying) return;
+      this.failures++;
+      if (this.failures >= this.tracks.length) this.pause();
+      else this.nextTrack();
+    });
   }
 
   init() {
@@ -85,6 +83,20 @@ class WeddingAudioEngine {
 
     this.musicGain.connect(this.masterGain);
     this.masterGain.connect(this.ctx.destination);
+
+    // Route the songs through the volume control, so the slider and the fade
+    // also work on iPhones (which ignore an audio element's own volume).
+    // Not when opened straight from a file: browsers would play silence.
+    if (location.protocol !== 'file:') {
+      try {
+        this.trackGain = this.ctx.createGain();
+        this.ctx.createMediaElementSource(this.player).connect(this.trackGain);
+        this.trackGain.connect(this.musicGain);
+      } catch (e) {
+        this.trackGain = null;
+      }
+    }
+    this.applyVolume(1);
   }
 
   ensureContext() {
@@ -122,6 +134,29 @@ class WeddingAudioEngine {
     if (this.musicGain && this.ctx) {
       this.musicGain.gain.setValueAtTime(this.musicVolume, this.ctx.currentTime);
     }
+    if (!this.trackGain) this.player.volume = this.musicVolume;
+  }
+
+  // level of the current song (1 = full, 0 = faded out); `over` = seconds to get there
+  applyVolume(level, over = 0) {
+    if (this.trackGain) {
+      const g = this.trackGain.gain, now = this.ctx.currentTime;
+      g.cancelScheduledValues(now);
+      g.setValueAtTime(g.value, now);
+      if (over > 0) g.linearRampToValueAtTime(level, now + over);
+      else g.setValueAtTime(level, now);
+      return;
+    }
+    // without Web Audio: step the element's own volume
+    clearInterval(this.volumeTimer);
+    const target = level * this.musicVolume;
+    if (!(over > 0)) { this.player.volume = target; return; }
+    const from = this.player.volume, started = performance.now();
+    this.volumeTimer = setInterval(() => {
+      const t = Math.min(1, (performance.now() - started) / (over * 1000));
+      this.player.volume = Math.max(0, Math.min(1, from + (target - from) * t));
+      if (t >= 1) clearInterval(this.volumeTimer);
+    }, 50);
   }
 
   toggleMusic() {
@@ -133,126 +168,146 @@ class WeddingAudioEngine {
     }
   }
 
+  loadTrack() {
+    this.cancelFade();
+    this.applyVolume(1);
+    this.player.src = this.getCurrentTrack().src;
+    this.loadedIndex = this.currentTrackIndex;
+  }
+
+  // Called from the gate's bell tap. Phones only let a page start sound from
+  // a tap, so a moment of silence is played now; the soundtrack can then
+  // start by itself a moment later.
+  unlock() {
+    this.ensureContext();
+    if (this.unlocked || this.isPlaying) return;
+    this.unlocked = true;
+    this.player.src = SILENCE;
+    this.loadedIndex = -1;        // the next play() loads the real song
+    const started = this.player.play();
+    if (started && started.then) {
+      started.then(() => { if (!this.isPlaying) this.player.pause(); }, () => { });
+    }
+  }
+
+  // The first song starts by itself once, as the guest enters through the gate,
+  // unless they have already used the player themselves.
+  autoStart() {
+    if (this.autoStarted || this.userControlled || this.isPlaying || !this.tracks.length) return;
+    this.autoStarted = true;
+    this.currentTrackIndex = 0;
+    if (this.onTrackChange) this.onTrackChange(this.getCurrentTrack());
+    this.play();
+  }
+
   play() {
     this.ensureContext();
-    if (this.isPlaying) return;
+    if (this.isPlaying || !this.tracks.length) return;
+    if (this.loadedIndex !== this.currentTrackIndex) this.loadTrack();
     this.isPlaying = true;
-    this.playCurrentTrackNote();
+    const started = this.player.play();
+    if (started && started.catch) {
+      started.catch(() => {
+        // refused (e.g. no tap yet) or the file is missing
+        if (this.player.error) return;    // the error handler moves on
+        this.isPlaying = false;
+        if (this.onPlayStateChange) this.onPlayStateChange(false);
+      });
+    }
     if (this.onPlayStateChange) this.onPlayStateChange(true);
   }
 
   pause() {
     this.isPlaying = false;
-    if (this.melodyTimer) {
-      clearTimeout(this.melodyTimer);
-      this.melodyTimer = null;
-    }
+    this.player.pause();
+    this.cancelFade();
     if (this.onPlayStateChange) this.onPlayStateChange(false);
   }
 
-  nextTrack() {
-    this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
-    this.currentMelodyStep = 0;
+  changeTrack(step) {
+    if (!this.tracks.length) return;
+    this.currentTrackIndex = (this.currentTrackIndex + step + this.tracks.length) % this.tracks.length;
+    this.loadTrack();
     if (this.onTrackChange) this.onTrackChange(this.getCurrentTrack());
     if (this.isPlaying) {
-      if (this.melodyTimer) clearTimeout(this.melodyTimer);
-      this.playCurrentTrackNote();
+      this.isPlaying = false;
+      this.play();
     }
   }
 
+  nextTrack() {
+    this.changeTrack(1);
+  }
+
   prevTrack() {
-    this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
-    this.currentMelodyStep = 0;
-    if (this.onTrackChange) this.onTrackChange(this.getCurrentTrack());
-    if (this.isPlaying) {
-      if (this.melodyTimer) clearTimeout(this.melodyTimer);
-      this.playCurrentTrackNote();
-    }
+    this.changeTrack(-1);
   }
 
   getCurrentTrack() {
     return this.tracks[this.currentTrackIndex];
   }
 
-  playCurrentTrackNote() {
-    if (!this.isPlaying) return;
-    const track = this.getCurrentTrack();
-    const noteData = track.notes[this.currentMelodyStep % track.notes.length];
-
-    if (noteData.pitch > 0) {
-      this.synthesizeNote(noteData.pitch, noteData.dur * 0.9, noteData.isNadaswaram);
-    }
-
-    const durationMs = noteData.dur * (60000 / track.tempo);
-    this.currentMelodyStep++;
-
-    this.melodyTimer = setTimeout(() => {
-      this.playCurrentTrackNote();
-    }, durationMs);
+  // Each song plays for SOUNDTRACK.maxPlaySeconds, fading out over the last
+  // SOUNDTRACK.fadeSeconds, then stops.
+  checkPlayLimit() {
+    const max = SOUNDTRACK.maxPlaySeconds;
+    if (!max || !this.isPlaying || this.fading) return;
+    const left = max - this.player.currentTime;
+    const fade = Math.min(SOUNDTRACK.fadeSeconds, max);
+    if (left > fade) return;
+    this.fading = true;
+    const wait = Math.max(0, left);
+    this.applyVolume(0, wait);
+    this.fadeTimer = setTimeout(() => this.finishTrack(), wait * 1000);
   }
 
-  synthesizeNote(freq, duration, isNadaswaram = false) {
+  // Time's up (or the song ended): stop, and have the next song waiting in
+  // the player for when the guest presses play.
+  finishTrack() {
+    this.pause();
+    this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+    this.loadTrack();
+    if (this.onTrackChange) this.onTrackChange(this.getCurrentTrack());
+  }
+
+  // a pause or a track change mid-fade brings the volume back
+  cancelFade() {
+    clearTimeout(this.fadeTimer);
+    if (this.fading) this.applyVolume(1);
+    this.fading = false;
+  }
+
+  // a short soft note (used by the Sangeet Mixtape's "recorded" chime)
+  synthesizeNote(freq, duration) {
     if (!this.ctx) return;
     const now = this.ctx.currentTime;
+    const osc1 = this.ctx.createOscillator();
+    const osc2 = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
 
-    if (isNadaswaram) {
-      const osc = this.ctx.createOscillator();
-      const osc2 = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      const filter = this.ctx.createBiquadFilter();
+    osc1.type = 'sine';
+    osc2.type = 'triangle';
+    osc1.frequency.setValueAtTime(freq, now);
+    osc2.frequency.setValueAtTime(freq * 2, now);
 
-      osc.type = 'sawtooth';
-      osc2.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, now);
-      osc2.frequency.setValueAtTime(freq * 1.004, now);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.24, now + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
-      filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(freq * 2.2, now);
-      filter.Q.setValueAtTime(3.0, now);
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(this.musicGain);
 
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-      osc.connect(filter);
-      osc2.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.musicGain);
-
-      osc.start(now);
-      osc2.start(now);
-      osc.stop(now + duration + 0.05);
-      osc2.stop(now + duration + 0.05);
-    } else {
-      const osc1 = this.ctx.createOscillator();
-      const osc2 = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc1.type = 'sine';
-      osc2.type = 'triangle';
-      osc1.frequency.setValueAtTime(freq, now);
-      osc2.frequency.setValueAtTime(freq * 2, now);
-
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.24, now + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(this.musicGain);
-
-      osc1.start(now);
-      osc2.start(now);
-      osc1.stop(now + duration + 0.05);
-      osc2.stop(now + duration + 0.05);
-    }
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + duration + 0.05);
+    osc2.stop(now + duration + 0.05);
   }
 }
 
 window.weddingAudio = new WeddingAudioEngine();
 
-// Background tabs throttle timers, which would make the melody stutter;
-// pause while hidden (e.g. switching apps on a phone) and resume on return.
+// Pause while the page is hidden (e.g. switching apps on a phone) and resume on return.
 document.addEventListener('visibilitychange', () => {
   const audio = window.weddingAudio;
   if (document.hidden) {

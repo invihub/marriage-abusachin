@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 1. Straight-Facing Gopuram Split Doors Opening
+ * 1. Temple gate: ring the bell, then the gate opens onto the invitation
  */
 function initTempleDoors() {
   const openDoorsBtn = document.getElementById('open-doors-btn');
@@ -42,6 +42,8 @@ function initTempleDoors() {
       // 1. Ring the temple bell: it swings and lamplight floods the doorway
       if (window.weddingAudio) {
         window.weddingAudio.playTempleBell();
+        // this tap also lets the soundtrack start by itself just after
+        window.weddingAudio.unlock();
       }
       doorOverlay.classList.add('bell-rung');
 
@@ -50,6 +52,12 @@ function initTempleDoors() {
         doorOverlay.classList.add('doors-opened');
         setGateClosed(false);
       }, reducedMotion ? 0 : 700);
+
+      // 3. The soundtrack begins as the guest walks in, once the bell has
+      //    mostly faded (only the first time, and not if they used the player)
+      setTimeout(() => {
+        if (window.weddingAudio) window.weddingAudio.autoStart();
+      }, 1500);
     });
   }
 
@@ -156,26 +164,24 @@ function initSpinWheel() {
 }
 
 /**
- * 4. Redesigned Tape Recorder Player (with 2 Rotating Reel Circles)
+ * 4. Cassette music player (with 2 rotating reels)
  */
 function initCassettePlayer() {
   const playBtn = document.getElementById('cassette-play-toggle');
   const playIcon = document.getElementById('cassette-play-icon');
   const nextBtn = document.getElementById('cassette-next');
   const trackTitleEl = document.getElementById('cassette-track-title');
-  const statusEl = document.getElementById('cassette-status-badge');
   const cassetteDeck = document.querySelector('.floating-cassette-widget');
   const cassetteToggleBtn = document.getElementById('cassette-toggle-widget');
   const quickSoundtrackBtn = document.getElementById('quick-soundtrack-toggle');
   const quickSoundtrackIcon = document.getElementById('quick-soundtrack-icon');
   const quickSoundtrackLabel = document.getElementById('quick-soundtrack-label');
-  const minimizeBtn = document.getElementById('cassette-minimize-btn');
   const musicSlider = document.getElementById('music-volume-slider');
 
   if (!window.weddingAudio) return;
 
   function updateTrackDisplay(track) {
-    if (trackTitleEl) trackTitleEl.textContent = track.title;
+    if (trackTitleEl && track) trackTitleEl.textContent = track.title;
   }
 
   window.weddingAudio.onTrackChange = (track) => {
@@ -186,9 +192,6 @@ function initCassettePlayer() {
     if (playIcon) {
       // Icon only: the play button is a small circle
       playIcon.textContent = isPlaying ? '❚❚' : '▶';
-    }
-    if (statusEl) {
-      statusEl.textContent = isPlaying ? 'PLAYING' : 'PAUSED';
     }
     if (cassetteDeck) {
       cassetteDeck.classList.toggle('is-playing', isPlaying);
@@ -204,32 +207,19 @@ function initCassettePlayer() {
     }
   };
 
-  const toggleMusic = () => window.weddingAudio.toggleMusic();
+  // once the guest uses the player, the soundtrack no longer starts by itself
+  const byGuest = (action) => () => {
+    window.weddingAudio.userControlled = true;
+    action();
+  };
+  const toggleMusic = byGuest(() => window.weddingAudio.toggleMusic());
 
-  if (playBtn) {
-    playBtn.addEventListener('click', () => {
-      toggleMusic();
-    });
-  }
-
-  if (quickSoundtrackBtn) {
-    quickSoundtrackBtn.addEventListener('click', () => {
-      toggleMusic();
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      window.weddingAudio.nextTrack();
-    });
-  }
+  if (playBtn) playBtn.addEventListener('click', toggleMusic);
+  if (quickSoundtrackBtn) quickSoundtrackBtn.addEventListener('click', toggleMusic);
+  if (nextBtn) nextBtn.addEventListener('click', byGuest(() => window.weddingAudio.nextTrack()));
 
   const prevBtn = document.getElementById('cassette-prev');
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      window.weddingAudio.prevTrack();
-    });
-  }
+  if (prevBtn) prevBtn.addEventListener('click', byGuest(() => window.weddingAudio.prevTrack()));
 
   if (musicSlider) {
     musicSlider.addEventListener('input', (e) => {
@@ -241,12 +231,6 @@ function initCassettePlayer() {
     cassetteToggleBtn.addEventListener('click', () => {
       const minimized = cassetteDeck.classList.toggle('widget-minimized');
       cassetteToggleBtn.setAttribute('aria-expanded', String(!minimized));
-    });
-  }
-
-  if (minimizeBtn && cassetteDeck) {
-    minimizeBtn.addEventListener('click', () => {
-      cassetteDeck.classList.add('widget-minimized');
     });
   }
 

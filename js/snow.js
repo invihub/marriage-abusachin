@@ -8,6 +8,8 @@
  * - Flake count scales with screen area (fewer on phones)
  * - Paused while the temple gate is closed and while the tab is hidden
  * - Sparser and slower for users who prefer reduced motion
+ * - Moves by time, not by frame, and draws at most 60 times a second, so a
+ *   120 Hz phone neither speeds the snow up nor does twice the work
  */
 
 class SnowfallEngine {
@@ -65,9 +67,12 @@ class SnowfallEngine {
     // Mobile browsers fire resize when the URL bar shows/hides; only
     // reallocate the canvas when the size actually changed.
     if (this.canvas.width === w && this.canvas.height === h) return;
+    const widthChanged = this.canvas.width !== w;
     this.canvas.width = w;
     this.canvas.height = h;
-    if (this.flakes.length) this.initFlakes();
+    // only a new width (turning the phone) needs a fresh snowfall; the URL bar
+    // changing the height must not reshuffle every flake mid-scroll
+    if (this.flakes.length && widthChanged) this.initFlakes();
   }
 
   initFlakes() {
@@ -99,6 +104,11 @@ class SnowfallEngine {
     if (!this.animationFrame && !document.hidden) this.loop();
   }
 
+  // the next frame; the time since the last drawn one decides how far flakes move
+  queueFrame() {
+    this.animationFrame = requestAnimationFrame((now) => this.loop(now));
+  }
+
   stop() {
     this.running = false;
     this.pauseFrame();
@@ -109,10 +119,21 @@ class SnowfallEngine {
       cancelAnimationFrame(this.animationFrame);
       this.animationFrame = null;
     }
+    this.lastTime = 0;
   }
 
-  loop() {
+  loop(now = performance.now()) {
     if (!this.canvas || !this.ctx) return;
+    // at most 60 drawings a second (a 120 Hz screen skips every other frame)
+    const elapsed = this.lastTime ? now - this.lastTime : 1000 / 60;
+    if (elapsed < 1000 / 60 - 2) {
+      this.queueFrame();
+      return;
+    }
+    this.lastTime = now;
+    // speeds are per 1/60 s; a long gap (tab switch, gate reopened) doesn't jump
+    const step = Math.min(elapsed / (1000 / 60), 3);
+
     const ctx = this.ctx;
     const w = this.canvas.width;
     const h = this.canvas.height;
@@ -120,9 +141,9 @@ class SnowfallEngine {
 
     for (let i = 0; i < this.flakes.length; i++) {
       const f = this.flakes[i];
-      f.swing += f.swingSpeed;
-      f.y += f.speedY;
-      f.x += Math.sin(f.swing) * 0.7 + f.speedX;
+      f.swing += f.swingSpeed * step;
+      f.y += f.speedY * step;
+      f.x += (Math.sin(f.swing) * 0.7 + f.speedX) * step;
 
       // Wrap around edges
       if (f.y > h + 10) {
@@ -139,7 +160,7 @@ class SnowfallEngine {
     }
     ctx.globalAlpha = 1;
 
-    this.animationFrame = requestAnimationFrame(() => this.loop());
+    this.queueFrame();
   }
 }
 

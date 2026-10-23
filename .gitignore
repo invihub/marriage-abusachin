@@ -25,3 +25,12 @@ scratch/
 
 # Large media (over GitHub's 100 MB limit)
 AbuSachin-invite-video.mp4
+
+# Original full-size PNG artwork (the site uses the compressed .jpg copies)
+images-source/
+
+songs-320kbs/
+
+
+# Soundtrack playlist, generated from songs/ by scripts/build-songs.mjs
+js/songs.js

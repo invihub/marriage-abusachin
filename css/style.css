@@ -3,42 +3,25 @@
    Theme: Snow-Themed Romantic Wedding + Tamil Gopuram Split Opening
    ========================================================================== */
 
-:root {
-  /* Snow & Winter Wedding Palette */
-  --snow-bg-start: #F3F7FA;
-  --snow-bg-mid: #E8F0F7;
-  --snow-bg-end: #DCE8F2;
+:root {/* Snow & Winter Wedding Palette */
   --snow-pure: #FFFFFF;
   --ice-blue: #E1EFF9;
   --ice-accent: #0284C7;
-  --frost-border: rgba(2, 132, 199, 0.18);
+  --frost-border: rgba(2, 132, 199, 0.18);/* Festive Wedding Jewel Accents */
 
-  /* Festive Wedding Jewel Accents */
   --royal-maroon: #8B1E28;
   --cranberry-festive: #9B1B30;
   --wedding-gold: #C59B27;
   --gold-glow: #F3CA65;
-  --pine-teal: #0D4E5B;
+  --pine-teal: #0D4E5B;/* Typography Colors */
+  --text-light: #F8FAFC;/* Glassmorphism */
+  --glass-shadow-hover: 0 18px 42px rgba(15, 23, 42, 0.14);/* Fonts */
 
-  /* Typography Colors */
-  --text-primary: #1E293B;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
-  --text-light: #F8FAFC;
-
-  /* Glassmorphism */
-  --glass-white: rgba(255, 255, 255, 0.88);
-  --glass-card-border: rgba(255, 255, 255, 0.95);
-  --glass-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-  --glass-shadow-hover: 0 18px 42px rgba(15, 23, 42, 0.14);
-
-  /* Fonts */
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-hero: 'Cinzel Decorative', 'Playfair Display', Georgia, serif;
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-script: 'Great Vibes', cursive;
+  --font-script: 'Great Vibes', cursive;/* Railway Livery */
 
-  /* Railway Livery */
   --train-blue: #0E3A6E;
   --train-blue-dark: #072242;
   --train-stripe: #F8E7B4;
@@ -65,10 +48,6 @@ html {
 body {
   font-family: var(--font-sans);
   line-height: 1.6;
-  background:
-    radial-gradient(ellipse at 15% 10%, rgba(225, 239, 249, 0.8) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 90%, rgba(219, 234, 254, 0.6) 0%, transparent 50%),
-    linear-gradient(180deg, var(--snow-bg-start) 0%, var(--snow-bg-mid) 50%, var(--snow-bg-end) 100%);
   color: var(--text-primary);
   overflow-x: hidden;
   position: relative;
@@ -98,7 +77,6 @@ body {
   align-items: center;
   overflow: hidden;
   background-color: #0B0E14;
-  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1) 1.2s, visibility 0.8s ease 2s;
 }
 
 .temple-entrance-curtain.doors-opened {
@@ -110,33 +88,24 @@ body {
 /* The Grand Tamil Gopuram split doors */
 .gopuram-split-doors-wrapper {
   position: relative;
-  width: min(94vw, 860px);
-  height: min(88vh, 780px);
   display: flex;
-  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(197, 155, 39, 0.3);
-  border: 4px solid var(--wedding-gold);
 }
 
 .gopuram-door-half {
-  flex: 1;
   height: 100%;
   position: relative;
   background-image: url('../images/gopuram-centered.jpg');
   background-size: 200% 100%;
   background-repeat: no-repeat;
-  transition: transform 1.6s cubic-bezier(0.7, 0, 0.2, 1);
 }
 
 .gopuram-door-left {
-  background-position: left center;
   border-right: 2px solid rgba(255, 215, 0, 0.7);
   box-shadow: inset -10px 0 30px rgba(0, 0, 0, 0.7);
 }
 
 .gopuram-door-right {
-  background-position: right center;
   border-left: 2px solid rgba(255, 215, 0, 0.7);
   box-shadow: inset 10px 0 30px rgba(0, 0, 0, 0.7);
 }
@@ -151,50 +120,28 @@ body {
 
 /* Name panels on each door half */
 .gopuram-name-panel {
-  position: absolute;
-  bottom: 80px;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  z-index: 5;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .gopuram-name-bride {
-  right: 16px;
-  text-align: right;
   align-items: flex-end;
-}
-
-.gopuram-name-groom {
-  left: 16px;
-  text-align: left;
-  align-items: flex-start;
 }
 
 .gopuram-name-role {
   font-family: var(--font-serif);
-  font-size: 0.85rem;
-  color: var(--gold-glow);
-  letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .gopuram-name-text {
   font-family: var(--font-hero);
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  color: #FFFFFF;
-  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9), 0 0 30px rgba(243, 202, 101, 0.5);
-  line-height: 1;
 }
 
 .gopuram-name-city {
   font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
   font-style: italic;
   letter-spacing: 1px;
 }
@@ -211,13 +158,6 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px 20px;
-  background: radial-gradient(circle at center, rgba(11, 14, 20, 0.75) 0%, rgba(11, 14, 20, 0.92) 80%);
-  border-radius: 20px;
-  max-width: 580px;
-  width: 90%;
-  border: 2px solid rgba(197, 155, 39, 0.5);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
   transition: opacity 0.4s ease;
 }
 
@@ -228,9 +168,6 @@ body {
 
 .gopuram-badge-label {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
-  letter-spacing: 2px;
-  color: var(--gold-glow);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
@@ -248,12 +185,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(139, 30, 40, 0.8);
   border: 1px solid var(--wedding-gold);
-  border-radius: 30px;
-  padding: 6px 18px;
-  font-size: 0.9rem;
-  color: #FFF;
   margin-bottom: 24px;
 }
 
@@ -262,7 +194,6 @@ body {
    ========================================================================== */
 .site-header {
   position: sticky;
-  top: 16px;
   z-index: 900;
   width: 100%;
   padding: 0 20px;
@@ -273,10 +204,7 @@ body {
   max-width: 1180px;
   margin: 0 auto;
   background: var(--glass-white);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-card-border);
-  border-radius: 50px;
   padding: 10px 24px;
   display: flex;
   align-items: center;
@@ -406,23 +334,15 @@ body {
     top: calc(100% + 8px);
     left: 20px;
     right: 20px;
-    background: var(--glass-white);
-    backdrop-filter: blur(20px);
     border-radius: 20px;
     flex-direction: column;
-    padding: 24px;
-    gap: 16px;
     box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
     display: none;
-  }
+}
 
   .site-nav-menu.nav-open {
     display: flex;
-  }
-
-  .mobile-nav-toggle {
-    display: block;
-  }
+}
 }
 
 /* ==========================================================================
@@ -430,7 +350,6 @@ body {
    ========================================================================== */
 .hero-wedding-section {
   position: relative;
-  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -450,7 +369,6 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--frost-border);
   border-radius: 50px;
   padding: 6px 20px;
@@ -467,14 +385,8 @@ body {
   font-family: var(--font-hero);
   font-size: clamp(2.4rem, 6.5vw, 4.6rem);
   font-weight: 900;
-  color: var(--royal-maroon);
   line-height: 1.15;
   margin-bottom: 12px;
-}
-
-.couple-names-highlight {
-  color: var(--royal-maroon);
-  text-shadow: 0 4px 18px rgba(139, 30, 40, 0.15);
 }
 
 .hero-cities-dual {
@@ -495,13 +407,11 @@ body {
 }
 
 .city-tuticorin {
-  background: #E0F2FE;
   color: #0369A1;
   border: 1px solid #BAE6FD;
 }
 
 .city-chennai {
-  background: #FEE2E2;
   color: #991B1B;
   border: 1px solid #FECACA;
 }
@@ -515,7 +425,6 @@ body {
 .hero-quote-box {
   background: var(--glass-white);
   border: 1px solid var(--glass-card-border);
-  border-radius: 18px;
   padding: 24px 32px;
   margin: 24px auto;
   max-width: 760px;
@@ -560,7 +469,6 @@ body {
 .timer-box {
   background: var(--glass-white);
   border: 1px solid var(--frost-border);
-  border-radius: 12px;
   padding: 10px 16px;
   min-width: 72px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
@@ -607,7 +515,6 @@ body {
 }
 
 .btn-secondary-snow {
-  background: var(--glass-white);
   border: 1px solid var(--frost-border);
   color: var(--text-primary);
   font-weight: 600;
@@ -644,7 +551,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 0 16px;
   background:
     radial-gradient(ellipse at 50% 10%, rgba(205, 235, 245, 0.6) 0%, transparent 60%),
     linear-gradient(180deg, var(--snow-bg-start) 0%, var(--snow-bg-mid) 100%);
@@ -704,7 +610,6 @@ body {
 }
 
 @keyframes pulseGreen {
-
   0%,
   100% {
     transform: scale(1);
@@ -1070,12 +975,6 @@ body {
   animation-play-state: paused;
 }
 
-@keyframes wheelRotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .wheel-segment {
   cursor: pointer;
   transition: opacity 0.3s ease, filter 0.3s ease;
@@ -1089,13 +988,10 @@ body {
 .wheel-segment-label {
   position: absolute;
   z-index: 3;
-  width: 30%;
   display: flex;
   flex-direction: column;
   gap: 3px;
   color: #fff;
-  font-size: clamp(.52rem, 1.25vw, .78rem);
-  line-height: 1.2;
   text-align: center;
   pointer-events: none;
   text-shadow: 0 1px 3px rgba(8, 25, 39, .38);
@@ -1111,31 +1007,9 @@ body {
   opacity: .92;
 }
 
-.label-hal {
-  top: 24%;
-  left: 54%;
-}
-
-.label-sangeet {
-  top: 57%;
-  left: 67%;
-}
-
 .label-wedding-one {
-  bottom: 10%;
-  left: 35%;
   color: #173a48;
   text-shadow: none;
-}
-
-.label-wedding-two {
-  top: 57%;
-  left: 4%;
-}
-
-.label-reception {
-  top: 24%;
-  left: 16%;
 }
 
 /* Center Frosted Hub */
@@ -1147,15 +1021,12 @@ body {
   width: min(38vw, 210px);
   height: min(38vw, 210px);
   border-radius: 50%;
-  background: rgba(247, 252, 255, 0.96);
   border: 4px solid var(--wedding-gold);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
   pointer-events: none;
   z-index: 5;
 }
@@ -1252,7 +1123,6 @@ body {
   padding: 12px 16px;
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
   transition: var(--transition-smooth);
 }
 
@@ -1269,7 +1139,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #F8FAFC;
   border: 1px solid #E2E8F0;
   border-radius: 12px;
   padding: 14px;
@@ -1285,11 +1154,6 @@ body {
   border: 1px solid #E2E8F0;
   cursor: pointer;
   transition: var(--transition-smooth);
-}
-
-.event-check-card:hover {
-  border-color: var(--royal-maroon);
-  background: #FEF2F2;
 }
 
 .event-check-card input[type="checkbox"] {
@@ -1363,7 +1227,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1457,7 +1320,6 @@ body {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
-  background: #F1F5F9;
 }
 
 .gallery-img-wrap img {
@@ -1465,10 +1327,6 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
-}
-
-.gallery-card:hover .gallery-img-wrap img {
-  transform: scale(1.05);
 }
 
 .gallery-card-caption {
@@ -1527,8 +1385,6 @@ body {
 
 .lightbox-close {
   position: absolute;
-  top: 24px;
-  right: 28px;
   font-size: 2.2rem;
   color: #FFF;
   background: transparent;
@@ -1677,8 +1533,6 @@ body {
    ========================================================================== */
 .floating-cassette-widget {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
   z-index: 950;
   display: flex;
   flex-direction: column;
@@ -1687,8 +1541,6 @@ body {
 }
 
 .cassette-toggle-pill {
-  background: linear-gradient(135deg, var(--train-blue), #0C3B47);
-  border: 1px solid var(--wedding-gold);
   border-radius: 50px;
   padding: 10px 18px;
   color: #FFF;
@@ -1702,12 +1554,6 @@ body {
 }
 
 .cassette-deck-card {
-  width: 310px;
-  background: #181C22;
-  border: 2px solid var(--wedding-gold);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1718,11 +1564,6 @@ body {
 }
 
 .cassette-tape-body {
-  height: 95px;
-  background: #EFE7D8;
-  border-radius: 8px;
-  border: 2px solid #8D7B68;
-  padding: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1731,20 +1572,14 @@ body {
 .cassette-tape-label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
   font-weight: 700;
-  color: #3E2723;
   border-bottom: 2px solid #C75B39;
 }
 
 .cassette-window {
-  height: 72px;
-  background: #2B211E;
-  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
 }
 
 /* === Redesigned Tape Reels === */
@@ -1755,18 +1590,7 @@ body {
 }
 
 .cassette-reel.reel-outer {
-  width: 54px;
-  height: 54px;
   border-radius: 50%;
-  background: conic-gradient(#4A3728 0deg 45deg,
-      #C4956A 45deg 90deg,
-      #4A3728 90deg 135deg,
-      #C4956A 135deg 180deg,
-      #4A3728 180deg 225deg,
-      #C4956A 225deg 270deg,
-      #4A3728 270deg 315deg,
-      #C4956A 315deg 360deg);
-  border: 3px solid #2B211E;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1778,10 +1602,7 @@ body {
 }
 
 .reel-inner {
-  width: 36px;
-  height: 36px;
   border-radius: 50%;
-  background: #EFE7D8;
   border: 2px solid #8D7B68;
   display: flex;
   align-items: center;
@@ -1789,20 +1610,8 @@ body {
 }
 
 .reel-hub {
-  width: 14px;
-  height: 14px;
   border-radius: 50%;
-  background: #3E2723;
   border: 2px solid #C4956A;
-}
-
-/* Legacy reel (no longer used but kept for safety) */
-.cassette-reel:not(.reel-outer) {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #FFF;
-  border: 4px solid #4E342E;
 }
 
 @keyframes reelSpin {
@@ -1817,13 +1626,11 @@ body {
 
 .cassette-title {
   font-size: 0.95rem;
-  color: var(--gold-glow);
   font-weight: 600;
 }
 
 .cassette-film {
   font-size: 0.75rem;
-  color: #BAE6FD;
 }
 
 .cassette-controls {
@@ -1834,9 +1641,7 @@ body {
 }
 
 .deck-btn {
-  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #FFF;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -1849,8 +1654,6 @@ body {
 .deck-btn-play {
   width: 42px;
   height: 42px;
-  background: var(--wedding-gold);
-  color: #111;
   font-weight: 700;
 }
 
@@ -1867,8 +1670,6 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: monospace;
-  font-size: 0.6rem;
-  color: #FFF;
   font-weight: 700;
   line-height: 1.2;
   opacity: 0.7;
@@ -1877,7 +1678,6 @@ body {
 .eq-bar {
   width: 4px;
   border-radius: 2px;
-  background: #38BDF8;
   height: 18px;
   transform: scaleY(0.2);
   transform-origin: bottom;
@@ -1929,7 +1729,6 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 0.85rem;
-  color: var(--gold-glow);
 }
 
 .vol-label {
@@ -1938,19 +1737,6 @@ body {
 }
 
 .cassette-volume-row input[type="range"] {
-  flex: 1;
-  accent-color: var(--wedding-gold);
-}
-
-.volume-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  color: #E2E8F0;
-}
-
-.volume-row input[type="range"] {
   flex: 1;
 }
 
@@ -1985,249 +1771,244 @@ body {
    ========================================================================== */
 
 @media (max-width: 768px) {
-
   /* Hero */
   .hero-wedding-section {
     min-height: 80vh;
     padding: 50px 16px;
-  }
+}
 
   .hero-main-title {
     font-size: clamp(2rem, 10vw, 3rem);
-  }
+}
 
   .hero-quote-box {
     padding: 16px 18px;
-  }
+}
 
   .hero-quote-text {
     font-size: 0.95rem;
-  }
+}
 
   .hero-cities-dual {
     gap: 8px;
-  }
+}
 
   .city-divider-train {
     font-size: 0.8rem;
-  }
+}
 
   .countdown-boxes {
     gap: 8px;
-  }
+}
 
   .timer-box {
     min-width: 60px;
     padding: 8px 10px;
-  }
+}
 
   .timer-num {
     font-size: 1.5rem;
-  }
+}
 
   .hero-cta-group {
     gap: 10px;
-  }
+}
 
   .btn-primary-festive,
   .btn-secondary-snow {
     font-size: 0.9rem;
     padding: 12px 22px;
-  }
+}
 
   /* Sections */
   .section-wrapper {
     padding: 60px 16px;
-  }
-
-  .section-title {
-    font-size: clamp(1.6rem, 7vw, 2.4rem);
-  }
+}
 
   /* Train coaches */
   .timeline-scroll-section {
     min-height: 250vh;
-  }
+}
 
   .train-coach-item {
     width: min(88vw, 360px);
     height: 240px;
-  }
+}
 
   .coach-panoramic-window {
     width: 100px;
     height: 75px;
-  }
+}
 
   .coach-title-clean {
     font-size: 0.98rem;
-  }
+}
 
   .coach-sub-clean {
     font-size: 0.78rem;
-  }
+}
 
   .train-locomotive {
     width: 300px;
     height: 200px;
-  }
+}
 
   .coach-nav-pills {
     display: none;
-  }
+}
 
   /* too small for mobile */
   .timeline-bottom-controls {
     gap: 12px;
-  }
+}
 
   .timeline-progress-track {
     max-width: 220px;
-  }
+}
 
   /* Celebration wheel */
   .celebration-wheel-outer {
     width: min(90vw, 340px);
     height: min(90vw, 340px);
-  }
+}
 
   .wheel-center-hub {
     width: 130px;
     height: 130px;
-  }
+}
 
   .hub-brand-names {
     font-size: 0.8rem;
-  }
+}
 
   .hub-status-text {
     font-size: 0.68rem;
-  }
+}
 
   .wheel-quick-pills {
     flex-direction: column;
     align-items: center;
-  }
+}
 
   .wheel-pill-link {
     font-size: 0.82rem;
-  }
+}
 
   /* RSVP */
   .rsvp-section-box {
     padding: 28px 18px;
-  }
+}
 
   .section-title {
     font-size: 1.8rem;
-  }
+}
 
   /* Gallery */
   .gallery-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+}
 
   /* Travel */
   .travel-grid {
     grid-template-columns: 1fr;
-  }
+}
 
   .hotels-grid {
     grid-template-columns: 1fr;
-  }
+}
 
   /* Spots */
   .city-spots-grid {
     grid-template-columns: 1fr;
-  }
+}
 
   /* Cassette widget */
   .cassette-deck-card {
     width: 270px;
-  }
+}
 
   .floating-cassette-widget {
     bottom: 12px;
     right: 12px;
-  }
+}
 
   /* Gopuram entrance */
   .gopuram-couple-names {
     font-size: clamp(1.8rem, 8vw, 2.6rem);
-  }
+}
 
   .gopuram-name-text {
     font-size: clamp(1.6rem, 8vw, 2.4rem);
-  }
+}
 
   .gopuram-name-panel {
     bottom: 50px;
-  }
+}
 
   .gopuram-cta-overlay {
     padding: 20px 16px;
     max-width: 96%;
-  }
+}
 }
 
 @media (max-width: 480px) {
   .festive-sub-badge {
     font-size: 0.75rem;
     padding: 4px 14px;
-  }
+}
 
   .nav-floating-pill {
     padding: 8px 16px;
-  }
+}
 
   .nav-names {
     font-size: 1rem;
-  }
+}
 
   .timer-box {
     min-width: 52px;
-  }
+}
 
   .timer-num {
     font-size: 1.3rem;
-  }
+}
 
   .train-coach-item {
     width: min(92vw, 340px);
     height: 220px;
-  }
+}
 
   .train-locomotive {
     width: 260px;
     height: 180px;
-  }
+}
 
   .section-title {
     font-size: 1.5rem;
-  }
+}
 
   .cassette-deck-card {
     width: 240px;
-  }
+}
 
   .cassette-reel.reel-outer {
     width: 46px;
     height: 46px;
-  }
+}
 
   .reel-inner {
     width: 30px;
     height: 30px;
-  }
+}
 
   .reel-hub {
     width: 12px;
     height: 12px;
-  }
+}
 
   .gopuram-name-text {
     font-size: clamp(1.4rem, 9vw, 2rem);
-  }
+}
 }
 
 /* ============================================================================
@@ -2239,7 +2020,6 @@ body {
   --snow-bg-end: #a9d3e2;
   --glass-white: rgba(247, 252, 255, 0.48);
   --glass-card-border: rgba(255, 255, 255, 0.72);
-  --glass-shadow: 0 16px 36px rgba(37, 83, 105, 0.12);
   --text-primary: #183746;
   --text-secondary: #416171;
   --text-muted: #617f8c;
@@ -2262,7 +2042,6 @@ body {
 .section-wrapper,
 .timeline-sticky-wrapper,
 .rsvp-section-box,
-.travel-card,
 .hotel-card,
 .spot-card,
 .gallery-card {
@@ -2280,10 +2059,10 @@ body {
   border-radius: 24px;
 }
 
-.temple-entrance-curtain {
-  /* sky -> paving colours of the gopuram photo, behind it while it loads */
-  background: linear-gradient(180deg, #5e9acc 0%, #a9c7dc 60%, #9a908b 100%);
-  /* coming back (Temple Gate button): visible at once, then fade in */
+.temple-entrance-curtain {/* sky -> paving colours of the gopuram photo, behind it while it loads */
+  
+  background: linear-gradient(180deg, #5e9acc 0%, #a9c7dc 60%, #9a908b 100%);/* coming back (Temple Gate button): visible at once, then fade in */
+  
   transition: opacity .85s cubic-bezier(.77, 0, .175, 1), visibility 0s linear 0s;
 }
 
@@ -2367,12 +2146,7 @@ body {
   max-width: 220px;
   padding: 12px 14px;
   gap: 2px;
-  background: rgba(103, 172, 191, 0.15);
-  border: 1px solid rgba(234, 247, 250, .58);
   border-radius: 18px;
-  box-shadow: 0 12px 26px rgba(9, 36, 47, .22);
-  backdrop-filter: blur(12px) saturate(120%);
-  -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
 .gopuram-name-bride {
@@ -2387,13 +2161,11 @@ body {
 }
 
 .gopuram-name-role {
-  color: #d9f0f5;
   font-size: .66rem;
   letter-spacing: 1.4px;
 }
 
 .gopuram-name-text {
-  color: #fff;
   font-size: clamp(1.45rem, 3.7vw, 2.65rem);
   line-height: 1.05;
   text-shadow: 0 2px 10px rgba(4, 24, 31, .52);
@@ -2479,7 +2251,6 @@ body {
 
 .floating-cassette-widget {
   right: 14px;
-  bottom: 14px;
 }
 
 .cassette-toggle-pill {
@@ -2604,75 +2375,70 @@ body {
 @media (max-width: 600px) {
   .gopuram-split-doors-wrapper {
     width: 100%;
-  }
+}
 
   .gopuram-name-panel {
     top: 38%;
     width: 80%;
     padding: 9px 10px;
     border-radius: 14px;
-  }
+}
 
   .gopuram-name-text {
     font-size: clamp(1.2rem, 6vw, 1.65rem);
-  }
+}
 
   .gopuram-name-role {
     font-size: .56rem;
-  }
+}
 
   .gopuram-name-city {
     font-size: .66rem;
-  }
+}
 
   .gopuram-badge-label {
     top: 3%;
-  }
+}
 
   .gopuram-cities-tag {
     bottom: max(1.1%, env(safe-area-inset-bottom));
     font-size: .64rem;
-  }
+}
 
   .hero-wedding-section {
     padding: 42px 14px 70px;
-  }
+}
 
   .hero-cities-dual {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-  }
+}
 
   .city-divider-train {
     grid-column: 1 / -1;
     grid-row: 2;
     font-size: .72rem;
-  }
+}
 
   .city-badge {
     padding: 7px 8px;
     font-size: .75rem;
-  }
+}
 
   .countdown-boxes {
     gap: 6px;
-  }
+}
 
   .timer-box {
     min-width: 0;
     flex: 1;
     padding: 9px 5px;
-  }
+}
 
   .timer-num {
     font-size: 1.35rem;
-  }
-
-  .floating-cassette-widget {
-    right: 10px;
-    bottom: 10px;
-  }
+}
 }
 
 .celebration-wheel-svg text {
@@ -2696,7 +2462,7 @@ body {
   .timeline-sticky-wrapper {
     height: 100svh;
     padding: 14px 0 10px;
-  }
+}
 
   .timeline-header-bar {
     padding: 0 16px;
@@ -2704,54 +2470,53 @@ body {
     align-items: center;
     gap: 8px;
     text-align: center;
-  }
+}
 
   .train-title-cluster {
     justify-content: center;
-  }
+}
 
   .train-service-name {
     font-size: 1.1rem;
-  }
+}
 
   .train-service-number {
     font-size: .72rem;
-  }
+}
 
   .train-station-indicator {
     padding: 5px 12px;
     font-size: .76rem;
-  }
+}
 
   .train-coaches-viewport {
     overflow: hidden;
-  }
+}
 
   .train-coaches-track {
-    gap: 18px;
     padding: 0 7vw;
-  }
+}
 
   .train-locomotive,
   .train-coach-item {
     width: min(86vw, 340px);
-  }
+}
 
   .train-locomotive {
     height: 218px;
     padding: 16px;
     border-radius: 28px 14px 14px;
-  }
+}
 
   .train-locomotive>div:first-child {
     gap: 8px;
     flex-wrap: wrap;
-  }
+}
 
   .locomotive-title {
     font-size: 1.15rem;
     line-height: 1.2;
-  }
+}
 
   .locomotive-route {
     display: grid;
@@ -2760,15 +2525,15 @@ body {
     padding: 7px 6px;
     font-size: .7rem;
     text-align: center;
-  }
+}
 
   .train-coach-item {
     height: 228px;
-  }
+}
 
   .coach-curved-roof {
     padding: 0 10px;
-  }
+}
 
   .coach-sr-tag {
     max-width: 48%;
@@ -2776,7 +2541,7 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: .58rem;
-  }
+}
 
   .coach-livery-stripes {
     overflow: hidden;
@@ -2785,118 +2550,67 @@ body {
     font-size: .58rem;
     letter-spacing: .7px;
     padding-inline: 8px;
-  }
-
-  .coach-windows-strip {
-    gap: 8px;
-    padding: 8px 10px;
-  }
-
-  .coach-panoramic-window {
-    width: 88px;
-    height: 68px;
-  }
-
-  .coach-year-badge {
-    font-size: .95rem;
-  }
+}
 
   .coach-title-clean {
-    font-size: .84rem;
     line-height: 1.18;
-  }
+}
 
   .coach-sub-clean {
-    font-size: .68rem;
     line-height: 1.25;
-  }
+}
 
   .coach-undercarriage {
     height: 34px;
     padding: 0 16px;
-  }
+}
 
   .train-wheel {
     width: 20px;
     height: 20px;
-  }
+}
 
   .bogie-set {
     gap: 7px;
-  }
+}
 
   .timeline-bottom-controls {
-    justify-content: center;
     padding: 0 14px;
     gap: 10px;
-  }
+}
 
   .celebration-wheel-outer {
     width: min(90vw, 340px);
     height: min(90vw, 340px);
-  }
+}
 
   .celebration-wheel-svg {
     animation: none;
-  }
+}
 
   .celebration-wheel-svg text {
     display: none;
-  }
-
-  .wheel-segment-label {
-    font-size: clamp(.5rem, 2.5vw, .7rem);
-    gap: 2px;
-  }
-
-  .label-hal {
-    top: 22%;
-    left: 54%;
-  }
-
-  .label-sangeet {
-    top: 65%;
-    left: 57%;
-  }
+}
 
   .label-wedding-one {
     bottom: 8%;
-    left: 35%;
-  }
-
-  .label-wedding-two {
-    top: 65%;
-    left: 13%;
-  }
-
-  .label-reception {
-    top: 22%;
-    left: 16%;
-  }
-
-  .wheel-center-hub {
-    width: 132px;
-    height: 132px;
-    padding: 14px;
-  }
+}
 
   .hub-brand-names {
-    font-size: .88rem;
     line-height: 1.25;
     white-space: normal;
-  }
+}
 
   .hub-status-text {
-    font-size: .68rem;
     line-height: 1.35;
     white-space: normal;
-  }
+}
 
   .wheel-quick-pills {
     width: 100%;
     gap: 8px;
     margin-top: 24px;
-  }
+}
 
   .wheel-pill-link {
     width: 100%;
@@ -2905,7 +2619,7 @@ body {
     text-align: center;
     white-space: normal;
     line-height: 1.35;
-  }
+}
 }
 
 /* ============================================================================
@@ -2914,8 +2628,8 @@ body {
    - touch-friendly sizes, no iOS zoom-on-focus, scrollable modals
    - avoids hover "stuck" states and heavy effects on touch devices
    ============================================================================ */
-:root {
-  /* floating nav height + gap: content below the nav must start after this */
+:root {/* floating nav height + gap: content below the nav must start after this */
+  
   --header-space: 84px;
 }
 
@@ -2977,20 +2691,45 @@ main>section[id] {
 @media (min-width: 1181px) {
   .site-nav-menu {
     gap: 18px;
-  }
+}
 
   .site-nav-menu a {
     font-size: .9rem;
-  }
+}
 
   /* the RSVP button sits right next to the links */
   .nav-item-rsvp {
     display: none;
-  }
+}
+}
+
+/* eight links: a wider bar on large screens, tighter links just above phone/tablet size */
+@media (min-width: 1300px) {
+  .nav-floating-pill {
+    max-width: 1260px;
+}
+}
+
+@media (min-width: 1181px) and (max-width: 1299px) {
+  .nav-floating-pill {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+  .site-nav-menu {
+    gap: 12px;
+}
+
+  .site-nav-menu a {
+    font-size: .85rem;
+}
+
+  .nav-names {
+    font-size: 1.1rem;
+}
 }
 
 @media (max-width: 1180px) {
-
   /* solid: the bar's own blur stops a nested blur from working, so a
      translucent menu let the page text show through the links */
   .site-nav-menu {
@@ -3000,7 +2739,7 @@ main>section[id] {
     border: 1px solid var(--frost-border);
     gap: 2px;
     padding: 10px;
-  }
+}
 
   .site-nav-menu a {
     display: block;
@@ -3008,15 +2747,15 @@ main>section[id] {
     border-radius: 12px;
     font-size: 1rem;
     text-align: center;
-  }
+}
 
   .site-nav-menu a::after {
     display: none;
-  }
+}
 
   .site-nav-menu a:active {
     background: rgba(2, 132, 199, .08);
-  }
+}
 
   .mobile-nav-toggle {
     width: 40px;
@@ -3024,12 +2763,12 @@ main>section[id] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
+}
 }
 
 /* ---- Pearl City Express timeline ---- */
-.timeline-sticky-wrapper {
-  /* clear the floating nav (top) and the music buttons (bottom) */
+.timeline-sticky-wrapper {/* clear the floating nav (top) and the music buttons (bottom) */
+  
   padding: var(--header-space) 0 76px;
 }
 
@@ -3045,44 +2784,17 @@ main>section[id] {
 @media (min-width: 769px) {
   .train-coach-item {
     height: 290px;
-  }
+}
 
   .coach-panoramic-window {
     width: 210px;
     height: 150px;
-  }
+}
 }
 
 /* ---- Celebration wheel: labels placed on each segment's centre line ---- */
 .wheel-segment-label {
-  width: 26%;
   transform: translate(-50%, -50%);
-}
-
-.label-hal {
-  left: 68.8%;
-  top: 24.1%;
-}
-
-.label-sangeet {
-  left: 82.3%;
-  top: 60.5%;
-}
-
-.label-wedding-one {
-  left: 50%;
-  top: 82%;
-  bottom: auto;
-}
-
-.label-wedding-two {
-  left: 17.7%;
-  top: 60.5%;
-}
-
-.label-reception {
-  left: 31.2%;
-  top: 24.1%;
 }
 
 /* ---- Forms: 16px inputs stop iOS Safari zooming in on focus ---- */
@@ -3119,59 +2831,59 @@ main>section[id] {
 @media (max-width: 600px) {
   :root {
     --header-space: 70px;
-  }
+}
 
   /* nav: crest + names, RSVP, temple icon, menu */
   .site-header {
     top: 8px;
     padding: 0 10px;
-  }
+}
 
   .nav-floating-pill {
     padding: 7px 8px 7px 10px;
     border-radius: 20px;
-  }
+}
 
   .nav-brand-link {
     gap: 8px;
-  }
+}
 
   .nav-crest {
     width: 34px;
     height: 34px;
     font-size: .85rem;
-  }
+}
 
   .nav-names {
     font-size: 1.02rem;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+}
 
   .nav-actions {
     gap: 6px;
-  }
+}
 
   .btn-nav-rsvp {
     padding: 8px 16px;
     font-size: .85rem;
-  }
+}
 
   .btn-nav-temple {
     width: 40px;
     height: 40px;
     padding: 0;
     font-size: 1.05rem;
-  }
+}
 
   .btn-nav-temple-text {
     display: none;
-  }
+}
 
   .site-nav-menu {
     left: 10px;
     right: 10px;
-  }
+}
 
   /* timeline: long rectangular coaches like real rakes. Each coach is wider
      than the screen: the photo window fills the screen first, and scrolling
@@ -3180,27 +2892,27 @@ main>section[id] {
   .timeline-sticky-wrapper {
     padding-top: var(--header-space);
     padding-bottom: max(14px, env(safe-area-inset-bottom));
-  }
+}
 
   .train-coaches-track {
     gap: 14px;
-  }
+}
 
   .train-locomotive,
-  .train-coach-item {
-    /* taller on taller phones, always leaving room for the focused lift */
+  .train-coach-item {/* taller on taller phones, always leaving room for the focused lift */
+    
     height: min(clamp(220px, 34svh, 300px), calc(100% - 16px));
     max-height: none;
-  }
+}
 
   .train-locomotive {
     width: min(78vw, 320px);
-  }
+}
 
-  .train-coach-item {
-    /* photo window (~screen) + story text (~2/3 screen) */
+  .train-coach-item {/* photo window (~screen) + story text (~2/3 screen) */
+    
     width: calc(min(78vw, 340px) + min(66vw, 300px) + 34px);
-  }
+}
 
   .coach-windows-strip {
     flex-direction: row;
@@ -3208,7 +2920,7 @@ main>section[id] {
     gap: 14px;
     padding: 10px;
     min-height: 0;
-  }
+}
 
   .coach-panoramic-window {
     width: min(78vw, 340px);
@@ -3217,35 +2929,35 @@ main>section[id] {
     max-height: none;
     aspect-ratio: auto;
     flex-shrink: 0;
-  }
+}
 
   .coach-milestone-brief {
     flex: 1;
     min-width: 0;
     padding-right: 6px;
-  }
+}
 
   .coach-year-badge {
     font-size: 1.15rem;
-  }
+}
 
   .coach-title-clean {
     font-size: 1.05rem;
-  }
+}
 
   .coach-sub-clean {
     font-size: .85rem;
-  }
+}
 
   .timeline-bottom-controls {
     padding-right: 116px;
     justify-content: flex-start;
-  }
+}
 
   /* music: compact round buttons so they don't cover page controls */
   .cassette-quick-actions .pill-text {
     display: none;
-  }
+}
 
   .cassette-toggle-pill,
   .quick-soundtrack-toggle {
@@ -3255,75 +2967,74 @@ main>section[id] {
     justify-content: center;
     border-radius: 50%;
     font-size: 1.05rem;
-  }
+}
 
   .floating-cassette-widget {
     right: 10px;
     bottom: max(10px, env(safe-area-inset-bottom));
-  }
+}
 
   /* gallery: two columns instead of one very long single column */
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-  }
+}
 
   .gallery-card {
     padding: 8px 8px 12px;
-  }
+}
 
   .gallery-card-caption {
     margin-top: 8px;
-  }
+}
 
   .gallery-card-caption strong {
     font-size: .86rem;
     line-height: 1.3;
-  }
+}
 
   .gallery-card-caption span {
     display: block;
     font-size: .74rem;
     line-height: 1.3;
-  }
+}
 }
 
 /* short phones (e.g. iPhone SE): keep the coach fully on screen */
 @media (max-width: 600px) and (max-height: 700px) {
   .train-service-number {
     display: none;
-  }
+}
 
   .train-title-cluster>span {
     font-size: 1.5rem !important;
-  }
+}
 
   .timeline-header-bar {
     gap: 4px;
-  }
+}
 }
 
 /* very short screens (old 4"/5" phones, landscape) */
 @media (max-width: 600px) and (max-height: 520px) {
   .train-station-indicator {
     display: none;
-  }
+}
 
   .train-locomotive,
   .train-coach-item {
     height: calc(100% - 12px);
-  }
+}
 }
 
 @media (max-width: 370px) {
   .nav-names {
     display: none;
-  }
+}
 }
 
 /* ---- Touch devices: no sticky hover lifts, no lag on the train ---- */
 @media (hover: none) {
-
   .gallery-card:hover,
   .spot-card:hover,
   .wheel-pill-link:hover,
@@ -3331,15 +3042,15 @@ main>section[id] {
   .btn-nav-rsvp:hover,
   .btn-submit-rsvp:hover {
     transform: none;
-  }
+}
 
   .gallery-card:hover .gallery-img-wrap img {
     transform: none;
-  }
+}
 
   .train-coaches-track {
     transition: none;
-  }
+}
 }
 
 /* ---- Respect "reduce motion" ----
@@ -3349,13 +3060,13 @@ main>section[id] {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
+}
 
   .station-pulse-dot,
   .is-playing .cassette-reel.reel-outer,
   .is-playing .eq-bar {
     animation: none !important;
-  }
+}
 }
 
 /* ---- Entrance gate on wide screens (16:9 photo) ----
@@ -3363,10 +3074,10 @@ main>section[id] {
    so it stays sharp. Any screen area around it is filled with a small,
    pre-blurred copy of the same photo (temple-gopuram-desktop-blur.jpg). */
 @media (min-width: 601px) {
-  :root {
-    /* fit inside the screen, but never larger than the photo's 1376px */
+  :root {/* fit inside the screen, but never larger than the photo's 1376px */
+    
     --gate-photo-width: min(1376px, 100cqw, calc(100cqh * 1376 / 768));
-  }
+}
 
   .gopuram-image-layer {
     background-image:
@@ -3376,7 +3087,7 @@ main>section[id] {
     background-size: 100% 100%, var(--gate-photo-width) auto, cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+}
 
   /* each door half is 200% wide (the full screen), so the same layers line up */
   .gopuram-door-half::before {
@@ -3386,17 +3097,17 @@ main>section[id] {
     background-size: var(--gate-photo-width) auto, cover;
     background-position: center;
     background-repeat: no-repeat;
-  }
+}
 
   /* invitation line first, then the journey pill under it */
   .gopuram-badge-label {
     top: 1.5%;
-  }
+}
 
   .gopuram-cities-tag {
     bottom: auto;
     top: calc(2% + 2.4rem);
-  }
+}
 }
 
 /* ============================================================================
@@ -3455,17 +3166,6 @@ main>section[id] {
 }
 
 /* ---- Bride / groom panels: darker glass so names read over the carvings ---- */
-/* .gopuram-name-panel {
-  background: rgba(9, 38, 48, .55);
-  border: 1px solid rgba(243, 202, 101, .6);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, .25);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.gopuram-name-role {
-  color: var(--gold-glow);
-} */
 
 .gopuram-name-panel {
   background: rgba(118, 187, 206, 0.15);
@@ -3485,8 +3185,8 @@ main>section[id] {
 }
 
 /* ---- Photo frame + doorway (percentages of the photo) ---- */
-.gopuram-cta-overlay {
-  /* phone: landscape photo (1200x896) covering the screen */
+.gopuram-cta-overlay {/* phone: landscape photo (1200x896) covering the screen */
+  
   --photo-w: max(100cqw, calc(100cqh * 1200 / 896));
   --photo-h: max(100cqh, calc(100cqw * 896 / 1200));
   --door-left: 47.2%;
@@ -3506,15 +3206,15 @@ main>section[id] {
 }
 
 @media (min-width: 601px) {
-  .gopuram-cta-overlay {
-    /* desktop: 16:9 photo (1376x768) at native size, centred */
+  .gopuram-cta-overlay {/* desktop: 16:9 photo (1376x768) at native size, centred */
+    
     --photo-w: var(--gate-photo-width);
     --photo-h: calc(var(--gate-photo-width) * 768 / 1376);
     --door-left: 48.1%;
     --door-top: 77.6%;
     --door-w: 4%;
     --door-h: 13.5%;
-  }
+}
 }
 
 /* The button IS the doorway opening */
@@ -3548,7 +3248,6 @@ main>section[id] {
 }
 
 @keyframes gateGlow {
-
   0%,
   100% {
     opacity: .65;
@@ -3579,7 +3278,6 @@ main>section[id] {
 }
 
 @keyframes bellIdle {
-
   0%,
   100% {
     transform: rotate(-4deg);
@@ -3686,11 +3384,10 @@ main>section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .gate-bell,
   .gate-door-glow {
     animation: none;
-  }
+}
 }
 
 /* ---- Entrance heading on phones ----
@@ -3700,17 +3397,17 @@ main>section[id] {
 @media (max-width: 600px) {
   .gate-heading {
     top: calc(env(safe-area-inset-top) + 10px);
-  }
+}
 
   .gate-heading .gopuram-badge-label {
     font-size: clamp(.8rem, 4.1vw, 1.05rem);
     letter-spacing: 1.2px;
     white-space: nowrap;
-  }
+}
 
   .gate-heading .gopuram-cities-tag {
     display: none;
-  }
+}
 }
 
 /* ============================================================================
@@ -3791,76 +3488,75 @@ main>section[id] {
    Mouse only: on touch screens a tap leaves a "stuck" hover, which froze the
    wheel after coming back from Google Maps. */
 @media (hover: hover) {
-
   .celebration-wheel-outer:hover .wheel-rotor,
   .celebration-wheel-outer:hover .wheel-segment-label,
   .celebration-wheel-outer.wheel-paused .wheel-rotor,
   .celebration-wheel-outer.wheel-paused .wheel-segment-label {
     animation-play-state: paused;
-  }
+}
 }
 
 /* Phones: the ring between hub and rim is only ~95px deep, so a smaller
    hub, smaller text, and the venue line may wrap under the date */
 @media (max-width: 600px) {
-  .celebration-wheel-outer {
-    /* HOW FAR THE LABELS SIT FROM THE CENTRE, as a % of the wheel's width.
+  .celebration-wheel-outer {/* HOW FAR THE LABELS SIT FROM THE CENTRE, as a % of the wheel's width.
        Bigger = closer to the outer edge, smaller = closer to the hub.
        Was 34 (halfway); 29 moves every label 5% inwards. Hub edge is ~15.5. */
+    
     --label-radius: 31;
-  }
+}
 
   .wheel-center-hub {
     width: 31%;
     height: 31%;
     padding: 8px;
-  }
+}
 
   .hub-brand-names {
     font-size: .7rem;
-  }
+}
 
   .hub-status-text {
     font-size: .5rem;
-  }
+}
 
   .wheel-segment-label {
     width: 22%;
     gap: 1px;
     font-size: clamp(.56rem, 2.5vw, .66rem);
     line-height: 1.2;
-  }
+}
 
   .wheel-segment-label span {
     white-space: normal;
-  }
+}
 
   /* position = centre + radius * (sin, -cos) of each segment's middle angle:
      Haldi 36deg, Sangeet 108deg, Wedding 1 180deg, Wedding 2 252deg, Reception 324deg */
   .label-hal {
     left: calc(50% + var(--label-radius) * 1% * sin(36deg));
     top: calc(50% - var(--label-radius) * 1% * cos(36deg));
-  }
+}
 
   .label-sangeet {
     left: calc(50% + var(--label-radius) * 1% * sin(108deg));
     top: calc(50% - var(--label-radius) * 1% * cos(108deg));
-  }
+}
 
   .label-wedding-one {
     left: 50%;
     top: calc(50% + var(--label-radius) * 1%);
-  }
+}
 
   .label-wedding-two {
     left: calc(50% + var(--label-radius) * 1% * sin(252deg));
     top: calc(50% - var(--label-radius) * 1% * cos(252deg));
-  }
+}
 
   .label-reception {
     left: calc(50% + var(--label-radius) * 1% * sin(324deg));
     top: calc(50% - var(--label-radius) * 1% * cos(324deg));
-  }
+}
 }
 
 /* No reduced-motion override: one turn a minute is gentle, and Windows'
@@ -3877,14 +3573,14 @@ main>section[id] {
   .coach-windows-strip {
     container-type: size;
     align-items: center;
-  }
+}
 
   .coach-panoramic-window {
     --win-size: 100cqh;
     width: var(--win-size);
     height: var(--win-size);
     aspect-ratio: 1 / 1;
-  }
+}
 }
 
 /* Per-photo framing, set on each <img> in index.html:
@@ -3900,7 +3596,7 @@ main>section[id] {
 @media (min-width: 769px) {
   .train-locomotive {
     height: 272px;
-  }
+}
 }
 
 /* Phones: the engine and coaches share one height; the focused coach keeps
@@ -3908,7 +3604,7 @@ main>section[id] {
 @media (max-width: 600px) {
   .train-coach-item.coach-focused {
     transform: none;
-  }
+}
 }
 
 /* Engine headlight: never squash the circle when the engine is short
@@ -3925,7 +3621,7 @@ main>section[id] {
     width: 30px;
     height: 30px;
     margin-bottom: 0.3px;
-  }
+}
 }
 
 /* ==========================================================================
@@ -3936,23 +3632,23 @@ main>section[id] {
    a faint blue tint pooling at the bottom. A light blur softens what's
    behind without turning it milky. All glass on the page reads these values:
    ========================================================================== */
-:root {
-  /* see-through amount: the first number is the top-left, the last the
+:root {/* see-through amount: the first number is the top-left, the last the
      bottom-right. Lower = clearer, higher = more frosted (old look ~.32) */
+  
   --glass-fill: linear-gradient(145deg,
       rgba(255, 255, 255, .2) 0%,
       rgba(255, 255, 255, .06) 40%,
       rgba(255, 255, 255, .04) 65%,
-      rgba(214, 238, 250, .14) 100%);
-  /* light sliding across the surface; set to "none" to remove */
+      rgba(214, 238, 250, .14) 100%);/* light sliding across the surface; set to "none" to remove */
+  
   --glass-glare:
     linear-gradient(125deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, 0) 24%),
-    radial-gradient(60% 40% at 100% 100%, rgba(255, 255, 255, .14) 0%, transparent 70%);
-  /* how much the background behind is softened: 0px = perfectly clear */
-  --glass-blur: blur(7px) saturate(135%) brightness(1.06);
-  /* rim colours: top, right, bottom, left (light comes from the top-left) */
-  --glass-rim: rgba(255, 255, 255, .75) rgba(255, 255, 255, .38) rgba(255, 255, 255, .3) rgba(255, 255, 255, .58);
-  /* edge light + thickness, then the drop shadow */
+    radial-gradient(60% 40% at 100% 100%, rgba(255, 255, 255, .14) 0%, transparent 70%);/* how much the background behind is softened: 0px = perfectly clear */
+  
+  --glass-blur: blur(7px) saturate(135%) brightness(1.06);/* rim colours: top, right, bottom, left (light comes from the top-left) */
+  
+  --glass-rim: rgba(255, 255, 255, .75) rgba(255, 255, 255, .38) rgba(255, 255, 255, .3) rgba(255, 255, 255, .58);/* edge light + thickness, then the drop shadow */
+  
   --glass-shadow:
     inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .95),
     inset -1px -1px .5px -.5px rgba(255, 255, 255, .55),
@@ -3964,8 +3660,8 @@ main>section[id] {
     inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .95),
     inset -1px -1px .5px -.5px rgba(255, 255, 255, .5),
     inset 0 -8px 14px -10px rgba(80, 145, 182, .4),
-    0 6px 16px -6px rgba(16, 42, 67, .3);
-  /* fields inside a glass card (inputs, checkbox rows, photo mats) */
+    0 6px 16px -6px rgba(16, 42, 67, .3);/* fields inside a glass card (inputs, checkbox rows, photo mats) */
+  
   --glass-field: rgba(255, 255, 255, .34);
 }
 
@@ -3973,7 +3669,7 @@ main>section[id] {
 @media (max-width: 600px) {
   :root {
     --glass-blur: blur(6px) saturate(135%) brightness(1.06);
-  }
+}
 }
 
 /* Section backgrounds become see-through: glass only frosts one layer deep,
@@ -4135,7 +3831,7 @@ main>section[id] {
   .hero-quote-box::after {
     background-position: calc(100% - 3px) 3px, calc(100% - 4px) 30px, 4px calc(100% - 4px);
     background-size: 18px 20px, 9px 10px, 13px 14px;
-  }
+}
 }
 
 .timer-box:nth-child(3)::after {
@@ -4187,12 +3883,75 @@ main>section[id] {
   .gallery-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 18px;
-  }
+}
 }
 
 /* phones (two columns): "Save the Date" spans the full width as the finale */
 @media (max-width: 600px) {
   .gallery-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
+}
+}
+/* ==========================================================================
+   Soundtrack playing: a soft gold light runs round the border of the
+   "Our soundtrack" and play / pause buttons, with a gentle glow behind.
+   The light is a turning gradient under the button's face, leaving a thin
+   ring showing at the edge: only a rotation, so the phone's GPU does it.
+   ========================================================================== */
+.floating-cassette-widget.is-playing :is(.cassette-toggle-pill, .quick-soundtrack-toggle) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(243, 202, 101, .55);
+  box-shadow: 0 0 14px 1px rgba(243, 202, 101, .45), 0 8px 20px rgba(21, 69, 82, .2);
+}
+
+/* the turning light: a gradient square larger than the widest button */
+.floating-cassette-widget.is-playing :is(.cassette-toggle-pill, .quick-soundtrack-toggle)::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  height: 260px;
+  margin: -130px 0 0 -130px;
+  background: conic-gradient(rgba(243, 202, 101, 0) 0deg 200deg,
+      rgba(255, 236, 190, .95) 300deg, #F3CA65 330deg, rgba(243, 202, 101, 0) 360deg);
+  animation: ringTurn 3.2s linear infinite;
+  pointer-events: none;
+}
+
+/* the button's face, 2px in from the edge */
+.floating-cassette-widget.is-playing :is(.cassette-toggle-pill, .quick-soundtrack-toggle)::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  border-radius: inherit;
+  background: var(--ring-face);
+  pointer-events: none;
+}
+
+.cassette-toggle-pill {
+  --ring-face: rgb(24, 82, 98);
+}
+
+.quick-soundtrack-toggle {
+  --ring-face: rgb(34, 100, 117);
+}
+
+.quick-soundtrack-toggle:hover,
+.quick-soundtrack-toggle:focus-visible {
+  --ring-face: #5d8b99;
+}
+
+@keyframes ringTurn {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-cassette-widget.is-playing :is(.cassette-toggle-pill, .quick-soundtrack-toggle)::before {
+    animation: none;
   }
 }

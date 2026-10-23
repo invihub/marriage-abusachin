@@ -32,6 +32,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: List the soundtrack songs (js/songs.js)
+        run: node scripts/build-songs.mjs
+
       - name: Generate js/config.js from secrets
         run: node scripts/build-config.mjs
         env:
@@ -42,7 +45,7 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp -r index.html css js images _site/
+          cp -r index.html css js images songs _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:
