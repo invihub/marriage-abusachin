@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-bg="original">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#cce8f2">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Guest List · Abu & Sachin</title>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/backgrounds.css">
+  <link rel="stylesheet" href="css/organizer.css">
+
+  <script>
+    // Only for organizers: the site opened once with ?organizer=true on this
+    // device (or this page with it). Everyone else goes to the invitation.
+    // The guest list itself is behind the password (js/organizer.js).
+    (function () {
+      var ok = /[?&]organizer=true/i.test(location.search);
+      try {
+        if (ok) localStorage.setItem('as-organizer', '1');
+        ok = ok || localStorage.getItem('as-organizer') === '1';
+      } catch (e) { /* storage blocked: only the ?organizer=true link works */ }
+      if (ok) document.documentElement.classList.add('is-organizer');
+      else location.replace('index.html');
+    })();
+  </script>
+</head>
+
+<body class="organizer-page">
+
+  <!-- Same menu as the invitation; its links lead back into it -->
+  <header class="site-header">
+    <div class="nav-floating-pill">
+
+      <a href="index.html#hero" class="nav-brand-link">
+        <div class="nav-crest">A&S</div>
+        <span class="nav-names">Abu & Sachin</span>
+      </a>
+
+      <nav>
+        <ul class="site-nav-menu" id="site-nav-menu">
+          <li><a href="index.html#hero">Invitation</a></li>
+          <li><a href="index.html#timeline-journey">Pearl Express</a></li>
+          <li><a href="index.html#celebration-wheel-section">Celebration Wheel</a></li>
+          <li class="nav-item-rsvp"><a href="index.html#rsvp-section">RSVP</a></li>
+          <li><a href="index.html#sangeet-mixtape">Mixtape</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="index.html#travel-transit">Travel</a></li>
+          <li><a href="index.html#iconic-places">Iconic Places</a></li>
+          <li class="nav-item-organizer"><a href="organizer.html" aria-current="page">Guest List</a></li>
+          <li class="nav-item-story"><a href="story.html">Our Story ▶</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#rsvp-section" class="btn-nav-rsvp">RSVP</a>
+        <a href="index.html" class="btn-nav-temple" title="View Temple Opening" aria-label="Temple gate: open the invitation from the start">
+          <span aria-hidden="true">🛕</span><span class="btn-nav-temple-text">Temple Gate</span>
+        </a>
+        <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu"
+          aria-controls="site-nav-menu" aria-expanded="false">☰</button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="org-main">
+
+    <a href="index.html" class="org-back" data-back-link><span aria-hidden="true">←</span> Back to the invitation</a>
+
+    <div class="section-title-cluster org-title">
+      <span class="section-pretitle">For the families · Private</span>
+      <h1 class="section-title">Guest List</h1>
+      <p class="section-desc" id="org-subtitle">Who is coming to each ceremony, from the RSVPs.</p>
+    </div>
+
+    <!-- Sign in: the password is checked by Supabase, never in this page -->
+    <section id="org-login" class="org-card org-login" hidden>
+      <form id="org-login-form" novalidate>
+        <label for="org-password" class="form-label">Organizers' password</label>
+        <input type="password" id="org-password" class="form-input" autocomplete="current-password" required>
+        <p id="org-login-error" class="rsvp-form-error" role="alert" hidden></p>
+        <button type="submit" id="org-login-btn" class="btn-submit-rsvp">Open the guest list</button>
+      </form>
+    </section>
+
+    <!-- The RSVPs (filled in by js/organizer.js) -->
+    <div id="org-board" class="org-board" hidden>
+
+      <div class="org-toolbar">
+        <span id="org-updated" class="org-updated"></span>
+        <button type="button" id="org-refresh" class="org-text-btn">↻ Refresh</button>
+        <button type="button" id="org-signout" class="org-text-btn">Sign out</button>
+      </div>
+
+      <div class="org-totals">
+        <div class="org-card org-total">
+          <strong id="org-total-guests">0</strong>
+          <span>guests, about</span>
+        </div>
+        <div class="org-card org-total">
+          <strong id="org-total-families">0</strong>
+          <span>RSVPs</span>
+        </div>
+        <div class="org-card org-total">
+          <strong id="org-total-wishes">0</strong>
+          <span>wishes</span>
+        </div>
+      </div>
+
+      <section class="org-section" aria-labelledby="org-events-heading">
+        <h2 class="org-heading" id="org-events-heading">Each ceremony</h2>
+        <p class="org-hint">Tap a ceremony to see who is coming to it.</p>
+        <div class="org-events" id="org-events"></div>
+      </section>
+
+      <section class="org-section" id="org-guests-section" aria-labelledby="org-guests-heading">
+        <h2 class="org-heading" id="org-guests-heading">Who's coming</h2>
+        <div class="org-card org-guests-card">
+          <div class="org-filters">
+            <input type="search" id="org-search" class="form-input" placeholder="Search a name or a wish"
+              aria-label="Search guests">
+            <div class="org-chips" id="org-chips" role="group" aria-label="Show guests coming to"></div>
+          </div>
+          <p class="org-count" id="org-count" aria-live="polite"></p>
+          <ul class="org-guests" id="org-guests"></ul>
+          <button type="button" id="org-export" class="btn-secondary-snow org-export">
+            Download the list (spreadsheet)
+          </button>
+        </div>
+      </section>
+
+      <section class="org-section" id="org-wishes-section" aria-labelledby="org-wishes-heading">
+        <h2 class="org-heading" id="org-wishes-heading">Wishes for Abu &amp; Sachin</h2>
+        <div class="org-wishes" id="org-wishes"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Generated from environment variables: node scripts/build-config.mjs -->
+  <script src="js/config.js"></script>
+  <script src="js/back-link.js"></script>
+  <!-- the shared menu (phone menu button) -->
+  <script src="js/main.js"></script>
+  <script src="js/organizer.js"></script>
+
+</body>
+
+</html>

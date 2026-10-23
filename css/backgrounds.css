@@ -415,7 +415,7 @@ html[data-bg="aurora"] {
 }
 
 html[data-bg="aurora"] :is(.nav-names, .timer-num, .spot-title, .footer-family-invitation,
-  .city-divider-train, .transit-title, .hotel-name) {
+  .city-divider-train, .transit-title) {
   color: var(--aurora-gold);
 }
 
@@ -423,7 +423,7 @@ html[data-bg="aurora"] :is(.hero-quote-caption, .city-badge.city-chennai) {
   color: var(--aurora-rose);
 }
 
-html[data-bg="aurora"] :is(.festive-sub-badge, .city-badge.city-tuticorin, .btn-hotel-map, .btn-nav-temple) {
+html[data-bg="aurora"] :is(.festive-sub-badge, .city-badge.city-tuticorin, .btn-nav-temple) {
   color: var(--aurora-sky);
 }
 
@@ -451,9 +451,10 @@ html[data-bg="aurora"] .form-select option {
   color: #1e293b;
 }
 
-/* surfaces that stay light keep the dark text: the wheel's centre, the
-   RSVP confirmation pop-up and the music player */
-html[data-bg="aurora"] :is(.wheel-center-hub, .rsvp-confirm-card, .floating-cassette-widget) {
+/* surfaces that stay light keep the dark text: the RSVP confirmation
+   pop-up and the music player (the wheel's centre is smoked glass with
+   its own white text, set in style.css) */
+html[data-bg="aurora"] :is(.rsvp-confirm-card, .floating-cassette-widget) {
   --text-primary: #1E293B;
   --text-secondary: #475569;
   --text-muted: #64748B;

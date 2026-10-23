@@ -16,8 +16,8 @@ class WeddingGallery {
   }
 
   init() {
-    // Bind click events on gallery cards
-    document.querySelectorAll('.gallery-card').forEach(card => {
+    // Bind click events on gallery photos (the film card below them is a link)
+    document.querySelectorAll('.gallery-grid .gallery-card').forEach(card => {
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
         const caption = card.querySelector('.gallery-card-caption');

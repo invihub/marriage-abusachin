@@ -1,0 +1,391 @@
+/* ==========================================================================
+   Our Story (story.html): the invitation film, played by scrolling
+   The film sits on a fixed stage; the page underneath is only a tall
+   spacer, so scrolling moves the film instead of the page.
+   ========================================================================== */
+
+:root {
+  --story-bg: #1a1220;
+  --story-ink: #fff8ee;
+  --story-muted: rgba(255, 248, 238, .74);
+  --story-gold: #f3ca65;
+  --story-gold-deep: #c59b27;
+  --story-maroon: #8b1e28;
+  --story-glass: rgba(24, 16, 30, .42);
+  --story-glass-edge: rgba(255, 255, 255, .24);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* gap between the screen edge and the buttons */
+  --story-edge: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--story-bg);
+  /* the film follows the scroll itself; native smooth scrolling would lag it */
+  scroll-behavior: auto;
+  overscroll-behavior-y: none;
+}
+
+body {
+  background: var(--story-bg);
+  color: var(--story-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Stage: the film, centred and as large as fits; a blurred copy of the
+   current frame fills the rest of the screen
+   -------------------------------------------------------------------------- */
+.story-stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--story-bg);
+}
+
+.story-backdrop {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  filter: blur(26px) saturate(1.15) brightness(.6);
+}
+
+/* the film's box: size set by js/story.js to fit the screen. The frames
+   (canvas) and the real video (while playing) fill it, one over the other */
+.story-screen {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.story-frame,
+.story-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.story-video {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.story-video.is-visible {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Glass pills (back link, Play, Watch again)
+   -------------------------------------------------------------------------- */
+.story-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--story-glass-edge);
+  border-radius: 999px;
+  background: var(--story-glass);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  backdrop-filter: blur(12px) saturate(1.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .18);
+  color: var(--story-ink);
+  font: 600 .9rem/1 var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.story-pill:hover {
+  background: rgba(24, 16, 30, .58);
+  border-color: rgba(243, 202, 101, .55);
+}
+
+.story-pill:focus-visible,
+.story-cta:focus-visible,
+.story-rail:focus-visible {
+  outline: 2px solid var(--story-gold);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Top: back to the invitation, Play / Pause
+   -------------------------------------------------------------------------- */
+.story-top {
+  position: fixed;
+  top: max(var(--story-edge), env(safe-area-inset-top));
+  left: max(var(--story-edge), env(safe-area-inset-left));
+  right: max(var(--story-edge), env(safe-area-inset-right));
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.story-top > * {
+  pointer-events: auto;
+}
+
+.story-play-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--story-gold), var(--story-gold-deep));
+  color: #2b1a05;
+  font-size: .62rem;
+  padding-left: 2px;
+}
+
+.story-play[aria-pressed="true"] .story-play-icon {
+  padding-left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom: status / end buttons, chapter name, progress rail
+   -------------------------------------------------------------------------- */
+.story-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 36px max(var(--story-edge), env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(var(--story-edge), env(safe-area-inset-left));
+  /* soft shade so the text reads over light frames on small phones */
+  background: linear-gradient(to top, rgba(10, 6, 14, .55), rgba(10, 6, 14, .25) 60%, transparent);
+  pointer-events: none;
+}
+
+.story-bar > * {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 560px;
+}
+
+.story-bar > .story-sound {
+  width: auto;
+}
+
+.story-sound[hidden] {
+  display: none;
+}
+
+.story-status {
+  text-align: center;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--story-muted);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .6);
+  transition: opacity .5s ease;
+}
+
+.story-status.is-hidden {
+  opacity: 0;
+}
+
+/* bouncing arrow under "Scroll to play our story" */
+.story-status .story-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  animation: story-nudge 1.6s ease-in-out infinite;
+}
+
+.story-status .story-arrow[hidden],
+.story-status[hidden] {
+  display: none;
+}
+
+@keyframes story-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.story-chapter {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--story-ink);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* the rail is a tall touch target around a thin line */
+.story-rail {
+  position: relative;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  touch-action: none;
+  border-radius: 6px;
+}
+
+.story-rail-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .26);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+}
+
+.story-rail-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--story-gold-deep), var(--story-gold));
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* chapter dots (added by js/story.js) */
+.story-tick {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .55);
+  box-shadow: 0 0 0 2px rgba(26, 18, 32, .55);
+  transition: background .3s ease, transform .3s ease;
+}
+
+.story-tick.is-passed {
+  background: var(--story-gold);
+}
+
+.story-tick.is-current {
+  transform: scale(1.35);
+}
+
+/* --------------------------------------------------------------------------
+   End of the film: open the invitation / watch again
+   -------------------------------------------------------------------------- */
+.story-end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  animation: story-rise .6s cubic-bezier(.16, 1, .3, 1);
+}
+
+.story-end[hidden] {
+  display: none;
+}
+
+@keyframes story-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.story-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--story-maroon), #9b1b30);
+  box-shadow: 0 8px 22px rgba(139, 30, 40, .45), inset 0 1px 0 rgba(255, 255, 255, .2);
+  color: #fff;
+  font: 700 .95rem/1 var(--font-sans);
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   The tall spacer that scrolling moves through
+   -------------------------------------------------------------------------- */
+.story-scroll {
+  /* --story-screens is set by js/story.js from the film length */
+  height: calc((var(--story-screens, 57) + 1) * 100vh);
+}
+
+@supports (height: 100lvh) {
+  .story-scroll {
+    height: calc((var(--story-screens, 57) + 1) * 100lvh);
+  }
+}
+
+.story-noscript {
+  position: fixed;
+  inset: auto 16px 40%;
+  z-index: 20;
+  text-align: center;
+  color: var(--story-ink);
+}
+
+.story-noscript a {
+  color: var(--story-gold);
+}
+
+/* --------------------------------------------------------------------------
+   Larger screens: the film is a tall panel in the middle
+   -------------------------------------------------------------------------- */
+@media (min-width: 700px) {
+  :root {
+    --story-edge: 22px;
+  }
+
+  .story-screen {
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+  }
+
+  .story-bar {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .story-chapter {
+    font-size: 1.15rem;
+  }
+}
+
+/* Short phones (and landscape): keep the bar compact */
+@media (max-height: 640px) {
+  .story-bar {
+    gap: 2px;
+    padding-top: 24px;
+  }
+
+  .story-chapter {
+    font-size: .95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-status .story-arrow,
+  .story-end {
+    animation: none;
+  }
+}

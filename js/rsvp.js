@@ -138,11 +138,10 @@ class RsvpSystem {
 
   getEventNamesMap() {
     return {
-      'haldi': 'Dec 5 · Haldi Ceremony (Thoothukudi)',
-      'sangeet': 'Dec 5 · Sangeet & Musical Night (Thoothukudi)',
+      'haldi_sangeet': 'Dec 5 · Haldi & Sangeet (Thoothukudi)',
       'wedding_thoothukudi': 'Dec 6 · Wedding Tradition 1 (Thoothukudi)',
-      'wedding_chennai': 'Dec 10 · Wedding Tradition 2 (Chennai)',
-      'reception_chennai': 'Dec 11 · Grand Reception at The Leela Palace (Chennai)'
+      'wedding_marakkanam': 'Dec 10 · Wedding Tradition 2 (Marakkanam)',
+      'reception_chennai': 'Dec 11 · Reception (Chennai)'
     };
   }
 

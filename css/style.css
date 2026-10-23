@@ -970,6 +970,52 @@ body {
   cursor: pointer;
 }
 
+/* ---- WHEEL COLOURS: change them here ----
+   Each segment fades from --wheel-N-bright at the rim to --wheel-N-deep at
+   the centre. 1 = Haldi & Sangeet (yellow), 2 = Wedding 1 (red),
+   3 = Wedding 2 (blue), 4 = Reception (green).
+   Haldi & Sangeet is light (yellow), so its label text is dark: see
+   .label-haldi-sangeet further down. The Guest List page uses matching
+   colours (colour / ink in js/organizer.js).
+   Tip: keep bright and deep close together for a flatter, calmer colour;
+   move them apart for more shine. For brighter or duller overall, make
+   both of a pair lighter or darker.
+   (First version, dull: #C59B27 gold, #9B1B30 red, #0284C7 blue, #0D4E5B teal.
+    Second version, too bright: yellow #FFE45C/#F5B80F, pink #FF5577/#D01B45,
+    blue #3F8EFA/#0A4FC4, green #2FCB63/#0A8034.) */
+:root {
+  --wheel-1-bright: #E2B52E;
+  --wheel-1-deep: #C99A1B;
+  --wheel-2-bright: #C4283F;
+  --wheel-2-deep: #9E1A31;
+  --wheel-3-bright: #1676C4;
+  --wheel-3-deep: #0A5A9E;
+  --wheel-4-bright: #2A9150;
+  --wheel-4-deep: #176B3A;
+}
+
+/* soft white edges between the segments, like the rim of the site's glass cards */
+.wheel-seg-shape {
+  stroke: rgba(255, 255, 255, .6);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+/* a still glass sheen over the turning wheel: light from the top-left, a
+   bright edge all round. It sits under the centre hub and ignores taps. */
+.celebration-wheel-outer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, .05) 36%, rgba(255, 255, 255, 0) 54%),
+    radial-gradient(circle at 50% 50%, transparent 66%, rgba(255, 255, 255, .1) 100%);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .35);
+}
+
 .celebration-wheel-outer.wheel-paused .celebration-wheel-svg,
 .celebration-wheel-outer:hover .celebration-wheel-svg {
   animation-play-state: paused;
@@ -994,7 +1040,7 @@ body {
   color: #fff;
   text-align: center;
   pointer-events: none;
-  text-shadow: 0 1px 3px rgba(8, 25, 39, .38);
+  text-shadow: 0 1px 3px rgba(8, 25, 39, .5);
 }
 
 .wheel-segment-label strong {
@@ -1007,8 +1053,8 @@ body {
   opacity: .92;
 }
 
-.label-wedding-one {
-  color: #173a48;
+.label-haldi-sangeet {
+  color: #3B2A06;
   text-shadow: none;
 }
 
@@ -1393,13 +1439,12 @@ body {
 }
 
 /* ==========================================================================
-   9. Travel Plans & Hotel Stays
+   9. Travel Plans
    ========================================================================== */
 .travel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin-bottom: 40px;
 }
 
 .transit-card {
@@ -1424,47 +1469,6 @@ body {
   gap: 8px;
   font-size: 0.9rem;
   color: var(--text-secondary);
-}
-
-.hotels-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.hotel-card {
-  background: var(--glass-white);
-  border: 1px solid var(--frost-border);
-  border-radius: 14px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-  box-shadow: var(--glass-shadow);
-}
-
-.hotel-name {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--text-primary);
-}
-
-.hotel-location {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-.btn-hotel-map {
-  align-self: flex-start;
-  padding: 6px 14px;
-  background: #E0F2FE;
-  border: 1px solid #BAE6FD;
-  border-radius: 20px;
-  color: #0369A1;
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
 }
 
 /* ==========================================================================
@@ -1913,10 +1917,6 @@ body {
     grid-template-columns: 1fr;
 }
 
-  .hotels-grid {
-    grid-template-columns: 1fr;
-}
-
   /* Spots */
   .city-spots-grid {
     grid-template-columns: 1fr;
@@ -2042,7 +2042,6 @@ body {
 .section-wrapper,
 .timeline-sticky-wrapper,
 .rsvp-section-box,
-.hotel-card,
 .spot-card,
 .gallery-card {
   background: var(--glass-white);
@@ -2592,10 +2591,6 @@ body {
     display: none;
 }
 
-  .label-wedding-one {
-    bottom: 8%;
-}
-
   .hub-brand-names {
     line-height: 1.25;
     white-space: normal;
@@ -2642,6 +2637,20 @@ html {
 html.gate-closed,
 html.gate-closed body {
   overflow: hidden;
+}
+
+/* Back from Our Story / the Guest List: no gate (see the script in <head>) */
+html.gate-skip .temple-entrance-curtain {
+  display: none;
+}
+
+/* Organizers (?organizer=true): "Guest List" joins the menu after Iconic Places */
+.nav-item-organizer {
+  display: none;
+}
+
+html.is-organizer .nav-item-organizer {
+  display: list-item;
 }
 
 .temple-entrance-curtain {
@@ -2699,6 +2708,11 @@ main>section[id] {
 
   /* the RSVP button sits right next to the links */
   .nav-item-rsvp {
+    display: none;
+}
+
+  /* no room for a ninth link; the hero's "Watch Our Story" button leads there */
+  .nav-item-story {
     display: none;
 }
 }
@@ -3416,7 +3430,7 @@ main>section[id] {
    still. Each label is pinned to its segment's centre line and turns the
    opposite way at the same speed, so it travels with its segment but always
    stays upright and readable.
-   Label positions: segment centre angles are 36°, 108°, 180°, 252°, 324°
+   Label positions: segment centre angles are 45°, 135°, 225°, 315°
    (clockwise from the top), at 34% of the wheel's width from the centre,
    halfway between the hub and the rim:
      left = 50% + 34% * sin(a),  top = 50% - 34% * cos(a)
@@ -3442,30 +3456,25 @@ main>section[id] {
   white-space: nowrap;
 }
 
-.label-hal {
-  left: 70%;
-  top: 22.5%;
-}
-
-.label-sangeet {
-  left: 82.3%;
-  top: 60.5%;
+.label-haldi-sangeet {
+  left: 74%;
+  top: 26%;
 }
 
 .label-wedding-one {
-  left: 50%;
-  top: 84%;
+  left: 74%;
+  top: 74%;
   bottom: auto;
 }
 
 .label-wedding-two {
-  left: 17.7%;
-  top: 60.5%;
+  left: 26%;
+  top: 74%;
 }
 
 .label-reception {
-  left: 30%;
-  top: 22.5%;
+  left: 26%;
+  top: 26%;
 }
 
 @keyframes wheelTurn {
@@ -3532,30 +3541,25 @@ main>section[id] {
 }
 
   /* position = centre + radius * (sin, -cos) of each segment's middle angle:
-     Haldi 36deg, Sangeet 108deg, Wedding 1 180deg, Wedding 2 252deg, Reception 324deg */
-  .label-hal {
-    left: calc(50% + var(--label-radius) * 1% * sin(36deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(36deg));
-}
-
-  .label-sangeet {
-    left: calc(50% + var(--label-radius) * 1% * sin(108deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(108deg));
+     Haldi & Sangeet 45deg, Wedding 1 135deg, Wedding 2 225deg, Reception 315deg */
+  .label-haldi-sangeet {
+    left: calc(50% + var(--label-radius) * 1% * sin(45deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(45deg));
 }
 
   .label-wedding-one {
-    left: 50%;
-    top: calc(50% + var(--label-radius) * 1%);
+    left: calc(50% + var(--label-radius) * 1% * sin(135deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(135deg));
 }
 
   .label-wedding-two {
-    left: calc(50% + var(--label-radius) * 1% * sin(252deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(252deg));
+    left: calc(50% + var(--label-radius) * 1% * sin(225deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(225deg));
 }
 
   .label-reception {
-    left: calc(50% + var(--label-radius) * 1% * sin(324deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(324deg));
+    left: calc(50% + var(--label-radius) * 1% * sin(315deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(315deg));
 }
 }
 
@@ -3687,7 +3691,6 @@ main>section[id] {
 .rsvp-section-box,
 .gallery-card,
 .transit-card,
-.hotel-card,
 .spot-card {
   background: var(--glass-glare), var(--glass-fill);
   border: 1px solid;
@@ -3745,16 +3748,53 @@ main>section[id] {
   -webkit-backdrop-filter: blur(5px) saturate(170%) brightness(1.1);
 }
 
-/* wheel hub: a clear glass lens over the turning wheel, gold ring kept.
-   A little more white than the cards so the hub text stays readable. */
+/* wheel hub: a smoked-glass lens over the turning wheel, in a silver ring
+   (the big outer ring stays gold). The glass is kept inside the ring
+   (background-clip), so the ring is an even band all the way round: before,
+   the glass and its white highlight were painted under the ring and made
+   its top-left look lighter and uneven.
+   Dark enough that the white venue text stays readable over every segment.
+   (Before, a milky white glass: rgba(255, 255, 255, .46) with maroon / grey text.)
+
+   SILVER RING: the colours of --hub-ring, light and dark silver in turn.
+   It is a separate thin layer (::before below), so only the 4px edge is silver. */
 .wheel-center-hub {
-  background: var(--glass-glare), rgba(255, 255, 255, .46);
+  --hub-ring: conic-gradient(from 200deg, #F7F9FB, #B7BFC9, #8E98A5, #E4E9EE, #FFFFFF, #AAB3BE, #F7F9FB);
+  border: 4px solid transparent;
+  overflow: visible;
+  background:
+    var(--glass-glare),
+    linear-gradient(rgba(9, 38, 64, .62), rgba(9, 38, 64, .62));
+  background-clip: padding-box;
   box-shadow:
-    inset 2px 2px 1px -1px rgba(255, 255, 255, .95),
-    inset 0 -14px 24px -16px rgba(80, 145, 182, .5),
-    0 10px 30px rgba(15, 23, 42, .25);
-  backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
-  -webkit-backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
+    inset 2px 2px 1px -1px rgba(255, 255, 255, .6),
+    inset 0 -14px 24px -16px rgba(0, 0, 0, .4),
+    0 10px 30px rgba(15, 23, 42, .3);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
+}
+
+/* the silver ring: a full circle of --hub-ring with the middle cut out */
+.wheel-center-hub::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--hub-ring);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  pointer-events: none;
+}
+
+/* the couple's names in gold (like the outer ring), the details in white */
+.wheel-center-hub .hub-brand-names {
+  color: var(--gold-glow);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .45);
+}
+
+.wheel-center-hub .hub-status-text {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .55);
 }
 
 /* ---- Inside glass cards: milkier fields, no second blur (it can't see
@@ -3763,8 +3803,7 @@ main>section[id] {
 .form-select,
 .form-textarea,
 .events-checkbox-container,
-.event-check-card,
-.btn-hotel-map {
+.event-check-card {
   background: var(--glass-field);
   border: 1px solid rgba(255, 255, 255, .7);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
@@ -3890,6 +3929,104 @@ main>section[id] {
 @media (max-width: 600px) {
   .gallery-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
+}
+}
+
+/* ---- Our Story film card, below the photos (opens story.html) ---- */
+.gallery-film {
+  margin-top: 24px;
+}
+
+.gallery-film-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gallery-film-poster {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+/* play button: sits between the title and the beach in the poster */
+.gallery-film-play {
+  position: absolute;
+  left: 50%;
+  top: 72%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--royal-maroon), var(--cranberry-festive));
+  border: 2px solid rgba(255, 255, 255, .85);
+  box-shadow: 0 8px 22px rgba(139, 30, 40, .45);
+  animation: gallery-film-pulse 2.4s ease-out infinite;
+}
+
+.gallery-film-play svg {
+  width: 26px;
+  height: 26px;
+  margin-left: 4px;
+  fill: #fff;
+}
+
+@keyframes gallery-film-pulse {
+  0% { box-shadow: 0 8px 22px rgba(139, 30, 40, .45), 0 0 0 0 rgba(255, 255, 255, .55); }
+  70%, 100% { box-shadow: 0 8px 22px rgba(139, 30, 40, .45), 0 0 0 16px rgba(255, 255, 255, 0); }
+}
+
+.gallery-film-length {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, .6);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+/* wider screens: picture beside the caption, centred under the photos */
+@media (min-width: 700px) {
+  .gallery-film-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+  .gallery-film-poster {
+    width: 55%;
+    flex-shrink: 0;
+}
+
+  .gallery-film-card .gallery-card-caption {
+    margin-top: 0;
+    text-align: left;
+}
+
+  .gallery-film-card .gallery-card-caption strong {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+  .gallery-film-card .gallery-card-caption span {
+    font-size: .92rem;
+}
+}
+
+@media (max-width: 600px) {
+  .gallery-film {
+    margin-top: 12px;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-film-play {
+    animation: none;
 }
 }
 /* ==========================================================================

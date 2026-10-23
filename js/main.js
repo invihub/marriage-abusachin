@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCassettePlayer();
   initSpinWheel();
   initMobileNav();
+  initSectionMemory();
 });
 
 /**
@@ -33,6 +34,18 @@ function initTempleDoors() {
     return;
   }
 
+  // Back from Our Story / the Guest List: the <head> script already skipped
+  // the gate; land on the section again once images above it have loaded
+  const html = document.documentElement;
+  if (html.classList.contains('gate-skip')) {
+    doorOverlay.classList.add('doors-opened', 'bell-rung');
+    setGateClosed(false);
+    const target = location.hash.length > 1 ? document.getElementById(location.hash.slice(1)) : null;
+    if (target) {
+      window.addEventListener('load', () => target.scrollIntoView({ behavior: 'instant', block: 'start' }), { once: true });
+    }
+  }
+
   if (openDoorsBtn) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -46,6 +59,8 @@ function initTempleDoors() {
         window.weddingAudio.unlock();
       }
       doorOverlay.classList.add('bell-rung');
+      // coming back to the invitation later in this tab skips the gate
+      try { sessionStorage.setItem('as-gate-open', '1'); } catch (e) { /* storage blocked */ }
 
       // 2. Then split open both halves of the gopuram
       setTimeout(() => {
@@ -66,6 +81,7 @@ function initTempleDoors() {
     reOpenDoorsBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'instant' });
+      html.classList.remove('gate-skip');
       doorOverlay.classList.remove('doors-opened', 'bell-rung');
       setGateClosed(true);
     });
@@ -76,7 +92,7 @@ function initTempleDoors() {
  * 2. Wedding Countdown Timer
  */
 function initCountdownTimer() {
-  const targetDate = new Date('2026-12-06T09:45:00+05:30').getTime();
+  const targetDate = new Date('2026-12-06T07:45:00+05:30').getTime();
 
   const daysEl = document.getElementById('timer-days');
   const hoursEl = document.getElementById('timer-hours');
@@ -240,6 +256,36 @@ function initCassettePlayer() {
 /**
  * 5. Mobile Navigation
  */
+/**
+ * Remember which section the guest was looking at, so "Back" on Our Story
+ * and the Guest List (js/back-link.js) returns there
+ */
+function initSectionMemory() {
+  // the invitation only (other pages share this script for the menu)
+  if (!document.getElementById('temple-door-curtain')) return;
+  const sections = document.querySelectorAll('main > section[id]');
+  if (!sections.length) return;
+
+  const remember = () => {
+    timer = 0;
+    if (document.documentElement.classList.contains('gate-closed')) return;
+    const line = window.innerHeight * 0.4;
+    for (const section of sections) {
+      const r = section.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) {
+        try { sessionStorage.setItem('as-last-section', section.id); } catch (e) { /* storage blocked */ }
+        return;
+      }
+    }
+  };
+
+  let timer = 0;
+  window.addEventListener('scroll', () => {
+    if (!timer) timer = setTimeout(remember, 250);
+  }, { passive: true });
+  window.addEventListener('pagehide', remember);
+}
+
 function initMobileNav() {
   const menuToggle = document.getElementById('mobile-nav-toggle');
   const navMenu = document.querySelector('.site-nav-menu');
