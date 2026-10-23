@@ -38,11 +38,11 @@
        "Background" button at the bottom-left, or ?bg=original | ice | aurora -->
   <link rel="stylesheet" href="css/backgrounds.css">
   <script>
+    // Every visit (and every refresh) opens on Original; ?bg= in the address picks another
     (function () {
       var m = (location.search + location.hash).toLowerCase().match(/bg=(\w+)/);
       var bg = m ? m[1] : null;
-      try { bg = bg || localStorage.getItem('bg-trial'); } catch (e) { }
-      if (['original', 'ice', 'aurora'].indexOf(bg) < 0) bg = 'original'; // default, or a removed theme
+      if (['original', 'ice', 'aurora'].indexOf(bg) < 0) bg = 'original';
       document.documentElement.setAttribute('data-bg', bg);
     })();
   </script>
@@ -1135,7 +1135,6 @@
       btn.addEventListener('click', function () {
         var next = themes[(themes.indexOf(current()) + 1) % themes.length];
         html.setAttribute('data-bg', next);
-        try { localStorage.setItem('bg-trial', next); } catch (e) { }
         show();
       });
       show();
