@@ -463,6 +463,7 @@
 }
 
 @media (min-width: 1000px) {
+  .org-events,
   .org-wishes {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

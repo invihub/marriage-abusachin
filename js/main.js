@@ -127,7 +127,7 @@ function initCountdownTimer() {
 }
 
 /**
- * 3. Celebration Schedule 5-Section Rotating Spin Wheel
+ * 3. Celebration Schedule 3-Section Rotating Spin Wheel
  */
 function initSpinWheel() {
   const wheel = document.getElementById('celebration-wheel');

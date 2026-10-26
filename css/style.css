@@ -941,7 +941,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* The Grand 5-Section Spinning Celebration Wheel */
+/* The Grand 3-Section Spinning Celebration Wheel */
 .wheel-container-wrapper {
   display: flex;
   flex-direction: column;
@@ -972,8 +972,8 @@ body {
 
 /* ---- WHEEL COLOURS: change them here ----
    Each segment fades from --wheel-N-bright at the rim to --wheel-N-deep at
-   the centre. 1 = Haldi & Sangeet (yellow), 2 = Wedding 1 (red),
-   3 = Wedding 2 (blue), 4 = Reception (green).
+   the centre. 1 = Haldi & Sangeet (yellow), 2 = Wedding (red),
+   3 = Reception (green).
    Haldi & Sangeet is light (yellow), so its label text is dark: see
    .label-haldi-sangeet further down. The Guest List page uses matching
    colours (colour / ink in js/organizer.js).
@@ -988,10 +988,8 @@ body {
   --wheel-1-deep: #C99A1B;
   --wheel-2-bright: #C4283F;
   --wheel-2-deep: #9E1A31;
-  --wheel-3-bright: #1676C4;
-  --wheel-3-deep: #0A5A9E;
-  --wheel-4-bright: #2A9150;
-  --wheel-4-deep: #176B3A;
+  --wheel-3-bright: #2A9150;
+  --wheel-3-deep: #176B3A;
 }
 
 /* soft white edges between the segments, like the rim of the site's glass cards */
@@ -3430,7 +3428,7 @@ main>section[id] {
    still. Each label is pinned to its segment's centre line and turns the
    opposite way at the same speed, so it travels with its segment but always
    stays upright and readable.
-   Label positions: segment centre angles are 45°, 135°, 225°, 315°
+   Label positions: segment centre angles are 60°, 180°, 300°
    (clockwise from the top), at 34% of the wheel's width from the centre,
    halfway between the hub and the rim:
      left = 50% + 34% * sin(a),  top = 50% - 34% * cos(a)
@@ -3457,24 +3455,19 @@ main>section[id] {
 }
 
 .label-haldi-sangeet {
-  left: 74%;
-  top: 26%;
+  left: 79.4%;
+  top: 33%;
 }
 
-.label-wedding-one {
-  left: 74%;
-  top: 74%;
+.label-wedding {
+  left: 50%;
+  top: 84%;
   bottom: auto;
 }
 
-.label-wedding-two {
-  left: 26%;
-  top: 74%;
-}
-
 .label-reception {
-  left: 26%;
-  top: 26%;
+  left: 20.6%;
+  top: 33%;
 }
 
 @keyframes wheelTurn {
@@ -3541,25 +3534,20 @@ main>section[id] {
 }
 
   /* position = centre + radius * (sin, -cos) of each segment's middle angle:
-     Haldi & Sangeet 45deg, Wedding 1 135deg, Wedding 2 225deg, Reception 315deg */
+     Haldi & Sangeet 60deg, Wedding 180deg, Reception 300deg */
   .label-haldi-sangeet {
-    left: calc(50% + var(--label-radius) * 1% * sin(45deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(45deg));
+    left: calc(50% + var(--label-radius) * 1% * sin(60deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(60deg));
 }
 
-  .label-wedding-one {
-    left: calc(50% + var(--label-radius) * 1% * sin(135deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(135deg));
-}
-
-  .label-wedding-two {
-    left: calc(50% + var(--label-radius) * 1% * sin(225deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(225deg));
+  .label-wedding {
+    left: calc(50% + var(--label-radius) * 1% * sin(180deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(180deg));
 }
 
   .label-reception {
-    left: calc(50% + var(--label-radius) * 1% * sin(315deg));
-    top: calc(50% - var(--label-radius) * 1% * cos(315deg));
+    left: calc(50% + var(--label-radius) * 1% * sin(300deg));
+    top: calc(50% - var(--label-radius) * 1% * cos(300deg));
 }
 }
 

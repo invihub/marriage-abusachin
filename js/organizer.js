@@ -17,19 +17,9 @@
 // colour = the wheel's colour (stripes, dots, bars); ink = a darker shade of it for text.
 const ORGANIZER_EVENTS = [
   { key: 'haldi_sangeet', short: 'Haldi & Sangeet', name: 'Haldi & Sangeet', when: 'Sat 5 Dec · 3:00 PM', venue: 'AVM Kamalavel Mahal, Ettayapuram Road, Thoothukudi', colour: '#D4A622', ink: '#8A5A00' },
-  { key: 'wedding_thoothukudi', short: 'Wedding · Thoothukudi', name: 'Wedding · Tradition 1', when: 'Sun 6 Dec · 7:45 AM', venue: 'AVM Kamalavel Mahal, Ettayapuram Road, Thoothukudi', colour: '#B1233A', ink: '#9E1A31' },
-  { key: 'wedding_marakkanam', short: 'Wedding · Marakkanam', name: 'Wedding · Tradition 2', when: 'Thu 10 Dec · 4:30 AM', venue: 'Ellaiamman Temple, Sandrorpalayam, Marakkanam', colour: '#1676C4', ink: '#0A5A9E' },
+  { key: 'wedding_thoothukudi', short: 'Wedding · Thoothukudi', name: 'Wedding', when: 'Sun 6 Dec · 7:45 AM', venue: 'AVM Kamalavel Mahal, Ettayapuram Road, Thoothukudi', colour: '#B1233A', ink: '#9E1A31' },
   { key: 'reception_chennai', short: 'Reception', name: 'Reception', when: 'Fri 11 Dec · 6:00 PM', venue: 'Madras Race Club, Guindy Lodge, Chennai', colour: '#2A9150', ink: '#176B3A' }
 ];
-
-// RSVPs sent before the plan changed used the old ceremony names: Haldi and
-// Sangeet were separate, and the second wedding was in Chennai. They are
-// counted under the current ceremonies.
-const LEGACY_EVENT_KEYS = {
-  haldi: 'haldi_sangeet',
-  sangeet: 'haldi_sangeet',
-  wedding_chennai: 'wedding_marakkanam'
-};
 
 // The RSVP form's last choice is "6+ People (Family)", saved as 6
 const PEOPLE_MAX_CHOICE = 6;
@@ -171,10 +161,7 @@ class GuestListBoard {
         this.showLogin('Your sign-in has ended. Please enter the password again.');
         return;
       }
-      this.rsvps = (r.rsvps || []).map((row) => ({
-        ...row,
-        events: [...new Set((row.events || []).map(key => LEGACY_EVENT_KEYS[key] || key))]
-      }));
+      this.rsvps = r.rsvps || [];
       this.showBoard();
     } catch (err) {
       console.error('Guest list not loaded', err);

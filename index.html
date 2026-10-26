@@ -511,7 +511,7 @@
     </section>
 
     <!-- ==========================================================================
-         5. Celebration Schedule Spin Wheel (4 Rotating Sections)
+         5. Celebration Schedule Spin Wheel (3 Rotating Sections)
          ========================================================================== -->
     <section id="celebration-wheel-section" class="section-wrapper">
       <div class="section-title-cluster">
@@ -522,7 +522,7 @@
         </p>
       </div>
 
-      <!-- The Grand 4-Section Rotating Spin Wheel -->
+      <!-- The Grand 3-Section Rotating Spin Wheel -->
       <div class="wheel-container-wrapper">
         <div id="celebration-wheel" class="celebration-wheel-outer">
 
@@ -530,7 +530,7 @@
           <div class="wheel-rotor">
             <svg class="celebration-wheel-svg" viewBox="0 0 500 500">
               <!-- Segment colours: a gradient from the rim (bright) to the centre (deeper).
-                   The colours are --wheel-1 ... --wheel-4 in css/style.css -->
+                   The colours are --wheel-1 ... --wheel-3 in css/style.css -->
               <defs>
                 <radialGradient id="wheel-fill-1" gradientUnits="userSpaceOnUse" cx="250" cy="250" r="240">
                   <stop offset="0" style="stop-color: var(--wheel-1-deep)" />
@@ -544,68 +544,52 @@
                   <stop offset="0" style="stop-color: var(--wheel-3-deep)" />
                   <stop offset="1" style="stop-color: var(--wheel-3-bright)" />
                 </radialGradient>
-                <radialGradient id="wheel-fill-4" gradientUnits="userSpaceOnUse" cx="250" cy="250" r="240">
-                  <stop offset="0" style="stop-color: var(--wheel-4-deep)" />
-                  <stop offset="1" style="stop-color: var(--wheel-4-bright)" />
-                </radialGradient>
               </defs>
-              <!-- 4 Segments (90 degrees each) -->
+              <!-- 3 Segments (120 degrees each) -->
               <!-- Segment 1: Dec 5 3:00 PM · Haldi & Sangeet (AVM Kamalavel Mahal) -->
               <g class="wheel-segment" data-title="Dec 5 · Haldi &amp; Sangeet (3:00 PM)"
                 data-venue="AVM Kamalavel Mahal, Ettayapuram Road, Thoothukudi"
                 data-map="https://maps.app.goo.gl/9LsKEyBVSDDpFLWo8">
-                <path d="M 250 250 L 250 10 A 240 240 0 0 1 490 250 Z" fill="url(#wheel-fill-1)" class="wheel-seg-shape" />
-                <text x="361" y="139" fill="#3B2A06" font-size="12" font-weight="700" text-anchor="middle"
-                  transform="rotate(45, 361, 139)">
+                <path d="M 250 250 L 250 10 A 240 240 0 0 1 457.85 370 Z" fill="url(#wheel-fill-1)"
+                  class="wheel-seg-shape" />
+                <text x="386" y="172" fill="#3B2A06" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(60, 386, 172)">
                   DEC 5 · 3:00 PM
                 </text>
-                <text x="361" y="156" fill="#5C4410" font-size="11" font-weight="600" text-anchor="middle"
-                  transform="rotate(45, 361, 156)">
+                <text x="386" y="189" fill="#5C4410" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(60, 386, 189)">
                   Haldi &amp; Sangeet
                 </text>
               </g>
 
-              <!-- Segment 2: Dec 6 7:45 AM · Wedding Tradition 1 (AVM Kamalavel Mahal) -->
-              <g class="wheel-segment" data-title="Dec 6 · Wedding Tradition 1 (7:45 AM Muhurtham)"
+              <!-- Segment 2: Dec 6 7:45 AM · Wedding (AVM Kamalavel Mahal) -->
+              <g class="wheel-segment" data-title="Dec 6 · Wedding (7:45 AM Muhurtham)"
                 data-venue="AVM Kamalavel Mahal, Ettayapuram Road, Thoothukudi"
                 data-map="https://share.google/FoauSwek7PCUqaAcR">
-                <path d="M 250 250 L 490 250 A 240 240 0 0 1 250 490 Z" fill="url(#wheel-fill-2)" class="wheel-seg-shape" />
-                <text x="361" y="361" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle"
-                  transform="rotate(135, 361, 361)">
+                <path d="M 250 250 L 457.85 370 A 240 240 0 0 1 42.15 370 Z" fill="url(#wheel-fill-2)"
+                  class="wheel-seg-shape" />
+                <text x="250" y="407" fill="#FFFFFF" font-size="12" font-weight="800" text-anchor="middle"
+                  transform="rotate(180, 250, 407)">
                   DEC 6 · 7:45 AM
                 </text>
-                <text x="361" y="378" fill="#FFE4EA" font-size="11" font-weight="700" text-anchor="middle"
-                  transform="rotate(135, 361, 378)">
+                <text x="250" y="424" fill="#FFE4EA" font-size="11" font-weight="700" text-anchor="middle"
+                  transform="rotate(180, 250, 424)">
                   Wedding · Thoothukudi
                 </text>
               </g>
 
-              <!-- Segment 3: Dec 10 4:30 AM · Wedding Tradition 2 (Ellaiamman Temple, Marakkanam) -->
-              <g class="wheel-segment" data-title="Dec 10 · Wedding Tradition 2 (4:30 AM Muhurtham)"
-                data-venue="Ellaiamman Temple, Sandrorpalayam, Marakkanam"
-                data-map="https://maps.app.goo.gl/TqVSWfLCDJjDHvx4A">
-                <path d="M 250 250 L 250 490 A 240 240 0 0 1 10 250 Z" fill="url(#wheel-fill-3)" class="wheel-seg-shape" />
-                <text x="139" y="361" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                  transform="rotate(-135, 139, 361)">
-                  DEC 10 · 4:30 AM
-                </text>
-                <text x="139" y="378" fill="#CCFBF1" font-size="11" font-weight="600" text-anchor="middle"
-                  transform="rotate(-135, 139, 378)">
-                  Wedding · Marakkanam
-                </text>
-              </g>
-
-              <!-- Segment 4: Dec 11 6:00 PM · Reception (Madras Race Club, Guindy) -->
+              <!-- Segment 3: Dec 11 6:00 PM · Reception (Madras Race Club, Guindy) -->
               <g class="wheel-segment" data-title="Dec 11 · Reception (6:00 PM)"
                 data-venue="Madras Race Club, Guindy Lodge, Chennai"
                 data-map="https://maps.app.goo.gl/KuNMGB7UNr8dQDk16">
-                <path d="M 250 250 L 10 250 A 240 240 0 0 1 250 10 Z" fill="url(#wheel-fill-4)" class="wheel-seg-shape" />
-                <text x="139" y="139" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
-                  transform="rotate(-45, 139, 139)">
+                <path d="M 250 250 L 42.15 370 A 240 240 0 0 1 250 10 Z" fill="url(#wheel-fill-3)"
+                  class="wheel-seg-shape" />
+                <text x="114" y="172" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle"
+                  transform="rotate(-60, 114, 172)">
                   DEC 11 · 6:00 PM
                 </text>
-                <text x="139" y="156" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle"
-                  transform="rotate(-45, 139, 156)">
+                <text x="114" y="189" fill="#FCE7F3" font-size="11" font-weight="600" text-anchor="middle"
+                  transform="rotate(-60, 114, 189)">
                   Reception · Chennai
                 </text>
               </g>
@@ -615,13 +599,9 @@
               <strong>Dec 5 · 3:00 PM</strong>
               <span>Haldi &amp; Sangeet</span>
             </div>
-            <div class="wheel-segment-label label-wedding-one" aria-hidden="true">
+            <div class="wheel-segment-label label-wedding" aria-hidden="true">
               <strong>Dec 6 · 7:45 AM</strong>
               <span>Wedding · Thoothukudi</span>
-            </div>
-            <div class="wheel-segment-label label-wedding-two" aria-hidden="true">
-              <strong>Dec 10 · 4:30 AM</strong>
-              <span>Wedding · Marakkanam</span>
             </div>
             <div class="wheel-segment-label label-reception" aria-hidden="true">
               <strong>Dec 11 · 6:00 PM</strong>
@@ -645,11 +625,7 @@
           </a>
           <a href="https://share.google/FoauSwek7PCUqaAcR" target="_blank" rel="noopener noreferrer"
             class="wheel-pill-link">
-            <span>🗺️</span> <strong>Dec 6:</strong> Wedding Tradition 1 (Thoothukudi)
-          </a>
-          <a href="https://maps.app.goo.gl/TqVSWfLCDJjDHvx4A" target="_blank" rel="noopener noreferrer"
-            class="wheel-pill-link">
-            <span>🗺️</span> <strong>Dec 10:</strong> Wedding Tradition 2 (Marakkanam)
+            <span>🗺️</span> <strong>Dec 6:</strong> Wedding (Thoothukudi)
           </a>
           <a href="https://maps.app.goo.gl/KuNMGB7UNr8dQDk16" target="_blank" rel="noopener noreferrer"
             class="wheel-pill-link">
@@ -679,8 +655,10 @@
 
             <!-- Guest / Family Name -->
             <div class="form-group">
-              <label for="rsvp-guest-name" class="form-label">Guest / Family Name * (e.g., "Sai and his family")</label>
-              <input type="text" id="rsvp-guest-name" class="form-input" placeholder="e.g. Sai and his family" required>
+              <label for="rsvp-guest-name" class="form-label">Guest / Family Name * (e.g., "Maya and her
+                family")</label>
+              <input type="text" id="rsvp-guest-name" class="form-input" placeholder="e.g. Maya and her family"
+                required>
             </div>
 
             <!-- Events Multi-Select Checkboxes -->
@@ -693,11 +671,7 @@
                 </label>
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="wedding_thoothukudi">
-                  <span class="event-check-name">Dec 6 · Wedding Tradition 1 (Thoothukudi)</span>
-                </label>
-                <label class="event-check-card">
-                  <input type="checkbox" name="rsvp_events" value="wedding_marakkanam">
-                  <span class="event-check-name">Dec 10 · Wedding Tradition 2 (Marakkanam)</span>
+                  <span class="event-check-name">Dec 6 · Wedding (Thoothukudi)</span>
                 </label>
                 <label class="event-check-card">
                   <input type="checkbox" name="rsvp_events" value="reception_chennai">

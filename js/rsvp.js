@@ -1,6 +1,6 @@
 /**
  * Personalized South Indian Wedding RSVP Engine
- * - Guest / Family Name recording (e.g. 'Sai and his family')
+ * - Guest / Family Name recording (e.g. 'Maya and her family')
  * - Event attendance multi-select
  * - Number of people (approx)
  * - Saved to the Supabase `abu_sachin.rsvps` table (insert-only for the public)
@@ -69,7 +69,7 @@ class RsvpSystem {
     const guestName = guestNameInput ? guestNameInput.value.trim() : '';
 
     if (!guestName) {
-      this.showError('Please enter your name or family name (e.g. Sai and his family).');
+      this.showError('Please enter your name or family name (e.g. Maya and her family).');
       if (guestNameInput) guestNameInput.focus();
       return;
     }
@@ -139,8 +139,7 @@ class RsvpSystem {
   getEventNamesMap() {
     return {
       'haldi_sangeet': 'Dec 5 · Haldi & Sangeet (Thoothukudi)',
-      'wedding_thoothukudi': 'Dec 6 · Wedding Tradition 1 (Thoothukudi)',
-      'wedding_marakkanam': 'Dec 10 · Wedding Tradition 2 (Marakkanam)',
+      'wedding_thoothukudi': 'Dec 6 · Wedding (Thoothukudi)',
       'reception_chennai': 'Dec 11 · Reception (Chennai)'
     };
   }

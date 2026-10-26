@@ -10,7 +10,7 @@ Live: https://invihub.github.io/marriage-abusachin/
 2. **Invitation:** names, the couple's quote and a live countdown to the Muhurtham (6 Dec 2026, 07:45 IST).
 3. **Pearl City Express:** an 11-year timeline told as a train. Scrolling moves the coaches sideways:
    2014 KCG College · 2015 First movie date · 2018–19 Tuticorin to Toronto · 2019–26 The Canada chapter · 2026 Marriage.
-4. **Celebration wheel:** the four ceremonies (Haldi & Sangeet, the Thoothukudi wedding, the Marakkanam wedding, the Chennai reception) on a slowly turning wheel. Tapping a section, or a venue button below the wheel, opens Google Maps.
+4. **Celebration wheel:** the three ceremonies (Haldi & Sangeet, the Thoothukudi wedding, the Chennai reception) on a slowly turning wheel. Tapping a section, or a venue button below the wheel, opens Google Maps.
 5. **RSVP:** name, ceremonies (none ticked to start), number of people and a blessing, saved to Supabase.
 6. **Sangeet Mixtape:** guests record songs they want to dance to, or tap a song on the shared tracklist to back it. Each guest has 3 picks. While they type, a glass piano key presses for each letter and 1 to 4 notes light up on two staves of music. Each song on the tracklist is a small cassette: the left reel shows its votes, the right reel backs it (+1), shows your vote (✓) or removes your own song (×).
 7. **Gallery:** five illustrated memories, each opening full size when tapped.
@@ -108,9 +108,10 @@ The page also opens straight from the file, but RSVPs need `js/config.js`.
 
 Run `supabase/rsvps.sql` once in the Supabase SQL editor. It creates the `abu_sachin.rsvps` table, where the public can insert but not read. Then add `abu_sachin` to **Project Settings → Data API → Exposed schemas**. View or export RSVPs (CSV) in the Supabase Table Editor.
 
-**The ceremonies changed** (Haldi and Sangeet are now one event, and the second wedding is in Marakkanam): run `supabase/rsvps.sql` again so the database accepts the new names (`haldi_sangeet`, `wedding_marakkanam`). It is safe to re-run, and RSVPs already saved under the old names are kept; the Guest List counts them under the new ceremonies. Run it **before** the new site goes live: until the database accepts the new names, the new RSVP form is refused.
+The table accepts three ceremonies: `haldi_sangeet`, `wedding_thoothukudi` and `reception_chennai` (the same values as the RSVP form).
 
 - **Clear test RSVPs before the invitations go out:** in the SQL editor run `delete from abu_sachin.rsvps;` (this removes every RSVP, so do it only while they are all test ones).
+- **Rebuild the table** (e.g. after changing the ceremonies in `rsvps.sql`, while the RSVPs are still test ones): run `drop table abu_sachin.rsvps;`, then run `supabase/rsvps.sql` again. Re-running `rsvps.sql` alone keeps an existing table as it is.
 
 ## Supabase (Sangeet Mixtape)
 
