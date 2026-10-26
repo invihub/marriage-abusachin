@@ -23,6 +23,8 @@ const ORGANIZER_EVENTS = [
 
 // The RSVP form's last choice is "6+ People (Family)", saved as 6
 const PEOPLE_MAX_CHOICE = 6;
+// The guest-list filter for RSVPs with no ceremony
+const NOT_COMING = 'not-coming';
 const TOKEN_KEY = 'as-organizer-token';
 
 class GuestListBoard {
@@ -213,10 +215,13 @@ class GuestListBoard {
     this.renderWishes();
   }
 
-  // Head count; "6+" families count as 6, so the total is "at least" (shown as 52+)
+  // Head count; "6+" families count as 6, so the total is "at least" (shown as 52+).
+  // RSVPs with no ceremony (not coming, maybe sending a blessing) keep their
+  // saved number of people, but it isn't counted.
   people(rows) {
-    const count = rows.reduce((sum, r) => sum + (r.people_count || 0), 0);
-    const open = rows.some(r => r.people_count >= PEOPLE_MAX_CHOICE);
+    const coming = rows.filter(isComing);
+    const count = coming.reduce((sum, r) => sum + (r.people_count || 0), 0);
+    const open = coming.some(r => r.people_count >= PEOPLE_MAX_CHOICE);
     return { count, text: `${count}${open ? '+' : ''}` };
   }
 
@@ -271,6 +276,7 @@ class GuestListBoard {
     };
     chip('all', 'Everyone');
     ORGANIZER_EVENTS.forEach(ev => chip(ev.key, ev.short, ev));
+    chip(NOT_COMING, 'Not attending');
     this.updateChips();
   }
 
@@ -291,7 +297,9 @@ class GuestListBoard {
 
   visibleGuests() {
     return this.rsvps.filter(r => {
-      if (this.filter !== 'all' && !(r.events || []).includes(this.filter)) return false;
+      if (this.filter === NOT_COMING) {
+        if (isComing(r)) return false;
+      } else if (this.filter !== 'all' && !(r.events || []).includes(this.filter)) return false;
       if (!this.query) return true;
       return `${r.guest_name} ${r.message || ''}`.toLowerCase().includes(this.query);
     });
@@ -304,9 +312,10 @@ class GuestListBoard {
 
     const ev = ORGANIZER_EVENTS.find(e => e.key === this.filter);
     const people = this.people(rows);
-    this.el.count.textContent = this.rsvps.length
-      ? `${rows.length} ${rows.length === 1 ? 'RSVP' : 'RSVPs'} · ${people.text} ${people.count === 1 ? 'guest' : 'guests'}${ev ? ` at the ${ev.short}` : ''}${this.query ? ` matching “${this.el.search.value.trim()}”` : ''}`
-      : '';
+    const matching = this.query ? ` matching “${this.el.search.value.trim()}”` : '';
+    if (!this.rsvps.length) this.el.count.textContent = '';
+    else if (this.filter === NOT_COMING) this.el.count.textContent = `${rows.length} ${rows.length === 1 ? 'RSVP' : 'RSVPs'} not attending${matching}`;
+    else this.el.count.textContent = `${rows.length} ${rows.length === 1 ? 'RSVP' : 'RSVPs'} · ${people.text} ${people.count === 1 ? 'guest' : 'guests'}${ev ? ` at the ${ev.short}` : ''}${matching}`;
 
     if (!rows.length) {
       list.append(el('li', 'org-empty', this.rsvps.length
@@ -320,7 +329,8 @@ class GuestListBoard {
 
       const top = el('div', 'org-guest-top');
       top.append(el('strong', 'org-guest-name', r.guest_name),
-        el('span', 'org-guest-people', r.people_count >= PEOPLE_MAX_CHOICE ? '6+ people' : `${r.people_count} ${r.people_count === 1 ? 'person' : 'people'}`));
+        el('span', 'org-guest-people', !isComing(r) ? 'Not attending'
+          : r.people_count >= PEOPLE_MAX_CHOICE ? '6+ people' : `${r.people_count} ${r.people_count === 1 ? 'person' : 'people'}`));
 
       const tags = el('div', 'org-guest-events');
       ORGANIZER_EVENTS.forEach(e => {
@@ -358,7 +368,7 @@ class GuestListBoard {
     const lines = [header].concat(this.rsvps.map(r => [
       formatDate(r.created_at),
       r.guest_name,
-      r.people_count >= PEOPLE_MAX_CHOICE ? '6+' : String(r.people_count),
+      !isComing(r) ? 'Not attending' : r.people_count >= PEOPLE_MAX_CHOICE ? '6+' : String(r.people_count),
       ...ORGANIZER_EVENTS.map(e => ((r.events || []).includes(e.key) ? 'Yes' : '')),
       r.message || '',
       r.phone || '',
@@ -378,6 +388,11 @@ class GuestListBoard {
 }
 
 /* ------------------------------------------------------------------ helpers */
+
+// An RSVP with at least one ceremony; one with none is a guest who can't come
+function isComing(r) {
+  return (r.events || []).length > 0;
+}
 
 function el(tag, className, text) {
   const node = document.createElement(tag);

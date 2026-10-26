@@ -10,9 +10,11 @@ create table if not exists abu_sachin.rsvps (
   id           uuid primary key default gen_random_uuid(),
   created_at   timestamptz not null default now(),
   guest_name   text not null check (char_length(btrim(guest_name)) between 1 and 120),
-  -- which ceremonies: Haldi & Sangeet, the wedding, the reception
+  -- which ceremonies: Haldi & Sangeet, the wedding, the reception. None ({})
+  -- = can't come (maybe sending a blessing); people_count is then kept but
+  -- not counted by the Guest List.
   events       text[] not null constraint rsvps_events_valid check (
-                 cardinality(events) between 1 and 3
+                 cardinality(events) <= 3
                  and events <@ array['haldi_sangeet', 'wedding_thoothukudi', 'reception_chennai']
                ),
   people_count smallint not null check (people_count between 1 and 20),

@@ -11,7 +11,7 @@ Live: https://invihub.github.io/marriage-abusachin/
 3. **Pearl City Express:** an 11-year timeline told as a train. Scrolling moves the coaches sideways:
    2014 KCG College · 2015 First movie date · 2018–19 Tuticorin to Toronto · 2019–26 The Canada chapter · 2026 Marriage.
 4. **Celebration wheel:** the three ceremonies (Haldi & Sangeet, the Thoothukudi wedding, the Chennai reception) on a slowly turning wheel. Tapping a section, or a venue button below the wheel, opens Google Maps.
-5. **RSVP:** name, ceremonies (none ticked to start), number of people and a blessing, saved to Supabase.
+5. **RSVP:** a Pearl City Express ticket, all on one page. Only the name is needed: ceremonies, seats and a blessing are optional, so guests who can't come can still send their name and a blessing. Sending it stamps the ticket ("Confirmed", or "With love" / "Thank you" for guests who can't come), and the guest can download a railway ticket in the Pearl City Express coach colours (a landscape ~200 KB JPEG drawn in the browser, no library) or share it from a phone. The ticket carries a QR code to each venue the guest is coming to: one for Thoothukudi (Haldi & Sangeet and the Wedding share the venue), one for Chennai (the Reception), both when both. The classic one-page form is still there: delete `data-rsvp="ticket"` from `#rsvp-section` in `index.html` to go back to it, or add `?rsvp=classic` / `?rsvp=ticket` to the address to preview either. Both save the same kind of RSVP (the classic form still asks for at least one ceremony).
 6. **Sangeet Mixtape:** guests record songs they want to dance to, or tap a song on the shared tracklist to back it. Each guest has 3 picks. While they type, a glass piano key presses for each letter and 1 to 4 notes light up on two staves of music. Each song on the tracklist is a small cassette: the left reel shows its votes, the right reel backs it (+1), shows your vote (✓) or removes your own song (×).
 7. **Gallery:** five illustrated memories, each opening full size when tapped.
 8. **Travel plans** and **iconic places** in Thoothukudi and Chennai.
@@ -65,10 +65,13 @@ css/style.css              layout, components, glass finish, phone layouts
 css/story.css              Our Story page
 css/organizer.css          Guest List page
 css/mixtape.css            Sangeet Mixtape (piano, score, cassette tracklist)
+css/rsvp-ticket.css        RSVP ticket (and the switch between it and the classic form)
 css/backgrounds.css        the three background themes + theme-specific colours
 js/main.js                 temple gate, countdown, celebration wheel, music controls, phone menu
 js/timeline.js             Pearl City Express horizontal scroll
 js/rsvp.js                 RSVP form -> Supabase
+js/rsvp-ticket.js          RSVP ticket: the form and the downloadable ticket (saves through js/rsvp.js)
+js/venue-qr.js             generated: the venue QR codes drawn on the ticket
 js/mixtape.js              Sangeet Mixtape: shared song list -> Supabase
 js/gallery.js              gallery lightbox (photos only; the film card is a link)
 js/snow.js                 snowfall (canvas)
@@ -86,6 +89,8 @@ story/                     Our Story frames, frame list (frames.js) and the vide
 scripts/build-story-frames.py  cuts the invitation video into story/ (settings at the top)
 scripts/build-config.mjs   writes js/config.js from .env or GitHub secrets
 scripts/build-songs.mjs    writes js/songs.js from the files in songs/
+scripts/build-qr.py        writes js/venue-qr.js and images/qr/*.svg from the venues' map links
+                           (only if a link changes: pip install segno, then run it)
 scripts/ice-crystals.py    redraws the Ice theme crystals (settings at the top)
 supabase/rsvps.sql         the RSVP table, permissions and row-level security
 supabase/song-wall.sql     the Sangeet Mixtape tables, rules and functions
@@ -108,7 +113,7 @@ The page also opens straight from the file, but RSVPs need `js/config.js`.
 
 Run `supabase/rsvps.sql` once in the Supabase SQL editor. It creates the `abu_sachin.rsvps` table, where the public can insert but not read. Then add `abu_sachin` to **Project Settings → Data API → Exposed schemas**. View or export RSVPs (CSV) in the Supabase Table Editor.
 
-The table accepts three ceremonies: `haldi_sangeet`, `wedding_thoothukudi` and `reception_chennai` (the same values as the RSVP form).
+The table accepts up to three ceremonies: `haldi_sangeet`, `wedding_thoothukudi` and `reception_chennai` (the same values as the RSVP form). No ceremony means the guest can't come: their number of people is kept but the Guest List doesn't count it, and lists them under **Not attending**.
 
 - **Clear test RSVPs before the invitations go out:** in the SQL editor run `delete from abu_sachin.rsvps;` (this removes every RSVP, so do it only while they are all test ones).
 - **Rebuild the table** (e.g. after changing the ceremonies in `rsvps.sql`, while the RSVPs are still test ones): run `drop table abu_sachin.rsvps;`, then run `supabase/rsvps.sql` again. Re-running `rsvps.sql` alone keeps an existing table as it is.

@@ -41,6 +41,7 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mixtape.css">
+  <link rel="stylesheet" href="css/rsvp-ticket.css">
 
   <!-- Background theme trial (see css/backgrounds.css). Choose with the
        "Background" button at the bottom-left, or ?bg=original | ice | aurora -->
@@ -639,7 +640,10 @@
     <!-- ==========================================================================
          6. Clean Personalized RSVP System
          ========================================================================== -->
-    <section id="rsvp-section" class="section-wrapper">
+    <!-- data-rsvp="ticket" shows the RSVP ticket (further down in this section).
+         Delete it to go back to the classic form; ?rsvp=classic / ?rsvp=ticket
+         in the address previews either one without editing. -->
+    <section id="rsvp-section" class="section-wrapper" data-rsvp="ticket">
       <div class="rsvp-section-box">
 
         <div class="rsvp-header-proclamation">
@@ -716,6 +720,168 @@
           </div>
         </form>
 
+      </div>
+
+      <!-- ======================================================================
+           RSVP TICKET: the RSVP as a Pearl City Express ticket. Everything is
+           on one page; only the name is needed. Sending it stamps the ticket,
+           and the guest can download it as a picture (drawn in the browser).
+           Shown instead of the classic form above while the section has
+           data-rsvp="ticket". Styles: css/rsvp-ticket.css, behaviour:
+           js/rsvp-ticket.js. It saves with the classic form's code (js/rsvp.js).
+           ====================================================================== -->
+      <div class="rsvp-ticket-area">
+        <div class="section-title-cluster">
+          <span class="section-pretitle">Your Presence Is Our Blessing</span>
+          <h2 class="section-title">Your RSVP Ticket</h2>
+          <p class="section-desc">
+            Fill in your ticket and keep it as a memento. Can't make it? Your name and a blessing are just as welcome.
+          </p>
+        </div>
+
+        <!-- the shadow sits on a wrapper: the ticket's notches are cut out with a mask -->
+        <div class="rt-shadow">
+          <div class="rt-ticket" id="rt-ticket">
+
+            <header class="rt-head">
+              <svg class="rt-engine-icon" viewBox="0 0 40 26" aria-hidden="true">
+                <path d="M3 8h17v12H3z" />
+                <path d="M20 4h10a2 2 0 0 1 2 2v14H20z" />
+                <path d="M6 3h4v5H6z" />
+                <path d="M32 12h4l2 8h-6z" />
+                <rect x="23" y="7" width="6" height="5" rx="1" class="rt-engine-window" />
+                <rect x="1" y="14" width="38" height="2" class="rt-engine-stripe" />
+                <circle cx="8" cy="22" r="3.2" />
+                <circle cx="17" cy="22" r="3.2" />
+                <circle cx="28" cy="22" r="3.2" />
+              </svg>
+              <div class="rt-head-text">
+                <span class="rt-head-name">Pearl City Express</span>
+                <span class="rt-head-sub">Thoothukudi ⇄ Chennai · Dec 2026</span>
+              </div>
+              <span class="rt-head-badge" aria-hidden="true">A&amp;S</span>
+            </header>
+            <div class="rt-livery" aria-hidden="true">Wedding Special · Abu &amp; Sachin</div>
+
+            <!-- Filling in the ticket -->
+            <form class="rt-form" id="rt-form" novalidate aria-label="RSVP ticket">
+              <div class="rt-body">
+
+                <div class="rt-field">
+                  <label class="rt-field-label" for="rt-name">Passenger <span class="rt-req">needed</span></label>
+                  <input type="text" id="rt-name" class="rt-input" maxlength="120" autocomplete="name"
+                    enterkeyhint="done" placeholder="Your name, or your family's">
+                  <p class="rt-hint">e.g. Maya and her family</p>
+                </div>
+
+                <!-- same colours as the celebration wheel -->
+                <div class="rt-field" role="group" aria-labelledby="rt-l-stops">
+                  <p class="rt-field-label" id="rt-l-stops">Ceremonies you'll join <span class="rt-opt">optional</span></p>
+                  <div class="rt-stops">
+                    <button type="button" class="rt-stop rt-stop-haldi" data-event="haldi_sangeet" data-venue="thoothukudi" aria-pressed="false">
+                      <span class="rt-stop-node" aria-hidden="true"></span>
+                      <span class="rt-stop-text">
+                        <span class="rt-stop-when">Sat 5 Dec · 3:00 PM</span>
+                        <span class="rt-stop-name">Haldi &amp; Sangeet</span>
+                        <span class="rt-stop-where">AVM Kamalavel Mahal, Thoothukudi</span>
+                      </span>
+                    </button>
+                    <button type="button" class="rt-stop rt-stop-wedding" data-event="wedding_thoothukudi" data-venue="thoothukudi" aria-pressed="false">
+                      <span class="rt-stop-node" aria-hidden="true"></span>
+                      <span class="rt-stop-text">
+                        <span class="rt-stop-when">Sun 6 Dec · 7:45 AM</span>
+                        <span class="rt-stop-name">Wedding</span>
+                        <span class="rt-stop-where">AVM Kamalavel Mahal, Thoothukudi</span>
+                      </span>
+                    </button>
+                    <button type="button" class="rt-stop rt-stop-reception" data-event="reception_chennai" data-venue="chennai" aria-pressed="false">
+                      <span class="rt-stop-node" aria-hidden="true"></span>
+                      <span class="rt-stop-text">
+                        <span class="rt-stop-when">Fri 11 Dec · 6:00 PM</span>
+                        <span class="rt-stop-name">Reception</span>
+                        <span class="rt-stop-where">Madras Race Club, Guindy, Chennai</span>
+                      </span>
+                    </button>
+                  </div>
+                  <p class="rt-hint">Can't make it? Leave these unticked and send your blessing below.</p>
+                </div>
+
+                <!-- people, 1 to 6+ (saved as 1-6, like the classic form); only
+                     counted when a ceremony is ticked -->
+                <div class="rt-field rt-seats" id="rt-seats" role="group" aria-labelledby="rt-l-seats">
+                  <p class="rt-field-label" id="rt-l-seats">
+                    <span>Seats <span class="rt-opt">optional</span></span>
+                    <span class="rt-seat-caption" id="rt-seat-caption" aria-live="polite">The two of us</span>
+                  </p>
+                  <div class="rt-coach" role="radiogroup" aria-label="Number of people">
+                    <!-- seat buttons are added by js/rsvp-ticket.js -->
+                  </div>
+                  <p class="rt-hint" id="rt-seats-hint">Tick a ceremony above to save seats.</p>
+                </div>
+
+                <div class="rt-field">
+                  <label class="rt-field-label" for="rt-wish">Blessing for Abu &amp; Sachin <span class="rt-opt">optional</span></label>
+                  <textarea id="rt-wish" class="rt-note" rows="3" maxlength="1000"
+                    placeholder="A blessing, a memory, a warm wish…"></textarea>
+                  <div class="rt-chips">
+                    <button type="button" class="rt-chip">Congratulations! 🎉</button>
+                    <button type="button" class="rt-chip">So happy for you! ❤️</button>
+                    <button type="button" class="rt-chip">A lifetime of love 🙏</button>
+                    <button type="button" class="rt-chip">See you on the dance floor! 💃</button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Hidden from people; bots that fill it are ignored -->
+              <div class="rsvp-honeypot" aria-hidden="true">
+                <label for="rt-website">Website</label>
+                <input type="text" id="rt-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <p class="rt-error" id="rt-error" role="alert" hidden></p>
+
+              <!-- the ticket's stub, below the perforation -->
+              <div class="rt-stub">
+                <button type="submit" class="rt-submit" id="rt-submit">Get my ticket</button>
+              </div>
+            </form>
+
+            <!-- Sent: the stamped ticket (also drawn as the downloadable picture) -->
+            <div class="rt-done" id="rt-done" hidden>
+              <div class="rt-body">
+                <svg class="rt-stamp" viewBox="0 0 200 200" aria-hidden="true">
+                  <defs>
+                    <path id="rt-stamp-ring" d="M100 100 m-74 0 a74 74 0 1 1 148 0 a74 74 0 1 1 -148 0" />
+                  </defs>
+                  <circle cx="100" cy="100" r="94" class="rt-stamp-line" stroke-width="5" />
+                  <circle cx="100" cy="100" r="66" class="rt-stamp-line" stroke-width="1.5" />
+                  <rect x="32" y="72" width="136" height="56" rx="4" class="rt-stamp-band" />
+                  <text class="rt-stamp-ring-text">
+                    <textPath href="#rt-stamp-ring" startOffset="50%" text-anchor="middle">★ PEARL CITY EXPRESS ★ WEDDING SPECIAL ★ DEC 2026</textPath>
+                  </text>
+                  <text x="100" y="95" text-anchor="middle" class="rt-stamp-big" id="rt-stamp-word">CONFIRMED</text>
+                  <text x="100" y="121" text-anchor="middle" class="rt-stamp-small">ABU ♥ SACHIN</text>
+                </svg>
+                <p class="rt-kicker" id="rt-d-kicker">Booked</p>
+                <h3 class="rt-title" id="rt-d-title" tabindex="-1">Your seat is saved!</h3>
+                <p class="rt-done-quote" id="rt-d-quote">"We look forward to celebrating with you."</p>
+                <!-- the ticket picture (landscape, with the venue QR codes); tap for full size -->
+                <a class="rt-preview" id="rt-preview" target="_blank" rel="noopener" aria-busy="true">
+                  <img id="rt-preview-img" alt="">
+                  <span class="rt-preview-wait">Printing your ticket…</span>
+                </a>
+                <p class="rt-hint rt-preview-hint">Tap the ticket to see it full size.</p>
+              </div>
+              <div class="rt-stub">
+                <button type="button" class="rt-share" id="rt-share" hidden>Share</button>
+                <button type="button" class="rt-submit" id="rt-download">Download ticket</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button type="button" class="rt-again" id="rt-again" hidden>Send another RSVP</button>
       </div>
     </section>
 
@@ -1133,6 +1299,9 @@
   <script src="js/snow.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/rsvp.js"></script>
+  <!-- Generated from the venues' map links: python scripts/build-qr.py -->
+  <script src="js/venue-qr.js"></script>
+  <script src="js/rsvp-ticket.js"></script>
   <script src="js/mixtape.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/main.js"></script>

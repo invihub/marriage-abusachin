@@ -1,0 +1,815 @@
+/* ==========================================================================
+   RSVP ticket: the RSVP as a Pearl City Express ticket
+   Markup: .rsvp-ticket-area in index.html (#rsvp-section). Behaviour and the
+   downloadable picture: js/rsvp-ticket.js.
+
+   THE SWITCH: data-rsvp="ticket" on #rsvp-section shows the ticket and hides
+   the classic form; without it the classic form shows and this file does
+   nothing else. (?rsvp=classic / ?rsvp=ticket in the address previews one.)
+
+   The ticket is paper, not glass: it keeps its own cream colours and dark
+   text on every background (the Aurora theme's light text is switched back
+   below, like the RSVP confirmation pop-up).
+   ========================================================================== */
+
+#rsvp-section:not([data-rsvp="ticket"]) .rsvp-ticket-area,
+#rsvp-section[data-rsvp="ticket"] .rsvp-section-box {
+  display: none;
+}
+
+.rsvp-ticket-area .section-title-cluster {
+  margin-bottom: 28px;
+}
+
+/* ---- COLOURS: change them here ----
+   paper / paper-deep: the ticket's cream, top to bottom
+   navy / navy-deep: the engine livery of the header (as the train coaches)
+   stripe: the cream livery band. Ceremony colours match the wheel.
+   (The downloaded picture uses the same colours: RT_COLOURS in js/rsvp-ticket.js) */
+.rt-ticket {
+  --rt-paper: #FFFDF7;
+  --rt-paper-deep: #FAF0D7;
+  --rt-navy: #1E3A5F;
+  --rt-navy-deep: #0A1C30;
+  --rt-stripe: #F8E7B4;
+  --rt-ink: #0A2F5C;
+  --rt-line: rgba(14, 58, 110, .16);
+  --rt-maroon: var(--royal-maroon, #8B1E28);
+  --rt-gold: var(--wedding-gold, #C59B27);
+  /* the stamp's ink: coach blue, like the downloaded ticket's stamp */
+  --rt-stamp: #0E427F;
+  --rt-haldi: #D4A622;
+  --rt-haldi-ink: #8A5A00;
+  --rt-wedding: #B1233A;
+  --rt-wedding-ink: #9E1A31;
+  --rt-reception: #2A9150;
+  --rt-reception-ink: #176B3A;
+  /* the stub below the perforation is this tall; the notches sit on its top edge */
+  --rt-stub-h: 84px;
+  --rt-notch: 13px;
+
+  /* dark text on the paper, on every background theme */
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+}
+
+/* the soft shadow follows the notched outline (a box-shadow would not) */
+.rt-shadow {
+  max-width: 500px;
+  margin: 0 auto;
+  filter: drop-shadow(0 18px 28px rgba(15, 23, 42, .18)) drop-shadow(0 2px 4px rgba(15, 23, 42, .1));
+}
+
+.rt-ticket {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  scroll-margin-top: 96px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  /* Playfair's numbers dip below the line by default (old-style) */
+  font-variant-numeric: lining-nums;
+  background:
+    repeating-linear-gradient(-45deg, rgba(139, 30, 40, .022) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, var(--rt-paper) 0%, var(--rt-paper-deep) 100%);
+  /* two half-circle notches where the stub tears off */
+  -webkit-mask:
+    radial-gradient(circle var(--rt-notch) at 0 calc(100% - var(--rt-stub-h)), transparent 97%, #000 100%),
+    radial-gradient(circle var(--rt-notch) at 100% calc(100% - var(--rt-stub-h)), transparent 97%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle var(--rt-notch) at 0 calc(100% - var(--rt-stub-h)), transparent 97%, #000 100%),
+    radial-gradient(circle var(--rt-notch) at 100% calc(100% - var(--rt-stub-h)), transparent 97%, #000 100%);
+  mask-composite: intersect;
+}
+
+/* ---- Header: engine livery ---- */
+.rt-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 14px;
+  background: linear-gradient(180deg, var(--rt-navy) 0%, var(--rt-navy-deep) 100%);
+  color: var(--rt-stripe);
+}
+
+.rt-engine-icon {
+  flex: none;
+  width: 40px;
+  height: 26px;
+  fill: #60A5FA;
+}
+
+.rt-engine-window,
+.rt-engine-stripe {
+  fill: var(--rt-stripe);
+}
+
+.rt-head-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.rt-head-name {
+  font-family: var(--font-hero);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+.rt-head-sub {
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: #BAE6FD;
+}
+
+.rt-head-badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-glow, #F3CA65);
+  background: var(--rt-maroon);
+  color: #FFF;
+  font-family: var(--font-serif);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.rt-livery {
+  padding: 5px 12px;
+  background: var(--rt-stripe);
+  border-bottom: 2px solid var(--rt-gold);
+  color: var(--rt-ink);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ---- The fields, one after another, divided like a ticket ---- */
+.rt-body {
+  padding: 20px 20px 24px;
+}
+
+.rt-field + .rt-field {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1.5px dashed var(--rt-line);
+}
+
+.rt-field-label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rt-ink);
+}
+
+.rt-req,
+.rt-opt {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+.rt-req {
+  color: var(--rt-maroon);
+}
+
+.rt-opt {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.rt-hint {
+  margin-top: 8px;
+  font-size: .84rem;
+  color: var(--text-muted);
+}
+
+/* written on the ticket: a pen line, not a box */
+.rt-input {
+  width: 100%;
+  padding: 4px 2px 8px;
+  border: 0;
+  border-bottom: 2px solid rgba(14, 58, 110, .3);
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--rt-ink);
+  transition: border-color .25s ease;
+}
+
+.rt-input::placeholder {
+  color: rgba(71, 85, 105, .5);
+}
+
+.rt-input:focus {
+  outline: none;
+  border-bottom-color: var(--rt-maroon);
+}
+
+/* ---- Ceremonies: the stops on the route ---- */
+.rt-stops {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+/* the line joining the stops, behind their dots */
+.rt-stops::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 24px;
+  border-left: 3px dotted rgba(14, 58, 110, .28);
+}
+
+/* each ceremony's colour (its stop, and its tags on the ticket) */
+.rt-stop-haldi {
+  --stop: var(--rt-haldi);
+  --stop-ink: var(--rt-haldi-ink);
+}
+
+.rt-stop-wedding {
+  --stop: var(--rt-wedding);
+  --stop-ink: var(--rt-wedding-ink);
+}
+
+.rt-stop-reception {
+  --stop: var(--rt-reception);
+  --stop-ink: var(--rt-reception-ink);
+}
+
+.rt-stop {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 11px 12px 11px 10px;
+  border: 1.5px solid var(--rt-line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .45);
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease, transform .15s ease;
+}
+
+.rt-stop:active {
+  transform: scale(.985);
+}
+
+.rt-stop[aria-pressed="true"] {
+  border-color: var(--stop);
+  background: color-mix(in srgb, var(--stop) 13%, transparent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--stop) 22%, transparent);
+}
+
+.rt-stop-node {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  border: 3px solid var(--stop);
+  border-radius: 50%;
+  background: var(--rt-paper);
+  transition: background .25s ease;
+}
+
+/* a tick, drawn with two borders */
+.rt-stop-node::after {
+  content: '';
+  width: 11px;
+  height: 6px;
+  margin-top: -3px;
+  border: solid #FFF;
+  border-width: 0 0 3px 3px;
+  transform: rotate(-45deg) scale(0);
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.rt-stop[aria-pressed="true"] .rt-stop-node {
+  background: var(--stop);
+}
+
+.rt-stop[aria-pressed="true"] .rt-stop-node::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+.rt-stop-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rt-stop-when {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--stop-ink);
+}
+
+.rt-stop-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--rt-ink);
+}
+
+.rt-stop-where {
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+/* ---- Seats: a row of seats in a coach, tap one to pick that many ---- */
+.rt-seats .rt-field-label {
+  justify-content: space-between;
+}
+
+.rt-seat-caption {
+  font-family: var(--font-serif);
+  font-size: .95rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--rt-maroon);
+}
+
+.rt-coach {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  padding: 10px 8px 6px;
+  border: 2px solid rgba(14, 58, 110, .14);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(14, 58, 110, .05), rgba(14, 58, 110, .02));
+}
+
+.rt-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 52px;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font: inherit;
+  color: rgba(14, 58, 110, .28);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .25s ease;
+}
+
+.rt-seat svg {
+  width: 100%;
+  max-width: 34px;
+  height: auto;
+  fill: currentColor;
+}
+
+.rt-seat span {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.rt-seat.is-filled {
+  color: var(--rt-maroon);
+}
+
+.rt-seat.is-filled svg {
+  animation: rtSeatIn .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@keyframes rtSeatIn {
+  from {
+    transform: scale(.6) translateY(4px);
+  }
+}
+
+/* no ceremony ticked: the seats rest (their number is kept, not counted) */
+.rt-seats.is-resting .rt-coach,
+.rt-seats.is-resting .rt-seat-caption {
+  opacity: .4;
+  filter: grayscale(1);
+}
+
+.rt-seats.is-resting .rt-seat {
+  cursor: default;
+}
+
+.rt-seats.is-resting .rt-seat.is-filled svg {
+  animation: none;
+}
+
+/* ---- Blessing: lined writing paper ---- */
+.rt-note {
+  display: block;
+  width: 100%;
+  min-height: 6.3rem;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 0;
+  resize: vertical;
+  background: repeating-linear-gradient(180deg, transparent 0 calc(2.1rem - 1px), rgba(14, 58, 110, .2) calc(2.1rem - 1px) 2.1rem);
+  background-attachment: local;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 2.1rem;
+  color: var(--rt-ink);
+}
+
+.rt-note::placeholder {
+  color: rgba(71, 85, 105, .5);
+}
+
+.rt-note:focus {
+  outline: none;
+}
+
+.rt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.rt-chip {
+  min-height: 40px;
+  padding: 7px 12px;
+  border: 1.5px solid var(--rt-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .6);
+  font: inherit;
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--rt-ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .2s ease, background .2s ease, transform .15s ease;
+}
+
+.rt-chip:active {
+  transform: scale(.96);
+  border-color: var(--rt-maroon);
+}
+
+/* ---- The stamped ticket ---- */
+.rt-done {
+  text-align: center;
+}
+
+.rt-done[hidden],
+.rt-form[hidden] {
+  display: none;
+}
+
+.rt-stamp {
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 4px;
+  opacity: .9;
+  transform: rotate(-12deg);
+  animation: rtStamp .6s cubic-bezier(.3, 1.4, .5, 1) .15s backwards;
+}
+
+@keyframes rtStamp {
+  from {
+    opacity: 0;
+    transform: rotate(-26deg) scale(1.9);
+  }
+}
+
+.rt-stamp-line {
+  fill: none;
+  stroke: var(--rt-stamp);
+}
+
+/* the band across the middle that carries the stamp's word (paper-coloured,
+   so it covers the inner ring behind the word) */
+.rt-stamp-band {
+  fill: var(--rt-paper);
+  stroke: var(--rt-stamp);
+  stroke-width: 3;
+}
+
+.rt-stamp text {
+  fill: var(--rt-stamp);
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.rt-stamp-ring-text {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+.rt-stamp-big {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.rt-stamp-small {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.rt-kicker {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--rt-maroon);
+}
+
+.rt-title {
+  margin: 4px 0 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 5.4vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--rt-ink);
+  outline: none;
+}
+
+.rt-done-quote {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1.5px dashed rgba(139, 30, 40, .5);
+  border-radius: 12px;
+  background: rgba(254, 242, 242, .6);
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--rt-maroon);
+}
+
+/* the printed ticket (landscape); tap it to open full size */
+.rt-preview {
+  position: relative;
+  display: block;
+  aspect-ratio: 1800 / 860;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #2C3E50;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, .18);
+}
+
+.rt-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.rt-preview.is-ready img {
+  opacity: 1;
+}
+
+/* while it's being drawn */
+.rt-preview-wait {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: #BAE6FD;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .12) 50%, transparent 70%) 0 0 / 220% 100%;
+  animation: rtPrinting 1.4s linear infinite;
+}
+
+.rt-preview.is-ready .rt-preview-wait {
+  display: none;
+}
+
+@keyframes rtPrinting {
+  from {
+    background-position: 120% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+.rt-preview-hint {
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ---- Messages ---- */
+.rt-error {
+  margin: 0 20px 16px;
+  padding: 10px 14px;
+  border: 1px solid #FCA5A5;
+  border-radius: 10px;
+  background: #FEF2F2;
+  font-size: .9rem;
+  font-weight: 600;
+  color: #991B1B;
+}
+
+.rt-shake {
+  animation: rtShake .4s ease;
+}
+
+@keyframes rtShake {
+  20%, 60% {
+    transform: translateX(-6px);
+  }
+
+  40%, 80% {
+    transform: translateX(6px);
+  }
+}
+
+/* ---- Stub: below the perforation ---- */
+.rt-stub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: var(--rt-stub-h);
+  padding: 0 18px;
+  background: rgba(14, 58, 110, .045);
+}
+
+/* the perforation, between the two notches */
+.rt-stub::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: calc(var(--rt-notch) + 6px);
+  right: calc(var(--rt-notch) + 6px);
+  border-top: 2px dashed rgba(14, 58, 110, .28);
+}
+
+.rt-submit {
+  flex: 1;
+  max-width: 340px;
+  min-height: 52px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--rt-maroon) 0%, var(--cranberry-festive, #9B1B30) 100%);
+  box-shadow: 0 8px 20px rgba(139, 30, 40, .28);
+  font-family: var(--font-hero);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: #FFF;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .15s ease, box-shadow .25s ease, opacity .2s ease;
+}
+
+.rt-submit:active {
+  transform: scale(.97);
+}
+
+.rt-submit:disabled {
+  opacity: .7;
+  cursor: wait;
+}
+
+/* "Preparing your ticket…" fits on a narrow phone */
+#rt-download:disabled {
+  font-family: var(--font-sans);
+  font-size: .95rem;
+}
+
+.rt-share {
+  min-height: 52px;
+  padding: 10px 18px;
+  border: 2px solid rgba(139, 30, 40, .4);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--rt-maroon);
+  cursor: pointer;
+}
+
+.rt-share[hidden] {
+  display: none;
+}
+
+/* below the ticket, once it is stamped */
+.rt-again {
+  display: block;
+  min-height: 44px;
+  margin: 18px auto 0;
+  padding: 8px 16px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--royal-maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+html[data-bg="aurora"] .rt-again {
+  color: var(--aurora-gold, #F6D37E);
+}
+
+.rt-again[hidden] {
+  display: none;
+}
+
+/* keyboard focus rings (not on tap) */
+.rt-ticket :is(button, input, textarea):focus-visible,
+.rt-again:focus-visible {
+  outline: 3px solid rgba(197, 155, 39, .7);
+  outline-offset: 2px;
+}
+
+/* ---- Wider screens: a little more room ---- */
+@media (min-width: 601px) {
+  .rt-body {
+    padding: 24px 32px 28px;
+  }
+
+  .rt-head {
+    padding: 18px 24px 16px;
+  }
+
+  .rt-error {
+    margin: 0 32px 16px;
+  }
+
+  .rt-chip:hover,
+  .rt-stop:hover {
+    border-color: rgba(139, 30, 40, .45);
+  }
+
+  .rt-submit:hover {
+    box-shadow: 0 12px 26px rgba(139, 30, 40, .36);
+  }
+}
+
+/* very narrow phones (320px) */
+@media (max-width: 360px) {
+  .rt-head {
+    gap: 10px;
+    padding: 14px 14px 12px;
+  }
+
+  .rt-head-name {
+    font-size: .9rem;
+  }
+
+  .rt-head-badge {
+    width: 36px;
+    height: 36px;
+    font-size: .74rem;
+  }
+
+  .rt-body {
+    padding: 18px 16px 22px;
+  }
+
+  .rt-submit {
+    font-size: .92rem;
+  }
+}
