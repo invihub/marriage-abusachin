@@ -384,7 +384,7 @@
     0 6px 18px -10px var(--slot-colour);
 }
 
-/* a pick of yours carried up from below the top 10: a gap holds it apart */
+/* a pick of yours carried up from below the top 7: a gap holds it apart */
 .mt-track.is-pinned + .mt-track:not(.is-pinned) {
   margin-top: 10px;
 }

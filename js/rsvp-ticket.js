@@ -50,34 +50,77 @@ const RT_DONE_TEXT = {
   noted: { stamp: 'THANK YOU', kicker: 'RSVP received', title: 'Thank you for letting us know', quote: '"You\'ll be missed, and you\'ll be in our hearts on the day."' }
 };
 
-// ---- THE PRINTED TICKET'S COLOURS: the Pearl City Express coaches' livery ----
-// (css/style.css .train-coach-item / .coach-livery-stripes / .train-locomotive):
-// blue coach bands, the cream livery stripe with navy lettering, sky-blue edge,
-// slate roof for the backdrop. Ceremony colours match the celebration wheel.
-const RT_PRINT = {
-  backdrop: '#2C3E50',     // coach roof
-  paper: '#FDF7E7',
-  paperEdge: '#F3E6C4',
-  bandTop: '#0E427F',      // coach body, top to bottom
-  bandBottom: '#0A2F5C',
-  bandText: '#FFFFFF',
-  bandSub: '#BAE6FD',      // light lettering on the coaches
-  stripe: '#F8E7B4',       // livery stripe
-  stripeText: '#0A2F5C',
-  sky: '#38BDF8',          // coach border
-  engine: '#60A5FA',       // locomotive trim
-  accent: '#0E427F',       // stamp ink, labels, frames
-  cream: '#F8E7B4',
-  ink: '#0A2F5C',
-  muted: '#5B6B82',
-  line: 'rgba(10, 47, 92, .25)',
-  qr: '#0A1C30',
-  ceremonies: {
-    haldi_sangeet: { stripe: '#D4A622', ink: '#8A5A00' },
-    wedding_thoothukudi: { stripe: '#B1233A', ink: '#9E1A31' },
-    reception_chennai: { stripe: '#2A9150', ink: '#176B3A' }
+// ---- THE PRINTED TICKET'S LOOK: 'ice' or 'coach' ----
+// ice:   the coaches' dark-blue bands on frosted ice paper, a pale ice stripe,
+//        a few frost crystals, on the site's Ice background (matches the
+//        ticket on the page)
+// coach: the earlier look, the Pearl City Express coaches' livery as they
+//        are drawn on the page (css/style.css .train-coach-item): blue bands,
+//        cream livery stripe, slate roof for the backdrop
+// ?ticket=coach or ?ticket=ice in the address previews the other one.
+const RT_PRINT_LOOK = 'ice';
+
+// ceremony colours match the celebration wheel, in both looks
+const RT_PRINT_CEREMONIES = {
+  haldi_sangeet: { stripe: '#D4A622', ink: '#8A5A00' },
+  wedding_thoothukudi: { stripe: '#B1233A', ink: '#9E1A31' },
+  reception_chennai: { stripe: '#2A9150', ink: '#176B3A' }
+};
+
+const RT_PRINT_STYLES = {
+  ice: {
+    backdrop: '#90CBDF',     // the site's Ice background, edge ...
+    backdropCentre: '#D2E6EE', // ... and centre
+    shadow: 'rgba(10, 60, 100, .3)',
+    paper: '#F8FCFE',
+    paperEdge: '#DCEDF6',
+    bandTop: '#0E427F',      // coach body, top to bottom
+    bandBottom: '#0A2F5C',
+    bandText: '#FFFFFF',
+    bandSub: '#BAE6FD',
+    stripe: '#DCF0FA',       // pale ice livery stripe
+    stripeText: '#0A2F5C',
+    sky: '#38BDF8',          // the ticket's edge, QR corners
+    engine: '#60A5FA',
+    accent: '#0E427F',       // stamp ink, labels, frames
+    cream: '#E0F2FE',        // light lettering on the blue (fare, side band)
+    ink: '#0A2F5C',
+    muted: '#4F6880',
+    line: 'rgba(10, 70, 120, .22)',
+    perforation: 'rgba(186, 230, 253, .55)',
+    qr: '#0A1C30',
+    frost: 'rgba(186, 230, 253, .3)', // crystals on the blue band
+    frostPaper: 'rgba(56, 160, 220, .16)', // ... and on the paper
+    ceremonies: RT_PRINT_CEREMONIES
+  },
+  coach: {
+    backdrop: '#2C3E50',     // coach roof
+    backdropCentre: '#2C3E50',
+    shadow: 'rgba(0, 0, 0, .35)',
+    paper: '#FDF7E7',
+    paperEdge: '#F3E6C4',
+    bandTop: '#0E427F',
+    bandBottom: '#0A2F5C',
+    bandText: '#FFFFFF',
+    bandSub: '#BAE6FD',
+    stripe: '#F8E7B4',       // cream livery stripe
+    stripeText: '#0A2F5C',
+    sky: '#38BDF8',
+    engine: '#60A5FA',
+    accent: '#0E427F',
+    cream: '#F8E7B4',
+    ink: '#0A2F5C',
+    muted: '#5B6B82',
+    line: 'rgba(10, 47, 92, .25)',
+    perforation: 'rgba(186, 230, 253, .55)',
+    qr: '#0A1C30',
+    frost: null,             // no crystals
+    frostPaper: null,
+    ceremonies: RT_PRINT_CEREMONIES
   }
 };
+
+const RT_PRINT = RT_PRINT_STYLES[((location.search.match(/[?&]ticket=(ice|coach)/i) || [])[1] || RT_PRINT_LOOK).toLowerCase()];
 
 class RsvpTicket {
   constructor(section) {
@@ -406,7 +449,7 @@ function ticketNumber(name) {
 
 /* ------------------------------------------------------------------------
    The printed ticket: a railway ticket in the Pearl City Express coaches'
-   livery (blue bands, cream stripe), landscape, 1800 x 860.
+   blue, on ice paper (or cream: RT_PRINT_LOOK above), landscape, 1800 x 860.
 
    ┌───────────────────────── main ─────────────────────────┐┌──── stub ─────┐
    │ band: engine · PEARL CITY EXPRESS              Nº 2026  ││ BOARDING PASS │
@@ -435,11 +478,14 @@ function paintTicket(ctx, t) {
   const coming = t.events.length > 0;
 
   // ---- backdrop, ticket shape, paper
-  ctx.fillStyle = P.backdrop;
+  const backdrop = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * .6);
+  backdrop.addColorStop(0, P.backdropCentre);
+  backdrop.addColorStop(1, P.backdrop);
+  ctx.fillStyle = backdrop;
   ctx.fillRect(0, 0, W, H);
 
   ctx.save();
-  ctx.shadowColor = 'rgba(0, 0, 0, .35)';
+  ctx.shadowColor = P.shadow;
   ctx.shadowBlur = 30;
   ctx.shadowOffsetY = 12;
   roundRect(ctx, X, Y, TW, TH, R);
@@ -470,6 +516,18 @@ function paintTicket(ctx, t) {
   ctx.fillStyle = '#FFFFFF';
   ctx.fillRect(X, Y + BAND, TW, 2);
   ctx.fillRect(X, Y + BAND + STRIPE - 2, TW, 2);
+
+  // frost crystals: on the band between the name and the ticket number,
+  // and faintly on the stub's paper
+  if (P.frost) {
+    drawCrystal(ctx, X + 880, Y + 56, 34, P.frost);
+    drawCrystal(ctx, X + 952, Y + 92, 15, P.frost);
+    drawCrystal(ctx, X + 838, Y + 100, 11, P.frost);
+  }
+  if (P.frostPaper) {
+    drawCrystal(ctx, X + TW - 122, Y + 332, 22, P.frostPaper);
+    drawCrystal(ctx, X + 34, Y + TH - 34, 18, P.frostPaper);
+  }
 
   drawLocomotive(ctx, X + 46, Y + 30, .4, P.engine, 1, true);
   text(ctx, 'Pearl City Express', X + 192, Y + 68, '700 46px "Cinzel Decorative"', P.bandText);
@@ -630,7 +688,7 @@ function paintTicket(ctx, t) {
   ctx.save();
   ctx.setLineDash([14, 10]);
   ctx.lineWidth = 3;
-  ctx.strokeStyle = 'rgba(186, 230, 253, .55)';
+  ctx.strokeStyle = P.perforation;
   ctx.beginPath();
   ctx.moveTo(PX, Y + 30);
   ctx.lineTo(PX, Y + BAND);
@@ -651,7 +709,7 @@ function paintTicket(ctx, t) {
   ctx.stroke();
 
   // notches where the stub tears off
-  ctx.fillStyle = P.backdrop;
+  ctx.fillStyle = backdrop;
   [Y, Y + TH].forEach(ny => {
     ctx.beginPath();
     ctx.arc(PX, ny, 24, 0, Math.PI * 2);
@@ -857,6 +915,32 @@ function drawLocomotive(ctx, x, y, scale, colour, alpha, steam) {
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
       ctx.fill();
     });
+  }
+  ctx.restore();
+}
+
+// a six-armed frost crystal (r: centre to arm tip), drawn in lines
+function drawCrystal(ctx, x, y, r, colour) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.strokeStyle = colour;
+  ctx.lineWidth = Math.max(2, r * .09);
+  ctx.lineCap = 'round';
+  for (let i = 0; i < 6; i++) {
+    ctx.save();
+    ctx.rotate(i * Math.PI / 3);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -r);
+    // two pairs of side branches on each arm
+    [[.45, .3], [.72, .2]].forEach(([at, len]) => {
+      ctx.moveTo(0, -r * at);
+      ctx.lineTo(-r * len, -r * (at + len));
+      ctx.moveTo(0, -r * at);
+      ctx.lineTo(r * len, -r * (at + len));
+    });
+    ctx.stroke();
+    ctx.restore();
   }
   ctx.restore();
 }

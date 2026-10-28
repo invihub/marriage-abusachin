@@ -7,9 +7,9 @@
    the classic form; without it the classic form shows and this file does
    nothing else. (?rsvp=classic / ?rsvp=ticket in the address previews one.)
 
-   The ticket is paper, not glass: it keeps its own cream colours and dark
-   text on every background (its text colours are set below, so a theme's
-   text colours never reach it).
+   The ticket is frosted paper, not glass: it keeps its own ice colours and
+   dark text on every background (its text colours are set below, so a
+   theme's text colours never reach it).
    ========================================================================== */
 
 #rsvp-section:not([data-rsvp="ticket"]) .rsvp-ticket-area,
@@ -18,24 +18,32 @@
 }
 
 .rsvp-ticket-area .section-title-cluster {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 /* ---- COLOURS: change them here ----
-   paper / paper-deep: the ticket's cream, top to bottom
-   navy / navy-deep: the engine livery of the header (as the train coaches)
-   stripe: the cream livery band. Ceremony colours match the wheel.
-   (The downloaded picture uses the same colours: RT_COLOURS in js/rsvp-ticket.js) */
+   paper / paper-deep: the ticket's frosted ice paper, top to bottom
+   sheen: the frost light in its corners
+   navy / navy-deep: the engine livery of the header (the train coaches' dark blue)
+   stripe / stripe-edge: the pale ice livery band under it
+   accent / accent-deep: ice blue for the "needed" tag, the chosen seats, the
+     button and the confirmation (the blues of the site's Ice background)
+   Ceremony colours match the wheel.
+   Before (cream & maroon): paper #FFFDF7 / #FAF0D7, stripe #F8E7B4 edged
+   #C59B27, accent #8B1E28 (button to #9B1B30)
+   (The downloaded picture has its own: RT_PRINT_STYLES in js/rsvp-ticket.js) */
 .rt-ticket {
-  --rt-paper: #FFFDF7;
-  --rt-paper-deep: #FAF0D7;
+  --rt-paper: #FAFDFF;
+  --rt-paper-deep: #E3F1F9;
+  --rt-sheen: rgba(186, 230, 253, .45);
   --rt-navy: #1E3A5F;
   --rt-navy-deep: #0A1C30;
-  --rt-stripe: #F8E7B4;
+  --rt-stripe: #DCF0FA;
+  --rt-stripe-edge: #7CC4E4;
   --rt-ink: #0A2F5C;
-  --rt-line: rgba(14, 58, 110, .16);
-  --rt-maroon: var(--royal-maroon, #8B1E28);
-  --rt-gold: var(--wedding-gold, #C59B27);
+  --rt-line: rgba(10, 100, 150, .18);
+  --rt-accent: #0A6FA6;
+  --rt-accent-deep: #0E427F;
   /* the stamp's ink: coach blue, like the downloaded ticket's stamp */
   --rt-stamp: #0E427F;
   --rt-haldi: #D4A622;
@@ -45,7 +53,7 @@
   --rt-reception: #2A9150;
   --rt-reception-ink: #176B3A;
   /* the stub below the perforation is this tall; the notches sit on its top edge */
-  --rt-stub-h: 84px;
+  --rt-stub-h: 62px;
   --rt-notch: 13px;
 
   /* dark text on the paper, on every background theme */
@@ -70,8 +78,10 @@
   font-family: var(--font-sans);
   /* Playfair's numbers dip below the line by default (old-style) */
   font-variant-numeric: lining-nums;
+  /* ice paper, with a soft frost light in two corners */
   background:
-    repeating-linear-gradient(-45deg, rgba(139, 30, 40, .022) 0 2px, transparent 2px 9px),
+    radial-gradient(120% 45% at 100% 0%, var(--rt-sheen) 0%, transparent 70%),
+    radial-gradient(90% 35% at 0% 100%, var(--rt-sheen) 0%, transparent 70%),
     linear-gradient(180deg, var(--rt-paper) 0%, var(--rt-paper-deep) 100%);
   /* two half-circle notches where the stub tears off */
   -webkit-mask:
@@ -88,16 +98,16 @@
 .rt-head {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 18px 14px;
+  gap: 10px;
+  padding: 9px 14px 8px;
   background: linear-gradient(180deg, var(--rt-navy) 0%, var(--rt-navy-deep) 100%);
   color: var(--rt-stripe);
 }
 
 .rt-engine-icon {
   flex: none;
-  width: 40px;
-  height: 26px;
+  width: 34px;
+  height: 22px;
   fill: #60A5FA;
 }
 
@@ -115,14 +125,14 @@
 
 .rt-head-name {
   font-family: var(--font-hero);
-  font-size: 1.02rem;
+  font-size: .95rem;
   font-weight: 700;
   line-height: 1.2;
   color: #FFFFFF;
 }
 
 .rt-head-sub {
-  font-size: .72rem;
+  font-size: .7rem;
   font-weight: 500;
   letter-spacing: .02em;
   color: #BAE6FD;
@@ -132,23 +142,23 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  border: 2px solid var(--gold-glow, #F3CA65);
-  background: var(--rt-maroon);
+  border: 2px solid #BAE6FD;
+  background: linear-gradient(160deg, #0A7EB9 0%, var(--rt-accent-deep) 100%);
   color: #FFF;
   font-family: var(--font-serif);
-  font-size: .82rem;
+  font-size: .76rem;
   font-weight: 700;
 }
 
 .rt-livery {
-  padding: 5px 12px;
+  padding: 3px 12px;
   background: var(--rt-stripe);
-  border-bottom: 2px solid var(--rt-gold);
+  border-bottom: 2px solid var(--rt-stripe-edge);
   color: var(--rt-ink);
-  font-size: .68rem;
+  font-size: .64rem;
   font-weight: 700;
   letter-spacing: .18em;
   text-align: center;
@@ -157,12 +167,12 @@
 
 /* ---- The fields, one after another, divided like a ticket ---- */
 .rt-body {
-  padding: 20px 20px 24px;
+  padding: 12px 16px 12px;
 }
 
 .rt-field + .rt-field {
-  margin-top: 18px;
-  padding-top: 18px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1.5px dashed var(--rt-line);
 }
 
@@ -170,8 +180,8 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: 10px;
-  font-size: .72rem;
+  margin-bottom: 5px;
+  font-size: .68rem;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -187,7 +197,7 @@
 }
 
 .rt-req {
-  color: var(--rt-maroon);
+  color: var(--rt-accent);
 }
 
 .rt-opt {
@@ -197,21 +207,22 @@
 }
 
 .rt-hint {
-  margin-top: 8px;
-  font-size: .84rem;
+  margin-top: 4px;
+  font-size: .76rem;
+  line-height: 1.4;
   color: var(--text-muted);
 }
 
 /* written on the ticket: a pen line, not a box */
 .rt-input {
   width: 100%;
-  padding: 4px 2px 8px;
+  padding: 0 2px 4px;
   border: 0;
-  border-bottom: 2px solid rgba(14, 58, 110, .3);
+  border-bottom: 2px solid rgba(10, 100, 150, .3);
   border-radius: 0;
   background: transparent;
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-style: italic;
   color: var(--rt-ink);
   transition: border-color .25s ease;
@@ -223,24 +234,24 @@
 
 .rt-input:focus {
   outline: none;
-  border-bottom-color: var(--rt-maroon);
+  border-bottom-color: var(--rt-accent);
 }
 
 /* ---- Ceremonies: the stops on the route ---- */
 .rt-stops {
   position: relative;
   display: grid;
-  gap: 8px;
+  gap: 5px;
 }
 
 /* the line joining the stops, behind their dots */
 .rt-stops::before {
   content: '';
   position: absolute;
-  top: 30px;
-  bottom: 30px;
-  left: 24px;
-  border-left: 3px dotted rgba(14, 58, 110, .28);
+  top: 22px;
+  bottom: 22px;
+  left: 20px;
+  border-left: 3px dotted rgba(10, 100, 150, .28);
 }
 
 /* each ceremony's colour (its stop, and its tags on the ticket) */
@@ -263,13 +274,13 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  min-height: 64px;
-  padding: 11px 12px 11px 10px;
+  min-height: 48px;
+  padding: 6px 10px 6px 9px;
   border: 1.5px solid var(--rt-line);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .45);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .55);
   font: inherit;
   text-align: left;
   color: inherit;
@@ -292,9 +303,9 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  margin-top: 2px;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
   border: 3px solid var(--stop);
   border-radius: 50%;
   background: var(--rt-paper);
@@ -304,8 +315,8 @@
 /* a tick, drawn with two borders */
 .rt-stop-node::after {
   content: '';
-  width: 11px;
-  height: 6px;
+  width: 9px;
+  height: 5px;
   margin-top: -3px;
   border: solid #FFF;
   border-width: 0 0 3px 3px;
@@ -325,10 +336,11 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  line-height: 1.3;
 }
 
 .rt-stop-when {
-  font-size: .72rem;
+  font-size: .66rem;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -337,14 +349,14 @@
 
 .rt-stop-name {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: .98rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.2;
   color: var(--rt-ink);
 }
 
 .rt-stop-where {
-  font-size: .8rem;
+  font-size: .74rem;
   color: var(--text-muted);
 }
 
@@ -355,36 +367,36 @@
 
 .rt-seat-caption {
   font-family: var(--font-serif);
-  font-size: .95rem;
+  font-size: .88rem;
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--rt-maroon);
+  color: var(--rt-accent);
 }
 
 .rt-coach {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 4px;
-  padding: 10px 8px 6px;
-  border: 2px solid rgba(14, 58, 110, .14);
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(14, 58, 110, .05), rgba(14, 58, 110, .02));
+  padding: 3px 6px 2px;
+  border: 2px solid rgba(10, 100, 150, .15);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(186, 230, 253, .3), rgba(255, 255, 255, .25));
 }
 
 .rt-seat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  min-height: 52px;
-  padding: 4px 0;
+  gap: 0;
+  min-height: 38px;
+  padding: 2px 0;
   border: 0;
   border-radius: 10px;
   background: none;
   font: inherit;
-  color: rgba(14, 58, 110, .28);
+  color: rgba(10, 100, 150, .26);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: color .25s ease;
@@ -392,19 +404,20 @@
 
 .rt-seat svg {
   width: 100%;
-  max-width: 34px;
+  max-width: 23px;
   height: auto;
   fill: currentColor;
 }
 
 .rt-seat span {
-  font-size: .72rem;
+  font-size: .66rem;
   font-weight: 700;
+  line-height: 1.25;
   color: var(--text-muted);
 }
 
 .rt-seat.is-filled {
-  color: var(--rt-maroon);
+  color: var(--rt-accent);
 }
 
 .rt-seat.is-filled svg {
@@ -436,17 +449,20 @@
 .rt-note {
   display: block;
   width: 100%;
-  min-height: 6.3rem;
+  /* two ruled lines (it can be dragged taller). A set height: some
+     browsers give rows="2" room for a third line. */
+  height: 3.6rem;
+  min-height: 3.6rem;
   padding: 0 4px;
   border: 0;
   border-radius: 0;
   resize: vertical;
-  background: repeating-linear-gradient(180deg, transparent 0 calc(2.1rem - 1px), rgba(14, 58, 110, .2) calc(2.1rem - 1px) 2.1rem);
+  background: repeating-linear-gradient(180deg, transparent 0 calc(1.8rem - 1px), rgba(10, 100, 150, .22) calc(1.8rem - 1px) 1.8rem);
   background-attachment: local;
   font-family: var(--font-serif);
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-style: italic;
-  line-height: 2.1rem;
+  line-height: 1.8rem;
   color: var(--rt-ink);
 }
 
@@ -461,18 +477,18 @@
 .rt-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
+  gap: 5px;
+  margin-top: 6px;
 }
 
 .rt-chip {
-  min-height: 40px;
-  padding: 7px 12px;
+  min-height: 30px;
+  padding: 3px 10px;
   border: 1.5px solid var(--rt-line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, .6);
+  background: rgba(255, 255, 255, .7);
   font: inherit;
-  font-size: .84rem;
+  font-size: .76rem;
   font-weight: 500;
   color: var(--rt-ink);
   cursor: pointer;
@@ -482,7 +498,7 @@
 
 .rt-chip:active {
   transform: scale(.96);
-  border-color: var(--rt-maroon);
+  border-color: var(--rt-accent);
 }
 
 /* ---- The stamped ticket ---- */
@@ -551,7 +567,7 @@
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--rt-maroon);
+  color: var(--rt-accent);
 }
 
 .rt-title {
@@ -567,14 +583,14 @@
 .rt-done-quote {
   margin: 0 0 14px;
   padding: 12px 14px;
-  border: 1.5px dashed rgba(139, 30, 40, .5);
+  border: 1.5px dashed rgba(10, 111, 166, .45);
   border-radius: 12px;
-  background: rgba(254, 242, 242, .6);
+  background: rgba(224, 242, 254, .6);
   font-family: var(--font-serif);
   font-size: 1.12rem;
   font-style: italic;
   font-weight: 700;
-  color: var(--rt-maroon);
+  color: var(--rt-accent-deep);
 }
 
 /* the printed ticket (landscape); tap it to open full size */
@@ -584,7 +600,7 @@
   aspect-ratio: 1800 / 860;
   border-radius: 10px;
   overflow: hidden;
-  background: #2C3E50;
+  background: #B9DCEB;
   box-shadow: 0 8px 20px rgba(15, 23, 42, .18);
 }
 
@@ -609,8 +625,8 @@
   font-size: .9rem;
   font-weight: 600;
   letter-spacing: .04em;
-  color: #BAE6FD;
-  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .12) 50%, transparent 70%) 0 0 / 220% 100%;
+  color: #0E427F;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%) 0 0 / 220% 100%;
   animation: rtPrinting 1.4s linear infinite;
 }
 
@@ -668,7 +684,7 @@
   gap: 10px;
   height: var(--rt-stub-h);
   padding: 0 18px;
-  background: rgba(14, 58, 110, .045);
+  background: rgba(186, 230, 253, .28);
 }
 
 /* the perforation, between the two notches */
@@ -678,20 +694,20 @@
   top: -1px;
   left: calc(var(--rt-notch) + 6px);
   right: calc(var(--rt-notch) + 6px);
-  border-top: 2px dashed rgba(14, 58, 110, .28);
+  border-top: 2px dashed rgba(10, 100, 150, .3);
 }
 
 .rt-submit {
   flex: 1;
   max-width: 340px;
-  min-height: 52px;
-  padding: 12px 22px;
+  min-height: 44px;
+  padding: 8px 22px;
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--rt-maroon) 0%, var(--cranberry-festive, #9B1B30) 100%);
-  box-shadow: 0 8px 20px rgba(139, 30, 40, .28);
+  background: linear-gradient(135deg, var(--rt-accent-deep) 0%, #0A7EB9 100%);
+  box-shadow: 0 8px 20px rgba(10, 90, 150, .3);
   font-family: var(--font-hero);
-  font-size: 1.02rem;
+  font-size: .98rem;
   font-weight: 700;
   letter-spacing: .02em;
   color: #FFF;
@@ -716,15 +732,15 @@
 }
 
 .rt-share {
-  min-height: 52px;
-  padding: 10px 18px;
-  border: 2px solid rgba(139, 30, 40, .4);
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 2px solid rgba(10, 111, 166, .45);
   border-radius: 999px;
-  background: transparent;
+  background: rgba(255, 255, 255, .5);
   font: inherit;
   font-size: .95rem;
   font-weight: 700;
-  color: var(--rt-maroon);
+  color: var(--rt-accent-deep);
   cursor: pointer;
 }
 
@@ -743,7 +759,7 @@
   font: inherit;
   font-size: .95rem;
   font-weight: 600;
-  color: var(--royal-maroon);
+  color: #0E427F;
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -756,18 +772,18 @@
 /* keyboard focus rings (not on tap) */
 .rt-ticket :is(button, input, textarea):focus-visible,
 .rt-again:focus-visible {
-  outline: 3px solid rgba(197, 155, 39, .7);
+  outline: 3px solid rgba(56, 189, 248, .8);
   outline-offset: 2px;
 }
 
 /* ---- Wider screens: a little more room ---- */
 @media (min-width: 601px) {
   .rt-body {
-    padding: 24px 32px 28px;
+    padding: 16px 28px 18px;
   }
 
   .rt-head {
-    padding: 18px 24px 16px;
+    padding: 12px 24px 10px;
   }
 
   .rt-error {
@@ -776,19 +792,19 @@
 
   .rt-chip:hover,
   .rt-stop:hover {
-    border-color: rgba(139, 30, 40, .45);
+    border-color: rgba(10, 111, 166, .5);
   }
 
   .rt-submit:hover {
-    box-shadow: 0 12px 26px rgba(139, 30, 40, .36);
+    box-shadow: 0 12px 26px rgba(10, 90, 150, .38);
   }
 }
 
 /* very narrow phones (320px) */
 @media (max-width: 360px) {
   .rt-head {
-    gap: 10px;
-    padding: 14px 14px 12px;
+    gap: 8px;
+    padding: 8px 12px 7px;
   }
 
   .rt-head-name {
@@ -796,13 +812,13 @@
   }
 
   .rt-head-badge {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     font-size: .74rem;
   }
 
   .rt-body {
-    padding: 18px 16px 22px;
+    padding: 11px 13px 11px;
   }
 
   .rt-submit {

@@ -509,18 +509,78 @@
     </section>
 
     <!-- ==========================================================================
-         5. Celebration Schedule Spin Wheel (3 Rotating Sections)
+         5. Celebration Schedule: the departures board (one row per ceremony)
          ========================================================================== -->
     <section id="celebration-wheel-section" class="section-wrapper">
       <div class="section-title-cluster">
         <span class="section-pretitle">Ceremonies & Venues</span>
         <h2 class="section-title">Celebration Schedule</h2>
         <p class="section-desc">
-          Tap any section of the wheel, or a venue below, to open it in Google Maps.
+          Tap a ceremony to open its venue in Google Maps.
         </p>
       </div>
 
-      <!-- The Grand 3-Section Rotating Spin Wheel -->
+      <!-- Departures board: one row per ceremony, each its venue's Google Maps
+           link. The date tiles flip in, like a station's split-flap board,
+           when the board scrolls into view (js/main.js initDepartureBoard).
+           Styles: "Departures board" in css/style.css. -->
+      <div class="departure-board">
+        <div class="db-head" aria-hidden="true">
+          <svg class="db-engine" viewBox="0 0 40 26">
+            <path d="M3 8h17v12H3z" />
+            <path d="M20 4h10a2 2 0 0 1 2 2v14H20z" />
+            <path d="M6 3h4v5H6z" />
+            <path d="M32 12h4l2 8h-6z" />
+            <circle cx="8" cy="22" r="3.2" />
+            <circle cx="17" cy="22" r="3.2" />
+            <circle cx="28" cy="22" r="3.2" />
+          </svg>
+          <span class="db-title">Departures</span>
+          <span class="db-sub">Pearl City Express · Dec 2026</span>
+        </div>
+        <a class="db-row db-haldi" style="--i: 0" href="https://maps.app.goo.gl/9LsKEyBVSDDpFLWo8" target="_blank" rel="noopener noreferrer"
+          aria-label="Haldi &amp; Sangeet, Saturday 5 December, 3:00 PM, AVM Kamalavel Mahal, Thoothukudi. Open in Google Maps">
+          <span class="db-flap" aria-hidden="true">
+            <span class="db-flap-day">Sat 5 Dec</span>
+            <span class="db-flap-time">3:00 PM</span>
+          </span>
+          <span class="db-info">
+            <span class="db-name">Haldi &amp; Sangeet</span>
+            <span class="db-venue">AVM Kamalavel Mahal, Thoothukudi</span>
+          </span>
+          <span class="db-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" /></svg></span>
+        </a>
+        <a class="db-row db-wedding" style="--i: 1" href="https://share.google/FoauSwek7PCUqaAcR" target="_blank" rel="noopener noreferrer"
+          aria-label="Wedding, Sunday 6 December, 7:45 AM Muhurtham, AVM Kamalavel Mahal, Thoothukudi. Open in Google Maps">
+          <span class="db-flap" aria-hidden="true">
+            <span class="db-flap-day">Sun 6 Dec</span>
+            <span class="db-flap-time">7:45 AM</span>
+          </span>
+          <span class="db-info">
+            <span class="db-name">Wedding</span>
+            <span class="db-venue">AVM Kamalavel Mahal, Thoothukudi</span>
+          </span>
+          <span class="db-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" /></svg></span>
+        </a>
+        <a class="db-row db-reception" style="--i: 2" href="https://maps.app.goo.gl/KuNMGB7UNr8dQDk16" target="_blank" rel="noopener noreferrer"
+          aria-label="Reception, Friday 11 December, 6:00 PM, Madras Race Club, Guindy, Chennai. Open in Google Maps">
+          <span class="db-flap" aria-hidden="true">
+            <span class="db-flap-day">Fri 11 Dec</span>
+            <span class="db-flap-time">6:00 PM</span>
+          </span>
+          <span class="db-info">
+            <span class="db-name">Reception</span>
+            <span class="db-venue">Madras Race Club, Guindy, Chennai</span>
+          </span>
+          <span class="db-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z" /></svg></span>
+        </a>
+      </div>
+
+      <!-- The earlier celebration wheel, kept but not shown (a template is never
+           drawn). To bring it back: move its contents out of the template and
+           delete the departures board above. Its styles are still in css/style.css
+           and its script in js/main.js (initSpinWheel). -->
+      <template id="celebration-wheel-old">
       <div class="wheel-container-wrapper">
         <div id="celebration-wheel" class="celebration-wheel-outer">
 
@@ -632,6 +692,7 @@
         </div>
 
       </div>
+      </template>
     </section>
 
     <!-- ==========================================================================
@@ -768,7 +829,6 @@
                   <label class="rt-field-label" for="rt-name">Passenger <span class="rt-req">needed</span></label>
                   <input type="text" id="rt-name" class="rt-input" maxlength="120" autocomplete="name"
                     enterkeyhint="done" placeholder="Your name, or your family's">
-                  <p class="rt-hint">e.g. Maya and her family</p>
                 </div>
 
                 <!-- same colours as the celebration wheel -->
@@ -804,7 +864,7 @@
                       </span>
                     </button>
                   </div>
-                  <p class="rt-hint">Can't make it? Leave these unticked and send your blessing below.</p>
+                  <p class="rt-hint">Can't make it? Skip these, send a blessing below.</p>
                 </div>
 
                 <!-- people, 1 to 6+ (saved as 1-6, like the classic form); only
@@ -828,8 +888,6 @@
                   <div class="rt-chips">
                     <button type="button" class="rt-chip">Congratulations! 🎉</button>
                     <button type="button" class="rt-chip">So happy for you! ❤️</button>
-                    <button type="button" class="rt-chip">A lifetime of love 🙏</button>
-                    <button type="button" class="rt-chip">See you on the dance floor! 💃</button>
                   </div>
                 </div>
 
@@ -1122,7 +1180,7 @@
           </div>
           <div class="spot-content">
             <h3 class="spot-title">Kapaleeshwarar & Filter Coffee</h3>
-            <p class="spot-brief">7th-century Dravidian temple followed by hot degree filter coffee.</p>
+            <p class="spot-brief">7th-century Dravidian temple with hot degree filter coffee.</p>
           </div>
         </article>
 
@@ -1206,7 +1264,7 @@
       <!-- Music Volume only -->
       <div class="cassette-volume-row">
         <span class="vol-label">♪</span>
-        <input type="range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.65" aria-label="Music volume">
+        <input type="range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.4" aria-label="Music volume">
       </div>
 
     </div>

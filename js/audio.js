@@ -11,6 +11,9 @@
 
 // ===== EDIT HERE ============================================================
 const SOUNDTRACK = {
+  // Music volume when the page opens: 0 = silent, 1 = full (0.4 = 40%).
+  // The player's volume slider starts here too. (The temple bell isn't affected.)
+  volume: 0.4,
   // How long a song plays before it fades out and stops, in seconds.
   // 0 = play the whole song.
   maxPlaySeconds: 60,
@@ -35,7 +38,7 @@ class WeddingAudioEngine {
     this.ctx = null;
     this.isPlaying = false;
     this.currentTrackIndex = 0;
-    this.musicVolume = 0.7;
+    this.musicVolume = SOUNDTRACK.volume;
     this.masterGain = null;
     this.musicGain = null;
     this.onTrackChange = null;

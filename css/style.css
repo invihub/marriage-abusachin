@@ -971,6 +971,8 @@ body {
 }
 
 /* ---- WHEEL COLOURS: change them here ----
+   Used by the departures board (the dot by each ceremony, below) and the
+   earlier wheel.
    Each segment fades from --wheel-N-bright at the rim to --wheel-N-deep at
    the centre. 1 = Haldi & Sangeet (yellow), 2 = Wedding (red),
    3 = Reception (green).
@@ -1119,6 +1121,292 @@ body {
   border-color: var(--royal-maroon);
   color: var(--royal-maroon);
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
+}
+
+/* ==========================================================================
+   Departures board: the Celebration Schedule
+   A station board in the site's glass, with the RSVP ticket's dark-blue
+   header. One row per ceremony: a dark-blue split-flap tile with the date
+   and time, the ceremony and its venue, a map pin. The whole row is its
+   venue's Google Maps link. The tiles flip in once, one after another,
+   when the board comes into view (js/main.js initDepartureBoard).
+   A small dot by each name is the ceremony's colour (--wheel-N above).
+   ========================================================================== */
+
+/* the board closes the section, so less room is needed under it */
+#celebration-wheel-section {
+  padding-bottom: 32px;
+}
+
+.departure-board {
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--glass-glare), var(--glass-fill);
+  border: 1px solid;
+  border-color: var(--glass-rim);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.db-haldi {
+  --db-dot: var(--wheel-1-bright);
+}
+
+.db-wedding {
+  --db-dot: var(--wheel-2-bright);
+}
+
+.db-reception {
+  --db-dot: var(--wheel-3-bright);
+}
+
+/* header: the ticket's dark blue */
+.db-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: linear-gradient(180deg, #1E3A5F 0%, #0A1C30 100%);
+  border-bottom: 2px solid #7CC4E4;
+}
+
+.db-engine {
+  flex: none;
+  width: 30px;
+  height: 20px;
+  fill: #60A5FA;
+}
+
+.db-title {
+  font-family: var(--font-hero);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: #FFFFFF;
+}
+
+.db-sub {
+  margin-left: auto;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: #BAE6FD;
+  white-space: nowrap;
+}
+
+/* a ceremony */
+.db-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  color: var(--text-primary);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .2s ease;
+}
+
+.db-row + .db-row {
+  border-top: 1px solid rgba(255, 255, 255, .55);
+}
+
+.db-row:active {
+  background: rgba(255, 255, 255, .28);
+}
+
+/* the split-flap tile: two halves with a seam across the middle */
+.db-flap {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  padding: 5px 4px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #164B88 0%, #0E427F 50%, #0A2F5C 50%, #0A2F5C 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 3px 8px rgba(10, 47, 92, .25);
+  line-height: 1.2;
+  text-align: center;
+  transform-origin: 50% 0;
+}
+
+.db-flap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, .35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .12);
+}
+
+.db-flap-day {
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #BAE6FD;
+}
+
+.db-flap-time {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.db-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.db-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-serif);
+  font-size: 1.04rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0F172A;
+}
+
+.db-name::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--db-dot);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .8);
+}
+
+.db-venue {
+  font-size: .74rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+/* the map pin: a small glass button */
+.db-go {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .85);
+  background: rgba(255, 255, 255, .45);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .9), 0 3px 8px rgba(16, 42, 67, .15);
+}
+
+.db-go svg {
+  width: 17px;
+  height: 17px;
+  fill: #0A6FA6;
+}
+
+.db-row:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, .85);
+  outline-offset: -3px;
+}
+
+/* the tiles flip in, one after another, when the board comes into view */
+.departure-board.is-arriving .db-flap {
+  animation: dbFlip .55s cubic-bezier(.3, 1.3, .5, 1) both;
+  animation-delay: calc(var(--i, 0) * .16s + .1s);
+}
+
+@keyframes dbFlip {
+  from {
+    transform: perspective(300px) rotateX(-95deg);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) {
+  .db-row:hover {
+    background: rgba(255, 255, 255, .2);
+  }
+
+  .db-row:hover .db-go {
+    background: rgba(255, 255, 255, .75);
+  }
+}
+
+@media (min-width: 601px) {
+  .db-head {
+    padding: 10px 20px;
+  }
+
+  .db-title {
+    font-size: 1rem;
+  }
+
+  .db-sub {
+    font-size: .76rem;
+  }
+
+  .db-row {
+    gap: 16px;
+    padding: 12px 20px;
+  }
+
+  .db-flap {
+    width: 96px;
+  }
+
+  .db-flap-day {
+    font-size: .7rem;
+  }
+
+  .db-flap-time {
+    font-size: 1rem;
+  }
+
+  .db-name {
+    font-size: 1.2rem;
+  }
+
+  .db-venue {
+    font-size: .88rem;
+  }
+}
+
+/* very narrow phones (320px) */
+@media (max-width: 360px) {
+  .db-sub {
+    display: none;
+  }
+
+  .db-row {
+    gap: 9px;
+    padding: 8px 10px;
+  }
+
+  .db-flap {
+    width: 70px;
+  }
+
+  .db-name {
+    font-size: .95rem;
+  }
+
+  .db-go {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 /* ==========================================================================

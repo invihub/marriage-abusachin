@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCountdownTimer();
   initCassettePlayer();
   initSpinWheel();
+  initDepartureBoard();
   initMobileNav();
   initSectionMemory();
 });
@@ -127,7 +128,25 @@ function initCountdownTimer() {
 }
 
 /**
- * 3. Celebration Schedule 3-Section Rotating Spin Wheel
+ * 3. Celebration Schedule: the departures board. Its date tiles flip in once,
+ * one after another, the first time the board comes into view. (Without
+ * this, or on an old browser, the board simply shows as it is.)
+ */
+function initDepartureBoard() {
+  const board = document.querySelector('.departure-board');
+  if (!board || !('IntersectionObserver' in window)) return;
+
+  const seen = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    board.classList.add('is-arriving');
+    seen.disconnect();
+  }, { threshold: 0.4 });
+  seen.observe(board);
+}
+
+/**
+ * The earlier Celebration Schedule wheel (kept in a <template> in index.html,
+ * not shown; this does nothing while it stays there)
  */
 function initSpinWheel() {
   const wheel = document.getElementById('celebration-wheel');
@@ -238,6 +257,8 @@ function initCassettePlayer() {
   if (prevBtn) prevBtn.addEventListener('click', byGuest(() => window.weddingAudio.prevTrack()));
 
   if (musicSlider) {
+    // the slider starts at the soundtrack's volume (SOUNDTRACK.volume in js/audio.js)
+    musicSlider.value = window.weddingAudio.musicVolume;
     musicSlider.addEventListener('input', (e) => {
       window.weddingAudio.setMusicVolume(parseFloat(e.target.value));
     });

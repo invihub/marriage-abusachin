@@ -29,7 +29,7 @@
   // Fallback only: the real limit is abu_sachin.max_picks() in supabase/song-wall.sql,
   // read on load. Keep the two equal so the page agrees with it offline too.
   let maxPicks = 3;
-  const TOP_N = 10;          // songs shown before "View all"
+  const TOP_N = 7;           // songs shown before "View all"
   const LIST_ROWS = 8;       // rows visible at once when the full list is open
 
   const tidy = (s) => s.replace(/\s+/g, ' ').trim();
@@ -475,8 +475,8 @@
     picksEl.append(label, tokens, count);
   }
 
-  /* Which rows show: the top 10, plus any of your picks that slipped below
-     them, carried up so you can always find your own. Still 10 rows. */
+  /* Which rows show: the top TOP_N (7), plus any of your picks that slipped below
+     them, carried up so you can always find your own. Still TOP_N rows. */
   function visibleRows() {
     const rows = songs.map((s, i) => ({ song: s, rank: i, pinned: false }));
     if (expanded || rows.length <= TOP_N) return rows;
@@ -508,7 +508,7 @@
     if (songs.length <= TOP_N) { moreBtn.hidden = true; expanded = false; }
     else {
       moreBtn.hidden = false;
-      moreBtn.textContent = expanded ? 'Show top 10' : `View all ${songs.length} songs`;
+      moreBtn.textContent = expanded ? `Show top ${TOP_N}` : `View all ${songs.length} songs`;
     }
     listEl.classList.toggle('is-expanded', expanded);
   }
