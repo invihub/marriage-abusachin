@@ -49,11 +49,9 @@ The RSVPs, laid out for planning: total guests, a card per ceremony (people and 
   Run it again to change the password; that signs everyone out. A sign-in lasts 12 hours, for that browser tab. After 20 wrong passwords in 10 minutes, sign-in pauses for 10 minutes.
 - **Back:** "Back to the invitation" (here and on Our Story) returns to the section the guest was last on, without the temple gate (once it has been opened in that tab).
 
-## Background themes (trial)
+## Background
 
-There are three backgrounds: **Original** (white marble with a light sheen), **Ice** (Frozen-style crystals) and **Aurora** (night sky with northern lights). While the trial runs, the **Background** button at the bottom-left switches between them, or add `?bg=original`, `?bg=ice` or `?bg=aurora` to the address.
-
-To make one permanent, set it on the `<html>` tag in `index.html` (for example `data-bg="aurora"`), remove the trial button and script, and delete the other themes' blocks in `css/backgrounds.css`.
+The site uses **Ice** (Frozen-style crystals on an ice-blue background). Its colours are at the top of `css/backgrounds.css` (`--ice-bg-centre`, `--ice-bg-middle`, `--ice-bg-edge`). The earlier **Original** background (white marble with a light sheen) is kept for previewing: add `?bg=original` to the address. There is no switch button on the page.
 
 ## Project layout
 

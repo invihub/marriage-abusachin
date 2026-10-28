@@ -352,7 +352,9 @@
     });
     return symbols.sort((p, q) => p.x - q.x);
   }
-  const symbols = drawScore();
+  // the score is optional (commented out in index.html for now); without it
+  // the piano still plays and nothing lights up
+  const symbols = scoreEl ? drawScore() : [];
 
   function lightSymbol(sym, ms = 700) {
     clearTimeout(sym.timer);

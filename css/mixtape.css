@@ -2,7 +2,7 @@
    Sangeet Mixtape: record a song for the dance floor, back others' songs
    Left: glass piano keys and two staves of music that react while you type.
    Right: the shared tracklist; each track is a little cassette window.
-   Ice and Aurora shades are in backgrounds.css; Original uses these.
+   Ice shades are in backgrounds.css; Original uses these.
    ========================================================================== */
 #sangeet-mixtape {
   --mt-gold: #b8891a;

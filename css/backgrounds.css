@@ -1,12 +1,9 @@
 /* ==========================================================================
-   Background themes (trial)
-   Pick one by adding data-bg to the <html> tag in index.html:
-     <html lang="en" class="gate-closed" data-bg="original">  grey gradient + silk sheen (default)
-     <html lang="en" class="gate-closed" data-bg="ice">       Frozen-style ice crystals
-     <html lang="en" class="gate-closed" data-bg="aurora">    night sky with northern lights
-   To preview without editing, use the "Background" button (bottom-left) or
-   add ?bg=original / ?bg=ice / ?bg=aurora to the URL.
-   Once you decide, delete the other blocks (and their files in images/bg/).
+   Background themes
+   Ice (Frozen-style crystals) is the site's background. Original (white
+   marble with a light sheen) is kept for previewing only: add ?bg=original
+   to the address. Set in the <head> of index.html (organizer.html always
+   uses Original).
 
    The pattern sits on fixed layers behind the page, so the glass cards
    scroll over it (that movement is what makes glass read).
@@ -38,10 +35,11 @@ html[data-bg="ice"] {
        Glacier blue           #e4edf2  #b9cdd9  #6f93aa
        Silver frost           #eef2f5  #cfd9e0  #8ea2b1
        Arctic night           #d3e0e8  #8eaabd  #3f6580
-       Teal ice               #d9f3f7  #7fcadb  #0f5f78           */
-  --ice-bg-centre: #c0dadb;
-  --ice-bg-middle: #8ad7dc;
-  --ice-bg-edge: #0a93b9af;
+       Teal ice               #d9f3f7  #7fcadb  #0f5f78
+     Before (a little greener): #c0dadb  #8ad7dc  #0a93b9af       */
+  --ice-bg-centre: #c7dce4;
+  --ice-bg-middle: #90cbdf;
+  --ice-bg-edge: #0a7eb9af;
   /* soft light falling from the top of the screen; transparent = none */
   --ice-bg-shine: rgba(255, 255, 255, 0.593);
 
@@ -52,7 +50,7 @@ html[data-bg="ice"] {
      Small crystals don't move. */
   --ice-sway-time: 36s;
 
-  /* ---- GLASS: as clear as the Aurora cards (the site default was
+  /* ---- GLASS: clear, so the crystals show through (the site default was
      milkier, ~.2). Blur, edges and shadows stay the site default, which
      suit the light ice background. Raise the numbers for more frost. */
   --glass-fill: linear-gradient(145deg,
@@ -236,245 +234,6 @@ html[data-bg="original"] :is(.section-pretitle, .section-title, .section-desc,
   text-shadow: 0 0 2px rgba(255, 255, 255, .9), 0 0 8px rgba(255, 255, 255, .7), 0 0 18px rgba(255, 255, 255, .5);
 }
 
-/* ==========================================================================
-   3. Aurora: polar night sky with moving northern lights
-   ========================================================================== */
-html[data-bg="aurora"] {
-  /* ---- SKY COLOURS: try your own here ----
-     top = high sky, mid = middle of the screen, horizon = just above the
-     mountains (a little lighter and greener, lit by the aurora).
-     Presets to try (top / mid / horizon):
-       Polar night (default)  #040a16  #0a1a30  #12364a
-       Midnight blue          #050b1f  #0e1f45  #1d3d66
-       Arctic teal            #03100f  #0a2427  #12403f
-       Violet night           #0a0718  #1a1335  #2b2c55            */
-  --aurora-sky-top: #040a16;
-  --aurora-sky-mid: #0a1a30;
-  --aurora-sky-horizon: #12364a;
-  /* stars: 1 = as drawn, .5 = fainter, 0 = none */
-  --aurora-stars: 1;
-  /* mountains and pine treeline along the bottom: 1 = shown, 0 = hidden */
-  --aurora-ridge: 1;
-
-  /* ---- THE AURORA ----
-     Two curtains (images/bg/aurora-a.svg, aurora-b.svg) that sway, drift
-     and breathe, on phones too; paused while the temple gate is closed.
-       --aurora-strength : 0 = off, .85 = default, 1 = full
-       --aurora-time     : one slow sway (higher = slower)
-       --aurora-top      : how far down the curtains hang (0 = top, 20% = lower) */
-  --aurora-strength: .85;
-  --aurora-time: 40s;
-  --aurora-top: 0%;
-
-  /* ---- GLASS: clear, the aurora shows through ----
-     raise the numbers for more frost (the earlier milky look was ~.75) */
-  --glass-fill: linear-gradient(145deg,
-      rgba(255, 255, 255, .16) 0%,
-      rgba(255, 255, 255, .05) 45%,
-      rgba(255, 255, 255, .03) 70%,
-      rgba(200, 255, 230, .08) 100%);
-  --glass-blur: blur(8px) saturate(150%);
-  --glass-field: rgba(255, 255, 255, .22);
-  --glass-rim: rgba(255, 255, 255, .7) rgba(255, 255, 255, .3) rgba(160, 255, 210, .3) rgba(255, 255, 255, .55);
-  --glass-shadow:
-    inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .9),
-    inset 0 -16px 26px -20px rgba(60, 200, 150, .35),
-    0 2px 6px rgba(0, 0, 0, .25),
-    0 18px 40px -14px rgba(0, 0, 0, .6);
-  --glass-pill-shadow:
-    inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .9),
-    0 6px 18px -6px rgba(0, 0, 0, .55);
-
-  /* ---- TEXT ON THE SKY ---- */
-  --aurora-text-title: #eef7ff;
-  --aurora-text-label: #8ff0c4;
-  --aurora-text-body: #bcd3e4;
-
-  background-color: var(--aurora-sky-mid);
-}
-
-/* layer 1: sky, stars and horizon (still) */
-html[data-bg="aurora"] body::before {
-  background:
-    url('../images/bg/night-ridge.svg') 50% 100% no-repeat,
-    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, calc(.95 * var(--aurora-stars))), transparent),
-    radial-gradient(1px 1px at 38% 62%, rgba(255, 255, 255, calc(.7 * var(--aurora-stars))), transparent),
-    radial-gradient(1px 1px at 71% 27%, rgba(220, 240, 255, calc(.8 * var(--aurora-stars))), transparent),
-    radial-gradient(1.2px 1.2px at 88% 74%, rgba(255, 255, 255, calc(.6 * var(--aurora-stars))), transparent),
-    radial-gradient(1px 1px at 55% 8%, rgba(255, 255, 255, calc(.75 * var(--aurora-stars))), transparent),
-    radial-gradient(1px 1px at 22% 44%, rgba(255, 255, 255, calc(.55 * var(--aurora-stars))), transparent),
-    radial-gradient(1.4px 1.4px at 64% 83%, rgba(230, 245, 255, calc(.85 * var(--aurora-stars))), transparent),
-    radial-gradient(1px 1px at 91% 12%, rgba(255, 255, 255, calc(.5 * var(--aurora-stars))), transparent),
-    radial-gradient(2px 2px at 30% 70%, rgba(255, 255, 255, calc(.9 * var(--aurora-stars))), transparent),
-    radial-gradient(1.8px 1.8px at 80% 35%, rgba(200, 235, 255, calc(.8 * var(--aurora-stars))), transparent),
-    linear-gradient(180deg, var(--aurora-sky-top) 0%, var(--aurora-sky-mid) 55%, var(--aurora-sky-horizon) 100%);
-  /* sizes, in order: mountains, three star tiles (5 + 3 + 2 stars), sky */
-  background-size:
-    100% calc(clamp(110px, 22vh, 220px) * var(--aurora-ridge)),
-    230px 230px, 230px 230px, 230px 230px, 230px 230px, 230px 230px,
-    370px 370px, 370px 370px, 370px 370px,
-    610px 610px, 610px 610px,
-    100% 100%;
-}
-
-/* layers 2 and 3: the two aurora curtains */
-html[data-bg="aurora"]::after,
-html[data-bg="aurora"] body::after {
-  content: '';
-  position: fixed;
-  top: var(--aurora-top);
-  left: -10%;
-  width: 120%;
-  height: 100lvh;
-  z-index: -1;
-  pointer-events: none;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  transform-origin: 50% 70%;
-  mix-blend-mode: screen;
-  will-change: transform, opacity;
-}
-
-/* front curtain */
-html[data-bg="aurora"]::after {
-  background-image: url('../images/bg/aurora-a.svg');
-  opacity: var(--aurora-strength);
-  animation: auroraSwayA var(--aurora-time) ease-in-out infinite,
-    auroraBreathe calc(var(--aurora-time) * .3) ease-in-out infinite;
-}
-
-/* fainter curtain behind it, on its own rhythm */
-html[data-bg="aurora"] body::after {
-  background-image: url('../images/bg/aurora-b.svg');
-  opacity: calc(var(--aurora-strength) * .7);
-  animation: auroraSwayB calc(var(--aurora-time) * 1.35) ease-in-out infinite;
-}
-
-/* sideways drift + a gentle skew, so the folds ripple like a curtain */
-@keyframes auroraSwayA {
-  0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleY(1); }
-  30% { transform: translate3d(4%, -1.5%, 0) skewX(-6deg) scaleY(1.08); }
-  65% { transform: translate3d(-3%, 1%, 0) skewX(5deg) scaleY(.94); }
-}
-
-@keyframes auroraSwayB {
-  0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleY(1); }
-  40% { transform: translate3d(-5%, 1%, 0) skewX(7deg) scaleY(1.1); }
-  75% { transform: translate3d(3%, -1%, 0) skewX(-4deg) scaleY(.92); }
-}
-
-/* the light brightens and dims, as real aurora does (opacity only: cheap) */
-@keyframes auroraBreathe {
-  0%, 100% { opacity: var(--aurora-strength); }
-  50% { opacity: calc(var(--aurora-strength) * .65); }
-}
-
-html.gate-closed[data-bg="aurora"]::after,
-html.gate-closed[data-bg="aurora"] body::after {
-  animation-play-state: paused;
-}
-
-/* phones: curtains a little wider than the screen, so the sway never
-   shows an edge on a narrow screen */
-@media (max-width: 600px) {
-  html[data-bg="aurora"]::after,
-  html[data-bg="aurora"] body::after {
-    left: -25%;
-    width: 150%;
-  }
-}
-
-/* text on the sky turns light */
-html[data-bg="aurora"] :is(.section-title, .hero-main-title, .train-service-name) {
-  color: var(--aurora-text-title);
-}
-
-html[data-bg="aurora"] :is(.section-pretitle, .countdown-title, .train-service-number) {
-  color: var(--aurora-text-label);
-}
-
-html[data-bg="aurora"] .section-desc {
-  color: var(--aurora-text-body);
-}
-
-html[data-bg="aurora"] :is(.section-pretitle, .section-title, .section-desc, .hero-main-title,
-  .city-divider-train, .countdown-title, .train-service-name, .train-service-number) {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 0 18px rgba(0, 0, 0, .45);
-}
-
-/* ---- TEXT IN THE GLASS CARDS: bright colours for the night sky ----
-     the site's text colours are switched to light ones for this theme;
-     accents (dates, names, titles) turn warm gold, links sky blue */
-html[data-bg="aurora"] {
-  --text-primary: #eef6ff;
-  --text-secondary: #d2e3f0;
-  --text-muted: #a9c2d6;
-  --aurora-gold: #f6d37e;
-  --aurora-rose: #ffaabb;
-  --aurora-sky: #9adcff;
-}
-
-html[data-bg="aurora"] :is(.nav-names, .timer-num, .spot-title, .footer-family-invitation,
-  .city-divider-train, .transit-title) {
-  color: var(--aurora-gold);
-}
-
-html[data-bg="aurora"] :is(.hero-quote-caption, .city-badge.city-chennai) {
-  color: var(--aurora-rose);
-}
-
-html[data-bg="aurora"] :is(.festive-sub-badge, .city-badge.city-tuticorin, .btn-nav-temple) {
-  color: var(--aurora-sky);
-}
-
-/* bride / groom chips: deeper tinted glass so their light text stands out */
-html[data-bg="aurora"] .city-badge.city-tuticorin {
-  background: var(--glass-glare), rgba(40, 120, 190, .32);
-}
-
-html[data-bg="aurora"] .city-badge.city-chennai {
-  background: var(--glass-glare), rgba(190, 60, 90, .3);
-}
-
-/* station name is coloured inline with --train-blue */
-html[data-bg="aurora"] .train-station-indicator {
-  --train-blue: var(--aurora-sky);
-}
-
-html[data-bg="aurora"] .form-input::placeholder,
-html[data-bg="aurora"] .form-textarea::placeholder {
-  color: rgba(210, 227, 240, .6);
-}
-
-/* the drop-down list itself is drawn by the phone/browser on white */
-html[data-bg="aurora"] .form-select option {
-  color: #1e293b;
-}
-
-/* surfaces that stay light keep the dark text: the RSVP confirmation
-   pop-up and the music player (the wheel's centre is smoked glass with
-   its own white text, set in style.css) */
-html[data-bg="aurora"] :is(.rsvp-confirm-card, .floating-cassette-widget) {
-  --text-primary: #1E293B;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
-}
-
-/* hover / tapped: a brighter glass, never a white fill under light text */
-html[data-bg="aurora"] :is(.btn-secondary-snow, .wheel-pill-link, .coach-nav-btn:not(.active)):hover {
-  background: var(--glass-glare), rgba(255, 255, 255, .2);
-  color: var(--aurora-gold);
-}
-
-html[data-bg="aurora"] .event-check-card:hover {
-  background: rgba(255, 170, 187, .16);
-}
-
-html[data-bg="aurora"] :is(.form-input, .form-select, .form-textarea):focus {
-  background: rgba(255, 255, 255, .14);
-  border-color: var(--aurora-gold);
-}
-
 /* ---- Sangeet Mixtape, per background (Original's shades are in mixtape.css) ----
      score ink / lit note colour, and the track cassettes: body, reels, hub */
 html[data-bg="ice"] #sangeet-mixtape {
@@ -489,45 +248,6 @@ html[data-bg="ice"] #sangeet-mixtape {
   --reel-hub: #e3f2f5;
   --reel-hub-ring: #2a7387;
   --reel-ink: #1b5f71;
-}
-
-html[data-bg="aurora"] #sangeet-mixtape {
-  --mt-gold: var(--aurora-gold);
-  --mt-maroon: var(--aurora-rose);
-  --score-ink: #dceaf5;
-  --score-lit: #f6d37e;
-  --score-glow: rgba(246, 211, 126, .9);
-  --trk-bg: rgba(8, 30, 48, .5);
-  --trk-rim: rgba(143, 240, 196, .35);
-  --trk-frame: rgba(143, 240, 196, .07);
-  --reel-a: #1fae84;
-  --reel-b: #0e3a4a;
-  --reel-rim: #bff5dd;
-  --reel-hub: #0b2133;
-  --reel-hub-ring: #8ff0c4;
-  --reel-ink: #eafff5;
-}
-
-/* night glass keys: clearer whites so the aurora shows through */
-html[data-bg="aurora"] .mt-key:not(.mt-key-black):not(.is-down) {
-  background: linear-gradient(180deg, rgba(255, 255, 255, .5) 0%, rgba(220, 240, 255, .22) 62%, rgba(255, 255, 255, .42) 100%);
-  border-color: rgba(220, 245, 255, .6);
-}
-
-html[data-bg="aurora"] .mt-tracklist-head h3 {
-  color: var(--aurora-gold);
-}
-
-html[data-bg="aurora"] .mt-track-action.is-backed b {
-  color: #1E293B;
-}
-
-html[data-bg="aurora"] .mt-note.is-warn {
-  color: var(--aurora-rose);
-}
-
-html[data-bg="aurora"] .mobile-nav-toggle {
-  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -552,59 +272,14 @@ html[data-bg="aurora"] .mobile-nav-toggle {
   html[data-bg="ice"] .site-nav-menu {
     background:
       radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, .7) 0%, transparent 70%),
-      linear-gradient(165deg, #effbfd 0%, #d3f1f5 55%, #b6e7ee 100%);
+      linear-gradient(165deg, #eff8fd 0%, #d3ebf6 55%, #b6dcef 100%);
     border: 1px solid rgba(255, 255, 255, .9);
-    box-shadow: inset 1.5px 1.5px .5px -.5px #fff, inset 0 -14px 24px -18px rgba(10, 147, 185, .45),
-      0 18px 40px -12px rgba(10, 90, 120, .35);
+    box-shadow: inset 1.5px 1.5px .5px -.5px #fff, inset 0 -14px 24px -18px rgba(10, 126, 185, .45),
+      0 18px 40px -12px rgba(10, 80, 125, .35);
   }
 
   html[data-bg="ice"] .site-nav-menu a:active {
-    background: rgba(10, 147, 185, .12);
+    background: rgba(10, 126, 185, .12);
   }
 
-  html[data-bg="aurora"] .site-nav-menu {
-    background:
-      radial-gradient(120% 60% at 50% 0%, rgba(61, 255, 154, .16) 0%, transparent 70%),
-      linear-gradient(165deg, #0e223a 0%, #071222 100%);
-    border: 1px solid rgba(143, 240, 196, .35);
-    box-shadow: inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .5), 0 18px 40px -12px rgba(0, 0, 0, .7);
-  }
-
-  html[data-bg="aurora"] .site-nav-menu a {
-    color: var(--text-primary);
-  }
-
-  html[data-bg="aurora"] .site-nav-menu a:active,
-  html[data-bg="aurora"] .site-nav-menu a:hover {
-    background: rgba(143, 240, 196, .14);
-    color: var(--aurora-gold);
-  }
-}
-
-/* ---- Trial switch button (bottom-left). Delete with the trial. ---- */
-.bg-trial-switch {
-  position: fixed;
-  left: 12px;
-  bottom: max(12px, env(safe-area-inset-bottom));
-  z-index: 900;
-  padding: 9px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .75);
-  background: rgba(24, 82, 98, .85);
-  color: #fff;
-  font: 600 .8rem/1 var(--font-sans);
-  box-shadow: 0 6px 18px rgba(16, 42, 67, .3);
-  cursor: pointer;
-}
-
-/* phones: sit above the train's bottom controls */
-@media (max-width: 600px) {
-  .bg-trial-switch {
-    bottom: max(70px, calc(env(safe-area-inset-bottom) + 58px));
-  }
-}
-
-/* hidden while the temple gate is closed */
-html.gate-closed .bg-trial-switch {
-  display: none;
 }

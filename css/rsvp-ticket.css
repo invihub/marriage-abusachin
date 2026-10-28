@@ -8,8 +8,8 @@
    nothing else. (?rsvp=classic / ?rsvp=ticket in the address previews one.)
 
    The ticket is paper, not glass: it keeps its own cream colours and dark
-   text on every background (the Aurora theme's light text is switched back
-   below, like the RSVP confirmation pop-up).
+   text on every background (its text colours are set below, so a theme's
+   text colours never reach it).
    ========================================================================== */
 
 #rsvp-section:not([data-rsvp="ticket"]) .rsvp-ticket-area,
@@ -747,10 +747,6 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
-}
-
-html[data-bg="aurora"] .rt-again {
-  color: var(--aurora-gold, #F6D37E);
 }
 
 .rt-again[hidden] {
