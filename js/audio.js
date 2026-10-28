@@ -13,7 +13,7 @@
 const SOUNDTRACK = {
   // Music volume when the page opens: 0 = silent, 1 = full (0.4 = 40%).
   // The player's volume slider starts here too. (The temple bell isn't affected.)
-  volume: 0.4,
+  volume: 0.25,
   // How long a song plays before it fades out and stops, in seconds.
   // 0 = play the whole song.
   maxPlaySeconds: 60,

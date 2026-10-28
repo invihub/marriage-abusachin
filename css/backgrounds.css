@@ -50,15 +50,16 @@ html[data-bg="ice"] {
      Small crystals don't move. */
   --ice-sway-time: 36s;
 
-  /* ---- GLASS: clear, so the crystals show through (the site default was
-     milkier, ~.2). Blur, edges and shadows stay the site default, which
-     suit the light ice background. Raise the numbers for more frost. */
+  /* ---- GLASS: very clear, so the crystals show through (the site default
+     is milkier, ~.2). Blur, edges and shadows are the site default (top of
+     the "Glass finish" part of style.css). Raise the numbers for more frost.
+     Before (a little milkier): .16  .05  .03  .08, fields .22 */
   --glass-fill: linear-gradient(145deg,
-      rgba(255, 255, 255, .16) 0%,
-      rgba(255, 255, 255, .05) 45%,
-      rgba(255, 255, 255, .03) 70%,
-      rgba(214, 238, 250, .08) 100%);
-  --glass-field: rgba(255, 255, 255, .22);
+      rgba(255, 255, 255, .08) 0%,
+      rgba(255, 255, 255, .02) 45%,
+      rgba(255, 255, 255, .01) 70%,
+      rgba(214, 238, 250, .05) 100%);
+  --glass-field: rgba(255, 255, 255, .18);
 
   background-color: var(--ice-bg-middle);
 }
@@ -163,13 +164,14 @@ html[data-bg="original"] {
   --orig-sheen-time: 14s;
   --orig-sheen-colour: rgba(255, 255, 255, .9);
 
-  /* glass: clear, more see-through than the site default */
+  /* glass: clear, more see-through than the site default
+     (before, a little milkier: .13  .03  .02  .08, fields .28) */
   --glass-fill: linear-gradient(145deg,
-      rgba(255, 255, 255, .13) 0%,
-      rgba(255, 255, 255, .03) 40%,
-      rgba(255, 255, 255, .02) 65%,
-      rgba(255, 255, 255, .08) 100%);
-  --glass-field: rgba(255, 255, 255, .28);
+      rgba(255, 255, 255, .07) 0%,
+      rgba(255, 255, 255, .015) 40%,
+      rgba(255, 255, 255, .01) 65%,
+      rgba(255, 255, 255, .05) 100%);
+  --glass-field: rgba(255, 255, 255, .24);
 
   background-color: var(--orig-marble);
 }

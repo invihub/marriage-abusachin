@@ -3922,18 +3922,20 @@ main>section[id] {
       rgba(214, 238, 250, .14) 100%);/* light sliding across the surface; set to "none" to remove */
   
   --glass-glare:
-    linear-gradient(125deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, 0) 24%),
-    radial-gradient(60% 40% at 100% 100%, rgba(255, 255, 255, .14) 0%, transparent 70%);/* how much the background behind is softened: 0px = perfectly clear */
+    linear-gradient(125deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, 0) 22%),
+    radial-gradient(60% 40% at 100% 100%, rgba(255, 255, 255, .08) 0%, transparent 70%);/* how much the background behind is softened: 0px = perfectly clear.
+     Kept light so the glass stays see-through, not milky
+     (before: blur(7px) saturate(135%) brightness(1.06), phones 6px) */
   
-  --glass-blur: blur(7px) saturate(135%) brightness(1.06);/* rim colours: top, right, bottom, left (light comes from the top-left) */
+  --glass-blur: blur(1.5px) saturate(110%);/* rim colours: top, right, bottom, left (light comes from the top-left) */
   
   --glass-rim: rgba(255, 255, 255, .75) rgba(255, 255, 255, .38) rgba(255, 255, 255, .3) rgba(255, 255, 255, .58);/* edge light + thickness, then the drop shadow */
   
   --glass-shadow:
     inset 1.5px 1.5px .5px -.5px rgba(255, 255, 255, .95),
     inset -1px -1px .5px -.5px rgba(255, 255, 255, .55),
-    inset 0 14px 22px -18px rgba(255, 255, 255, .9),
-    inset 0 -16px 26px -20px rgba(80, 145, 182, .45),
+    inset 0 14px 22px -18px rgba(255, 255, 255, .55),
+    inset 0 -16px 26px -20px rgba(80, 145, 182, .35),
     0 2px 6px rgba(16, 42, 67, .08),
     0 14px 34px -14px rgba(16, 42, 67, .32);
   --glass-pill-shadow:
@@ -3942,13 +3944,13 @@ main>section[id] {
     inset 0 -8px 14px -10px rgba(80, 145, 182, .4),
     0 6px 16px -6px rgba(16, 42, 67, .3);/* fields inside a glass card (inputs, checkbox rows, photo mats) */
   
-  --glass-field: rgba(255, 255, 255, .34);
+  --glass-field: rgba(255, 255, 255, .3);
 }
 
 /* phones: lighter blur keeps scrolling smooth */
 @media (max-width: 600px) {
   :root {
-    --glass-blur: blur(6px) saturate(135%) brightness(1.06);
+    --glass-blur: blur(1.5px) saturate(110%);
 }
 }
 
@@ -3995,6 +3997,12 @@ main>section[id] {
 .btn-secondary-snow:hover,
 .wheel-pill-link:hover {
   background: var(--glass-glare), rgba(255, 255, 255, .32);
+}
+
+/* the floating nav sits over the page's own text as it scrolls by, so it
+   keeps a stronger blur (still clear, not milky) to keep its words readable */
+.nav-floating-pill {
+  --glass-blur: blur(10px) saturate(115%);
 }
 
 /* bride / groom chips: tinted glass, same colours as before */
